@@ -86,6 +86,17 @@ npm run build      # tsup — ESM + CJS + .d.ts, per-layer barrels
 npm run typecheck   # tsc --noEmit
 ```
 
+`dist/` is committed to this repo. This package is consumed elsewhere as a plain
+GitHub dependency (`github:autopaylab/landing-design-system#main`) rather than
+published to npm, and installers of a git dependency get no build step by
+default — an earlier version relied on an npm `prepare` script to rebuild on
+install, which meant every consuming install (including CI) had to fetch this
+package's own devDependencies and run `tsup` from scratch, a slow, fragile
+step to depend on in a production build. Shipping the built output directly
+means installing this package is a plain file copy, same as any npm-published
+package. **After changing anything under `src/`, run `npm run build` and
+commit the resulting `dist/` changes in the same commit.**
+
 Story files are CSF3-compatible; a minimal `.storybook/main.ts` is included but Storybook itself has not been installed or run as part of this package's own tooling — run `npx storybook init` (or add `@storybook/react-vite` to a consumer app) if you want the interactive dev server. Stated as uncertain rather than claimed working, per the audit's own "verify before implementing" rule.
 
 ## Known limitations / not yet harmonized with Autopay Design System 2.0
