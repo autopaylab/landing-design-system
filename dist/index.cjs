@@ -37,7 +37,6 @@ __export(src_exports, {
   Badge: () => Badge,
   BulletItem: () => BulletItem,
   Button: () => Button,
-  CalendarCtaSection: () => CalendarCtaSection,
   Checkbox: () => Checkbox,
   ConsentCheckboxField: () => ConsentCheckboxField,
   ContactSection: () => ContactSection,
@@ -62,6 +61,7 @@ __export(src_exports, {
   Logo: () => Logo,
   Navbar: () => Navbar,
   PlatformFeatureShowcase: () => PlatformFeatureShowcase,
+  PromoCtaSection: () => PromoCtaSection,
   SecuritySection: () => SecuritySection,
   SingleIntegrationSection: () => SingleIntegrationSection,
   StatBlock: () => StatBlock,
@@ -132,9 +132,9 @@ var buttonVariants = (0, import_class_variance_authority.cva)(
   {
     variants: {
       variant: {
-        /** Brand CTA — observed on every hero and the footer (HomeContent, HeroVariants, CalendarFooter). */
+        /** Brand CTA — observed on every hero and the footer across the source page. */
         lime: "bg-lime text-lime-foreground transition-transform hover:scale-[1.02]",
-        /** Light outline for use over dark hero-overlay imagery (HeroVariantA/B secondary CTA). */
+        /** Light outline for use over dark hero-overlay imagery (secondary CTA on both hero-overlay variants). */
         "outline-inverse": "border border-background/40 text-background hover:bg-background/10",
         /** Neutral outline, used for header "Login" and industry-card "Learn more". */
         outline: "border border-border text-foreground hover:bg-muted",
@@ -915,9 +915,9 @@ function FaqAccordionSection({ heading, entries }) {
   ] }) });
 }
 
-// src/organisms/CalendarCtaSection/CalendarCtaSection.tsx
+// src/organisms/PromoCtaSection/PromoCtaSection.tsx
 var import_jsx_runtime35 = require("react/jsx-runtime");
-function CalendarCtaSection({
+function PromoCtaSection({
   backgroundImage,
   heading,
   primaryCta,
@@ -1037,7 +1037,6 @@ var radiusTokens = {
   Badge,
   BulletItem,
   Button,
-  CalendarCtaSection,
   Checkbox,
   ConsentCheckboxField,
   ContactSection,
@@ -1062,6 +1061,7 @@ var radiusTokens = {
   Logo,
   Navbar,
   PlatformFeatureShowcase,
+  PromoCtaSection,
   SecuritySection,
   SingleIntegrationSection,
   StatBlock,

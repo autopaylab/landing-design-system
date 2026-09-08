@@ -133,9 +133,9 @@ export const FullPage: Story = {
       />,
       <FaqAccordionSection
         key="faq"
-        heading="Najczęstsze pytania"
+        heading="Frequently asked questions"
         entries={[
-          { question: "Czy moje pieniądze są bezpieczne?", answer: "Tak. Płatności obsługiwane są przez Autopay." },
+          { question: "Is my money safe?", answer: "Yes. Payments are processed through a licensed, regulated payment institution." },
         ]}
       />,
     ],

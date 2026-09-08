@@ -15,11 +15,11 @@ export const Stacked: Story = {
   args: {
     layout: "stacked",
     image: placeholderImage,
-    title: "Nie płacisz prowizji za Twoich klientów.",
+    title: "You don't pay commission on your own customers.",
     subtitle:
-      "Kalendarz Autopay to system rezerwacji online, który zostaje z Tobą — bez przejmowania Twoich klientów i bez prowizji za każdą wizytę.",
-    primaryCta: { label: "Dołącz do early access", href: "#contact" },
-    secondaryCta: { label: "Zobacz demo", href: "#platform" },
+      "Nimbus is an online booking system that stays with you, no takeover of your customers and no fee per visit.",
+    primaryCta: { label: "Join early access", href: "#contact" },
+    secondaryCta: { label: "See a demo", href: "#platform" },
   },
 };
 
@@ -27,8 +27,8 @@ export const Split: Story = {
   args: {
     layout: "split",
     image: placeholderImage,
-    title: "Gotowy, żeby Twój kalendarz zaczął pracować za Ciebie?",
-    primaryCta: { label: "Zostaw e-mail", href: "#contact" },
-    secondaryCta: { label: "Zobacz demo na żywo", href: "#platform" },
+    title: "Ready for your bookings to run themselves?",
+    primaryCta: { label: "Leave your email", href: "#contact" },
+    secondaryCta: { label: "See a live demo", href: "#platform" },
   },
 };

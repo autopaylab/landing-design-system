@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 
 /**
  * `eyebrow` merges three byte-identical implementations: `Eyebrow` in
- * HomeContent.tsx, `VariantLabel` in HeroVariants.tsx, and an inline <span>
+ * HomeContent.tsx, `VariantLabel` in the source's second hero-variant file, and an inline <span>
  * in IndustriesGridA.tsx. `default`/`secondary`/`destructive`/`outline` are
  * the unused-on-page shadcn/ui variants, kept as real declared alternates
  * rather than discarded — see AUDIT.md, "Eyebrow / pill badge".

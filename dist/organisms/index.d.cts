@@ -14,18 +14,18 @@ interface HeroVideoSplitProps {
 declare function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc }: HeroVideoSplitProps): React.JSX.Element;
 
 /**
- * Merges HeroVariantA ("stacked": gradient overlay, single-column content,
- * eyebrow-less) and HeroVariantB ("split": flat overlay, 2-col heading/CTA)
- * from HeroVariants.tsx into one organism with a `layout` prop — see
- * AUDIT.md dedup decision for "Hero image-overlay". Both variants in the
- * source render Polish "Autopay Calendar" copy; that content is passed in
- * via props here, not hardcoded — see AUDIT.md #1 for the product-mixing flag.
+ * Merges the source's two hero-overlay variants ("stacked": gradient
+ * overlay, single-column content, eyebrow-less; "split": flat overlay,
+ * 2-col heading/CTA) into one organism with a `layout` prop — see AUDIT.md
+ * dedup decision for "Hero image-overlay". Both variants in the source
+ * belong to a second, unrelated product line; that copy is not reused
+ * here — all content is passed in via props, see AUDIT.md #1.
  */
 interface HeroImageOverlayProps {
     layout: "stacked" | "split";
     image: string;
     title: React.ReactNode;
-    /** Only rendered in the "stacked" layout, matching the source (HeroVariantA has a subtitle paragraph, HeroVariantB does not). */
+    /** Only rendered in the "stacked" layout, matching the source (the "stacked" variant has a subtitle paragraph, "split" does not). */
     subtitle?: string;
     primaryCta: {
         label: string;
@@ -55,9 +55,10 @@ interface Step {
     body: string;
 }
 /**
- * FourStepsSection.tsx — content is Autopay Calendar (booking SaaS) specific
- * and in Polish; kept as a real, working organism but flagged in AUDIT.md #1
- * as likely wrong-product content for a payments-platform page.
+ * Content is specific to a second, unrelated product line found in the
+ * source; kept as a real, working organism but flagged in AUDIT.md #1 as
+ * likely wrong-product content for a payments-platform page. No copy from
+ * that product line is reused here — see the story for placeholder content.
  */
 interface FourStepsSectionProps {
     heading: React.ReactNode;
@@ -213,11 +214,12 @@ interface FaqAccordionSectionProps {
 declare function FaqAccordionSection({ heading, entries }: FaqAccordionSectionProps): React.JSX.Element;
 
 /**
- * CalendarFooter.tsx — Calendar-booking-SaaS promo CTA, distinct from the
- * payments-platform copy everywhere else on the page. Kept as a real,
- * working organism; see AUDIT.md #1 for the product-mixing flag.
+ * Originally a promotional footer CTA from a second, unrelated product line
+ * found in the source (image background + two CTAs, plus a nested lime
+ * promo card) — see AUDIT.md #1 for the product-mixing flag. No copy from
+ * that product line is reused here; all content is passed in via props.
  */
-interface CalendarCtaSectionProps {
+interface PromoCtaSectionProps {
     backgroundImage: string;
     heading: React.ReactNode;
     primaryCta: {
@@ -236,6 +238,6 @@ interface CalendarCtaSectionProps {
     privacyLabel: string;
     privacyHref: string;
 }
-declare function CalendarCtaSection({ backgroundImage, heading, primaryCta, secondaryCta, logoSrc, logoAlt, promoText, copyrightText, privacyLabel, privacyHref, }: CalendarCtaSectionProps): React.JSX.Element;
+declare function PromoCtaSection({ backgroundImage, heading, primaryCta, secondaryCta, logoSrc, logoAlt, promoText, copyrightText, privacyLabel, privacyHref, }: PromoCtaSectionProps): React.JSX.Element;
 
-export { CalendarCtaSection, type CalendarCtaSectionProps, ContactSection, type ContactSectionProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps };
+export { ContactSection, type ContactSectionProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps };

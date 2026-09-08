@@ -13,16 +13,16 @@ const placeholder =
 
 export const Default: Story = {
   args: {
-    heading: "Autopay Calendar w 4 krokach",
+    heading: "Get started with Nimbus in 4 steps",
     description:
-      "Nie potrzebujesz wdrożeniowca ani szkoleń. Zakładasz konto, wpisujesz usługi i od razu przyjmujesz rezerwacje z płatnością online — na własnej stronie, bez pośredników.",
+      "No onboarding calls or training required. Create your account, add your services, and start taking orders right away, on your own site, no middlemen.",
     image: placeholder,
-    imageAlt: "Pulpit Autopay Calendar z listą rezerwacji na dany dzień",
+    imageAlt: "Nimbus dashboard showing today's activity",
     steps: [
-      { title: "Załóż konto i skonfiguruj swój profil", body: "Podaj dane swojej firmy, godziny otwarcia, logo i zdjęcia. Profil gotowy w kilka minut." },
-      { title: "Dodaj usługi, cennik i pracowników", body: "Wprowadź usługi, dodaj pracowników i przypisz im stanowiska." },
-      { title: "Przyjmuj rezerwacje z jednego pulpitu", body: "Wszystkie rezerwacje i dane klientów widzisz w jednym panelu." },
-      { title: "Zarządzaj sprzedażą bez ręcznego liczenia", body: "Historia transakcji, metody płatności i statusy zawsze pod ręką." },
+      { title: "Create your account and set up your profile", body: "Add your business details, hours, logo and photos. Profile ready in minutes." },
+      { title: "Add your services, pricing and team", body: "Enter your services, add team members and assign roles." },
+      { title: "Manage everything from one dashboard", body: "See all your activity and customer data in a single panel." },
+      { title: "Track sales without manual bookkeeping", body: "Transaction history, payment methods and statuses always at hand." },
     ],
   },
 };

@@ -12,9 +12,9 @@ export const Single: Story = {
   render: () => (
     <Accordion type="single" collapsible className="w-full max-w-lg">
       <AccordionItem value="item-1">
-        <AccordionTrigger>Czy moi klienci będą musieli płacić zaliczkę online?</AccordionTrigger>
+        <AccordionTrigger>Will my customers need to pay a deposit online?</AccordionTrigger>
         <AccordionContent>
-          To Ty decydujesz, czy i jaką kwotę zaliczki wymagać przy rezerwacji.
+          You decide whether to require a deposit, and how much.
         </AccordionContent>
       </AccordionItem>
     </Accordion>

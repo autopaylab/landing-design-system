@@ -18,8 +18,9 @@ declare const AccordionContent: React.ForwardRefExoticComponent<Omit<AccordionPr
  * Merges 11+ hand-rolled CTA markups found across landing-page-kit (hero CTAs,
  * header Login/Sign In, industry-card "Learn more", contact-form submit) into
  * one variant-driven atom. See AUDIT.md, "Buttons" section, for the full list
- * of source occurrences and the one inconsistency (CalendarFooter's fixed
- * h-12 + hover:bg-lime/90) that was NOT silently folded in.
+ * of source occurrences and the one inconsistency (a second product line's
+ * footer CTA using a fixed h-12 + hover:bg-lime/90) that was NOT silently
+ * folded in.
  */
 declare const buttonVariants: (props?: ({
     variant?: "link" | "lime" | "outline-inverse" | "outline" | "solid" | "default" | "destructive" | "secondary" | "ghost" | null | undefined;
@@ -32,7 +33,7 @@ declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAtt
 
 /**
  * `eyebrow` merges three byte-identical implementations: `Eyebrow` in
- * HomeContent.tsx, `VariantLabel` in HeroVariants.tsx, and an inline <span>
+ * HomeContent.tsx, `VariantLabel` in the source's second hero-variant file, and an inline <span>
  * in IndustriesGridA.tsx. `default`/`secondary`/`destructive`/`outline` are
  * the unused-on-page shadcn/ui variants, kept as real declared alternates
  * rather than discarded — see AUDIT.md, "Eyebrow / pill badge".
@@ -80,9 +81,9 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>, Varia
 declare const Link: React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>;
 
 /**
- * Wraps the `<img>` pattern used for the Autopay wordmark in SiteHeader,
- * SiteFooter and CalendarFooter (h-7, h-6, h-7/h-8 respectively — the
- * source never settled on one height, see AUDIT.md #4). `src`/`alt` are
+ * Wraps the `<img>` pattern used for the Autopay wordmark across the
+ * source's header, footer and promo sections (h-7, h-6, h-7/h-8
+ * respectively — the source never settled on one height, see AUDIT.md #4). `src`/`alt` are
  * left as required props rather than hardcoding the Autopay asset, since
  * this package ships no brand assets (see README "Known limitations").
  */

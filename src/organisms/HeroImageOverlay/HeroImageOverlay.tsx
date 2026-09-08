@@ -4,18 +4,18 @@ import { Button } from "@/atoms/Button";
 import { cn } from "@/lib/cn";
 
 /**
- * Merges HeroVariantA ("stacked": gradient overlay, single-column content,
- * eyebrow-less) and HeroVariantB ("split": flat overlay, 2-col heading/CTA)
- * from HeroVariants.tsx into one organism with a `layout` prop — see
- * AUDIT.md dedup decision for "Hero image-overlay". Both variants in the
- * source render Polish "Autopay Calendar" copy; that content is passed in
- * via props here, not hardcoded — see AUDIT.md #1 for the product-mixing flag.
+ * Merges the source's two hero-overlay variants ("stacked": gradient
+ * overlay, single-column content, eyebrow-less; "split": flat overlay,
+ * 2-col heading/CTA) into one organism with a `layout` prop — see AUDIT.md
+ * dedup decision for "Hero image-overlay". Both variants in the source
+ * belong to a second, unrelated product line; that copy is not reused
+ * here — all content is passed in via props, see AUDIT.md #1.
  */
 export interface HeroImageOverlayProps {
   layout: "stacked" | "split";
   image: string;
   title: React.ReactNode;
-  /** Only rendered in the "stacked" layout, matching the source (HeroVariantA has a subtitle paragraph, HeroVariantB does not). */
+  /** Only rendered in the "stacked" layout, matching the source (the "stacked" variant has a subtitle paragraph, "split" does not). */
   subtitle?: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };

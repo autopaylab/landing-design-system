@@ -8,9 +8,10 @@ export interface Step {
 }
 
 /**
- * FourStepsSection.tsx — content is Autopay Calendar (booking SaaS) specific
- * and in Polish; kept as a real, working organism but flagged in AUDIT.md #1
- * as likely wrong-product content for a payments-platform page.
+ * Content is specific to a second, unrelated product line found in the
+ * source; kept as a real, working organism but flagged in AUDIT.md #1 as
+ * likely wrong-product content for a payments-platform page. No copy from
+ * that product line is reused here — see the story for placeholder content.
  */
 export interface FourStepsSectionProps {
   heading: React.ReactNode;

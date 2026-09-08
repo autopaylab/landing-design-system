@@ -12,9 +12,9 @@ type Story = StoryObj<typeof FaqItem>;
 export const Default: Story = {
   args: {
     value: "item-0",
-    question: "Czy moi klienci będą musieli płacić zaliczkę online?",
+    question: "Will my customers need to pay a deposit online?",
     answer:
-      "To Ty decydujesz, czy i jaką kwotę zaliczki wymagać przy rezerwacji. Możesz zacząć od symbolicznej kwoty.",
+      "You decide whether to require a deposit, and how much. Starting with a small amount is usually enough to reduce no-shows.",
   },
   render: (args) => (
     <Accordion type="single" collapsible className="flex w-full max-w-lg flex-col gap-3">

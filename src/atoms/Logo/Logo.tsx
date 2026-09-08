@@ -4,9 +4,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
 /**
- * Wraps the `<img>` pattern used for the Autopay wordmark in SiteHeader,
- * SiteFooter and CalendarFooter (h-7, h-6, h-7/h-8 respectively — the
- * source never settled on one height, see AUDIT.md #4). `src`/`alt` are
+ * Wraps the `<img>` pattern used for the Autopay wordmark across the
+ * source's header, footer and promo sections (h-7, h-6, h-7/h-8
+ * respectively — the source never settled on one height, see AUDIT.md #4). `src`/`alt` are
  * left as required props rather than hardcoding the Autopay asset, since
  * this package ships no brand assets (see README "Known limitations").
  */

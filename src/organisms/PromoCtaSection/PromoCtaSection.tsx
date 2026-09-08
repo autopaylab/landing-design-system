@@ -4,11 +4,12 @@ import { Button } from "@/atoms/Button";
 import { Logo } from "@/atoms/Logo";
 
 /**
- * CalendarFooter.tsx — Calendar-booking-SaaS promo CTA, distinct from the
- * payments-platform copy everywhere else on the page. Kept as a real,
- * working organism; see AUDIT.md #1 for the product-mixing flag.
+ * Originally a promotional footer CTA from a second, unrelated product line
+ * found in the source (image background + two CTAs, plus a nested lime
+ * promo card) — see AUDIT.md #1 for the product-mixing flag. No copy from
+ * that product line is reused here; all content is passed in via props.
  */
-export interface CalendarCtaSectionProps {
+export interface PromoCtaSectionProps {
   backgroundImage: string;
   heading: React.ReactNode;
   primaryCta: { label: string; href: string };
@@ -21,7 +22,7 @@ export interface CalendarCtaSectionProps {
   privacyHref: string;
 }
 
-export function CalendarCtaSection({
+export function PromoCtaSection({
   backgroundImage,
   heading,
   primaryCta,
@@ -32,7 +33,7 @@ export function CalendarCtaSection({
   copyrightText,
   privacyLabel,
   privacyHref,
-}: CalendarCtaSectionProps) {
+}: PromoCtaSectionProps) {
   return (
     <section className="bg-surface px-4 pb-6 md:px-8 md:pb-8">
       <div className="relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl">

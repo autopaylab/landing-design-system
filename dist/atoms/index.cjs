@@ -102,9 +102,9 @@ var buttonVariants = (0, import_class_variance_authority.cva)(
   {
     variants: {
       variant: {
-        /** Brand CTA — observed on every hero and the footer (HomeContent, HeroVariants, CalendarFooter). */
+        /** Brand CTA — observed on every hero and the footer across the source page. */
         lime: "bg-lime text-lime-foreground transition-transform hover:scale-[1.02]",
-        /** Light outline for use over dark hero-overlay imagery (HeroVariantA/B secondary CTA). */
+        /** Light outline for use over dark hero-overlay imagery (secondary CTA on both hero-overlay variants). */
         "outline-inverse": "border border-background/40 text-background hover:bg-background/10",
         /** Neutral outline, used for header "Login" and industry-card "Learn more". */
         outline: "border border-border text-foreground hover:bg-muted",

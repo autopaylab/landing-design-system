@@ -8,17 +8,18 @@ import { cn } from "@/lib/cn";
  * Merges 11+ hand-rolled CTA markups found across landing-page-kit (hero CTAs,
  * header Login/Sign In, industry-card "Learn more", contact-form submit) into
  * one variant-driven atom. See AUDIT.md, "Buttons" section, for the full list
- * of source occurrences and the one inconsistency (CalendarFooter's fixed
- * h-12 + hover:bg-lime/90) that was NOT silently folded in.
+ * of source occurrences and the one inconsistency (a second product line's
+ * footer CTA using a fixed h-12 + hover:bg-lime/90) that was NOT silently
+ * folded in.
  */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-semibold cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        /** Brand CTA — observed on every hero and the footer (HomeContent, HeroVariants, CalendarFooter). */
+        /** Brand CTA — observed on every hero and the footer across the source page. */
         lime: "bg-lime text-lime-foreground transition-transform hover:scale-[1.02]",
-        /** Light outline for use over dark hero-overlay imagery (HeroVariantA/B secondary CTA). */
+        /** Light outline for use over dark hero-overlay imagery (secondary CTA on both hero-overlay variants). */
         "outline-inverse": "border border-background/40 text-background hover:bg-background/10",
         /** Neutral outline, used for header "Login" and industry-card "Learn more". */
         outline: "border border-border text-foreground hover:bg-muted",

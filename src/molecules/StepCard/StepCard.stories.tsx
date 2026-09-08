@@ -11,8 +11,8 @@ type Story = StoryObj<typeof StepCard>;
 export const Default: Story = {
   args: {
     index: 1,
-    title: "Załóż konto i skonfiguruj swój profil",
-    body: "Podaj dane swojej firmy, godziny otwarcia, logo i zdjęcia. Profil gotowy w kilka minut.",
+    title: "Create your account and set up your profile",
+    body: "Add your business details, opening hours, logo and photos. Profile ready in minutes.",
   },
   render: (args) => (
     <ol>

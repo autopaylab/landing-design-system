@@ -14,4 +14,4 @@ export * from "./IndustriesStackedSection";
 export * from "./IndustriesGridSection";
 export * from "./ContactSection";
 export * from "./FaqAccordionSection";
-export * from "./CalendarCtaSection";
+export * from "./PromoCtaSection";

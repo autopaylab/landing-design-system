@@ -103,7 +103,7 @@ Story files are CSF3-compatible; a minimal `.storybook/main.ts` is included but 
 
 See [`AUDIT.md`](./AUDIT.md) section 5 for full detail. Summary:
 
-1. **Two products are mixed in the source page** — English payments-platform copy plus Polish "Autopay Calendar" booking-SaaS content (`HeroImageOverlay`, `FourStepsSection`, `CalendarCtaSection`). Extracted as real, working organisms; needs a product decision before shipping together again.
+1. **Two products are mixed in the source page** — English payments-platform copy plus a second, unrelated product line's content in a different language (`HeroImageOverlay`, `FourStepsSection`, `PromoCtaSection`). Extracted as real, working organisms with fictional placeholder copy; needs a product decision before shipping together again.
 2. **35 shadcn/ui primitives existed in the source; only `Accordion` was ever used** — the rest were not ported (would have been inventing usage that doesn't exist).
 3. **Button/Input/Label each had two competing visual systems** in the source (a real, rendered one and an unused, more "complete" `cva`/Radix one). Merged into one atom each, matching what actually renders; the unused alternates are documented, not silently dropped.
 4. **`--lime` is a raw hex value** while every other color token is OKLCH — an authoring inconsistency carried through into `tokens/` as-is.
