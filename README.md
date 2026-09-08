@@ -1,5 +1,7 @@
 # @autopaylab/landing-design-system
 
+[![CI](https://github.com/autopaylab/landing-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/autopaylab/landing-design-system/actions/workflows/ci.yml)
+
 A standalone, Atomic Design component package extracted from [`autopaylab/landing-page-kit`](https://github.com/autopaylab/landing-page-kit) — a single long-scroll Lovable-generated landing page.
 
 **This is a first-pass extraction, not a rebrand.** Autopay's brand design tokens (colors, type scale, spacing) have **not** been applied — everything here documents what actually existed in the source, as-is. See [`AUDIT.md`](./AUDIT.md) for the full inventory, every deduplication decision, and the classification rationale for anything ambiguous. See "Known limitations" below for what still needs a harmonization pass against Autopay Design System 2.0.
