@@ -4,6 +4,8 @@ A standalone, Atomic Design component package extracted from [`autopaylab/landin
 
 **This is a first-pass extraction, not a rebrand.** Autopay's brand design tokens (colors, type scale, spacing) have **not** been applied — everything here documents what actually existed in the source, as-is. See [`AUDIT.md`](./AUDIT.md) for the full inventory, every deduplication decision, and the classification rationale for anything ambiguous. See "Known limitations" below for what still needs a harmonization pass against Autopay Design System 2.0.
 
+Contributing? See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the extraction discipline this package holds itself to. Licensed under [MIT](./LICENSE).
+
 ## Install
 
 ```bash
@@ -84,7 +86,20 @@ Full audit, dedup rationale and classification calls: [`AUDIT.md`](./AUDIT.md).
 npm install
 npm run build      # tsup — ESM + CJS + .d.ts, per-layer barrels
 npm run typecheck   # tsc --noEmit
+npm run lint        # eslint, incl. eslint-plugin-jsx-a11y
+npm test            # vitest — see "Testing" below
 ```
+
+All four run in CI (`.github/workflows/ci.yml`) on every push/PR to `main`, along with a check that `dist/` is actually up to date with `src/` (a build whose `dist/` diff wasn't committed fails CI rather than shipping stale output).
+
+## Testing
+
+`npm test` runs two things:
+
+1. **`PlatformFeatureShowcase.test.tsx`** — targeted behavior tests for the one organism with real interactive state (keyboard arrow-key navigation, roving `tabindex`, `aria-controls`/`aria-labelledby` linkage). This is a regression test for the keyboard-focus bug the WCAG audit found — see `AUDIT.md` section 6.
+2. **`src/a11y.test.tsx`** — an automated accessibility guardrail: it dynamically imports every `.stories.tsx` file in the package (36 files, each with one or more real, already-documented variants — no invented content) and runs `axe-core` against every rendered story. This turns the manual WCAG audit into a permanent CI check instead of a one-time pass. Two known, documented exceptions exist (see `KNOWN_LIMITATIONS` in that file) for cases where "fixing" the finding would mean inventing content the source never had — most notably the bare `Checkbox` atom, which the source itself never gave a label outside of `ConsentCheckboxField`.
+
+Built with Vitest + React Testing Library + `vitest-axe`, running in `jsdom`.
 
 `dist/` is committed to this repo. This package is consumed elsewhere as a plain
 GitHub dependency (`github:autopaylab/landing-design-system#main`) rather than
