@@ -1,0 +1,74 @@
+{
+  "name": "@autopaylab/landing-design-system",
+  "version": "0.1.0",
+  "description": "Standalone Atomic Design component package extracted from autopaylab/landing-page-kit. First-pass extraction — not yet harmonized with Autopay Design System 2.0.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./atoms": {
+      "types": "./dist/atoms/index.d.ts",
+      "import": "./dist/atoms/index.js",
+      "require": "./dist/atoms/index.cjs"
+    },
+    "./molecules": {
+      "types": "./dist/molecules/index.d.ts",
+      "import": "./dist/molecules/index.js",
+      "require": "./dist/molecules/index.cjs"
+    },
+    "./organisms": {
+      "types": "./dist/organisms/index.d.ts",
+      "import": "./dist/organisms/index.js",
+      "require": "./dist/organisms/index.cjs"
+    },
+    "./templates": {
+      "types": "./dist/templates/index.d.ts",
+      "import": "./dist/templates/index.js",
+      "require": "./dist/templates/index.cjs"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "import": "./dist/tokens/index.js",
+      "require": "./dist/tokens/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && node -e \"require('fs').copyFileSync('src/tokens/tokens.css','dist/styles.css')\"",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "tailwindcss": ">=3.4.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.575.0",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@storybook/react": "^8.6.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^3.4.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,63 @@
+import * as React from "react";
+
+import { Button } from "@/atoms/Button";
+import { cn } from "@/lib/cn";
+
+/**
+ * Merges HeroVariantA ("stacked": gradient overlay, single-column content,
+ * eyebrow-less) and HeroVariantB ("split": flat overlay, 2-col heading/CTA)
+ * from HeroVariants.tsx into one organism with a `layout` prop — see
+ * AUDIT.md dedup decision for "Hero image-overlay". Both variants in the
+ * source render Polish "Autopay Calendar" copy; that content is passed in
+ * via props here, not hardcoded — see AUDIT.md #1 for the product-mixing flag.
+ */
+export interface HeroImageOverlayProps {
+  layout: "stacked" | "split";
+  image: string;
+  title: React.ReactNode;
+  /** Only rendered in the "stacked" layout, matching the source (HeroVariantA has a subtitle paragraph, HeroVariantB does not). */
+  subtitle?: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+}
+
+export function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondaryCta }: HeroImageOverlayProps) {
+  const ctas = (
+    <div className="flex flex-col gap-3 sm:flex-row">
+      <Button asChild variant="lime" size="lg">
+        <a href={primaryCta.href}>{primaryCta.label}</a>
+      </Button>
+      <Button asChild variant="outline-inverse" size="lg">
+        <a href={secondaryCta.href}>{secondaryCta.label}</a>
+      </Button>
+    </div>
+  );
+
+  return (
+    <div className="px-4 md:px-8">
+      <section className="relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground">
+        <img src={image} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 size-full object-cover" />
+        <div
+          aria-hidden="true"
+          className={cn("absolute inset-0", layout === "stacked" ? "bg-gradient-to-r from-foreground via-foreground/75 to-foreground/10" : "bg-foreground/50")}
+        />
+        {layout === "stacked" ? (
+          <div className="relative px-6 py-20 text-background sm:px-10 md:px-16 md:py-32 lg:py-40">
+            <div className="max-w-3xl">
+              <h2 className="font-display text-[40px] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">{title}</h2>
+              {subtitle && <p className="mt-6 max-w-2xl text-base text-background/80 md:text-xl">{subtitle}</p>}
+              <div className="mt-9">{ctas}</div>
+            </div>
+          </div>
+        ) : (
+          <div className="relative px-6 py-20 sm:px-10 md:px-14 md:py-28">
+            <div className="grid gap-10 md:grid-cols-2 md:items-center">
+              <h2 className="max-w-xl font-display text-[36px] leading-[1.05] text-background md:text-[56px]">{title}</h2>
+              <div className="md:justify-self-end">{ctas}</div>
+            </div>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}

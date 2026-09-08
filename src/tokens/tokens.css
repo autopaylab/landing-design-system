@@ -1,0 +1,44 @@
+/**
+ * Raw design tokens as observed in autopaylab/landing-page-kit (src/styles.css).
+ * These are NOT Autopay Design System 2.0 brand tokens — see AUDIT.md, section 4.
+ * Import this once in a consuming app alongside Tailwind.
+ */
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0.985 0.003 60);
+  --foreground: oklch(0.18 0.02 260);
+  --ink: oklch(0.18 0.02 260);
+
+  --surface: oklch(0.97 0.005 60);
+  --surface-muted: oklch(0.94 0.006 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+
+  --primary: oklch(0.22 0.03 260);
+  --primary-foreground: oklch(0.985 0.003 60);
+  --secondary: oklch(0.94 0.006 250);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.94 0.006 250);
+  --muted-foreground: oklch(0.45 0.015 260);
+  --accent: oklch(0.93 0.012 240);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.985 0.003 60);
+  --border: oklch(0.9 0.008 250);
+  --input: oklch(0.92 0.008 250);
+  --ring: oklch(0.7 0.04 250);
+
+  /* Flagged in AUDIT.md #6: raw hex, every other color token here is OKLCH */
+  --lime: #e6ffa0;
+  --lime-foreground: oklch(0.18 0.02 260);
+
+  --banking: oklch(0.85 0.12 235);
+  --automotive: oklch(0.92 0.18 100);
+  --insurance: oklch(0.82 0.1 295);
+  --healthcare: oklch(0.88 0.1 155);
+  --retail: oklch(0.88 0.08 20);
+  --energy: oklch(0.78 0.14 35);
+  --telecom: oklch(0.93 0.15 110);
+}
