@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { e as NavbarProps, b as FooterProps } from '../Footer-BdcVzbNU.js';
+import { e as NavbarProps, b as FooterProps } from '../Footer-BwJA9-2z.js';
 
 /**
  * Arranges Navbar + a hero slot + an ordered list of section slots + Footer.

@@ -23,6 +23,10 @@ export interface NavbarProps {
   /** e.g. a flag emoji or short region code, as observed on the page ("🇬🇧"). */
   languageLabel?: React.ReactNode;
   onLanguageClick?: () => void;
+  /** Accessible name for the language button — the visible label alone (a flag/code) isn't a name assistive tech can announce. */
+  languageButtonAriaLabel?: string;
+  /** Accessible name for the primary nav landmark, so it's distinguishable from other <nav> regions (e.g. a footer nav) on the same page. */
+  navAriaLabel?: string;
 }
 
 export function Navbar({
@@ -36,6 +40,8 @@ export function Navbar({
   onSignInClick,
   languageLabel,
   onLanguageClick,
+  languageButtonAriaLabel = "Change language",
+  navAriaLabel = "Primary",
 }: NavbarProps) {
   return (
     <header className="sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6">
@@ -43,7 +49,7 @@ export function Navbar({
         <a href={homeHref} className="flex items-center">
           <Logo src={logoSrc} alt={logoAlt} size="md" />
         </a>
-        <nav className="hidden flex-1 items-center justify-center gap-2 md:flex">
+        <nav aria-label={navAriaLabel} className="hidden flex-1 items-center justify-center gap-2 md:flex">
           {navItems.map((item) => (
             <Link key={item.label} variant="nav" href={item.href}>
               {item.label}
@@ -66,6 +72,7 @@ export function Navbar({
             <button
               type="button"
               onClick={onLanguageClick}
+              aria-label={languageButtonAriaLabel}
               className="hidden items-center gap-1.5 rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted md:inline-flex"
             >
               <span className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base">

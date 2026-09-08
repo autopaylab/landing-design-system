@@ -161,11 +161,13 @@ function Navbar({
   signInLabel = "Sign In",
   onSignInClick,
   languageLabel,
-  onLanguageClick
+  onLanguageClick,
+  languageButtonAriaLabel = "Change language",
+  navAriaLabel = "Primary"
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center justify-between gap-6 rounded-xl bg-background px-6 py-3 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
     /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center gap-2", children: [
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
         Button,
@@ -183,6 +185,7 @@ function Navbar({
         {
           type: "button",
           onClick: onLanguageClick,
+          "aria-label": languageButtonAriaLabel,
           className: "hidden items-center gap-1.5 rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted md:inline-flex",
           children: [
             /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
@@ -207,7 +210,8 @@ function Footer({
   navItems,
   address,
   legalText,
-  schemeBadges
+  schemeBadges,
+  navAriaLabel = "Footer"
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("footer", { className: "mt-24", children: [
     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("section", { className: "relative mx-4 overflow-hidden rounded-t-3xl md:mx-8", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
@@ -228,7 +232,7 @@ function Footer({
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("nav", { className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Link, { variant: "underline", href: item.href, children: item.label }, item.label)) }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("nav", { "aria-label": navAriaLabel, className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Link, { variant: "underline", href: item.href, children: item.label }, item.label)) }),
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("address", { className: "text-sm not-italic leading-relaxed md:text-right", children: address })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-lime-foreground/20 pt-5 text-xs", children: [
@@ -424,6 +428,10 @@ function PlatformFeatureShowcase({ features }) {
   const [active, setActive] = React3.useState(features[0]?.key);
   const [hovered, setHovered] = React3.useState(null);
   const shown = hovered ?? active;
+  const tabRefs = React3.useRef({});
+  const reactId = React3.useId();
+  const tabId = (key) => `${reactId}-tab-${key}`;
+  const panelId = (key) => `${reactId}-panel-${key}`;
   const onKeyDown = (e, i) => {
     if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
     e.preventDefault();
@@ -431,6 +439,7 @@ function PlatformFeatureShowcase({ features }) {
     const next = features[(i + dir + features.length) % features.length];
     setActive(next.key);
     setHovered(null);
+    tabRefs.current[next.key]?.focus();
   };
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(import_jsx_runtime15.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "flex flex-col gap-6 md:hidden", children: features.map((f) => /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "rounded-3xl bg-card p-6 shadow-sm", children: [
@@ -439,7 +448,7 @@ function PlatformFeatureShowcase({ features }) {
       /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "mt-5 flex items-center justify-center overflow-hidden rounded-lg bg-[oklch(0.97_0.02_240)] p-4", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("video", { src: f.video, autoPlay: true, muted: true, loop: true, playsInline: true, preload: "metadata", className: "w-full max-w-full object-contain" }) })
     ] }, f.key)) }),
     /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "hidden items-stretch gap-6 md:grid md:grid-cols-[1.35fr_1fr]", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "flex min-h-[460px] items-center justify-center overflow-hidden rounded-3xl bg-[oklch(0.97_0.02_240)] p-8", children: features.map((f) => /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "flex min-h-[460px] items-center justify-center overflow-hidden rounded-3xl bg-[oklch(0.97_0.02_240)] p-8", children: features.map((f) => /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { role: "tabpanel", id: panelId(f.key), "aria-labelledby": tabId(f.key), hidden: shown !== f.key, children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
         "video",
         {
           src: f.video,
@@ -447,15 +456,19 @@ function PlatformFeatureShowcase({ features }) {
           muted: true,
           loop: true,
           playsInline: true,
-          className: `max-h-[420px] w-auto max-w-full object-contain transition-opacity duration-300 ${shown === f.key ? "block opacity-100" : "hidden opacity-0"}`
-        },
-        f.key
-      )) }),
+          className: "max-h-[420px] w-auto max-w-full object-contain transition-opacity duration-300"
+        }
+      ) }, f.key)) }),
       /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "flex flex-col gap-5", role: "tablist", "aria-orientation": "vertical", children: features.map((f, i) => {
         const isActive = active === f.key;
         return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
           "button",
           {
+            ref: (el) => {
+              tabRefs.current[f.key] = el;
+            },
+            id: tabId(f.key),
+            "aria-controls": panelId(f.key),
             type: "button",
             role: "tab",
             "aria-selected": isActive,

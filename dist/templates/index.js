@@ -109,11 +109,13 @@ function Navbar({
   signInLabel = "Sign In",
   onSignInClick,
   languageLabel,
-  onLanguageClick
+  onLanguageClick,
+  languageButtonAriaLabel = "Change language",
+  navAriaLabel = "Primary"
 }) {
   return /* @__PURE__ */ jsx4("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between gap-6 rounded-xl bg-background px-6 py-3 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ jsx4("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ jsx4(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
-    /* @__PURE__ */ jsx4("nav", { className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx4(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
+    /* @__PURE__ */ jsx4("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx4(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
     /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
       /* @__PURE__ */ jsx4(
         Button,
@@ -131,6 +133,7 @@ function Navbar({
         {
           type: "button",
           onClick: onLanguageClick,
+          "aria-label": languageButtonAriaLabel,
           className: "hidden items-center gap-1.5 rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted md:inline-flex",
           children: [
             /* @__PURE__ */ jsx4("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
@@ -155,7 +158,8 @@ function Footer({
   navItems,
   address,
   legalText,
-  schemeBadges
+  schemeBadges,
+  navAriaLabel = "Footer"
 }) {
   return /* @__PURE__ */ jsxs2("footer", { className: "mt-24", children: [
     /* @__PURE__ */ jsx5("section", { className: "relative mx-4 overflow-hidden rounded-t-3xl md:mx-8", children: /* @__PURE__ */ jsx5(
@@ -176,7 +180,7 @@ function Footer({
       ] }),
       /* @__PURE__ */ jsxs2("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
         /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),
-        /* @__PURE__ */ jsx5("nav", { className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map((item) => /* @__PURE__ */ jsx5(Link, { variant: "underline", href: item.href, children: item.label }, item.label)) }),
+        /* @__PURE__ */ jsx5("nav", { "aria-label": navAriaLabel, className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map((item) => /* @__PURE__ */ jsx5(Link, { variant: "underline", href: item.href, children: item.label }, item.label)) }),
         /* @__PURE__ */ jsx5("address", { className: "text-sm not-italic leading-relaxed md:text-right", children: address })
       ] }),
       /* @__PURE__ */ jsxs2("div", { className: "mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-lime-foreground/20 pt-5 text-xs", children: [

@@ -17,8 +17,12 @@ interface NavbarProps {
     /** e.g. a flag emoji or short region code, as observed on the page ("🇬🇧"). */
     languageLabel?: React.ReactNode;
     onLanguageClick?: () => void;
+    /** Accessible name for the language button — the visible label alone (a flag/code) isn't a name assistive tech can announce. */
+    languageButtonAriaLabel?: string;
+    /** Accessible name for the primary nav landmark, so it's distinguishable from other <nav> regions (e.g. a footer nav) on the same page. */
+    navAriaLabel?: string;
 }
-declare function Navbar({ logoSrc, logoAlt, homeHref, navItems, loginLabel, onLoginClick, signInLabel, onSignInClick, languageLabel, onLanguageClick, }: NavbarProps): React.JSX.Element;
+declare function Navbar({ logoSrc, logoAlt, homeHref, navItems, loginLabel, onLoginClick, signInLabel, onSignInClick, languageLabel, onLanguageClick, languageButtonAriaLabel, navAriaLabel, }: NavbarProps): React.JSX.Element;
 
 interface FooterNavItem {
     label: string;
@@ -45,7 +49,9 @@ interface FooterProps {
     address: React.ReactNode;
     legalText: React.ReactNode;
     schemeBadges: string[];
+    /** Accessible name for the footer nav landmark, so it's distinguishable from other <nav> regions (e.g. the header nav) on the same page. */
+    navAriaLabel?: string;
 }
-declare function Footer({ ctaHeading, ctaSubheading, bannerImage, logoSrc, logoAlt, socialLinks, tagline, navItems, address, legalText, schemeBadges, }: FooterProps): React.JSX.Element;
+declare function Footer({ ctaHeading, ctaSubheading, bannerImage, logoSrc, logoAlt, socialLinks, tagline, navItems, address, legalText, schemeBadges, navAriaLabel, }: FooterProps): React.JSX.Element;
 
 export { Footer as F, type NavItem as N, type FooterNavItem as a, type FooterProps as b, type FooterSocialLink as c, Navbar as d, type NavbarProps as e };

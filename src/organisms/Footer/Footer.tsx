@@ -28,6 +28,8 @@ export interface FooterProps {
   address: React.ReactNode;
   legalText: React.ReactNode;
   schemeBadges: string[];
+  /** Accessible name for the footer nav landmark, so it's distinguishable from other <nav> regions (e.g. the header nav) on the same page. */
+  navAriaLabel?: string;
 }
 
 export function Footer({
@@ -42,6 +44,7 @@ export function Footer({
   address,
   legalText,
   schemeBadges,
+  navAriaLabel = "Footer",
 }: FooterProps) {
   return (
     <footer className="mt-24">
@@ -70,7 +73,7 @@ export function Footer({
         </div>
         <div className="mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]">
           <p className="font-display text-3xl leading-[1.1] md:text-[38px]">{tagline}</p>
-          <nav className="flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium">
+          <nav aria-label={navAriaLabel} className="flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium">
             {navItems.map((item) => (
               <Link key={item.label} variant="underline" href={item.href}>
                 {item.label}

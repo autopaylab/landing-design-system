@@ -113,3 +113,18 @@ Extracted verbatim from `src/styles.css` in the source: `--background`, `--foreg
 8. **Contact form is uncontrolled and non-functional** (`onSubmit={(e) => e.preventDefault()}`, no real field state, no validation) — extracted as-is (matches source), not wired to real submission logic since none existed to extract.
 9. **No pricing table, no testimonials, no stat-carousel** exist anywhere in the source despite being common landing-page patterns — not invented here; if a future page needs them they'll need genuinely new design work, not extraction.
 10. **Ad hoc color literals throughout** (`text-[oklch(0.6_0.22_255)]`, `bg-[oklch(0.97_0.02_240)]`, etc.) used directly in JSX instead of semantic tokens — extracted verbatim into organism styles for this first pass; a token-mapping pass is needed before these can be called "on brand".
+
+## 6. WCAG audit (2026-09-08)
+
+Ran against a consuming site (autopaylab-landing) with axe-core plus manual review, since automated tools only catch a fraction of real issues (no error-association or focus-management checks, for example). Findings and fixes:
+
+**Fixed:**
+- `Navbar`: the language-switcher button had no accessible name (just a flag/region-code visual label) — added a `languageButtonAriaLabel` prop, defaulted to `"Change language"`. Its `<nav>` had no `aria-label` either, meaning a page using both this organism's nav and a footer nav would expose two identically-named "navigation" landmarks to screen-reader users — added `navAriaLabel`, defaulted to `"Primary"`.
+- `Footer`: same missing-label gap on its `<nav>` — added `navAriaLabel`, defaulted to `"Footer"`.
+- `PlatformFeatureShowcase`: two real bugs, not just missing polish. (1) The tab buttons (`role="tab"`) had no `aria-controls` and the video panels had no `role="tabpanel"`/`id`/`aria-labelledby` at all — added the full linkage, matching the ARIA APG tabs pattern. (2) Arrow-key navigation moved the `active` state (so the visual selection and `tabIndex` roving updated correctly) but never moved actual DOM focus — a keyboard user pressing an arrow key ended up with focus stranded on a button that had just become `tabIndex={-1}` and was no longer in the tab order. Fixed by focusing the newly active tab's button ref after moving selection.
+
+**Verified clean, no changes needed:** color contrast (checked every rendered text/background pairing programmatically against the WCAG 4.5:1 / 3:1-for-large-text thresholds — the token palette passes everywhere it's actually used), heading hierarchy in every organism, label association on every form molecule (`FormField`/native `<label>` wrapping is a valid, working technique here, confirmed with axe and manual DOM inspection), `Accordion`'s Radix-derived ARIA semantics.
+
+**Flagged, not fixed (scope call, not an oversight):**
+- **Autoplay looping video with no pause control** (`HeroVideoSplit`, `PlatformFeatureShowcase`, `SingleIntegrationSection`, `DataLeverageSection`'s decorative elements) — WCAG 2.2.2 (Pause, Stop, Hide) requires a way to pause moving content that auto-plays for more than 5 seconds. Adding a play/pause affordance is a real UI feature addition, not a small a11y patch, so it's flagged here rather than bolted on. Whoever builds the next page consuming these organisms should design that control rather than have it default-added silently.
+- Reduced-motion preferences (`prefers-reduced-motion`) aren't respected anywhere (hover scales, translates, transitions) — this is WCAG 2.3.3, which is AAA, not AA; noted as a nice-to-have, not treated as a compliance gap.

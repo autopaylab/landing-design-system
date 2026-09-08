@@ -21,6 +21,10 @@ export function PlatformFeatureShowcase({ features }: PlatformFeatureShowcasePro
   const [active, setActive] = React.useState(features[0]?.key);
   const [hovered, setHovered] = React.useState<string | null>(null);
   const shown = hovered ?? active;
+  const tabRefs = React.useRef<Record<string, HTMLButtonElement | null>>({});
+  const reactId = React.useId();
+  const tabId = (key: string) => `${reactId}-tab-${key}`;
+  const panelId = (key: string) => `${reactId}-panel-${key}`;
 
   const onKeyDown = (e: React.KeyboardEvent, i: number) => {
     if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -29,6 +33,10 @@ export function PlatformFeatureShowcase({ features }: PlatformFeatureShowcasePro
     const next = features[(i + dir + features.length) % features.length];
     setActive(next.key);
     setHovered(null);
+    // Roving tabindex means only the newly active tab is tab-reachable; move
+    // real DOM focus to it too, or keyboard focus would stay stranded on the
+    // now-unreachable previous button.
+    tabRefs.current[next.key]?.focus();
   };
 
   return (
@@ -48,15 +56,16 @@ export function PlatformFeatureShowcase({ features }: PlatformFeatureShowcasePro
       <div className="hidden items-stretch gap-6 md:grid md:grid-cols-[1.35fr_1fr]">
         <div className="flex min-h-[460px] items-center justify-center overflow-hidden rounded-3xl bg-[oklch(0.97_0.02_240)] p-8">
           {features.map((f) => (
-            <video
-              key={f.key}
-              src={f.video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={`max-h-[420px] w-auto max-w-full object-contain transition-opacity duration-300 ${shown === f.key ? "block opacity-100" : "hidden opacity-0"}`}
-            />
+            <div key={f.key} role="tabpanel" id={panelId(f.key)} aria-labelledby={tabId(f.key)} hidden={shown !== f.key}>
+              <video
+                src={f.video}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="max-h-[420px] w-auto max-w-full object-contain transition-opacity duration-300"
+              />
+            </div>
           ))}
         </div>
         <div className="flex flex-col gap-5" role="tablist" aria-orientation="vertical">
@@ -65,6 +74,11 @@ export function PlatformFeatureShowcase({ features }: PlatformFeatureShowcasePro
             return (
               <button
                 key={f.key}
+                ref={(el) => {
+                  tabRefs.current[f.key] = el;
+                }}
+                id={tabId(f.key)}
+                aria-controls={panelId(f.key)}
                 type="button"
                 role="tab"
                 aria-selected={isActive}
