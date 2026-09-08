@@ -96,7 +96,10 @@ Button.displayName = "Button";
 // src/atoms/Link/Link.tsx
 var React2 = __toESM(require("react"), 1);
 var import_class_variance_authority2 = require("class-variance-authority");
-var import_jsx_runtime2 = require("react/jsx-runtime");
+var import_jsx_runtime2 = (
+  // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
+  require("react/jsx-runtime")
+);
 var linkVariants = (0, import_class_variance_authority2.cva)("transition-colors", {
   variants: {
     variant: {

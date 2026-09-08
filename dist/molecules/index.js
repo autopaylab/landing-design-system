@@ -75,7 +75,10 @@ var linkVariants = cva("transition-colors", {
   }
 });
 var Link = React4.forwardRef(
-  ({ className, variant, ...props }, ref) => /* @__PURE__ */ jsx5("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  ({ className, variant, ...props }, ref) => (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
+    /* @__PURE__ */ jsx5("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  )
 );
 Link.displayName = "Link";
 
@@ -114,12 +117,14 @@ function IconFeatureItem({
   title,
   description,
   iconClassName = "text-[oklch(0.6_0.22_255)]",
+  headingLevel = "h4",
   ...props
 }) {
+  const Heading = headingLevel;
   return /* @__PURE__ */ jsxs4("li", { className: cn("flex gap-4", className), ...props, children: [
     /* @__PURE__ */ jsx8(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
     /* @__PURE__ */ jsxs4("div", { children: [
-      /* @__PURE__ */ jsx8("h4", { className: "font-display text-lg", children: title }),
+      /* @__PURE__ */ jsx8(Heading, { className: "font-display text-lg", children: title }),
       /* @__PURE__ */ jsx8("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });

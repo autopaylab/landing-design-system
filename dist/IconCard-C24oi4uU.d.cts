@@ -21,8 +21,17 @@ interface IconFeatureItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
     description: string;
     /** Icon color as observed on the page — an ad hoc oklch literal, not a semantic token. See AUDIT.md #10. */
     iconClassName?: string;
+    /**
+     * The source always rendered this as an h4, but that's only correct when
+     * an h3 already sits between it and the section's h2 (true in
+     * SingleIntegrationSection, where "Single API for everything" is an h3).
+     * GlobalCoverageSection has no such h3, so its list needs `headingLevel="h3"`
+     * or axe's heading-order check (rightly) flags a skipped level. See
+     * AUDIT.md section 6.
+     */
+    headingLevel?: "h3" | "h4";
 }
-declare function IconFeatureItem({ className, icon: Icon, title, description, iconClassName, ...props }: IconFeatureItemProps): React.JSX.Element;
+declare function IconFeatureItem({ className, icon: Icon, title, description, iconClassName, headingLevel, ...props }: IconFeatureItemProps): React.JSX.Element;
 
 /** One of the 4 Security cards in HomeContent.tsx: icon-in-gradient-tile + title + bullet list. */
 interface IconCardProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -1,6 +1,6 @@
 export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from '../Footer-BwJA9-2z.cjs';
 import * as React from 'react';
-import { c as IconFeatureItemProps, a as IconCardProps, d as StatBlockProps } from '../IconCard-OOVgKX3R.cjs';
+import { c as IconFeatureItemProps, a as IconCardProps, d as StatBlockProps } from '../IconCard-C24oi4uU.cjs';
 
 /** The primary two-column video hero from HomeContent.tsx (lines 142-165). */
 interface HeroVideoSplitProps {

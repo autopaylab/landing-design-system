@@ -74,7 +74,10 @@ var linkVariants = cva2("transition-colors", {
   }
 });
 var Link = React2.forwardRef(
-  ({ className, variant, ...props }, ref) => /* @__PURE__ */ jsx2("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  ({ className, variant, ...props }, ref) => (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
+    /* @__PURE__ */ jsx2("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  )
 );
 Link.displayName = "Link";
 
@@ -332,12 +335,14 @@ function IconFeatureItem({
   title,
   description,
   iconClassName = "text-[oklch(0.6_0.22_255)]",
+  headingLevel = "h4",
   ...props
 }) {
+  const Heading = headingLevel;
   return /* @__PURE__ */ jsxs8("li", { className: cn("flex gap-4", className), ...props, children: [
     /* @__PURE__ */ jsx13(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
     /* @__PURE__ */ jsxs8("div", { children: [
-      /* @__PURE__ */ jsx13("h4", { className: "font-display text-lg", children: title }),
+      /* @__PURE__ */ jsx13(Heading, { className: "font-display text-lg", children: title }),
       /* @__PURE__ */ jsx13("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });
@@ -492,7 +497,12 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
     /* @__PURE__ */ jsxs14("div", { children: [
       /* @__PURE__ */ jsx19(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx19("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading }),
-      /* @__PURE__ */ jsx19("ul", { className: "mt-12 space-y-8", children: features.map((f) => /* @__PURE__ */ jsx19(IconFeatureItem, { ...f }, f.title)) })
+      /* @__PURE__ */ jsx19("ul", { className: "mt-12 space-y-8", children: features.map((f) => (
+        // No h3 sits between this list and the section's h2 above (unlike
+        // SingleIntegrationSection, which has one), so these need to be h3
+        // themselves or heading levels skip -- see AUDIT.md section 6.
+        /* @__PURE__ */ jsx19(IconFeatureItem, { headingLevel: "h3", ...f }, f.title)
+      )) })
     ] }),
     /* @__PURE__ */ jsxs14("div", { className: "relative aspect-square rounded-3xl bg-gradient-to-br from-muted to-background", children: [
       /* @__PURE__ */ jsx19("div", { className: "absolute right-8 top-8 grid h-20 w-20 place-items-center rounded-full bg-card shadow-lg", children: /* @__PURE__ */ jsx19("div", { className: "h-9 w-6 rounded-t-full bg-[oklch(0.6_0.22_255)]" }) }),

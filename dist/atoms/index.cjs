@@ -201,7 +201,10 @@ Checkbox.displayName = "Checkbox";
 // src/atoms/Link/Link.tsx
 var React5 = __toESM(require("react"), 1);
 var import_class_variance_authority3 = require("class-variance-authority");
-var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_jsx_runtime7 = (
+  // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
+  require("react/jsx-runtime")
+);
 var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors", {
   variants: {
     variant: {

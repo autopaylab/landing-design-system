@@ -105,7 +105,10 @@ Checkbox.displayName = "Checkbox";
 // src/atoms/Link/Link.tsx
 var React4 = __toESM(require("react"), 1);
 var import_class_variance_authority = require("class-variance-authority");
-var import_jsx_runtime5 = require("react/jsx-runtime");
+var import_jsx_runtime5 = (
+  // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
+  require("react/jsx-runtime")
+);
 var linkVariants = (0, import_class_variance_authority.cva)("transition-colors", {
   variants: {
     variant: {
@@ -158,12 +161,14 @@ function IconFeatureItem({
   title,
   description,
   iconClassName = "text-[oklch(0.6_0.22_255)]",
+  headingLevel = "h4",
   ...props
 }) {
+  const Heading = headingLevel;
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("li", { className: cn("flex gap-4", className), ...props, children: [
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h4", { className: "font-display text-lg", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Heading, { className: "font-display text-lg", children: title }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });

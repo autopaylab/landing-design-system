@@ -27,7 +27,10 @@ export function GlobalCoverageSection({ eyebrow, heading, features, floatingBadg
           <h2 className="mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]">{heading}</h2>
           <ul className="mt-12 space-y-8">
             {features.map((f) => (
-              <IconFeatureItem key={f.title} {...f} />
+              // No h3 sits between this list and the section's h2 above (unlike
+              // SingleIntegrationSection, which has one), so these need to be h3
+              // themselves or heading levels skip -- see AUDIT.md section 6.
+              <IconFeatureItem key={f.title} headingLevel="h3" {...f} />
             ))}
           </ul>
         </div>

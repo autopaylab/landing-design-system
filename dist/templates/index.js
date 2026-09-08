@@ -74,7 +74,10 @@ var linkVariants = cva2("transition-colors", {
   }
 });
 var Link = React2.forwardRef(
-  ({ className, variant, ...props }, ref) => /* @__PURE__ */ jsx2("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  ({ className, variant, ...props }, ref) => (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
+    /* @__PURE__ */ jsx2("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  )
 );
 Link.displayName = "Link";
 

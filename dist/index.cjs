@@ -231,7 +231,10 @@ Checkbox.displayName = "Checkbox";
 // src/atoms/Link/Link.tsx
 var React5 = __toESM(require("react"), 1);
 var import_class_variance_authority3 = require("class-variance-authority");
-var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_jsx_runtime7 = (
+  // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
+  require("react/jsx-runtime")
+);
 var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors", {
   variants: {
     variant: {
@@ -331,12 +334,14 @@ function IconFeatureItem({
   title,
   description,
   iconClassName = "text-[oklch(0.6_0.22_255)]",
+  headingLevel = "h4",
   ...props
 }) {
+  const Heading = headingLevel;
   return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("li", { className: cn("flex gap-4", className), ...props, children: [
     /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
     /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("h4", { className: "font-display text-lg", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Heading, { className: "font-display text-lg", children: title }),
       /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });
@@ -761,7 +766,12 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
     /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mt-12 space-y-8", children: features.map((f) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(IconFeatureItem, { ...f }, f.title)) })
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mt-12 space-y-8", children: features.map((f) => (
+        // No h3 sits between this list and the section's h2 above (unlike
+        // SingleIntegrationSection, which has one), so these need to be h3
+        // themselves or heading levels skip -- see AUDIT.md section 6.
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(IconFeatureItem, { headingLevel: "h3", ...f }, f.title)
+      )) })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "relative aspect-square rounded-3xl bg-gradient-to-br from-muted to-background", children: [
       /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "absolute right-8 top-8 grid h-20 w-20 place-items-center rounded-full bg-card shadow-lg", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "h-9 w-6 rounded-t-full bg-[oklch(0.6_0.22_255)]" }) }),

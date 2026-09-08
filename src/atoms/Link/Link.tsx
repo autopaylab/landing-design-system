@@ -27,6 +27,7 @@ export interface LinkProps
 
 export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   ({ className, variant, ...props }, ref) => (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
     <a className={cn(linkVariants({ variant }), className)} ref={ref} {...props} />
   ),
 );
