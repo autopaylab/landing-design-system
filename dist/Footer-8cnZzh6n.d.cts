@@ -21,8 +21,12 @@ interface NavbarProps {
     languageButtonAriaLabel?: string;
     /** Accessible name for the primary nav landmark, so it's distinguishable from other <nav> regions (e.g. a footer nav) on the same page. */
     navAriaLabel?: string;
+    /** Accessible name for the mobile menu toggle button when the menu is closed. */
+    openMenuAriaLabel?: string;
+    /** Accessible name for the mobile menu toggle button when the menu is open. */
+    closeMenuAriaLabel?: string;
 }
-declare function Navbar({ logoSrc, logoAlt, homeHref, navItems, loginLabel, onLoginClick, signInLabel, onSignInClick, languageLabel, onLanguageClick, languageButtonAriaLabel, navAriaLabel, }: NavbarProps): React.JSX.Element;
+declare function Navbar({ logoSrc, logoAlt, homeHref, navItems, loginLabel, onLoginClick, signInLabel, onSignInClick, languageLabel, onLanguageClick, languageButtonAriaLabel, navAriaLabel, openMenuAriaLabel, closeMenuAriaLabel, }: NavbarProps): React.JSX.Element;
 
 interface FooterNavItem {
     label: string;

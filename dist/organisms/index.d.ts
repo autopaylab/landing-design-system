@@ -1,4 +1,4 @@
-export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from '../Footer-BwJA9-2z.js';
+export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from '../Footer-8cnZzh6n.js';
 import * as React from 'react';
 import { c as IconFeatureItemProps, a as IconCardProps, d as StatBlockProps } from '../IconCard-C24oi4uU.js';
 

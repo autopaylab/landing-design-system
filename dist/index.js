@@ -388,7 +388,8 @@ function FaqItem({ value, question, answer }) {
 }
 
 // src/organisms/Navbar/Navbar.tsx
-import { ChevronDown as ChevronDown2 } from "lucide-react";
+import * as React8 from "react";
+import { ChevronDown as ChevronDown2, Menu, X } from "lucide-react";
 import { jsx as jsx19, jsxs as jsxs11 } from "react/jsx-runtime";
 function Navbar({
   logoSrc,
@@ -402,37 +403,93 @@ function Navbar({
   languageLabel,
   onLanguageClick,
   languageButtonAriaLabel = "Change language",
-  navAriaLabel = "Primary"
+  navAriaLabel = "Primary",
+  openMenuAriaLabel = "Open menu",
+  closeMenuAriaLabel = "Close menu"
 }) {
-  return /* @__PURE__ */ jsx19("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs11("div", { className: "flex items-center justify-between gap-6 rounded-xl bg-background px-6 py-3 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
-    /* @__PURE__ */ jsx19("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ jsx19(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
-    /* @__PURE__ */ jsx19("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx19(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
-    /* @__PURE__ */ jsxs11("div", { className: "flex items-center gap-2", children: [
-      /* @__PURE__ */ jsx19(
-        Button,
-        {
-          type: "button",
-          variant: "outline",
-          className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
-          onClick: onLoginClick,
-          children: loginLabel
-        }
-      ),
-      /* @__PURE__ */ jsx19(Button, { type: "button", variant: "lime", className: "px-6 py-2.5 text-[17px]", onClick: onSignInClick, children: signInLabel }),
-      languageLabel && /* @__PURE__ */ jsxs11(
-        "button",
-        {
-          type: "button",
-          onClick: onLanguageClick,
-          "aria-label": languageButtonAriaLabel,
-          className: "hidden items-center gap-1.5 rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted md:inline-flex",
-          children: [
-            /* @__PURE__ */ jsx19("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
-            /* @__PURE__ */ jsx19(ChevronDown2, { className: "h-4 w-4" })
-          ]
-        }
-      )
-    ] })
+  const [isMenuOpen, setIsMenuOpen] = React8.useState(false);
+  const menuId = React8.useId();
+  return /* @__PURE__ */ jsx19("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs11("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
+    /* @__PURE__ */ jsxs11("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
+      /* @__PURE__ */ jsx19("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ jsx19(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
+      /* @__PURE__ */ jsx19("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx19(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
+      /* @__PURE__ */ jsxs11("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsx19(
+          Button,
+          {
+            type: "button",
+            variant: "outline",
+            className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
+            onClick: onLoginClick,
+            children: loginLabel
+          }
+        ),
+        /* @__PURE__ */ jsx19(Button, { type: "button", variant: "lime", className: "hidden px-6 py-2.5 text-[17px] md:inline-flex", onClick: onSignInClick, children: signInLabel }),
+        languageLabel && /* @__PURE__ */ jsxs11(
+          "button",
+          {
+            type: "button",
+            onClick: onLanguageClick,
+            "aria-label": languageButtonAriaLabel,
+            className: "hidden items-center gap-1.5 rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted md:inline-flex",
+            children: [
+              /* @__PURE__ */ jsx19("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
+              /* @__PURE__ */ jsx19(ChevronDown2, { className: "h-4 w-4" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx19(
+          "button",
+          {
+            type: "button",
+            onClick: () => setIsMenuOpen((open) => !open),
+            "aria-label": isMenuOpen ? closeMenuAriaLabel : openMenuAriaLabel,
+            "aria-expanded": isMenuOpen,
+            "aria-controls": menuId,
+            className: "inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden",
+            children: isMenuOpen ? /* @__PURE__ */ jsx19(X, { className: "h-5 w-5" }) : /* @__PURE__ */ jsx19(Menu, { className: "h-5 w-5" })
+          }
+        )
+      ] })
+    ] }),
+    isMenuOpen && /* @__PURE__ */ jsxs11(
+      "nav",
+      {
+        id: menuId,
+        "aria-label": navAriaLabel,
+        className: "flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden",
+        children: [
+          navItems.map((item) => /* @__PURE__ */ jsx19(
+            Link,
+            {
+              variant: "nav",
+              href: item.href,
+              onClick: () => setIsMenuOpen(false),
+              className: "py-2",
+              children: item.label
+            },
+            item.label
+          )),
+          /* @__PURE__ */ jsxs11("div", { className: "mt-3 flex flex-col gap-2", children: [
+            /* @__PURE__ */ jsx19(Button, { type: "button", variant: "outline", className: "w-full py-2.5 text-[17px]", onClick: onLoginClick, children: loginLabel }),
+            /* @__PURE__ */ jsx19(Button, { type: "button", variant: "lime", className: "w-full py-2.5 text-[17px]", onClick: onSignInClick, children: signInLabel })
+          ] }),
+          languageLabel && /* @__PURE__ */ jsxs11(
+            "button",
+            {
+              type: "button",
+              onClick: onLanguageClick,
+              "aria-label": languageButtonAriaLabel,
+              className: "mt-3 inline-flex items-center gap-1.5 self-start rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted",
+              children: [
+                /* @__PURE__ */ jsx19("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
+                /* @__PURE__ */ jsx19(ChevronDown2, { className: "h-4 w-4" })
+              ]
+            }
+          )
+        ]
+      }
+    )
   ] }) });
 }
 
@@ -592,14 +649,14 @@ function SingleIntegrationSection({
 }
 
 // src/organisms/PlatformFeatureShowcase/PlatformFeatureShowcase.tsx
-import * as React8 from "react";
+import * as React9 from "react";
 import { Fragment as Fragment2, jsx as jsx26, jsxs as jsxs18 } from "react/jsx-runtime";
 function PlatformFeatureShowcase({ features }) {
-  const [active, setActive] = React8.useState(features[0]?.key);
-  const [hovered, setHovered] = React8.useState(null);
+  const [active, setActive] = React9.useState(features[0]?.key);
+  const [hovered, setHovered] = React9.useState(null);
   const shown = hovered ?? active;
-  const tabRefs = React8.useRef({});
-  const reactId = React8.useId();
+  const tabRefs = React9.useRef({});
+  const reactId = React9.useId();
   const tabId = (key) => `${reactId}-tab-${key}`;
   const panelId = (key) => `${reactId}-panel-${key}`;
   const onKeyDown = (e, i) => {

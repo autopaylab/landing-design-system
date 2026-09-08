@@ -51,6 +51,7 @@ __export(organisms_exports, {
 module.exports = __toCommonJS(organisms_exports);
 
 // src/organisms/Navbar/Navbar.tsx
+var React3 = __toESM(require("react"), 1);
 var import_lucide_react = require("lucide-react");
 
 // src/atoms/Button/Button.tsx
@@ -166,37 +167,93 @@ function Navbar({
   languageLabel,
   onLanguageClick,
   languageButtonAriaLabel = "Change language",
-  navAriaLabel = "Primary"
+  navAriaLabel = "Primary",
+  openMenuAriaLabel = "Open menu",
+  closeMenuAriaLabel = "Close menu"
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center justify-between gap-6 rounded-xl bg-background px-6 py-3 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center gap-2", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-        Button,
-        {
-          type: "button",
-          variant: "outline",
-          className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
-          onClick: onLoginClick,
-          children: loginLabel
-        }
-      ),
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button, { type: "button", variant: "lime", className: "px-6 py-2.5 text-[17px]", onClick: onSignInClick, children: signInLabel }),
-      languageLabel && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
-        "button",
-        {
-          type: "button",
-          onClick: onLanguageClick,
-          "aria-label": languageButtonAriaLabel,
-          className: "hidden items-center gap-1.5 rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted md:inline-flex",
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_lucide_react.ChevronDown, { className: "h-4 w-4" })
-          ]
-        }
-      )
-    ] })
+  const [isMenuOpen, setIsMenuOpen] = React3.useState(false);
+  const menuId = React3.useId();
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          Button,
+          {
+            type: "button",
+            variant: "outline",
+            className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
+            onClick: onLoginClick,
+            children: loginLabel
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button, { type: "button", variant: "lime", className: "hidden px-6 py-2.5 text-[17px] md:inline-flex", onClick: onSignInClick, children: signInLabel }),
+        languageLabel && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+          "button",
+          {
+            type: "button",
+            onClick: onLanguageClick,
+            "aria-label": languageButtonAriaLabel,
+            className: "hidden items-center gap-1.5 rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted md:inline-flex",
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_lucide_react.ChevronDown, { className: "h-4 w-4" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          "button",
+          {
+            type: "button",
+            onClick: () => setIsMenuOpen((open) => !open),
+            "aria-label": isMenuOpen ? closeMenuAriaLabel : openMenuAriaLabel,
+            "aria-expanded": isMenuOpen,
+            "aria-controls": menuId,
+            className: "inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden",
+            children: isMenuOpen ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_lucide_react.X, { className: "h-5 w-5" }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_lucide_react.Menu, { className: "h-5 w-5" })
+          }
+        )
+      ] })
+    ] }),
+    isMenuOpen && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+      "nav",
+      {
+        id: menuId,
+        "aria-label": navAriaLabel,
+        className: "flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden",
+        children: [
+          navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            Link,
+            {
+              variant: "nav",
+              href: item.href,
+              onClick: () => setIsMenuOpen(false),
+              className: "py-2",
+              children: item.label
+            },
+            item.label
+          )),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "mt-3 flex flex-col gap-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button, { type: "button", variant: "outline", className: "w-full py-2.5 text-[17px]", onClick: onLoginClick, children: loginLabel }),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button, { type: "button", variant: "lime", className: "w-full py-2.5 text-[17px]", onClick: onSignInClick, children: signInLabel })
+          ] }),
+          languageLabel && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+            "button",
+            {
+              type: "button",
+              onClick: onLanguageClick,
+              "aria-label": languageButtonAriaLabel,
+              className: "mt-3 inline-flex items-center gap-1.5 self-start rounded-lg pl-1 pr-2 py-1 text-foreground hover:bg-muted",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg text-base", children: languageLabel }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_lucide_react.ChevronDown, { className: "h-4 w-4" })
+              ]
+            }
+          )
+        ]
+      }
+    )
   ] }) });
 }
 
@@ -427,14 +484,14 @@ function SingleIntegrationSection({
 }
 
 // src/organisms/PlatformFeatureShowcase/PlatformFeatureShowcase.tsx
-var React3 = __toESM(require("react"), 1);
+var React4 = __toESM(require("react"), 1);
 var import_jsx_runtime15 = require("react/jsx-runtime");
 function PlatformFeatureShowcase({ features }) {
-  const [active, setActive] = React3.useState(features[0]?.key);
-  const [hovered, setHovered] = React3.useState(null);
+  const [active, setActive] = React4.useState(features[0]?.key);
+  const [hovered, setHovered] = React4.useState(null);
   const shown = hovered ?? active;
-  const tabRefs = React3.useRef({});
-  const reactId = React3.useId();
+  const tabRefs = React4.useRef({});
+  const reactId = React4.useId();
   const tabId = (key) => `${reactId}-tab-${key}`;
   const panelId = (key) => `${reactId}-panel-${key}`;
   const onKeyDown = (e, i) => {
@@ -764,12 +821,12 @@ function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaCl
 }
 
 // src/molecules/FormField/FormField.tsx
-var React5 = __toESM(require("react"), 1);
+var React6 = __toESM(require("react"), 1);
 
 // src/atoms/Input/Input.tsx
-var React4 = __toESM(require("react"), 1);
+var React5 = __toESM(require("react"), 1);
 var import_jsx_runtime26 = require("react/jsx-runtime");
-var Input = React4.forwardRef(
+var Input = React5.forwardRef(
   ({ className, type, ...props }, ref) => {
     return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
       "input",
@@ -795,7 +852,7 @@ function Label({ className, ...props }) {
 
 // src/molecules/FormField/FormField.tsx
 var import_jsx_runtime28 = require("react/jsx-runtime");
-var FormField = React5.forwardRef(
+var FormField = React6.forwardRef(
   ({ label, id, ...inputProps }, ref) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("label", { className: "block", children: [
     /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Label, { children: label }),
     /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Input, { ref, id, className: "mt-2", ...inputProps })
@@ -804,19 +861,19 @@ var FormField = React5.forwardRef(
 FormField.displayName = "FormField";
 
 // src/molecules/ConsentCheckboxField/ConsentCheckboxField.tsx
-var React7 = __toESM(require("react"), 1);
+var React8 = __toESM(require("react"), 1);
 
 // src/atoms/Checkbox/Checkbox.tsx
-var React6 = __toESM(require("react"), 1);
+var React7 = __toESM(require("react"), 1);
 var import_jsx_runtime29 = require("react/jsx-runtime");
-var Checkbox = React6.forwardRef(
+var Checkbox = React7.forwardRef(
   ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("input", { type, className: cn("mt-1", className), ref, ...props })
 );
 Checkbox.displayName = "Checkbox";
 
 // src/molecules/ConsentCheckboxField/ConsentCheckboxField.tsx
 var import_jsx_runtime30 = require("react/jsx-runtime");
-var ConsentCheckboxField = React7.forwardRef(
+var ConsentCheckboxField = React8.forwardRef(
   ({ consentText, controllerText, moreHref = "#", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("label", { className: "flex gap-3 text-xs text-muted-foreground", children: [
     /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Checkbox, { ref, ...props }),
     /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("span", { children: [
@@ -864,14 +921,14 @@ function ContactSection({
 }
 
 // src/atoms/Accordion/Accordion.tsx
-var React8 = __toESM(require("react"), 1);
+var React9 = __toESM(require("react"), 1);
 var AccordionPrimitive = __toESM(require("@radix-ui/react-accordion"), 1);
 var import_lucide_react2 = require("lucide-react");
 var import_jsx_runtime32 = require("react/jsx-runtime");
 var Accordion = AccordionPrimitive.Root;
-var AccordionItem = React8.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
+var AccordionItem = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
 AccordionItem.displayName = "AccordionItem";
-var AccordionTrigger = React8.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(
+var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(
   AccordionPrimitive.Trigger,
   {
     ref,
@@ -887,7 +944,7 @@ var AccordionTrigger = React8.forwardRef(({ className, children, ...props }, ref
   }
 ) }));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-var AccordionContent = React8.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
+var AccordionContent = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
   AccordionPrimitive.Content,
   {
     ref,
