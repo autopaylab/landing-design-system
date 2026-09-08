@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test (includes an automated axe a11y check per component story)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify dist/ is committed and up to date
+        run: |
+          if [ -n "$(git status --porcelain dist)" ]; then
+            echo "::error::dist/ is out of date with src/. Run 'npm run build' and commit the result -- see CONTRIBUTING.md."
+            git status --porcelain dist
+            git diff --stat dist
+            exit 1
+          fi
