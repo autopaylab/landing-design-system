@@ -1,6 +1,7 @@
 # @autopaylab/landing-design-system
 
 [![CI](https://github.com/autopaylab/landing-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/autopaylab/landing-design-system/actions/workflows/ci.yml)
+[![Storybook on Chromatic](https://img.shields.io/badge/Storybook-Chromatic-FF4785?logo=storybook&logoColor=white)](https://www.chromatic.com/builds?appId=6aa104b411b5b49179275bdc)
 
 A standalone, Atomic Design component package extracted from [`autopaylab/landing-page-kit`](https://github.com/autopaylab/landing-page-kit) — a single long-scroll Lovable-generated landing page.
 
@@ -116,6 +117,8 @@ package. **After changing anything under `src/`, run `npm run build` and
 commit the resulting `dist/` changes in the same commit.**
 
 Storybook (10.6, `@storybook/react-vite`) runs directly on the same `src/**/*.stories.tsx` files used by the a11y test suite — `npm run storybook` for the dev server, `npm run build-storybook` for a static build (output: `storybook-static/`, gitignored). Tailwind is wired up via `postcss.config.cjs` + `.storybook/preview.css`, scanning `src/` directly (see `.storybook/tailwind.config.ts` — a dev-only override of the package's own exported `tailwind.config.ts`, which targets consumers' `dist/`, not `src/`). `.storybook/main.ts`'s `viteFinal` also adds the `@/*` alias (mirroring `vitest.config.ts`) and forces `react`/`react-dom` into `optimizeDeps` — both needed for Storybook's own Vite pipeline, not required by consumers.
+
+Every push/PR to `main` also publishes the built Storybook to [Chromatic](https://www.chromatic.com/builds?appId=6aa104b411b5b49179275bdc) (the `chromatic` CI job, gated on the `CHROMATIC_PROJECT_TOKEN` repo secret) — a visual, browsable catalog of every story, and the foundation for visual regression testing if that's added later.
 
 ## Known limitations / not yet harmonized with Autopay Design System 2.0
 
