@@ -34,6 +34,10 @@ export default {
 @import "@autopaylab/landing-design-system/styles.css";
 ```
 
+### Fonts
+
+`styles.css` imports both font families (`Bricolage Grotesque` display, `Open Sans` body — weights 400/600/700) via `@fontsource/*`, which are real dependencies of this package. This is self-hosting: the actual `.woff2` files ship inside `@fontsource/bricolage-grotesque` and `@fontsource/open-sans` (installed transitively with this package), and are served same-origin by your app's own bundler — no request to Google's font CDN (`fonts.googleapis.com`/`fonts.gstatic.com`) at build time or runtime. This requires a bundler that resolves bare npm specifiers inside CSS `@import` (webpack, Vite, Next.js, and Storybook's Vite builder all do) — a plain, unbundled static-file server won't resolve it.
+
 ## Quick usage
 
 ```tsx

@@ -3,6 +3,17 @@
  * These are NOT Autopay Design System 2.0 brand tokens — see AUDIT.md, section 4.
  * Import this once in a consuming app alongside Tailwind.
  */
+
+/*
+ * Self-hosted via @fontsource (a real dependency of this package, see package.json) --
+ * no request to Google's font CDN at runtime or build time. Weights match what's
+ * actually used: Open Sans 400/600/700 (body), Bricolage Grotesque 400 (display).
+ */
+@import "@fontsource/open-sans/400.css";
+@import "@fontsource/open-sans/600.css";
+@import "@fontsource/open-sans/700.css";
+@import "@fontsource/bricolage-grotesque/400.css";
+
 :root {
   --radius: 0.625rem;
 
