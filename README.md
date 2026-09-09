@@ -90,9 +90,10 @@ npm run build      # tsup — ESM + CJS + .d.ts, per-layer barrels
 npm run typecheck   # tsc --noEmit
 npm run lint        # eslint, incl. eslint-plugin-jsx-a11y
 npm test            # vitest — see "Testing" below
+npm run storybook   # dev server at localhost:6006 — visual catalog of every story
 ```
 
-All four run in CI (`.github/workflows/ci.yml`) on every push/PR to `main`, along with a check that `dist/` is actually up to date with `src/` (a build whose `dist/` diff wasn't committed fails CI rather than shipping stale output).
+All four (build/typecheck/lint/test) run in CI (`.github/workflows/ci.yml`) on every push/PR to `main`, along with a check that `dist/` is actually up to date with `src/` (a build whose `dist/` diff wasn't committed fails CI rather than shipping stale output).
 
 ## Testing
 
@@ -114,7 +115,7 @@ means installing this package is a plain file copy, same as any npm-published
 package. **After changing anything under `src/`, run `npm run build` and
 commit the resulting `dist/` changes in the same commit.**
 
-Story files are CSF3-compatible; a minimal `.storybook/main.ts` is included but Storybook itself has not been installed or run as part of this package's own tooling — run `npx storybook init` (or add `@storybook/react-vite` to a consumer app) if you want the interactive dev server. Stated as uncertain rather than claimed working, per the audit's own "verify before implementing" rule.
+Storybook (10.6, `@storybook/react-vite`) runs directly on the same `src/**/*.stories.tsx` files used by the a11y test suite — `npm run storybook` for the dev server, `npm run build-storybook` for a static build (output: `storybook-static/`, gitignored). Tailwind is wired up via `postcss.config.cjs` + `.storybook/preview.css`, scanning `src/` directly (see `.storybook/tailwind.config.ts` — a dev-only override of the package's own exported `tailwind.config.ts`, which targets consumers' `dist/`, not `src/`). `.storybook/main.ts`'s `viteFinal` also adds the `@/*` alias (mirroring `vitest.config.ts`) and forces `react`/`react-dom` into `optimizeDeps` — both needed for Storybook's own Vite pipeline, not required by consumers.
 
 ## Known limitations / not yet harmonized with Autopay Design System 2.0
 
