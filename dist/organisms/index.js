@@ -1,3 +1,4 @@
+"use client";
 // src/organisms/Navbar/Navbar.tsx
 import * as React3 from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -60,6 +61,7 @@ Button.displayName = "Button";
 
 // src/atoms/Link/Link.tsx
 import * as React2 from "react";
+import { Slot as Slot2 } from "@radix-ui/react-slot";
 import { cva as cva2 } from "class-variance-authority";
 import { jsx as jsx2 } from "react/jsx-runtime";
 var linkVariants = cva2("transition-colors", {
@@ -75,10 +77,10 @@ var linkVariants = cva2("transition-colors", {
   }
 });
 var Link = React2.forwardRef(
-  ({ className, variant, ...props }, ref) => (
-    // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
-    /* @__PURE__ */ jsx2("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
-  )
+  ({ className, variant, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot2 : "a";
+    return /* @__PURE__ */ jsx2(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+  }
 );
 Link.displayName = "Link";
 

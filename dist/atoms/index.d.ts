@@ -77,6 +77,8 @@ declare const linkVariants: (props?: ({
     variant?: "nav" | "underline" | "plain" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>, VariantProps<typeof linkVariants> {
+    /** Render the styling onto a single child element (e.g. a router `Link`) instead of a plain `<a>`. */
+    asChild?: boolean;
 }
 declare const Link: React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>;
 

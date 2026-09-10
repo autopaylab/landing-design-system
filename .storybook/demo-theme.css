@@ -1,0 +1,38 @@
+/**
+ * Fictional demo theme, NOT a real Autopay palette -- exists only to prove
+ * every component in this package is driven entirely by the CSS custom
+ * properties in src/tokens/tokens.css, with zero hardcoded colors baked
+ * into component source. Swapping every value here re-themes the whole
+ * package; no component file changes. See the Storybook toolbar's "Theme"
+ * control.
+ */
+[data-theme="demo"] {
+  --background: oklch(0.97 0.01 280);
+  --foreground: oklch(0.2 0.03 280);
+  --ink: oklch(0.2 0.03 280);
+
+  --surface: oklch(0.95 0.015 280);
+  --surface-muted: oklch(0.92 0.02 270);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+
+  --primary: oklch(0.3 0.08 280);
+  --primary-foreground: oklch(0.97 0.01 280);
+  --secondary: oklch(0.92 0.02 270);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.92 0.02 270);
+  --muted-foreground: oklch(0.5 0.02 270);
+  --accent: oklch(0.9 0.03 260);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.97 0.01 280);
+  --border: oklch(0.88 0.02 270);
+  --input: oklch(0.9 0.02 270);
+  --ring: oklch(0.65 0.05 270);
+
+  /* Brand-accent swap: the token name stays "--lime" (component code
+     references var(--lime), never the literal color), only the value changes. */
+  --lime: oklch(0.75 0.15 190);
+  --lime-foreground: oklch(0.2 0.03 280);
+}

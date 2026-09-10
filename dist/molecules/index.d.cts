@@ -54,4 +54,20 @@ interface FaqItemProps {
 }
 declare function FaqItem({ value, question, answer }: FaqItemProps): React.JSX.Element;
 
-export { BulletItem, ConsentCheckboxField, type ConsentCheckboxFieldProps, FaqItem, type FaqItemProps, FormField, type FormFieldProps, IndustryCard, type IndustryCardProps, StepCard, type StepCardProps };
+/**
+ * New molecule, not extracted from landing-page-kit -- inspired by a
+ * partner/provider-count badge pattern observed live on autopay.pl during
+ * the market-scan pass (see MARKET-SCAN.md #6), which has no equivalent in
+ * this package's actual source. Built from existing tokens (matches
+ * `Badge`'s `eyebrow` variant treatment: rounded-full, bg-muted) rather than
+ * copying autopay.pl's exact visual details, which weren't captured.
+ */
+interface PartnerCountBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** The number/count, e.g. "+40". Rendered as plain text, not parsed. */
+    count: string;
+    /** What the count refers to, e.g. "payment providers". */
+    label: string;
+}
+declare function PartnerCountBadge({ className, count, label, ...props }: PartnerCountBadgeProps): React.JSX.Element;
+
+export { BulletItem, ConsentCheckboxField, type ConsentCheckboxFieldProps, FaqItem, type FaqItemProps, FormField, type FormFieldProps, IndustryCard, type IndustryCardProps, PartnerCountBadge, type PartnerCountBadgeProps, StepCard, type StepCardProps };

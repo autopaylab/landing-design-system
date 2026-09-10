@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/cn";
@@ -23,13 +24,16 @@ const linkVariants = cva("transition-colors", {
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    VariantProps<typeof linkVariants> {}
+    VariantProps<typeof linkVariants> {
+  /** Render the styling onto a single child element (e.g. a router `Link`) instead of a plain `<a>`. */
+  asChild?: boolean;
+}
 
 export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant, ...props }, ref) => (
-    // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
-    <a className={cn(linkVariants({ variant }), className)} ref={ref} {...props} />
-  ),
+  ({ className, variant, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "a";
+    return <Comp className={cn(linkVariants({ variant }), className)} ref={ref} {...props} />;
+  },
 );
 Link.displayName = "Link";
 

@@ -1,4 +1,5 @@
 @import "tailwindcss";
 @import "../src/tokens/tokens.css";
+@import "./demo-theme.css";
 
 @config "./tailwind.config.ts";

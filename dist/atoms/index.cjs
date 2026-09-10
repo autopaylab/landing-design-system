@@ -200,11 +200,9 @@ Checkbox.displayName = "Checkbox";
 
 // src/atoms/Link/Link.tsx
 var React5 = __toESM(require("react"), 1);
+var import_react_slot2 = require("@radix-ui/react-slot");
 var import_class_variance_authority3 = require("class-variance-authority");
-var import_jsx_runtime7 = (
-  // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
-  require("react/jsx-runtime")
-);
+var import_jsx_runtime7 = require("react/jsx-runtime");
 var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors", {
   variants: {
     variant: {
@@ -218,7 +216,10 @@ var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors"
   }
 });
 var Link = React5.forwardRef(
-  ({ className, variant, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  ({ className, variant, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? import_react_slot2.Slot : "a";
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+  }
 );
 Link.displayName = "Link";
 

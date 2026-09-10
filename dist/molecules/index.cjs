@@ -1,3 +1,4 @@
+"use client";
 "use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -37,6 +38,7 @@ __export(molecules_exports, {
   IconCard: () => IconCard,
   IconFeatureItem: () => IconFeatureItem,
   IndustryCard: () => IndustryCard,
+  PartnerCountBadge: () => PartnerCountBadge,
   StatBlock: () => StatBlock,
   StepCard: () => StepCard
 });
@@ -104,11 +106,9 @@ Checkbox.displayName = "Checkbox";
 
 // src/atoms/Link/Link.tsx
 var React4 = __toESM(require("react"), 1);
+var import_react_slot = require("@radix-ui/react-slot");
 var import_class_variance_authority = require("class-variance-authority");
-var import_jsx_runtime5 = (
-  // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
-  require("react/jsx-runtime")
-);
+var import_jsx_runtime5 = require("react/jsx-runtime");
 var linkVariants = (0, import_class_variance_authority.cva)("transition-colors", {
   variants: {
     variant: {
@@ -122,7 +122,10 @@ var linkVariants = (0, import_class_variance_authority.cva)("transition-colors",
   }
 });
 var Link = React4.forwardRef(
-  ({ className, variant, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
+  ({ className, variant, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? import_react_slot.Slot : "a";
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+  }
 );
 Link.displayName = "Link";
 
@@ -230,7 +233,7 @@ function StepCard({ className, index, title, body, ...props }) {
 
 // src/atoms/Button/Button.tsx
 var React6 = __toESM(require("react"), 1);
-var import_react_slot = require("@radix-ui/react-slot");
+var import_react_slot2 = require("@radix-ui/react-slot");
 var import_class_variance_authority2 = require("class-variance-authority");
 var import_jsx_runtime13 = require("react/jsx-runtime");
 var buttonVariants = (0, import_class_variance_authority2.cva)(
@@ -269,7 +272,7 @@ var buttonVariants = (0, import_class_variance_authority2.cva)(
 );
 var Button = React6.forwardRef(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? import_react_slot.Slot : "button";
+    const Comp = asChild ? import_react_slot2.Slot : "button";
     return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Comp, { className: cn(buttonVariants({ variant, size, className })), ref, ...props });
   }
 );
@@ -390,6 +393,25 @@ function FaqItem({ value, question, answer }) {
     /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
   ] });
 }
+
+// src/molecules/PartnerCountBadge/PartnerCountBadge.tsx
+var import_jsx_runtime17 = require("react/jsx-runtime");
+function PartnerCountBadge({ className, count, label, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+    "div",
+    {
+      className: cn(
+        "inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 text-foreground/70",
+        className
+      ),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "text-sm font-semibold text-foreground", children: count }),
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "text-xs", children: label })
+      ]
+    }
+  );
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   BulletItem,
@@ -399,6 +421,7 @@ function FaqItem({ value, question, answer }) {
   IconCard,
   IconFeatureItem,
   IndustryCard,
+  PartnerCountBadge,
   StatBlock,
   StepCard
 });

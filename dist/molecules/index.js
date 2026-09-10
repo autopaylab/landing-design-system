@@ -1,3 +1,4 @@
+"use client";
 // src/molecules/FormField/FormField.tsx
 import * as React2 from "react";
 
@@ -60,6 +61,7 @@ Checkbox.displayName = "Checkbox";
 
 // src/atoms/Link/Link.tsx
 import * as React4 from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import { jsx as jsx5 } from "react/jsx-runtime";
 var linkVariants = cva("transition-colors", {
@@ -75,10 +77,10 @@ var linkVariants = cva("transition-colors", {
   }
 });
 var Link = React4.forwardRef(
-  ({ className, variant, ...props }, ref) => (
-    // eslint-disable-next-line jsx-a11y/anchor-has-content -- `children` is part of `...props` (LinkProps extends AnchorHTMLAttributes), the rule can't see through the spread on this passthrough atom.
-    /* @__PURE__ */ jsx5("a", { className: cn(linkVariants({ variant }), className), ref, ...props })
-  )
+  ({ className, variant, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "a";
+    return /* @__PURE__ */ jsx5(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+  }
 );
 Link.displayName = "Link";
 
@@ -186,7 +188,7 @@ function StepCard({ className, index, title, body, ...props }) {
 
 // src/atoms/Button/Button.tsx
 import * as React6 from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot as Slot2 } from "@radix-ui/react-slot";
 import { cva as cva2 } from "class-variance-authority";
 import { jsx as jsx13 } from "react/jsx-runtime";
 var buttonVariants = cva2(
@@ -225,7 +227,7 @@ var buttonVariants = cva2(
 );
 var Button = React6.forwardRef(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+    const Comp = asChild ? Slot2 : "button";
     return /* @__PURE__ */ jsx13(Comp, { className: cn(buttonVariants({ variant, size, className })), ref, ...props });
   }
 );
@@ -346,6 +348,25 @@ function FaqItem({ value, question, answer }) {
     /* @__PURE__ */ jsx16(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
   ] });
 }
+
+// src/molecules/PartnerCountBadge/PartnerCountBadge.tsx
+import { jsx as jsx17, jsxs as jsxs11 } from "react/jsx-runtime";
+function PartnerCountBadge({ className, count, label, ...props }) {
+  return /* @__PURE__ */ jsxs11(
+    "div",
+    {
+      className: cn(
+        "inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 text-foreground/70",
+        className
+      ),
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx17("span", { className: "text-sm font-semibold text-foreground", children: count }),
+        /* @__PURE__ */ jsx17("span", { className: "text-xs", children: label })
+      ]
+    }
+  );
+}
 export {
   BulletItem,
   ConsentCheckboxField,
@@ -354,6 +375,7 @@ export {
   IconCard,
   IconFeatureItem,
   IndustryCard,
+  PartnerCountBadge,
   StatBlock,
   StepCard
 };

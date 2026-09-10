@@ -45,7 +45,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup && node -e \"require('fs').copyFileSync('src/tokens/tokens.css','dist/styles.css')\"",
+    "build": "tsup && node -e \"require('fs').copyFileSync('src/tokens/tokens.css','dist/styles.css')\" && node scripts/prepend-use-client.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src",

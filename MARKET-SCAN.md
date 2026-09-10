@@ -21,7 +21,7 @@ These exist on autopay.pl and/or autopayglobal.com but have no equivalent organi
 | 3 | Hub-and-spoke feature diagram (center logo, radiating icon nodes with connecting lines) | autopay.pl platform section | No equivalent in source at all | New organism — largely a decorative/graphic composition; needs a decision on whether it's an SVG-based atom+organism or purely illustrative (lower priority, high build cost for the payoff) |
 | 4 | Full-bleed dark/navy section background treatment | autopay.pl, alternating with light sections | Source is entirely light-background; no dark section token or pattern exists in `tokens/` | Token/theming addition (a `dark` section background token + verifying existing organisms' text contrast against it), not a new organism |
 | 5 | Blog/article card grid | autopay.pl | No blog content or route exists in source at all | Net-new molecule (`ArticleCard`) + organism (`ArticleGrid`) — needs real content shape (author/date/image/excerpt fields) confirmed against whatever CMS backs it, not guessed |
-| 6 | Partner-integration badge with a count (e.g. "+40 providers") | autopay.pl | No equivalent counter/badge composition in source | Small molecule, low effort, low risk — safe to build once prioritized |
+| 6 | ~~Partner-integration badge with a count (e.g. "+40 providers")~~ **Done (2026-09-10)** | autopay.pl | No equivalent counter/badge composition in source | Built as `PartnerCountBadge` molecule, composing existing tokens (matches `Badge`'s `eyebrow` treatment) rather than autopay.pl's exact visual details, which weren't captured during the scan |
 
 ## 3. Discrepancy worth flagging, not fixing
 
