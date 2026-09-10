@@ -7,7 +7,7 @@ A standalone, Atomic Design component package extracted from [`autopaylab/landin
 
 **This is a first-pass extraction, not a rebrand.** Autopay's brand design tokens (colors, type scale, spacing) have **not** been applied — everything here documents what actually existed in the source, as-is. See [`AUDIT.md`](./AUDIT.md) for the full inventory, every deduplication decision, and the classification rationale for anything ambiguous. See "Known limitations" below for what still needs a harmonization pass against Autopay Design System 2.0.
 
-Contributing? See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the extraction discipline this package holds itself to. Licensed under [MIT](./LICENSE).
+Contributing? See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the extraction discipline this package holds itself to. Found a vulnerability? See [`SECURITY.md`](./SECURITY.md). Licensed under [MIT](./LICENSE).
 
 ## Install
 
