@@ -133,6 +133,10 @@ Storybook (10.6, `@storybook/react-vite`) runs directly on the same `src/**/*.st
 
 Every push/PR to `main` also publishes the built Storybook to [Chromatic](https://www.chromatic.com/builds?appId=6aa104b411b5b49179275bdc) (the `chromatic` CI job, gated on the `CHROMATIC_PROJECT_TOKEN` repo secret) — a visual, browsable catalog of every story, and the foundation for visual regression testing if that's added later.
 
+## API docs
+
+`npm run docs` generates a static API reference with [TypeDoc](https://typedoc.org) (output: `docs/`, gitignored) — every exported component, prop interface, and its real JSDoc comments, grouped by Atomic Design layer (`atoms`/`molecules`/`organisms`/`templates`/`tokens`, matching `typedoc.json`'s entry points). This is generated straight from the same TypeScript source and doc comments Storybook and the props tables already rely on, so it can't drift from the actual code the way a hand-maintained docs site could. CI builds it on every push/PR (`npm run docs` must succeed) to catch broken doc comments or entry points before they ship, even though the output isn't currently published anywhere.
+
 ## Known limitations / not yet harmonized with Autopay Design System 2.0
 
 See [`AUDIT.md`](./AUDIT.md) section 5 for full detail. Summary:

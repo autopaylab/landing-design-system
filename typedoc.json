@@ -1,0 +1,17 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/atoms/index.ts",
+    "src/molecules/index.ts",
+    "src/organisms/index.ts",
+    "src/templates/index.ts",
+    "src/tokens/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "tsconfig": "tsconfig.json",
+  "name": "@autopaylab/landing-design-system",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeInternal": true
+}

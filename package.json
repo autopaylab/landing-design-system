@@ -55,7 +55,8 @@
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:tag": "changeset git-tag",
-    "size": "size-limit"
+    "size": "size-limit",
+    "docs": "typedoc"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -98,6 +99,7 @@
     "storybook": "^10.6.0",
     "tailwindcss": "^4.3.3",
     "tsup": "^8.3.5",
+    "typedoc": "^0.28.20",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.70.0",
     "vitest": "^5.0.0",
