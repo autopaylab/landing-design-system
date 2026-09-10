@@ -110,7 +110,8 @@ All four (build/typecheck/lint/test) run in CI (`.github/workflows/ci.yml`) on e
 Built with Vitest + React Testing Library + `vitest-axe`, running in `jsdom`.
 
 `dist/` is committed to this repo. This package is consumed elsewhere as a plain
-GitHub dependency (`github:autopaylab/landing-design-system#main`) rather than
+GitHub dependency (`github:autopaylab/landing-design-system#main`, or a tagged
+version like `#v0.2.0` — see "Releases" in `CONTRIBUTING.md`) rather than
 published to npm, and installers of a git dependency get no build step by
 default — an earlier version relied on an npm `prepare` script to rebuild on
 install, which meant every consuming install (including CI) had to fetch this
@@ -119,6 +120,14 @@ step to depend on in a production build. Shipping the built output directly
 means installing this package is a plain file copy, same as any npm-published
 package. **After changing anything under `src/`, run `npm run build` and
 commit the resulting `dist/` changes in the same commit.**
+
+This package is deliberately **not** published to npm or GitHub Packages —
+`"private": true` in `package.json` enforces that. Only GitHub collaborators
+explicitly given access to this repo can consume it at all, which is a real
+decision, not an oversight (a public registry would make it installable by
+anyone, which isn't wanted here). It still gets real semver versions and a
+changelog via [Changesets](https://github.com/changesets/changesets) — see
+`CONTRIBUTING.md` for how a release is cut.
 
 Storybook (10.6, `@storybook/react-vite`) runs directly on the same `src/**/*.stories.tsx` files used by the a11y test suite — `npm run storybook` for the dev server, `npm run build-storybook` for a static build (output: `storybook-static/`, gitignored). Tailwind v4 (`@tailwindcss/postcss`) is wired up via `postcss.config.cjs` + `.storybook/preview.css`'s `@import "tailwindcss";`; the `@config "./tailwind.config.ts";` directive there points Tailwind at `.storybook/tailwind.config.ts` — a dev-only override of the package's own exported `tailwind.config.ts` (which targets consumers' `dist/`, not `src/`) using the same v3-style `content`/`theme.extend` shape, which v4 still fully supports via `@config`. `.storybook/main.ts`'s `viteFinal` also adds the `@/*` alias (mirroring `vitest.config.ts`) and forces `react`/`react-dom` into `optimizeDeps` — both needed for Storybook's own Vite pipeline, not required by consumers.
 
