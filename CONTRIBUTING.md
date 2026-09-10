@@ -53,7 +53,7 @@ npm test
 npm run build
 ```
 
-All four run in CI on every PR. `npm run lint` includes `eslint-plugin-jsx-a11y`; `npm test` includes an automated accessibility check (via `jest-axe`) against every component's story fixtures — this is deliberate. The WCAG audit in `AUDIT.md` section 6 found real bugs (a keyboard-focus bug in `PlatformFeatureShowcase`, missing ARIA linkage, unlabeled nav landmarks); the CI a11y check exists so issues like that get caught automatically instead of waiting for the next manual audit.
+All four run in CI on every PR. `npm run lint` includes `eslint-plugin-jsx-a11y`; `npm test` includes an automated accessibility check (via `vitest-axe`) against every component's story fixtures — this is deliberate. The WCAG audit in `AUDIT.md` section 6 found real bugs (a keyboard-focus bug in `PlatformFeatureShowcase`, missing ARIA linkage, unlabeled nav landmarks); the CI a11y check exists so issues like that get caught automatically instead of waiting for the next manual audit.
 
 ## Releases
 
