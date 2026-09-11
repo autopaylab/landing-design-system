@@ -661,7 +661,7 @@ function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondar
 // src/organisms/TrustedByLogos/TrustedByLogos.tsx
 import { jsx as jsx25, jsxs as jsxs17 } from "react/jsx-runtime";
 function TrustedByLogos({ heading, logos }) {
-  return /* @__PURE__ */ jsxs17("section", { id: "trusted-by", className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ jsxs17("section", { id: "trusted-by", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
     /* @__PURE__ */ jsx25("h2", { className: "text-center font-display text-h3", children: heading }),
     /* @__PURE__ */ jsx25("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ jsx25(
       "img",
@@ -710,7 +710,7 @@ function SingleIntegrationSection({
   features,
   videoSrc
 }) {
-  return /* @__PURE__ */ jsx27("section", { id: "platform", className: "mt-32 w-full overflow-hidden bg-white pb-0 pt-24", children: /* @__PURE__ */ jsxs19("div", { className: "mx-auto max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ jsx27("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ jsxs19("div", { className: "mx-auto max-w-[1280px] px-6", children: [
     /* @__PURE__ */ jsxs19("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx27(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx27("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -803,7 +803,7 @@ function PlatformFeatureShowcase({ features }) {
 // src/organisms/SecuritySection/SecuritySection.tsx
 import { jsx as jsx29, jsxs as jsxs21 } from "react/jsx-runtime";
 function SecuritySection({ eyebrow, heading, description, schemeBadges, cards }) {
-  return /* @__PURE__ */ jsxs21("section", { id: "security", className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ jsxs21("section", { id: "security", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
     /* @__PURE__ */ jsxs21("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx29(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx29("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -817,7 +817,7 @@ function SecuritySection({ eyebrow, heading, description, schemeBadges, cards })
 // src/organisms/GlobalCoverageSection/GlobalCoverageSection.tsx
 import { jsx as jsx30, jsxs as jsxs22 } from "react/jsx-runtime";
 function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
-  return /* @__PURE__ */ jsx30("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs22("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ jsx30("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs22("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs22("div", { children: [
       /* @__PURE__ */ jsx30(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx30("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -846,7 +846,7 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
 // src/organisms/DataLeverageSection/DataLeverageSection.tsx
 import { jsx as jsx31, jsxs as jsxs23 } from "react/jsx-runtime";
 function DataLeverageSection({ eyebrow, heading, description, items, reportingPeriods }) {
-  return /* @__PURE__ */ jsxs23("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ jsxs23("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
     /* @__PURE__ */ jsxs23("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx31(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx31("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -889,7 +889,7 @@ function DataLeverageSection({ eyebrow, heading, description, items, reportingPe
 // src/organisms/StatsSection/StatsSection.tsx
 import { jsx as jsx32, jsxs as jsxs24 } from "react/jsx-runtime";
 function StatsSection({ heading, description, stats }) {
-  return /* @__PURE__ */ jsx32("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs24("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
+  return /* @__PURE__ */ jsx32("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs24("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
     /* @__PURE__ */ jsxs24("div", { className: "max-w-2xl", children: [
       /* @__PURE__ */ jsx32("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx32("p", { className: "mt-6 text-muted-foreground md:text-[17px]", children: description })
@@ -901,7 +901,7 @@ function StatsSection({ heading, description, stats }) {
 // src/organisms/IndustriesStackedSection/IndustriesStackedSection.tsx
 import { jsx as jsx33, jsxs as jsxs25 } from "react/jsx-runtime";
 function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ jsx33("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ jsxs25("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ jsx33("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs25("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ jsxs25("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx33(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx33("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -931,7 +931,7 @@ function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCt
 // src/organisms/IndustriesGridSection/IndustriesGridSection.tsx
 import { jsx as jsx34, jsxs as jsxs26 } from "react/jsx-runtime";
 function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ jsx34("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ jsxs26("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ jsx34("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs26("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ jsxs26("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx34(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx34("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -955,7 +955,7 @@ function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaCl
 // src/organisms/OverlappingCardsSection/OverlappingCardsSection.tsx
 import { jsx as jsx35, jsxs as jsxs27 } from "react/jsx-runtime";
 function OverlappingCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ jsx35("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ jsxs27("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ jsx35("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs27("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ jsxs27("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx35(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx35("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -992,7 +992,7 @@ function ContactSection({
   submitLabel = "Send",
   onSubmit
 }) {
-  return /* @__PURE__ */ jsx36("section", { id: "contact", className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs28("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ jsx36("section", { id: "contact", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs28("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs28("div", { children: [
       /* @__PURE__ */ jsx36("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx36("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })

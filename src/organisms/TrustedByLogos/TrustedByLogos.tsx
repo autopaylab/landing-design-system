@@ -14,7 +14,7 @@ export interface TrustedByLogosProps {
 
 export function TrustedByLogos({ heading, logos }: TrustedByLogosProps) {
   return (
-    <section id="trusted-by" className="mx-auto mt-32 max-w-[1280px] px-6">
+    <section id="trusted-by" className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
       <h2 className="text-center font-display text-h3">{heading}</h2>
       <div className="mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
         {logos.map((l) => (

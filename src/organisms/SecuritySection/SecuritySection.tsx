@@ -14,7 +14,7 @@ export interface SecuritySectionProps {
 
 export function SecuritySection({ eyebrow, heading, description, schemeBadges, cards }: SecuritySectionProps) {
   return (
-    <section id="security" className="mx-auto mt-32 max-w-[1280px] px-6">
+    <section id="security" className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
       <div className="text-center">
         <Badge variant="eyebrow">{eyebrow}</Badge>
         <h2 className="mt-6 font-display text-h2">{heading}</h2>

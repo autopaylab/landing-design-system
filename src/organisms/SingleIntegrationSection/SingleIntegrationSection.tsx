@@ -22,7 +22,7 @@ export function SingleIntegrationSection({
   videoSrc,
 }: SingleIntegrationSectionProps) {
   return (
-    <section id="platform" className="mt-32 w-full overflow-hidden bg-white pb-0 pt-24">
+    <section id="platform" className="mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32">
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="text-center">
           <Badge variant="eyebrow">{eyebrow}</Badge>

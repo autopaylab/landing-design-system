@@ -32,7 +32,7 @@ export function ContactSection({
   onSubmit,
 }: ContactSectionProps) {
   return (
-    <section id="contact" className="mx-auto mt-32 max-w-[1280px] px-6">
+    <section id="contact" className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
       <div className="grid items-start gap-12 md:grid-cols-2">
         <div>
           <h2 className="font-display text-h2">{heading}</h2>

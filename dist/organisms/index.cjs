@@ -376,7 +376,7 @@ function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondar
 // src/organisms/TrustedByLogos/TrustedByLogos.tsx
 var import_jsx_runtime9 = require("react/jsx-runtime");
 function TrustedByLogos({ heading, logos }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("section", { id: "trusted-by", className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("section", { id: "trusted-by", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
     /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h2", { className: "text-center font-display text-h3", children: heading }),
     /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
       "img",
@@ -472,7 +472,7 @@ function SingleIntegrationSection({
   features,
   videoSrc
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("section", { id: "platform", className: "mt-32 w-full overflow-hidden bg-white pb-0 pt-24", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "mx-auto max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "mx-auto max-w-[1280px] px-6", children: [
     /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -593,7 +593,7 @@ function IconCard({ className, icon: Icon, title, bullets, color, ...props }) {
 // src/organisms/SecuritySection/SecuritySection.tsx
 var import_jsx_runtime18 = require("react/jsx-runtime");
 function SecuritySection({ eyebrow, heading, description, schemeBadges, cards }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("section", { id: "security", className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("section", { id: "security", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
     /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -607,7 +607,7 @@ function SecuritySection({ eyebrow, heading, description, schemeBadges, cards })
 // src/organisms/GlobalCoverageSection/GlobalCoverageSection.tsx
 var import_jsx_runtime19 = require("react/jsx-runtime");
 function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -636,7 +636,7 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
 // src/organisms/DataLeverageSection/DataLeverageSection.tsx
 var import_jsx_runtime20 = require("react/jsx-runtime");
 function DataLeverageSection({ eyebrow, heading, description, items, reportingPeriods }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
     /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -689,7 +689,7 @@ function StatBlock({ className, eyebrow = "UP TO", value, label, ...props }) {
 // src/organisms/StatsSection/StatsSection.tsx
 var import_jsx_runtime22 = require("react/jsx-runtime");
 function StatsSection({ heading, description, stats }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
     /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "max-w-2xl", children: [
       /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "mt-6 text-muted-foreground md:text-[17px]", children: description })
@@ -774,7 +774,7 @@ function IndustryCard({
 // src/organisms/IndustriesStackedSection/IndustriesStackedSection.tsx
 var import_jsx_runtime24 = require("react/jsx-runtime");
 function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -804,7 +804,7 @@ function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCt
 // src/organisms/IndustriesGridSection/IndustriesGridSection.tsx
 var import_jsx_runtime25 = require("react/jsx-runtime");
 function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -885,7 +885,7 @@ function OverlapCard({
 // src/organisms/OverlappingCardsSection/OverlappingCardsSection.tsx
 var import_jsx_runtime27 = require("react/jsx-runtime");
 function OverlappingCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -990,7 +990,7 @@ function ContactSection({
   submitLabel = "Send",
   onSubmit
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("section", { id: "contact", className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("section", { id: "contact", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })

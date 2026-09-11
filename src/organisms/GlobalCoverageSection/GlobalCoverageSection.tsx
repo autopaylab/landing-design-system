@@ -20,7 +20,7 @@ export interface GlobalCoverageSectionProps {
 
 export function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }: GlobalCoverageSectionProps) {
   return (
-    <section className="mx-auto mt-32 max-w-[1280px] px-6">
+    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
       <div className="grid items-center gap-12 md:grid-cols-2">
         <div>
           <Badge variant="eyebrow">{eyebrow}</Badge>
