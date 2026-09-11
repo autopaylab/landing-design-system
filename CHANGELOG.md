@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- c87157d: Replace ad hoc per-component heading sizes with a shared, responsive `text-h1`-`text-h6` scale sourced from Autopay Design System 2.0's typescale. Fixes real drift where the same heading level rendered at different sizes across organisms; see `DS2-HARMONIZATION.md` for the full before/after mapping.
+- c4c562c: Remap the neutral/semantic color tokens (background, foreground, ink, surface, primary, muted, accent, border, input) to their nearest real Autopay Design System 2.0 swatch, replacing OKLCH values that were never checked against DS2. WCAG contrast was re-verified for every real text/background pairing — no regression. `--ring` and `--destructive` were intentionally left unchanged; see `DS2-HARMONIZATION.md` for details.
+
 ## 0.3.0
 
 ### Minor Changes
