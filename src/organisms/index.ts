@@ -16,3 +16,4 @@ export * from "./OverlappingCardsSection";
 export * from "./ContactSection";
 export * from "./FaqAccordionSection";
 export * from "./PromoCtaSection";
+export * from "./CookieConsentScript";

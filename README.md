@@ -79,13 +79,34 @@ See `src/templates/LandingPageTemplate/LandingPageTemplate.stories.tsx` for a co
 | Layer | Count | Location |
 |---|---|---|
 | Atoms | 9 (incl. vendored `Accordion`) | `src/atoms/` |
-| Molecules | 9 | `src/molecules/` |
-| Organisms | 17 | `src/organisms/` |
+| Molecules | 12 | `src/molecules/` |
+| Organisms | 19 | `src/organisms/` |
 | Templates | 1 | `src/templates/` |
 
 Every component ships a `.stories.tsx` (CSF3 format) alongside its implementation, showing its real observed variants — no invented ones. Props tables are the exported TypeScript types themselves (`ButtonProps`, `IconCardProps`, etc.) rather than hand-written tables that can drift; run `npm run typecheck` or hover the export in your editor to see them.
 
 Full audit, dedup rationale and classification calls: [`AUDIT.md`](./AUDIT.md).
+
+## Cookie consent — add `CookieConsentScript` to every landing page
+
+`organisms/CookieConsentScript` ships Autopay's production ConsentManager (consentmanager.net) loader exactly as it runs on autopaylab.com, ported byte-for-byte — not redesigned or reimplemented. It's the one deliberate exception to "every component here is built and styled by us": a real legal/compliance obligation, not a visual pattern. **Every new landing page should include it**, as the very first child of `<body>`, before any other script:
+
+```tsx
+import { CookieConsentScript } from "@autopaylab/landing-design-system/organisms";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <CookieConsentScript />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+It only does its job server-rendered (a Next.js Server Component, no `"use client"` needed) — see the component's own doc comment for why it's inert, and expected, when mounted client-side (as its own Storybook story is). Its `cmp_cdid` is tied to Autopay's specific ConsentManager account; only reuse this for other autopaylab.com pages, not an unrelated site. See `AUDIT.md` section 12 for the full port rationale.
 
 ## Development
 

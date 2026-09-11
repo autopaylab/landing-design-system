@@ -263,4 +263,96 @@ interface PromoCtaSectionProps {
 }
 declare function PromoCtaSection({ backgroundImage, heading, primaryCta, secondaryCta, logoSrc, logoAlt, promoText, copyrightText, privacyLabel, privacyHref, }: PromoCtaSectionProps): React.JSX.Element;
 
-export { ContactSection, type ContactSectionProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps };
+/**
+ * Verbatim, unmodified ConsentManager (consentmanager.net) autoblocking
+ * loader running in production on autopaylab.com, cmp_cdid
+ * "136af463a10ba". Ported here as a deliberate exception, per the
+ * maintainer: every other component in this package is built and styled by
+ * us; this one is a real cookie-consent legal obligation that must not be
+ * redesigned or reimplemented, only reused byte-for-byte. See README
+ * "Known limitations" and AUDIT.md for why it doesn't fit the usual
+ * atomic-design mold.
+ *
+ * The visible banner/modal is rendered by ConsentManager's own
+ * remote-hosted script and iframe, configured on their dashboard — not by
+ * any markup or CSS in this codebase, so there's no meaningful visual
+ * Storybook preview.
+ *
+ * In real usage (a Next.js Server Component, as in autopaylab-landing's
+ * root layout), this ships as part of the server-rendered HTML document —
+ * browsers execute a `<script>` that's present in parsed page markup
+ * normally, which is what makes the banner actually load in production.
+ * Mounted via pure client-side rendering instead (Storybook, this
+ * package's own axe test suite, or a mistaken client-component usage),
+ * the exact same JSX takes React's `dangerouslySetInnerHTML` →
+ * `Element.innerHTML` path, and a script assigned that way is marked
+ * "already started" per the HTML spec and never executes — confirmed
+ * empirically (zero network requests fire when this story mounts). React
+ * itself will log a benign console warning in that case ("Encountered a
+ * script tag while rendering React component... never executed when
+ * rendering on the client") — expected, not a sign of misconfiguration,
+ * just a reminder this only does its job server-rendered.
+ *
+ * `cmp_cdid` is tied to Autopay's specific ConsentManager account and
+ * domain registration. Reusing this component only makes sense for other
+ * autopaylab.com pages under the same legal entity / consent record — NOT
+ * for an unrelated site, which would need its own cdid from its own
+ * ConsentManager account. Do not change this value when reusing the
+ * component; if a genuinely different property needs a consent banner, it
+ * needs its own ConsentManager setup, not this one repointed.
+ *
+ * Two fixes were applied, once, to the vendor snippet as originally pasted
+ * into chat (carried forward unchanged from the original port in
+ * autopaylab-landing/src/lib/consent-manager-script.ts):
+ * 1. Two occurrences of a bare `_` variable (used for the GPP regulation
+ *    key, declared as `_=c("gppkey")` and read back via `h(_)`) were
+ *    missing from the pasted text — almost certainly eaten by chat
+ *    markdown treating a lone underscore as an emphasis marker, since the
+ *    snippet wasn't pasted in a fenced code block. Left as pasted, this is
+ *    a hard JavaScript syntax error that would have thrown immediately and
+ *    the whole banner would never have loaded. Both restored; nothing else
+ *    in the vendor snippet was changed.
+ * 2. A small IIFE reads the already-chosen locale out of `localStorage`
+ *    and sets `window.cmp_setlang` before the loader runs, so the banner
+ *    opens in whichever language the site is currently showing rather than
+ *    the visitor's browser language. `cmp_setlang` is an existing hook
+ *    read by the loader's own `cmp_getlangs()`, not an invented API. This
+ *    only fixes the language at initial load/banner-open; if
+ *    ConsentManager exposes a way to re-language an already-open banner on
+ *    the fly it isn't in this snippet, so toggling locale while the banner
+ *    is already open won't retranslate it without a refresh.
+ */
+interface CookieConsentScriptProps {
+    /**
+     * localStorage key holding the current UI locale ("pl", else treated as
+     * "en"), read once before the CMP loader boots. Defaults to
+     * "autopaylab-locale" — the exact key autopaylab-landing's own
+     * LocaleProvider uses today, so the default reproduces production
+     * behavior unchanged. This is the one piece of plumbing that had to be
+     * adapted for portability (the original imported the constant directly
+     * from an app-local i18n module that doesn't exist in this package) —
+     * the CMP script content itself is untouched. Override only if a
+     * different consuming app stores its locale under a different key; if
+     * the key is never set, the banner just falls back to the visitor's
+     * browser language — a harmless degrade, not a break.
+     */
+    localeStorageKey?: string;
+}
+declare function buildCookieConsentScript({ localeStorageKey }?: CookieConsentScriptProps): string;
+/**
+ * Renders the loader as a raw `<script>` tag. Must be the very first thing
+ * inside `<body>`, before anything else can set cookies or run tracking
+ * scripts — a hard ordering requirement from ConsentManager, not a style
+ * preference:
+ *
+ * ```tsx
+ * <body>
+ *   <CookieConsentScript />
+ *   <Script id="matomo-analytics" strategy="afterInteractive" ... />
+ *   {children}
+ * </body>
+ * ```
+ */
+declare function CookieConsentScript(props?: CookieConsentScriptProps): React.JSX.Element;
+
+export { ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };
