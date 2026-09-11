@@ -1,6 +1,6 @@
 {
   "name": "@autopaylab/landing-design-system",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Standalone Atomic Design component package extracted from autopaylab/landing-page-kit. First-pass extraction — not yet harmonized with Autopay Design System 2.0.",
   "license": "MIT",
   "private": true,
