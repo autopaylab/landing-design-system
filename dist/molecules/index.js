@@ -306,14 +306,71 @@ function IndustryCard({
   );
 }
 
+// src/molecules/OverlapCard/OverlapCard.tsx
+import { jsx as jsx15, jsxs as jsxs9 } from "react/jsx-runtime";
+function OverlapCard({
+  className,
+  title,
+  description,
+  image,
+  backgroundColor,
+  primaryCta,
+  secondaryCta,
+  style,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs9(
+    "article",
+    {
+      className: cn(
+        "grid items-stretch overflow-hidden rounded-3xl shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-2",
+        className
+      ),
+      style: { backgroundColor, ...style },
+      ...props,
+      children: [
+        /* @__PURE__ */ jsxs9("div", { className: "flex flex-col justify-between p-10 md:p-12", children: [
+          /* @__PURE__ */ jsx15("h3", { className: "font-display text-h3 whitespace-pre-line", children: title }),
+          /* @__PURE__ */ jsxs9("div", { className: "mt-8", children: [
+            /* @__PURE__ */ jsx15("p", { className: "max-w-md text-sm leading-relaxed text-foreground/75", children: description }),
+            /* @__PURE__ */ jsxs9("div", { className: "mt-8 flex flex-wrap gap-3", children: [
+              /* @__PURE__ */ jsx15(Button, { type: "button", variant: "solid", size: "xs", onClick: primaryCta.onClick, children: primaryCta.label }),
+              /* @__PURE__ */ jsx15(
+                Button,
+                {
+                  type: "button",
+                  variant: "outline",
+                  size: "xs",
+                  className: "border-foreground/80 hover:bg-foreground hover:text-background",
+                  onClick: secondaryCta.onClick,
+                  children: secondaryCta.label
+                }
+              )
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsx15(
+          "div",
+          {
+            className: "min-h-[260px] bg-cover bg-center md:min-h-[420px]",
+            style: { backgroundImage: `url(${image})` },
+            role: "img",
+            "aria-label": `${title.replace("\n", " ")} \u2014 promo`
+          }
+        )
+      ]
+    }
+  );
+}
+
 // src/atoms/Accordion/Accordion.tsx
 import * as React7 from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
-import { jsx as jsx15, jsxs as jsxs9 } from "react/jsx-runtime";
-var AccordionItem = React7.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx15(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
+import { jsx as jsx16, jsxs as jsxs10 } from "react/jsx-runtime";
+var AccordionItem = React7.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx16(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
 AccordionItem.displayName = "AccordionItem";
-var AccordionTrigger = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx15(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs9(
+var AccordionTrigger = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx16(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs10(
   AccordionPrimitive.Trigger,
   {
     ref,
@@ -324,35 +381,35 @@ var AccordionTrigger = React7.forwardRef(({ className, children, ...props }, ref
     ...props,
     children: [
       children,
-      /* @__PURE__ */ jsx15(ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
+      /* @__PURE__ */ jsx16(ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
     ]
   }
 ) }));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-var AccordionContent = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx15(
+var AccordionContent = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx16(
   AccordionPrimitive.Content,
   {
     ref,
     className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
     ...props,
-    children: /* @__PURE__ */ jsx15("div", { className: cn("pb-4 pt-0", className), children })
+    children: /* @__PURE__ */ jsx16("div", { className: cn("pb-4 pt-0", className), children })
   }
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 // src/molecules/FaqItem/FaqItem.tsx
-import { jsx as jsx16, jsxs as jsxs10 } from "react/jsx-runtime";
+import { jsx as jsx17, jsxs as jsxs11 } from "react/jsx-runtime";
 function FaqItem({ value, question, answer }) {
-  return /* @__PURE__ */ jsxs10(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
-    /* @__PURE__ */ jsx16(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
-    /* @__PURE__ */ jsx16(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
+  return /* @__PURE__ */ jsxs11(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
+    /* @__PURE__ */ jsx17(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
+    /* @__PURE__ */ jsx17(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
   ] });
 }
 
 // src/molecules/PartnerCountBadge/PartnerCountBadge.tsx
-import { jsx as jsx17, jsxs as jsxs11 } from "react/jsx-runtime";
+import { jsx as jsx18, jsxs as jsxs12 } from "react/jsx-runtime";
 function PartnerCountBadge({ className, count, label, ...props }) {
-  return /* @__PURE__ */ jsxs11(
+  return /* @__PURE__ */ jsxs12(
     "div",
     {
       className: cn(
@@ -361,8 +418,8 @@ function PartnerCountBadge({ className, count, label, ...props }) {
       ),
       ...props,
       children: [
-        /* @__PURE__ */ jsx17("span", { className: "text-sm font-semibold text-foreground", children: count }),
-        /* @__PURE__ */ jsx17("span", { className: "text-xs", children: label })
+        /* @__PURE__ */ jsx18("span", { className: "text-sm font-semibold text-foreground", children: count }),
+        /* @__PURE__ */ jsx18("span", { className: "text-xs", children: label })
       ]
     }
   );
@@ -375,6 +432,7 @@ export {
   IconCard,
   IconFeatureItem,
   IndustryCard,
+  OverlapCard,
   PartnerCountBadge,
   StatBlock,
   StepCard

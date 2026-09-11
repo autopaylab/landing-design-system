@@ -45,4 +45,27 @@ interface IconCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare function IconCard({ className, icon: Icon, title, bullets, color, ...props }: IconCardProps): React.JSX.Element;
 
-export { IconCard as I, StatBlock as S, type IconCardProps as a, IconFeatureItem as b, type IconFeatureItemProps as c, type StatBlockProps as d };
+/**
+ * Generic, content-agnostic promo card for a sticky overlapping-cards stack
+ * (Autopay DS2's "Overlapping cards" base section — see
+ * DS2-HARMONIZATION.md #8). Unlike IndustryCard (one CTA, industry-specific
+ * data shape), this carries two independent CTAs and no domain-specific
+ * fields, so it can host any promotional pairing (e.g. "Buy now" / "See
+ * more"), not just an industry use case.
+ */
+interface OverlapCardCta {
+    label: string;
+    onClick?: () => void;
+}
+interface OverlapCardProps extends React.HTMLAttributes<HTMLElement> {
+    title: string;
+    description: string;
+    image: string;
+    /** Background color, e.g. a CSS color literal or "var(--retail)". Caller-supplied, same convention as IndustryCard. */
+    backgroundColor: string;
+    primaryCta: OverlapCardCta;
+    secondaryCta: OverlapCardCta;
+}
+declare function OverlapCard({ className, title, description, image, backgroundColor, primaryCta, secondaryCta, style, ...props }: OverlapCardProps): React.JSX.Element;
+
+export { IconCard as I, OverlapCard as O, StatBlock as S, type IconCardProps as a, IconFeatureItem as b, type IconFeatureItemProps as c, type OverlapCardCta as d, type OverlapCardProps as e, type StatBlockProps as f };

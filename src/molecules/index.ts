@@ -6,5 +6,6 @@ export * from "./IconCard";
 export * from "./BulletItem";
 export * from "./StepCard";
 export * from "./IndustryCard";
+export * from "./OverlapCard";
 export * from "./FaqItem";
 export * from "./PartnerCountBadge";

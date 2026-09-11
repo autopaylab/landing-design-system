@@ -1,6 +1,6 @@
 export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from '../Footer-8cnZzh6n.js';
 import * as React from 'react';
-import { c as IconFeatureItemProps, a as IconCardProps, d as StatBlockProps } from '../IconCard-C24oi4uU.js';
+import { c as IconFeatureItemProps, a as IconCardProps, f as StatBlockProps, d as OverlapCardCta } from '../OverlapCard-DnLktg2T.js';
 
 /** The primary two-column video hero from HomeContent.tsx (lines 142-165). */
 interface HeroVideoSplitProps {
@@ -185,6 +185,29 @@ interface IndustriesGridSectionProps {
 }
 declare function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }: IndustriesGridSectionProps): React.JSX.Element;
 
+interface OverlapCardEntry {
+    title: string;
+    description: string;
+    image: string;
+    backgroundColor: string;
+    primaryCta: OverlapCardCta;
+    secondaryCta: OverlapCardCta;
+}
+/**
+ * Autopay DS2's "Overlapping cards" base section (see
+ * DS2-HARMONIZATION.md #8): a sticky, scroll-activated card stack, generic
+ * enough to host any promotional pairing. The sticky mechanism mirrors
+ * IndustriesStackedSection's, but the data shape is content-agnostic (no
+ * "industry" fields) and each card carries two CTAs, matching DS2's own
+ * "Buy now" / "See more" example rather than IndustryCard's single CTA.
+ */
+interface OverlappingCardsSectionProps {
+    eyebrow: string;
+    heading: React.ReactNode;
+    cards: OverlapCardEntry[];
+}
+declare function OverlappingCardsSection({ eyebrow, heading, cards }: OverlappingCardsSectionProps): React.JSX.Element;
+
 /**
  * HomeContent.tsx Contact section + form (lines 433-473). The source form is
  * uncontrolled and calls `e.preventDefault()` with no real submit logic —
@@ -240,4 +263,4 @@ interface PromoCtaSectionProps {
 }
 declare function PromoCtaSection({ backgroundImage, heading, primaryCta, secondaryCta, logoSrc, logoAlt, promoText, copyrightText, privacyLabel, privacyHref, }: PromoCtaSectionProps): React.JSX.Element;
 
-export { ContactSection, type ContactSectionProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps };
+export { ContactSection, type ContactSectionProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps };

@@ -770,15 +770,101 @@ function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaCl
   ] }) });
 }
 
+// src/molecules/OverlapCard/OverlapCard.tsx
+import { jsx as jsx26, jsxs as jsxs21 } from "react/jsx-runtime";
+function OverlapCard({
+  className,
+  title,
+  description,
+  image,
+  backgroundColor,
+  primaryCta,
+  secondaryCta,
+  style,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs21(
+    "article",
+    {
+      className: cn(
+        "grid items-stretch overflow-hidden rounded-3xl shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-2",
+        className
+      ),
+      style: { backgroundColor, ...style },
+      ...props,
+      children: [
+        /* @__PURE__ */ jsxs21("div", { className: "flex flex-col justify-between p-10 md:p-12", children: [
+          /* @__PURE__ */ jsx26("h3", { className: "font-display text-h3 whitespace-pre-line", children: title }),
+          /* @__PURE__ */ jsxs21("div", { className: "mt-8", children: [
+            /* @__PURE__ */ jsx26("p", { className: "max-w-md text-sm leading-relaxed text-foreground/75", children: description }),
+            /* @__PURE__ */ jsxs21("div", { className: "mt-8 flex flex-wrap gap-3", children: [
+              /* @__PURE__ */ jsx26(Button, { type: "button", variant: "solid", size: "xs", onClick: primaryCta.onClick, children: primaryCta.label }),
+              /* @__PURE__ */ jsx26(
+                Button,
+                {
+                  type: "button",
+                  variant: "outline",
+                  size: "xs",
+                  className: "border-foreground/80 hover:bg-foreground hover:text-background",
+                  onClick: secondaryCta.onClick,
+                  children: secondaryCta.label
+                }
+              )
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsx26(
+          "div",
+          {
+            className: "min-h-[260px] bg-cover bg-center md:min-h-[420px]",
+            style: { backgroundImage: `url(${image})` },
+            role: "img",
+            "aria-label": `${title.replace("\n", " ")} \u2014 promo`
+          }
+        )
+      ]
+    }
+  );
+}
+
+// src/organisms/OverlappingCardsSection/OverlappingCardsSection.tsx
+import { jsx as jsx27, jsxs as jsxs22 } from "react/jsx-runtime";
+function OverlappingCardsSection({ eyebrow, heading, cards }) {
+  return /* @__PURE__ */ jsx27("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ jsxs22("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+    /* @__PURE__ */ jsxs22("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx27(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx27("h2", { className: "mt-6 font-display text-h2", children: heading })
+    ] }),
+    /* @__PURE__ */ jsx27("div", { className: "mt-12", children: cards.map((c, i) => /* @__PURE__ */ jsx27(
+      OverlapCard,
+      {
+        title: c.title,
+        description: c.description,
+        image: c.image,
+        backgroundColor: c.backgroundColor,
+        primaryCta: c.primaryCta,
+        secondaryCta: c.secondaryCta,
+        className: "sticky",
+        style: {
+          top: `calc(6rem + ${i * 1.25}rem)`,
+          marginBottom: i === cards.length - 1 ? 0 : "2rem",
+          zIndex: i + 1
+        }
+      },
+      c.title
+    )) })
+  ] }) });
+}
+
 // src/molecules/FormField/FormField.tsx
 import * as React6 from "react";
 
 // src/atoms/Input/Input.tsx
 import * as React5 from "react";
-import { jsx as jsx26 } from "react/jsx-runtime";
+import { jsx as jsx28 } from "react/jsx-runtime";
 var Input = React5.forwardRef(
   ({ className, type, ...props }, ref) => {
-    return /* @__PURE__ */ jsx26(
+    return /* @__PURE__ */ jsx28(
       "input",
       {
         type,
@@ -795,17 +881,17 @@ var Input = React5.forwardRef(
 Input.displayName = "Input";
 
 // src/atoms/Label/Label.tsx
-import { jsx as jsx27 } from "react/jsx-runtime";
+import { jsx as jsx29 } from "react/jsx-runtime";
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ jsx27("span", { className: cn("text-xs text-muted-foreground", className), ...props });
+  return /* @__PURE__ */ jsx29("span", { className: cn("text-xs text-muted-foreground", className), ...props });
 }
 
 // src/molecules/FormField/FormField.tsx
-import { jsx as jsx28, jsxs as jsxs21 } from "react/jsx-runtime";
+import { jsx as jsx30, jsxs as jsxs23 } from "react/jsx-runtime";
 var FormField = React6.forwardRef(
-  ({ label, id, ...inputProps }, ref) => /* @__PURE__ */ jsxs21("label", { className: "block", children: [
-    /* @__PURE__ */ jsx28(Label, { children: label }),
-    /* @__PURE__ */ jsx28(Input, { ref, id, className: "mt-2", ...inputProps })
+  ({ label, id, ...inputProps }, ref) => /* @__PURE__ */ jsxs23("label", { className: "block", children: [
+    /* @__PURE__ */ jsx30(Label, { children: label }),
+    /* @__PURE__ */ jsx30(Input, { ref, id, className: "mt-2", ...inputProps })
   ] })
 );
 FormField.displayName = "FormField";
@@ -815,23 +901,23 @@ import * as React8 from "react";
 
 // src/atoms/Checkbox/Checkbox.tsx
 import * as React7 from "react";
-import { jsx as jsx29 } from "react/jsx-runtime";
+import { jsx as jsx31 } from "react/jsx-runtime";
 var Checkbox = React7.forwardRef(
-  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ jsx29("input", { type, className: cn("mt-1", className), ref, ...props })
+  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ jsx31("input", { type, className: cn("mt-1", className), ref, ...props })
 );
 Checkbox.displayName = "Checkbox";
 
 // src/molecules/ConsentCheckboxField/ConsentCheckboxField.tsx
-import { jsx as jsx30, jsxs as jsxs22 } from "react/jsx-runtime";
+import { jsx as jsx32, jsxs as jsxs24 } from "react/jsx-runtime";
 var ConsentCheckboxField = React8.forwardRef(
-  ({ consentText, controllerText, moreHref = "#", ...props }, ref) => /* @__PURE__ */ jsxs22("label", { className: "flex gap-3 text-xs text-muted-foreground", children: [
-    /* @__PURE__ */ jsx30(Checkbox, { ref, ...props }),
-    /* @__PURE__ */ jsxs22("span", { children: [
+  ({ consentText, controllerText, moreHref = "#", ...props }, ref) => /* @__PURE__ */ jsxs24("label", { className: "flex gap-3 text-xs text-muted-foreground", children: [
+    /* @__PURE__ */ jsx32(Checkbox, { ref, ...props }),
+    /* @__PURE__ */ jsxs24("span", { children: [
       consentText,
-      /* @__PURE__ */ jsxs22("span", { className: "mt-2 block text-[11px]", children: [
+      /* @__PURE__ */ jsxs24("span", { className: "mt-2 block text-[11px]", children: [
         controllerText,
         " ",
-        /* @__PURE__ */ jsx30(Link, { variant: "underline", href: moreHref, children: "More" })
+        /* @__PURE__ */ jsx32(Link, { variant: "underline", href: moreHref, children: "More" })
       ] })
     ] })
   ] })
@@ -839,7 +925,7 @@ var ConsentCheckboxField = React8.forwardRef(
 ConsentCheckboxField.displayName = "ConsentCheckboxField";
 
 // src/organisms/ContactSection/ContactSection.tsx
-import { jsx as jsx31, jsxs as jsxs23 } from "react/jsx-runtime";
+import { jsx as jsx33, jsxs as jsxs25 } from "react/jsx-runtime";
 function ContactSection({
   heading,
   description,
@@ -849,22 +935,22 @@ function ContactSection({
   submitLabel = "Send",
   onSubmit
 }) {
-  return /* @__PURE__ */ jsx31("section", { id: "contact", className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs23("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
-    /* @__PURE__ */ jsxs23("div", { children: [
-      /* @__PURE__ */ jsx31("h2", { className: "font-display text-h2", children: heading }),
-      /* @__PURE__ */ jsx31("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
+  return /* @__PURE__ */ jsx33("section", { id: "contact", className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs25("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ jsxs25("div", { children: [
+      /* @__PURE__ */ jsx33("h2", { className: "font-display text-h2", children: heading }),
+      /* @__PURE__ */ jsx33("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
     ] }),
-    /* @__PURE__ */ jsxs23("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
-      /* @__PURE__ */ jsx31("h3", { className: "font-display text-h4", children: formHeading }),
-      /* @__PURE__ */ jsxs23("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
-        /* @__PURE__ */ jsxs23("div", { className: "grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsx31(FormField, { label: "First name", name: "firstName", placeholder: "Jane" }),
-          /* @__PURE__ */ jsx31(FormField, { label: "Last name", name: "lastName", placeholder: "Doe" })
+    /* @__PURE__ */ jsxs25("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
+      /* @__PURE__ */ jsx33("h3", { className: "font-display text-h4", children: formHeading }),
+      /* @__PURE__ */ jsxs25("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
+        /* @__PURE__ */ jsxs25("div", { className: "grid grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsx33(FormField, { label: "First name", name: "firstName", placeholder: "Jane" }),
+          /* @__PURE__ */ jsx33(FormField, { label: "Last name", name: "lastName", placeholder: "Doe" })
         ] }),
-        /* @__PURE__ */ jsx31(FormField, { label: "Phone number", name: "phone", placeholder: "123456789" }),
-        /* @__PURE__ */ jsx31(FormField, { label: "Business e-mail", name: "email", type: "email", placeholder: "jane@example.com" }),
-        /* @__PURE__ */ jsx31(ConsentCheckboxField, { name: "consent", consentText, controllerText }),
-        /* @__PURE__ */ jsx31(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
+        /* @__PURE__ */ jsx33(FormField, { label: "Phone number", name: "phone", placeholder: "123456789" }),
+        /* @__PURE__ */ jsx33(FormField, { label: "Business e-mail", name: "email", type: "email", placeholder: "jane@example.com" }),
+        /* @__PURE__ */ jsx33(ConsentCheckboxField, { name: "consent", consentText, controllerText }),
+        /* @__PURE__ */ jsx33(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
       ] })
     ] })
   ] }) });
@@ -874,11 +960,11 @@ function ContactSection({
 import * as React9 from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown as ChevronDown2 } from "lucide-react";
-import { jsx as jsx32, jsxs as jsxs24 } from "react/jsx-runtime";
+import { jsx as jsx34, jsxs as jsxs26 } from "react/jsx-runtime";
 var Accordion = AccordionPrimitive.Root;
-var AccordionItem = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx32(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
+var AccordionItem = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx34(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
 AccordionItem.displayName = "AccordionItem";
-var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx32(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs24(
+var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx34(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs26(
   AccordionPrimitive.Trigger,
   {
     ref,
@@ -889,42 +975,42 @@ var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref
     ...props,
     children: [
       children,
-      /* @__PURE__ */ jsx32(ChevronDown2, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
+      /* @__PURE__ */ jsx34(ChevronDown2, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
     ]
   }
 ) }));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-var AccordionContent = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx32(
+var AccordionContent = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx34(
   AccordionPrimitive.Content,
   {
     ref,
     className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
     ...props,
-    children: /* @__PURE__ */ jsx32("div", { className: cn("pb-4 pt-0", className), children })
+    children: /* @__PURE__ */ jsx34("div", { className: cn("pb-4 pt-0", className), children })
   }
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 // src/molecules/FaqItem/FaqItem.tsx
-import { jsx as jsx33, jsxs as jsxs25 } from "react/jsx-runtime";
+import { jsx as jsx35, jsxs as jsxs27 } from "react/jsx-runtime";
 function FaqItem({ value, question, answer }) {
-  return /* @__PURE__ */ jsxs25(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
-    /* @__PURE__ */ jsx33(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
-    /* @__PURE__ */ jsx33(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
+  return /* @__PURE__ */ jsxs27(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
+    /* @__PURE__ */ jsx35(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
+    /* @__PURE__ */ jsx35(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
   ] });
 }
 
 // src/organisms/FaqAccordionSection/FaqAccordionSection.tsx
-import { jsx as jsx34, jsxs as jsxs26 } from "react/jsx-runtime";
+import { jsx as jsx36, jsxs as jsxs28 } from "react/jsx-runtime";
 function FaqAccordionSection({ heading, entries }) {
-  return /* @__PURE__ */ jsx34("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ jsxs26("div", { className: "mx-auto max-w-[1280px]", children: [
-    /* @__PURE__ */ jsx34("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
-    /* @__PURE__ */ jsx34(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ jsx34(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
+  return /* @__PURE__ */ jsx36("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ jsxs28("div", { className: "mx-auto max-w-[1280px]", children: [
+    /* @__PURE__ */ jsx36("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
+    /* @__PURE__ */ jsx36(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ jsx36(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
   ] }) });
 }
 
 // src/organisms/PromoCtaSection/PromoCtaSection.tsx
-import { jsx as jsx35, jsxs as jsxs27 } from "react/jsx-runtime";
+import { jsx as jsx37, jsxs as jsxs29 } from "react/jsx-runtime";
 function PromoCtaSection({
   backgroundImage,
   heading,
@@ -937,33 +1023,33 @@ function PromoCtaSection({
   privacyLabel,
   privacyHref
 }) {
-  return /* @__PURE__ */ jsx35("section", { className: "bg-surface px-4 pb-6 md:px-8 md:pb-8", children: /* @__PURE__ */ jsxs27("div", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl", children: [
-    /* @__PURE__ */ jsx35("img", { src: backgroundImage, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
-    /* @__PURE__ */ jsx35("div", { "aria-hidden": "true", className: "absolute inset-0 bg-ink/40" }),
-    /* @__PURE__ */ jsxs27("div", { className: "relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24", children: [
-      /* @__PURE__ */ jsxs27("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
-        /* @__PURE__ */ jsx35("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
-        /* @__PURE__ */ jsxs27("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
-          /* @__PURE__ */ jsx35(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ jsx35("a", { href: primaryCta.href, children: primaryCta.label }) }),
-          /* @__PURE__ */ jsx35(
+  return /* @__PURE__ */ jsx37("section", { className: "bg-surface px-4 pb-6 md:px-8 md:pb-8", children: /* @__PURE__ */ jsxs29("div", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl", children: [
+    /* @__PURE__ */ jsx37("img", { src: backgroundImage, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
+    /* @__PURE__ */ jsx37("div", { "aria-hidden": "true", className: "absolute inset-0 bg-ink/40" }),
+    /* @__PURE__ */ jsxs29("div", { className: "relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24", children: [
+      /* @__PURE__ */ jsxs29("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
+        /* @__PURE__ */ jsx37("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
+        /* @__PURE__ */ jsxs29("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
+          /* @__PURE__ */ jsx37(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ jsx37("a", { href: primaryCta.href, children: primaryCta.label }) }),
+          /* @__PURE__ */ jsx37(
             Button,
             {
               asChild: true,
               variant: "outline-inverse",
               className: "h-12 border-background/30 px-7 text-base",
-              children: /* @__PURE__ */ jsx35("a", { href: secondaryCta.href, target: secondaryCta.external ? "_blank" : void 0, rel: secondaryCta.external ? "noopener noreferrer" : void 0, children: secondaryCta.label })
+              children: /* @__PURE__ */ jsx37("a", { href: secondaryCta.href, target: secondaryCta.external ? "_blank" : void 0, rel: secondaryCta.external ? "noopener noreferrer" : void 0, children: secondaryCta.label })
             }
           )
         ] })
       ] }),
-      /* @__PURE__ */ jsxs27("div", { className: "mt-14 rounded-3xl bg-lime p-8 text-lime-foreground md:mt-24 md:p-12", children: [
-        /* @__PURE__ */ jsxs27("div", { className: "flex flex-col gap-6 md:flex-row md:items-center md:gap-10", children: [
-          /* @__PURE__ */ jsx35(Logo, { src: logoSrc, alt: logoAlt, size: "sm", className: "md:h-8" }),
-          /* @__PURE__ */ jsx35("p", { className: "font-display text-2xl leading-tight md:text-3xl", children: promoText })
+      /* @__PURE__ */ jsxs29("div", { className: "mt-14 rounded-3xl bg-lime p-8 text-lime-foreground md:mt-24 md:p-12", children: [
+        /* @__PURE__ */ jsxs29("div", { className: "flex flex-col gap-6 md:flex-row md:items-center md:gap-10", children: [
+          /* @__PURE__ */ jsx37(Logo, { src: logoSrc, alt: logoAlt, size: "sm", className: "md:h-8" }),
+          /* @__PURE__ */ jsx37("p", { className: "font-display text-2xl leading-tight md:text-3xl", children: promoText })
         ] }),
-        /* @__PURE__ */ jsxs27("div", { className: "mt-8 flex flex-col justify-between gap-4 border-t border-lime-foreground/15 pt-6 sm:flex-row sm:items-center", children: [
-          /* @__PURE__ */ jsx35("p", { className: "text-sm text-lime-foreground/70", children: copyrightText }),
-          /* @__PURE__ */ jsx35(
+        /* @__PURE__ */ jsxs29("div", { className: "mt-8 flex flex-col justify-between gap-4 border-t border-lime-foreground/15 pt-6 sm:flex-row sm:items-center", children: [
+          /* @__PURE__ */ jsx37("p", { className: "text-sm text-lime-foreground/70", children: copyrightText }),
+          /* @__PURE__ */ jsx37(
             "a",
             {
               href: privacyHref,
@@ -975,7 +1061,7 @@ function PromoCtaSection({
           )
         ] })
       ] }),
-      /* @__PURE__ */ jsx35("div", { className: "h-6 md:h-8" })
+      /* @__PURE__ */ jsx37("div", { className: "h-6 md:h-8" })
     ] })
   ] }) });
 }
@@ -991,6 +1077,7 @@ export {
   IndustriesGridSection,
   IndustriesStackedSection,
   Navbar,
+  OverlappingCardsSection,
   PlatformFeatureShowcase,
   PromoCtaSection,
   SecuritySection,

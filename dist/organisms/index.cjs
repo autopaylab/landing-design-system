@@ -42,6 +42,7 @@ __export(organisms_exports, {
   IndustriesGridSection: () => IndustriesGridSection,
   IndustriesStackedSection: () => IndustriesStackedSection,
   Navbar: () => Navbar,
+  OverlappingCardsSection: () => OverlappingCardsSection,
   PlatformFeatureShowcase: () => PlatformFeatureShowcase,
   PromoCtaSection: () => PromoCtaSection,
   SecuritySection: () => SecuritySection,
@@ -822,15 +823,101 @@ function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaCl
   ] }) });
 }
 
+// src/molecules/OverlapCard/OverlapCard.tsx
+var import_jsx_runtime26 = require("react/jsx-runtime");
+function OverlapCard({
+  className,
+  title,
+  description,
+  image,
+  backgroundColor,
+  primaryCta,
+  secondaryCta,
+  style,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(
+    "article",
+    {
+      className: cn(
+        "grid items-stretch overflow-hidden rounded-3xl shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-2",
+        className
+      ),
+      style: { backgroundColor, ...style },
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "flex flex-col justify-between p-10 md:p-12", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h3", { className: "font-display text-h3 whitespace-pre-line", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "mt-8", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("p", { className: "max-w-md text-sm leading-relaxed text-foreground/75", children: description }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "mt-8 flex flex-wrap gap-3", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(Button, { type: "button", variant: "solid", size: "xs", onClick: primaryCta.onClick, children: primaryCta.label }),
+              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
+                Button,
+                {
+                  type: "button",
+                  variant: "outline",
+                  size: "xs",
+                  className: "border-foreground/80 hover:bg-foreground hover:text-background",
+                  onClick: secondaryCta.onClick,
+                  children: secondaryCta.label
+                }
+              )
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
+          "div",
+          {
+            className: "min-h-[260px] bg-cover bg-center md:min-h-[420px]",
+            style: { backgroundImage: `url(${image})` },
+            role: "img",
+            "aria-label": `${title.replace("\n", " ")} \u2014 promo`
+          }
+        )
+      ]
+    }
+  );
+}
+
+// src/organisms/OverlappingCardsSection/OverlappingCardsSection.tsx
+var import_jsx_runtime27 = require("react/jsx-runtime");
+function OverlappingCardsSection({ eyebrow, heading, cards }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "text-center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mt-12", children: cards.map((c, i) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+      OverlapCard,
+      {
+        title: c.title,
+        description: c.description,
+        image: c.image,
+        backgroundColor: c.backgroundColor,
+        primaryCta: c.primaryCta,
+        secondaryCta: c.secondaryCta,
+        className: "sticky",
+        style: {
+          top: `calc(6rem + ${i * 1.25}rem)`,
+          marginBottom: i === cards.length - 1 ? 0 : "2rem",
+          zIndex: i + 1
+        }
+      },
+      c.title
+    )) })
+  ] }) });
+}
+
 // src/molecules/FormField/FormField.tsx
 var React6 = __toESM(require("react"), 1);
 
 // src/atoms/Input/Input.tsx
 var React5 = __toESM(require("react"), 1);
-var import_jsx_runtime26 = require("react/jsx-runtime");
+var import_jsx_runtime28 = require("react/jsx-runtime");
 var Input = React5.forwardRef(
   ({ className, type, ...props }, ref) => {
-    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
       "input",
       {
         type,
@@ -847,17 +934,17 @@ var Input = React5.forwardRef(
 Input.displayName = "Input";
 
 // src/atoms/Label/Label.tsx
-var import_jsx_runtime27 = require("react/jsx-runtime");
+var import_jsx_runtime29 = require("react/jsx-runtime");
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: cn("text-xs text-muted-foreground", className), ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: cn("text-xs text-muted-foreground", className), ...props });
 }
 
 // src/molecules/FormField/FormField.tsx
-var import_jsx_runtime28 = require("react/jsx-runtime");
+var import_jsx_runtime30 = require("react/jsx-runtime");
 var FormField = React6.forwardRef(
-  ({ label, id, ...inputProps }, ref) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("label", { className: "block", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Label, { children: label }),
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Input, { ref, id, className: "mt-2", ...inputProps })
+  ({ label, id, ...inputProps }, ref) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("label", { className: "block", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Label, { children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Input, { ref, id, className: "mt-2", ...inputProps })
   ] })
 );
 FormField.displayName = "FormField";
@@ -867,23 +954,23 @@ var React8 = __toESM(require("react"), 1);
 
 // src/atoms/Checkbox/Checkbox.tsx
 var React7 = __toESM(require("react"), 1);
-var import_jsx_runtime29 = require("react/jsx-runtime");
+var import_jsx_runtime31 = require("react/jsx-runtime");
 var Checkbox = React7.forwardRef(
-  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("input", { type, className: cn("mt-1", className), ref, ...props })
+  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("input", { type, className: cn("mt-1", className), ref, ...props })
 );
 Checkbox.displayName = "Checkbox";
 
 // src/molecules/ConsentCheckboxField/ConsentCheckboxField.tsx
-var import_jsx_runtime30 = require("react/jsx-runtime");
+var import_jsx_runtime32 = require("react/jsx-runtime");
 var ConsentCheckboxField = React8.forwardRef(
-  ({ consentText, controllerText, moreHref = "#", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("label", { className: "flex gap-3 text-xs text-muted-foreground", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Checkbox, { ref, ...props }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("span", { children: [
+  ({ consentText, controllerText, moreHref = "#", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("label", { className: "flex gap-3 text-xs text-muted-foreground", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Checkbox, { ref, ...props }),
+    /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("span", { children: [
       consentText,
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("span", { className: "mt-2 block text-[11px]", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("span", { className: "mt-2 block text-[11px]", children: [
         controllerText,
         " ",
-        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Link, { variant: "underline", href: moreHref, children: "More" })
+        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Link, { variant: "underline", href: moreHref, children: "More" })
       ] })
     ] })
   ] })
@@ -891,7 +978,7 @@ var ConsentCheckboxField = React8.forwardRef(
 ConsentCheckboxField.displayName = "ConsentCheckboxField";
 
 // src/organisms/ContactSection/ContactSection.tsx
-var import_jsx_runtime31 = require("react/jsx-runtime");
+var import_jsx_runtime33 = require("react/jsx-runtime");
 function ContactSection({
   heading,
   description,
@@ -901,22 +988,22 @@ function ContactSection({
   submitLabel = "Send",
   onSubmit
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("section", { id: "contact", className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h2", { className: "font-display text-h2", children: heading }),
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("section", { id: "contact", className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { className: "font-display text-h2", children: heading }),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h3", { className: "font-display text-h4", children: formHeading }),
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
-        /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(FormField, { label: "First name", name: "firstName", placeholder: "Jane" }),
-          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(FormField, { label: "Last name", name: "lastName", placeholder: "Doe" })
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h3", { className: "font-display text-h4", children: formHeading }),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "grid grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(FormField, { label: "First name", name: "firstName", placeholder: "Jane" }),
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(FormField, { label: "Last name", name: "lastName", placeholder: "Doe" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(FormField, { label: "Phone number", name: "phone", placeholder: "123456789" }),
-        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(FormField, { label: "Business e-mail", name: "email", type: "email", placeholder: "jane@example.com" }),
-        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(ConsentCheckboxField, { name: "consent", consentText, controllerText }),
-        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(FormField, { label: "Phone number", name: "phone", placeholder: "123456789" }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(FormField, { label: "Business e-mail", name: "email", type: "email", placeholder: "jane@example.com" }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(ConsentCheckboxField, { name: "consent", consentText, controllerText }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
       ] })
     ] })
   ] }) });
@@ -926,11 +1013,11 @@ function ContactSection({
 var React9 = __toESM(require("react"), 1);
 var AccordionPrimitive = __toESM(require("@radix-ui/react-accordion"), 1);
 var import_lucide_react2 = require("lucide-react");
-var import_jsx_runtime32 = require("react/jsx-runtime");
+var import_jsx_runtime34 = require("react/jsx-runtime");
 var Accordion = AccordionPrimitive.Root;
-var AccordionItem = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
+var AccordionItem = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
 AccordionItem.displayName = "AccordionItem";
-var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(
+var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
   AccordionPrimitive.Trigger,
   {
     ref,
@@ -941,42 +1028,42 @@ var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref
     ...props,
     children: [
       children,
-      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(import_lucide_react2.ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(import_lucide_react2.ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
     ]
   }
 ) }));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-var AccordionContent = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
+var AccordionContent = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(
   AccordionPrimitive.Content,
   {
     ref,
     className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
     ...props,
-    children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: cn("pb-4 pt-0", className), children })
+    children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: cn("pb-4 pt-0", className), children })
   }
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 // src/molecules/FaqItem/FaqItem.tsx
-var import_jsx_runtime33 = require("react/jsx-runtime");
+var import_jsx_runtime35 = require("react/jsx-runtime");
 function FaqItem({ value, question, answer }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
-    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
   ] });
 }
 
 // src/organisms/FaqAccordionSection/FaqAccordionSection.tsx
-var import_jsx_runtime34 = require("react/jsx-runtime");
+var import_jsx_runtime36 = require("react/jsx-runtime");
 function FaqAccordionSection({ heading, entries }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "mx-auto max-w-[1280px]", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
-    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-[1280px]", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
   ] }) });
 }
 
 // src/organisms/PromoCtaSection/PromoCtaSection.tsx
-var import_jsx_runtime35 = require("react/jsx-runtime");
+var import_jsx_runtime37 = require("react/jsx-runtime");
 function PromoCtaSection({
   backgroundImage,
   heading,
@@ -989,33 +1076,33 @@ function PromoCtaSection({
   privacyLabel,
   privacyHref
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("section", { className: "bg-surface px-4 pb-6 md:px-8 md:pb-8", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("img", { src: backgroundImage, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
-    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { "aria-hidden": "true", className: "absolute inset-0 bg-ink/40" }),
-    /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("a", { href: primaryCta.href, children: primaryCta.label }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("section", { className: "bg-surface px-4 pb-6 md:px-8 md:pb-8", children: /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("img", { src: backgroundImage, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { "aria-hidden": "true", className: "absolute inset-0 bg-ink/40" }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("a", { href: primaryCta.href, children: primaryCta.label }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
             Button,
             {
               asChild: true,
               variant: "outline-inverse",
               className: "h-12 border-background/30 px-7 text-base",
-              children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("a", { href: secondaryCta.href, target: secondaryCta.external ? "_blank" : void 0, rel: secondaryCta.external ? "noopener noreferrer" : void 0, children: secondaryCta.label })
+              children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("a", { href: secondaryCta.href, target: secondaryCta.external ? "_blank" : void 0, rel: secondaryCta.external ? "noopener noreferrer" : void 0, children: secondaryCta.label })
             }
           )
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "mt-14 rounded-3xl bg-lime p-8 text-lime-foreground md:mt-24 md:p-12", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "flex flex-col gap-6 md:flex-row md:items-center md:gap-10", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "sm", className: "md:h-8" }),
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("p", { className: "font-display text-2xl leading-tight md:text-3xl", children: promoText })
+      /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "mt-14 rounded-3xl bg-lime p-8 text-lime-foreground md:mt-24 md:p-12", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "flex flex-col gap-6 md:flex-row md:items-center md:gap-10", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "sm", className: "md:h-8" }),
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("p", { className: "font-display text-2xl leading-tight md:text-3xl", children: promoText })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "mt-8 flex flex-col justify-between gap-4 border-t border-lime-foreground/15 pt-6 sm:flex-row sm:items-center", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("p", { className: "text-sm text-lime-foreground/70", children: copyrightText }),
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "mt-8 flex flex-col justify-between gap-4 border-t border-lime-foreground/15 pt-6 sm:flex-row sm:items-center", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("p", { className: "text-sm text-lime-foreground/70", children: copyrightText }),
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
             "a",
             {
               href: privacyHref,
@@ -1027,7 +1114,7 @@ function PromoCtaSection({
           )
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "h-6 md:h-8" })
+      /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: "h-6 md:h-8" })
     ] })
   ] }) });
 }
@@ -1044,6 +1131,7 @@ function PromoCtaSection({
   IndustriesGridSection,
   IndustriesStackedSection,
   Navbar,
+  OverlappingCardsSection,
   PlatformFeatureShowcase,
   PromoCtaSection,
   SecuritySection,

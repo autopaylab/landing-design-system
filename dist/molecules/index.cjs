@@ -38,6 +38,7 @@ __export(molecules_exports, {
   IconCard: () => IconCard,
   IconFeatureItem: () => IconFeatureItem,
   IndustryCard: () => IndustryCard,
+  OverlapCard: () => OverlapCard,
   PartnerCountBadge: () => PartnerCountBadge,
   StatBlock: () => StatBlock,
   StepCard: () => StepCard
@@ -351,14 +352,71 @@ function IndustryCard({
   );
 }
 
+// src/molecules/OverlapCard/OverlapCard.tsx
+var import_jsx_runtime15 = require("react/jsx-runtime");
+function OverlapCard({
+  className,
+  title,
+  description,
+  image,
+  backgroundColor,
+  primaryCta,
+  secondaryCta,
+  style,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
+    "article",
+    {
+      className: cn(
+        "grid items-stretch overflow-hidden rounded-3xl shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-2",
+        className
+      ),
+      style: { backgroundColor, ...style },
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "flex flex-col justify-between p-10 md:p-12", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h3", { className: "font-display text-h3 whitespace-pre-line", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "mt-8", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { className: "max-w-md text-sm leading-relaxed text-foreground/75", children: description }),
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "mt-8 flex flex-wrap gap-3", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Button, { type: "button", variant: "solid", size: "xs", onClick: primaryCta.onClick, children: primaryCta.label }),
+              /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+                Button,
+                {
+                  type: "button",
+                  variant: "outline",
+                  size: "xs",
+                  className: "border-foreground/80 hover:bg-foreground hover:text-background",
+                  onClick: secondaryCta.onClick,
+                  children: secondaryCta.label
+                }
+              )
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+          "div",
+          {
+            className: "min-h-[260px] bg-cover bg-center md:min-h-[420px]",
+            style: { backgroundImage: `url(${image})` },
+            role: "img",
+            "aria-label": `${title.replace("\n", " ")} \u2014 promo`
+          }
+        )
+      ]
+    }
+  );
+}
+
 // src/atoms/Accordion/Accordion.tsx
 var React7 = __toESM(require("react"), 1);
 var AccordionPrimitive = __toESM(require("@radix-ui/react-accordion"), 1);
 var import_lucide_react = require("lucide-react");
-var import_jsx_runtime15 = require("react/jsx-runtime");
-var AccordionItem = React7.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
+var import_jsx_runtime16 = require("react/jsx-runtime");
+var AccordionItem = React7.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
 AccordionItem.displayName = "AccordionItem";
-var AccordionTrigger = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
+var AccordionTrigger = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
   AccordionPrimitive.Trigger,
   {
     ref,
@@ -369,35 +427,35 @@ var AccordionTrigger = React7.forwardRef(({ className, children, ...props }, ref
     ...props,
     children: [
       children,
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(import_lucide_react.ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react.ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
     ]
   }
 ) }));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-var AccordionContent = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+var AccordionContent = React7.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
   AccordionPrimitive.Content,
   {
     ref,
     className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
     ...props,
-    children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: cn("pb-4 pt-0", className), children })
+    children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: cn("pb-4 pt-0", className), children })
   }
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 // src/molecules/FaqItem/FaqItem.tsx
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime17 = require("react/jsx-runtime");
 function FaqItem({ value, question, answer }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
   ] });
 }
 
 // src/molecules/PartnerCountBadge/PartnerCountBadge.tsx
-var import_jsx_runtime17 = require("react/jsx-runtime");
+var import_jsx_runtime18 = require("react/jsx-runtime");
 function PartnerCountBadge({ className, count, label, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
     "div",
     {
       className: cn(
@@ -406,8 +464,8 @@ function PartnerCountBadge({ className, count, label, ...props }) {
       ),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "text-sm font-semibold text-foreground", children: count }),
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "text-xs", children: label })
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: "text-sm font-semibold text-foreground", children: count }),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: "text-xs", children: label })
       ]
     }
   );
@@ -421,6 +479,7 @@ function PartnerCountBadge({ className, count, label, ...props }) {
   IconCard,
   IconFeatureItem,
   IndustryCard,
+  OverlapCard,
   PartnerCountBadge,
   StatBlock,
   StepCard

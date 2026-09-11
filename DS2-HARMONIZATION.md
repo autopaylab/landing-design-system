@@ -166,6 +166,35 @@ Values are stored as raw hex, not OKLCH — deliberately, following the same "va
 
 **WCAG contrast — no regression, verified not assumed:** every real text/background pairing from the original `AUDIT.md` §6 audit was recomputed before/after. All stayed far above the 4.5:1 AA threshold (most in the 14:1-19:1 range); the one pairing that moved the most (button text on `--primary`) went from 16.61:1 to 14.13:1 — still comfortably AAA.
 
+## 8. Base sections coverage vs. Figma DS2
+
+DS2's "BASE SECTIONS" examples page lists 11 patterns. Mapped against this package's organisms:
+
+| DS2 base section | Coverage |
+|---|---|
+| Menu | ✅ `Navbar` |
+| Footer | ✅ `Footer` |
+| Hero | ✅ `HeroVideoSplit` / `HeroImageOverlay` |
+| Steps | ✅ `FourStepsSection` |
+| FAQ | ✅ `FaqAccordionSection` |
+| CTA | ✅ `PromoCtaSection` |
+| Numbers | ✅ `StatsSection` |
+| Form | ✅ `ContactSection` |
+| Segments | ✅ `IndustriesGridSection` / `IndustriesStackedSection` — two intentional, supported layouts over the same data shape (see `AUDIT.md` §5 item 7, resolved 2026-09-11: keep both, no consolidation) |
+| Partners | ✅ `TrustedByLogos` |
+| Overlapping cards | ✅ **New:** `OverlappingCardsSection` (§9) — the closest prior match, `IndustriesStackedSection`, shared the mechanism (sticky-stack) but not the shape (DS2's version is content-agnostic with 2 CTAs per card; `IndustriesStackedSection` is industry-specific with 1) |
+
+All 11 are now covered.
+
+## 9. New organism: `OverlappingCardsSection` (implemented 2026-09-11)
+
+DS2's "Overlapping cards" example ("Vignettes": a salmon split-card with "Buy now"/"See more" buttons and a product image, scroll-activated so cards layer on top of each other) had no clean equivalent here — see §8. Built as a new, additive pair, `IndustriesStackedSection` untouched:
+
+- `OverlapCard` (molecule, `src/molecules/OverlapCard`) — generic `title`/`description`/`image`/`backgroundColor` plus two independent CTAs (`primaryCta`, `secondaryCta`), using the existing `solid`/`outline` `Button` variants (already-declared, not invented) to mirror DS2's filled-primary/outlined-secondary pairing.
+- `OverlappingCardsSection` (organism, `src/organisms/OverlappingCardsSection`) — the sticky-stack container, reusing `IndustriesStackedSection`'s exact `top`/`zIndex`/`marginBottom` sticky mechanism over the generic card data shape.
+
+See `AUDIT.md` §11 for the full verification (typecheck/lint/71 tests incl. axe/build/size-limit, plus a visual sticky-overlap check in Storybook).
+
 ## Summary
 
 | Layer | Status |
@@ -175,3 +204,4 @@ Values are stored as raw hex, not OKLCH — deliberately, following the same "va
 | Brand accent colors | ✅ Confirmed aligned (`--lime` = Pistachio 500, logo blue = Blue 500) — no action, optional OKLCH conversion for consistency only |
 | Neutral/semantic colors | ✅ Harmonized — remapped to real DS2 Digital Gray/Mineral Black swatches, WCAG contrast re-verified (§7); `--ring` and `--destructive` deliberately left unmapped |
 | Spacing | ➖ No DS2 source exists to compare against — current Tailwind-default baseline stands as-is |
+| Base sections coverage | ✅ All 11 DS2 base sections now have a matching organism, including the new `OverlappingCardsSection` (§8, §9) |
