@@ -17,33 +17,49 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(0.985 0.003 60);
-  --foreground: oklch(0.18 0.02 260);
-  --ink: oklch(0.18 0.02 260);
+  /*
+   * Neutral scale harmonized with Autopay DS2's real Digital Gray/Mineral
+   * Black/Dark-mode-Black swatches -- see DS2-HARMONIZATION.md #7. Each
+   * value below is the exact DS2 swatch nearest (by sRGB distance) to this
+   * token's original OKLCH value, not a converted approximation -- same
+   * "raw hex over lossy-but-consistent OKLCH" precedent already used for
+   * --lime. `--surface-muted`/`--secondary`/`--muted`/`--accent` and
+   * `--border`/`--input` each collapse onto the same DS2 swatch (Gray 4 and
+   * Gray 5 respectively) -- a disclosed loss of their prior fine-grained
+   * OKLCH distinction, not an oversight.
+   */
+  --background: #fafafa; /* Digital Gray 1 */
+  --foreground: #0f0f0f; /* Dark mode Black */
+  --ink: #0f0f0f; /* Dark mode Black */
 
-  --surface: oklch(0.97 0.005 60);
-  --surface-muted: oklch(0.94 0.006 250);
+  --surface: #f5f5f5; /* Digital Gray 2 */
+  --surface-muted: #ebebeb; /* Digital Gray 4 */
 
-  --card: oklch(1 0 0);
+  --card: oklch(1 0 0); /* pure white -- already an exact match for Digital White */
   --card-foreground: var(--ink);
 
-  --primary: oklch(0.22 0.03 260);
-  --primary-foreground: oklch(0.985 0.003 60);
-  --secondary: oklch(0.94 0.006 250);
+  --primary: #282828; /* Mineral Black */
+  --primary-foreground: #fafafa; /* Digital Gray 1, matches --background */
+  --secondary: #ebebeb; /* Digital Gray 4 */
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.94 0.006 250);
-  --muted-foreground: oklch(0.45 0.015 260);
-  --accent: oklch(0.93 0.012 240);
+  --muted: #ebebeb; /* Digital Gray 4 */
+  --muted-foreground: #4c4c4c; /* Digital Gray 11 */
+  --accent: #ebebeb; /* Digital Gray 4 */
   --accent-foreground: var(--ink);
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.985 0.003 60);
-  --border: oklch(0.9 0.008 250);
-  --input: oklch(0.92 0.008 250);
+  --border: #e5e5e5; /* Digital Gray 5 */
+  --input: #e5e5e5; /* Digital Gray 5 */
+  /*
+   * Not remapped: no DS2 neutral gray is a close match (nearest, Gray 8, is
+   * still ~34 sRGB units away -- this token carries real blue chroma DS2's
+   * neutral scale doesn't have an equivalent for). See DS2-HARMONIZATION.md #7.
+   */
   --ring: oklch(0.7 0.04 250);
 
   /* Flagged in AUDIT.md #6: raw hex, every other color token here is OKLCH */
   --lime: #e6ffa0;
-  --lime-foreground: oklch(0.18 0.02 260);
+  --lime-foreground: #0f0f0f; /* Dark mode Black, matches --ink */
 
   --banking: oklch(0.85 0.12 235);
   --automotive: oklch(0.92 0.18 100);

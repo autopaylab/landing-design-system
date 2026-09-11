@@ -4,27 +4,31 @@
  * for provenance. Not Autopay Design System 2.0 tokens.
  */
 declare const colorTokens: {
-    readonly background: "oklch(0.985 0.003 60)";
-    readonly foreground: "oklch(0.18 0.02 260)";
-    readonly ink: "oklch(0.18 0.02 260)";
-    readonly surface: "oklch(0.97 0.005 60)";
-    readonly surfaceMuted: "oklch(0.94 0.006 250)";
+    /** Neutral scale harmonized with Autopay DS2's real gray swatches — see
+     * AUDIT.md #9 and DS2-HARMONIZATION.md #7. Mirrors tokens.css. */
+    readonly background: "#fafafa";
+    readonly foreground: "#0f0f0f";
+    readonly ink: "#0f0f0f";
+    readonly surface: "#f5f5f5";
+    readonly surfaceMuted: "#ebebeb";
     readonly card: "oklch(1 0 0)";
-    readonly primary: "oklch(0.22 0.03 260)";
-    readonly primaryForeground: "oklch(0.985 0.003 60)";
-    readonly secondary: "oklch(0.94 0.006 250)";
-    readonly muted: "oklch(0.94 0.006 250)";
-    readonly mutedForeground: "oklch(0.45 0.015 260)";
-    readonly accent: "oklch(0.93 0.012 240)";
+    readonly primary: "#282828";
+    readonly primaryForeground: "#fafafa";
+    readonly secondary: "#ebebeb";
+    readonly muted: "#ebebeb";
+    readonly mutedForeground: "#4c4c4c";
+    readonly accent: "#ebebeb";
     readonly destructive: "oklch(0.58 0.22 27)";
-    readonly border: "oklch(0.9 0.008 250)";
-    readonly input: "oklch(0.92 0.008 250)";
+    readonly border: "#e5e5e5";
+    readonly input: "#e5e5e5";
+    /** Not remapped — no DS2 neutral gray is a close match; this token
+     * carries real blue chroma the neutral scale doesn't cover. */
     readonly ring: "oklch(0.7 0.04 250)";
     /** Raw hex — inconsistent in representation with the rest of the palette
      * (OKLCH), but the value is correct: an exact match for Autopay DS2's
      * real "Pistachio 500". See AUDIT.md #6 and DS2-HARMONIZATION.md. */
     readonly lime: "#e6ffa0";
-    readonly limeForeground: "oklch(0.18 0.02 260)";
+    readonly limeForeground: "#0f0f0f";
     readonly banking: "oklch(0.85 0.12 235)";
     readonly automotive: "oklch(0.92 0.18 100)";
     readonly insurance: "oklch(0.82 0.1 295)";

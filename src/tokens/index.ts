@@ -4,27 +4,31 @@
  * for provenance. Not Autopay Design System 2.0 tokens.
  */
 export const colorTokens = {
-  background: "oklch(0.985 0.003 60)",
-  foreground: "oklch(0.18 0.02 260)",
-  ink: "oklch(0.18 0.02 260)",
-  surface: "oklch(0.97 0.005 60)",
-  surfaceMuted: "oklch(0.94 0.006 250)",
+  /** Neutral scale harmonized with Autopay DS2's real gray swatches — see
+   * AUDIT.md #9 and DS2-HARMONIZATION.md #7. Mirrors tokens.css. */
+  background: "#fafafa", // Digital Gray 1
+  foreground: "#0f0f0f", // Dark mode Black
+  ink: "#0f0f0f", // Dark mode Black
+  surface: "#f5f5f5", // Digital Gray 2
+  surfaceMuted: "#ebebeb", // Digital Gray 4
   card: "oklch(1 0 0)",
-  primary: "oklch(0.22 0.03 260)",
-  primaryForeground: "oklch(0.985 0.003 60)",
-  secondary: "oklch(0.94 0.006 250)",
-  muted: "oklch(0.94 0.006 250)",
-  mutedForeground: "oklch(0.45 0.015 260)",
-  accent: "oklch(0.93 0.012 240)",
+  primary: "#282828", // Mineral Black
+  primaryForeground: "#fafafa", // Digital Gray 1, matches background
+  secondary: "#ebebeb", // Digital Gray 4
+  muted: "#ebebeb", // Digital Gray 4
+  mutedForeground: "#4c4c4c", // Digital Gray 11
+  accent: "#ebebeb", // Digital Gray 4
   destructive: "oklch(0.58 0.22 27)",
-  border: "oklch(0.9 0.008 250)",
-  input: "oklch(0.92 0.008 250)",
+  border: "#e5e5e5", // Digital Gray 5
+  input: "#e5e5e5", // Digital Gray 5
+  /** Not remapped — no DS2 neutral gray is a close match; this token
+   * carries real blue chroma the neutral scale doesn't cover. */
   ring: "oklch(0.7 0.04 250)",
   /** Raw hex — inconsistent in representation with the rest of the palette
    * (OKLCH), but the value is correct: an exact match for Autopay DS2's
    * real "Pistachio 500". See AUDIT.md #6 and DS2-HARMONIZATION.md. */
   lime: "#e6ffa0",
-  limeForeground: "oklch(0.18 0.02 260)",
+  limeForeground: "#0f0f0f", // Dark mode Black, matches ink
   banking: "oklch(0.85 0.12 235)",
   automotive: "oklch(0.92 0.18 100)",
   insurance: "oklch(0.82 0.1 295)",

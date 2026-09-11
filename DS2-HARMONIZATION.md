@@ -73,15 +73,9 @@ Transcribed from the rendered "Main Colors" frame. This is the reference to harm
 
 The file also has "Solution Palette" (Payments/Authorization/Verification/Insights/Reach/Recurring-transactions categories), "Connectors", and "Elevation" color groups (nodes `10769:2089`, `10769:3633`, `10769:3313`) — not transcribed here as they didn't come up as directly relevant to this package's current token set; revisit if a future component needs them.
 
-## 4. Neutral/semantic tokens — the real, unresolved gap
+## 4. Neutral/semantic tokens — harmonized (see §7)
 
-This package's `--background`/`--foreground`/`--ink`/`--surface`/`--muted`/`--border`/etc. (`src/tokens/tokens.css`) are OKLCH values extracted verbatim from `landing-page-kit`'s draft CSS — they were never checked against DS2's actual Digital Gray scale above, because DS2 didn't exist as an accessible reference until this session. They're visually in the same neighborhood (light neutrals for background/surface, dark neutrals for foreground/ink) but **not verified to be the same values**, and almost certainly aren't exact matches — OKLCH lightness/chroma/hue were never chosen with this specific gray scale as a target.
-
-**This is flagged, not fixed.** Precisely remapping OKLCH → the nearest DS2 Digital Gray requires an actual color-conversion pass (checking real contrast ratios, not eyeballing which swatch "looks about right") — that's real work, not a copy-paste. Proposed approach for whoever picks this up:
-1. Convert each current OKLCH neutral token to sRGB.
-2. Find the closest DS2 Digital Gray/Mineral Black by actual color distance, not visual guess.
-3. Re-verify WCAG contrast ratios after remapping (the WCAG audit in `AUDIT.md` §6 passed against the *current* values — a remap could change contrast math).
-4. Ship as a single, reviewable PR — not mixed with unrelated changes.
+Originally flagged here as an unresolved gap; implemented on 2026-09-11. See §7 for the real values, methodology, and what was deliberately left unmapped.
 
 ## 5. Spacing — not defined in DS2, nothing to harmonize
 
@@ -136,7 +130,41 @@ Unlike font *families* (§1), heading *sizes* had never been checked against DS2
 
 **Verification:** `npm run typecheck`, `npm run lint`, `npm test` (69 tests incl. the automated axe a11y suite against every story — no new violations), `npm run build`, `npx size-limit` (all packages under budget) and `npm run build-storybook` all pass; spot-checked `HeroVideoSplit`, `SecuritySection`, and `TrustedByLogos` visually in Storybook at mobile and desktop widths.
 
-**Not in scope for this pass:** the Figma file's "BASE SECTIONS" examples page and the neutral-color gap (§4) are separate, already-tracked threads — not touched here.
+**Not in scope for this pass:** the Figma file's "BASE SECTIONS" examples page and the neutral-color gap (§4, done separately as §7) are separate, already-tracked threads — not touched here.
+
+## 7. Neutral/semantic tokens — harmonized (implemented 2026-09-11)
+
+Every neutral/semantic OKLCH token in `src/tokens/tokens.css` (`--background`, `--foreground`/`--ink`, `--surface`, `--surface-muted`/`--secondary`/`--muted`, `--primary`, `--muted-foreground`, `--accent`, `--border`, `--input`, `--ring`) was extracted verbatim from `landing-page-kit`'s draft CSS and never checked against DS2's real Digital Gray/Mineral Black/Dark-mode-Black scale (§3) until now.
+
+**Method, following the proposal previously logged in §4:**
+1. Converted each token's OKLCH value to sRGB using a canvas 2D context (`ctx.fillStyle = 'oklch(...)'` then `getImageData`) rather than hand-rolled OKLab math — `getComputedStyle` alone was tried first and rejected because modern browsers serialize the color back as `oklch()`, not `rgb()`; only rendering to a canvas forces real sRGB quantization.
+2. Found the nearest DS2 Digital Gray/Mineral Black/Dark-mode-Black swatch for each by Euclidean distance in sRGB — not a visual guess.
+3. Re-verified WCAG contrast for every real text/background pairing the original `AUDIT.md` §6 audit covered, before and after the remap (relative-luminance/contrast-ratio formula per the WCAG spec).
+4. Shipped as its own commit, isolated from the typography-scale work in §6.
+
+**Real DS2 sRGB matches found:**
+
+| Token | Old (OKLCH → sRGB) | New (DS2 swatch) | DS2 name |
+|---|---|---|---|
+| `--background` | `#fcfaf8` | `#fafafa` | Digital Gray 1 |
+| `--foreground` / `--ink` / `--lime-foreground` | `#0c121a` | `#0f0f0f` | Dark mode Black |
+| `--surface` | `#f8f4f2` | `#f5f5f5` | Digital Gray 2 |
+| `--surface-muted` / `--secondary` / `--muted` / `--accent` | `#e8ebef` / `#e1e9ef` | `#ebebeb` | Digital Gray 4 |
+| `--primary` | `#121b29` | `#282828` | Mineral Black |
+| `--primary-foreground` | `#fcfaf8` | `#fafafa` | Digital Gray 1, matches `--background` |
+| `--muted-foreground` | `#50565e` | `#4c4c4c` | Digital Gray 11 |
+| `--border` / `--input` | `#dadee3` / `#e1e5ea` | `#e5e5e5` | Digital Gray 5 |
+| `--card` | `#ffffff` | *unchanged* | already an exact match for Digital White |
+
+Values are stored as raw hex, not OKLCH — deliberately, following the same "value correctness over representation consistency" precedent already established for `--lime` (§2): a hex literal is traceably identical to the real DS2 swatch, an OKLCH re-encoding would just be a second, lossier round-trip.
+
+**Disclosed simplifications (a discrete 14-swatch DS2 scale can't preserve every distinction a continuous OKLCH space could):**
+- `--surface-muted`, `--secondary`, `--muted`, and `--accent` were four *slightly* different OKLCH values before (visually near-identical) and all land on the same nearest DS2 swatch (Digital Gray 4) — they're now byte-identical. This mirrors their original near-identical intent, so nothing meaningful was lost.
+- `--border` and `--input` were two deliberately distinct OKLCH lightnesses (an input's border meant to read slightly lighter than a generic divider) and both land on Digital Gray 5 — nearest-match is unambiguous for both, so the distinction collapses. Disclosed, not silently dropped.
+
+**Left unmapped, on purpose:** `--ring` (the focus-ring color) carries real blue chroma (its R/G/B channels differ by up to ~43) that no DS2 neutral gray is close to — the nearest candidate, Digital Gray 8, is still ~34 sRGB units away, and forcing it onto a pure neutral would strip the blue "focus" cue, which is a meaningful, likely accessibility-relevant UI signal. `--destructive`/`--destructive-foreground` were also left alone — they're a semantic red, not part of the neutral scale, and DS2's own Red scale (§3) was outside this pass's scope.
+
+**WCAG contrast — no regression, verified not assumed:** every real text/background pairing from the original `AUDIT.md` §6 audit was recomputed before/after. All stayed far above the 4.5:1 AA threshold (most in the 14:1-19:1 range); the one pairing that moved the most (button text on `--primary`) went from 16.61:1 to 14.13:1 — still comfortably AAA.
 
 ## Summary
 
@@ -145,5 +173,5 @@ Unlike font *families* (§1), heading *sizes* had never been checked against DS2
 | Typography (families) | ✅ Confirmed aligned (Bricolage Grotesque / Open Sans) — no action |
 | Typography (sizes) | ✅ Harmonized — token-based `text-h1`..`text-h6` scale implemented across all organisms/molecules (§6) |
 | Brand accent colors | ✅ Confirmed aligned (`--lime` = Pistachio 500, logo blue = Blue 500) — no action, optional OKLCH conversion for consistency only |
-| Neutral/semantic colors | ⚠️ Real gap — needs a dedicated color-conversion + contrast-reverification pass (§4) |
+| Neutral/semantic colors | ✅ Harmonized — remapped to real DS2 Digital Gray/Mineral Black swatches, WCAG contrast re-verified (§7); `--ring` and `--destructive` deliberately left unmapped |
 | Spacing | ➖ No DS2 source exists to compare against — current Tailwind-default baseline stands as-is |
