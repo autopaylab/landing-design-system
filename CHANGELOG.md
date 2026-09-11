@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+
+### Minor Changes
+
+- 462f07b: Add `CookieConsentScript` (organisms) — Autopay's production ConsentManager cookie-consent loader, ported byte-for-byte from autopaylab.com as a deliberate exception (not redesigned or restyled). Every new landing page should include it as the first child of `<body>`. Raises the `organisms` and root `size-limit` budgets (13→15KB, 14→16KB) to reflect the vendor script's real, non-optimizable weight.
+- 72dbb36: Add `OverlapCard` (molecule) and `OverlappingCardsSection` (organism) — a new, generic sticky-stack promo pattern with two independent CTAs per card, matching Autopay DS2's "Overlapping cards" base section. `IndustriesStackedSection` and `IndustriesGridSection` are unchanged and both remain supported (see `AUDIT.md` §5 item 7).
+
 ## 0.4.0
 
 ### Minor Changes
