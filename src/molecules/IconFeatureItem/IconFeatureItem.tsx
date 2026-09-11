@@ -38,7 +38,7 @@ export function IconFeatureItem({
     <li className={cn("flex gap-4", className)} {...props}>
       <Icon className={cn("mt-1 h-5 w-5 shrink-0", iconClassName)} />
       <div>
-        <Heading className="font-display text-lg">{title}</Heading>
+        <Heading className="font-display text-h6">{title}</Heading>
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>
       </div>
     </li>

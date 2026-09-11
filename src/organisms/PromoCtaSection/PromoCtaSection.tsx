@@ -42,7 +42,7 @@ export function PromoCtaSection({
 
         <div className="relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24">
           <div className="grid gap-10 md:grid-cols-2 md:items-start">
-            <h2 className="max-w-xl font-display text-3xl text-background md:text-5xl">{heading}</h2>
+            <h2 className="max-w-xl font-display text-h2 text-background">{heading}</h2>
             <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
               <Button asChild variant="lime" className="h-12 px-7 text-base hover:scale-100 hover:bg-lime/90">
                 <a href={primaryCta.href}>{primaryCta.label}</a>

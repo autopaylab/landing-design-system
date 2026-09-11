@@ -17,7 +17,7 @@ export function SecuritySection({ eyebrow, heading, description, schemeBadges, c
     <section id="security" className="mx-auto mt-32 max-w-[1280px] px-6">
       <div className="text-center">
         <Badge variant="eyebrow">{eyebrow}</Badge>
-        <h2 className="mt-6 font-display text-[44px] leading-[1.05] md:text-[64px]">{heading}</h2>
+        <h2 className="mt-6 font-display text-h2">{heading}</h2>
         <p className="mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]">{description}</p>
       </div>
       <div className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale">

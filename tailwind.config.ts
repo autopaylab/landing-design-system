@@ -18,6 +18,18 @@ const config: Config = {
         display: ["Bricolage Grotesque", "ui-sans-serif", "system-ui", "sans-serif"],
         sans: ["Open Sans", "ui-sans-serif", "system-ui", "sans-serif"],
       },
+      fontSize: {
+        // Responsive by design: each size flips at the `md` breakpoint via
+        // the underlying CSS variable (see tokens.css), not via a `md:`
+        // variant -- one class (`text-h1`) covers both. See
+        // DS2-HARMONIZATION.md "Typography sizes".
+        h1: ["var(--text-h1)", { lineHeight: "var(--leading-h1)", letterSpacing: "var(--tracking-h1)" }],
+        h2: ["var(--text-h2)", { lineHeight: "var(--leading-h2)", letterSpacing: "var(--tracking-h2)" }],
+        h3: ["var(--text-h3)", { lineHeight: "var(--leading-h3)", letterSpacing: "var(--tracking-h3)" }],
+        h4: ["var(--text-h4)", { lineHeight: "var(--leading-h4)", letterSpacing: "var(--tracking-h4)" }],
+        h5: ["var(--text-h5)", { lineHeight: "var(--leading-h5)", letterSpacing: "var(--tracking-h5)" }],
+        h6: ["var(--text-h6)", { lineHeight: "var(--leading-h6)", letterSpacing: "var(--tracking-h6)" }],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

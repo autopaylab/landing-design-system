@@ -24,7 +24,7 @@ export function GlobalCoverageSection({ eyebrow, heading, features, floatingBadg
       <div className="grid items-center gap-12 md:grid-cols-2">
         <div>
           <Badge variant="eyebrow">{eyebrow}</Badge>
-          <h2 className="mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]">{heading}</h2>
+          <h2 className="mt-6 font-display text-h2">{heading}</h2>
           <ul className="mt-12 space-y-8">
             {features.map((f) => (
               // No h3 sits between this list and the section's h2 above (unlike

@@ -44,7 +44,7 @@ export function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, s
         {layout === "stacked" ? (
           <div className="relative px-6 py-20 text-background sm:px-10 md:px-16 md:py-32 lg:py-40">
             <div className="max-w-3xl">
-              <h2 className="font-display text-[40px] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">{title}</h2>
+              <h2 className="font-display text-h1">{title}</h2>
               {subtitle && <p className="mt-6 max-w-2xl text-base text-background/80 md:text-xl">{subtitle}</p>}
               <div className="mt-9">{ctas}</div>
             </div>
@@ -52,7 +52,7 @@ export function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, s
         ) : (
           <div className="relative px-6 py-20 sm:px-10 md:px-14 md:py-28">
             <div className="grid gap-10 md:grid-cols-2 md:items-center">
-              <h2 className="max-w-xl font-display text-[36px] leading-[1.05] text-background md:text-[56px]">{title}</h2>
+              <h2 className="max-w-xl font-display text-h2 text-background">{title}</h2>
               <div className="md:justify-self-end">{ctas}</div>
             </div>
           </div>

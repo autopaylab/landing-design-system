@@ -35,11 +35,11 @@ export function ContactSection({
     <section id="contact" className="mx-auto mt-32 max-w-[1280px] px-6">
       <div className="grid items-start gap-12 md:grid-cols-2">
         <div>
-          <h2 className="font-display text-[44px] leading-[1.05] md:text-[56px]">{heading}</h2>
+          <h2 className="font-display text-h2">{heading}</h2>
           <p className="mt-6 max-w-md text-muted-foreground md:text-[17px]">{description}</p>
         </div>
         <div className="rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10">
-          <h3 className="font-display text-3xl">{formHeading}</h3>
+          <h3 className="font-display text-h4">{formHeading}</h3>
           <form className="mt-6 space-y-5" onSubmit={onSubmit ?? ((e) => e.preventDefault())}>
             <div className="grid grid-cols-2 gap-4">
               <FormField label="First name" name="firstName" placeholder="Jane" />

@@ -46,7 +46,7 @@ export function PlatformFeatureShowcase({ features }: PlatformFeatureShowcasePro
       <div className="flex flex-col gap-6 md:hidden">
         {features.map((f) => (
           <div key={f.key} className="rounded-3xl bg-card p-6 shadow-sm">
-            <h4 className="font-display text-xl">{f.title}</h4>
+            <h4 className="font-display text-h5">{f.title}</h4>
             <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{f.desc}</p>
             <div className="mt-5 flex items-center justify-center overflow-hidden rounded-lg bg-[oklch(0.97_0.02_240)] p-4">
               <video src={f.video} autoPlay muted loop playsInline preload="metadata" className="w-full max-w-full object-contain" />

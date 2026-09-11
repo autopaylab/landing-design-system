@@ -27,14 +27,14 @@ export function DataLeverageSection({ eyebrow, heading, description, items, repo
     <section className="mx-auto mt-32 max-w-[1280px] px-6">
       <div className="text-center">
         <Badge variant="eyebrow">{eyebrow}</Badge>
-        <h2 className="mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]">{heading}</h2>
+        <h2 className="mt-6 font-display text-h2">{heading}</h2>
         <p className="mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]">{description}</p>
       </div>
       <div className="mt-16 grid gap-10 md:grid-cols-2">
         <ul className="divide-y divide-border">
           {items.map((d) => (
             <li key={d.title} className="py-8 first:pt-0">
-              <h3 className="font-display text-2xl">{d.title}</h3>
+              <h3 className="font-display text-h4">{d.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">{d.desc}</p>
             </li>
           ))}

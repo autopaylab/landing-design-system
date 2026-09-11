@@ -16,7 +16,7 @@ export function IconCard({ className, icon: Icon, title, bullets, color, ...prop
   return (
     <div className={cn("rounded-3xl bg-card p-8 shadow-sm", className)} {...props}>
       <div className="flex items-start justify-between gap-4">
-        <h3 className="font-display text-2xl">{title}</h3>
+        <h3 className="font-display text-h4">{title}</h3>
         <div
           className="grid h-12 w-12 shrink-0 place-items-center rounded-xl"
           style={{ background: `linear-gradient(135deg, ${color}, color-mix(in oklab, ${color} 40%, white))` }}

@@ -23,7 +23,7 @@ export function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, vi
               <Badge variant="eyebrow">{eyebrow}</Badge>
             </div>
           )}
-          <h1 className="font-display text-[48px] leading-[1.05] tracking-[-0.02em] md:text-[72px]">{title}</h1>
+          <h1 className="font-display text-h1">{title}</h1>
           <p className="mt-8 max-w-md text-base leading-relaxed text-muted-foreground md:text-[17px]">{subtitle}</p>
           <div className="mt-10">
             <Button asChild variant="lime" size="lg">

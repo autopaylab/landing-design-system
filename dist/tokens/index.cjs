@@ -22,6 +22,7 @@ var tokens_exports = {};
 __export(tokens_exports, {
   colorTokens: () => colorTokens,
   fontTokens: () => fontTokens,
+  headingScale: () => headingScale,
   radiusTokens: () => radiusTokens
 });
 module.exports = __toCommonJS(tokens_exports);
@@ -42,7 +43,9 @@ var colorTokens = {
   border: "oklch(0.9 0.008 250)",
   input: "oklch(0.92 0.008 250)",
   ring: "oklch(0.7 0.04 250)",
-  /** Raw hex — inconsistent with the rest of the palette (OKLCH). See AUDIT.md #6. */
+  /** Raw hex — inconsistent in representation with the rest of the palette
+   * (OKLCH), but the value is correct: an exact match for Autopay DS2's
+   * real "Pistachio 500". See AUDIT.md #6 and DS2-HARMONIZATION.md. */
   lime: "#e6ffa0",
   limeForeground: "oklch(0.18 0.02 260)",
   banking: "oklch(0.85 0.12 235)",
@@ -66,10 +69,19 @@ var radiusTokens = {
   "2xl": "calc(0.625rem + 14px)",
   "3xl": "calc(0.625rem + 22px)"
 };
+var headingScale = {
+  h1: { mobile: { size: 48, lineHeight: 1, letterSpacing: "-0.02em" }, desktop: { size: 64, lineHeight: 1.15, letterSpacing: "-0.02em" } },
+  h2: { mobile: { size: 40, lineHeight: 1, letterSpacing: "-0.02em" }, desktop: { size: 56, lineHeight: 1.15, letterSpacing: "-0.02em" } },
+  h3: { mobile: { size: 32, lineHeight: 1, letterSpacing: "-0.02em" }, desktop: { size: 48, lineHeight: 1.15, letterSpacing: "-0.02em" } },
+  h4: { mobile: { size: 24, lineHeight: 1, letterSpacing: "-0.02em" }, desktop: { size: 32, lineHeight: 1.15, letterSpacing: "-0.02em" } },
+  h5: { mobile: { size: 20, lineHeight: 1, letterSpacing: "-0.02em" }, desktop: { size: 24, lineHeight: 1.15, letterSpacing: "-0.01em" } },
+  h6: { mobile: { size: 18, lineHeight: 1, letterSpacing: "-0.02em" }, desktop: { size: 20, lineHeight: 1.15, letterSpacing: "-0.01em" } }
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   colorTokens,
   fontTokens,
+  headingScale,
   radiusTokens
 });
 //# sourceMappingURL=index.cjs.map

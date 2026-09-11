@@ -20,7 +20,9 @@ declare const colorTokens: {
     readonly border: "oklch(0.9 0.008 250)";
     readonly input: "oklch(0.92 0.008 250)";
     readonly ring: "oklch(0.7 0.04 250)";
-    /** Raw hex — inconsistent with the rest of the palette (OKLCH). See AUDIT.md #6. */
+    /** Raw hex — inconsistent in representation with the rest of the palette
+     * (OKLCH), but the value is correct: an exact match for Autopay DS2's
+     * real "Pistachio 500". See AUDIT.md #6 and DS2-HARMONIZATION.md. */
     readonly lime: "#e6ffa0";
     readonly limeForeground: "oklch(0.18 0.02 260)";
     readonly banking: "oklch(0.85 0.12 235)";
@@ -44,5 +46,87 @@ declare const radiusTokens: {
     readonly "2xl": "calc(0.625rem + 14px)";
     readonly "3xl": "calc(0.625rem + 22px)";
 };
+/**
+ * Heading scale (h1-h6), mobile and desktop (>=768px, matching Tailwind's
+ * `md` breakpoint) sizes in px, plus line-height and letter-spacing.
+ * Sourced from Autopay Design System 2.0's typescale — see
+ * DS2-HARMONIZATION.md "Typography sizes". Use the `text-h1`..`text-h6`
+ * Tailwind utilities (tailwind.config.ts) in components; this export is
+ * for consumers that need the raw numbers (e.g. a non-Tailwind context).
+ */
+declare const headingScale: {
+    readonly h1: {
+        readonly mobile: {
+            readonly size: 48;
+            readonly lineHeight: 1;
+            readonly letterSpacing: "-0.02em";
+        };
+        readonly desktop: {
+            readonly size: 64;
+            readonly lineHeight: 1.15;
+            readonly letterSpacing: "-0.02em";
+        };
+    };
+    readonly h2: {
+        readonly mobile: {
+            readonly size: 40;
+            readonly lineHeight: 1;
+            readonly letterSpacing: "-0.02em";
+        };
+        readonly desktop: {
+            readonly size: 56;
+            readonly lineHeight: 1.15;
+            readonly letterSpacing: "-0.02em";
+        };
+    };
+    readonly h3: {
+        readonly mobile: {
+            readonly size: 32;
+            readonly lineHeight: 1;
+            readonly letterSpacing: "-0.02em";
+        };
+        readonly desktop: {
+            readonly size: 48;
+            readonly lineHeight: 1.15;
+            readonly letterSpacing: "-0.02em";
+        };
+    };
+    readonly h4: {
+        readonly mobile: {
+            readonly size: 24;
+            readonly lineHeight: 1;
+            readonly letterSpacing: "-0.02em";
+        };
+        readonly desktop: {
+            readonly size: 32;
+            readonly lineHeight: 1.15;
+            readonly letterSpacing: "-0.02em";
+        };
+    };
+    readonly h5: {
+        readonly mobile: {
+            readonly size: 20;
+            readonly lineHeight: 1;
+            readonly letterSpacing: "-0.02em";
+        };
+        readonly desktop: {
+            readonly size: 24;
+            readonly lineHeight: 1.15;
+            readonly letterSpacing: "-0.01em";
+        };
+    };
+    readonly h6: {
+        readonly mobile: {
+            readonly size: 18;
+            readonly lineHeight: 1;
+            readonly letterSpacing: "-0.02em";
+        };
+        readonly desktop: {
+            readonly size: 20;
+            readonly lineHeight: 1.15;
+            readonly letterSpacing: "-0.01em";
+        };
+    };
+};
 
-export { colorTokens, fontTokens, radiusTokens };
+export { colorTokens, fontTokens, headingScale, radiusTokens };

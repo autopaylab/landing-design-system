@@ -18,7 +18,7 @@ export function FaqAccordionSection({ heading, entries }: FaqAccordionSectionPro
   return (
     <section id="faq" aria-labelledby="faq-title" className="bg-surface px-5 py-14 md:py-20">
       <div className="mx-auto max-w-[1280px]">
-        <h2 id="faq-title" className="font-display text-3xl md:text-4xl">
+        <h2 id="faq-title" className="font-display text-h2">
           {heading}
         </h2>
         <Accordion type="single" collapsible className="mt-8 flex w-full flex-col gap-3">

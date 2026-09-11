@@ -26,12 +26,12 @@ export function SingleIntegrationSection({
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="text-center">
           <Badge variant="eyebrow">{eyebrow}</Badge>
-          <h2 className="mt-6 font-display text-[44px] leading-[1.05] md:text-[64px]">{heading}</h2>
+          <h2 className="mt-6 font-display text-h2">{heading}</h2>
         </div>
 
         <div className="mt-20 grid items-end gap-10 md:grid-cols-2">
           <div className="pb-24">
-            <h3 className="font-display text-[28px]">{subheading}</h3>
+            <h3 className="font-display text-h4">{subheading}</h3>
             <p className="mt-2 text-muted-foreground">{subheadingCaption}</p>
             <ul className="mt-10 space-y-8">
               {features.map((f) => (

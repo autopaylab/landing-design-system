@@ -171,7 +171,7 @@ function IconFeatureItem({
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("li", { className: cn("flex gap-4", className), ...props, children: [
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Heading, { className: "font-display text-lg", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Heading, { className: "font-display text-h6", children: title }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });
@@ -191,7 +191,7 @@ var import_jsx_runtime10 = require("react/jsx-runtime");
 function IconCard({ className, icon: Icon, title, bullets, color, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: cn("rounded-3xl bg-card p-8 shadow-sm", className), ...props, children: [
     /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex items-start justify-between gap-4", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "font-display text-2xl", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "font-display text-h4", children: title }),
       /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
         "div",
         {
@@ -226,7 +226,7 @@ var import_jsx_runtime12 = require("react/jsx-runtime");
 function StepCard({ className, index, title, body, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("li", { className: cn("p-8", className), ...props, children: [
     /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(StepNumber, { value: index }),
-    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h3", { className: "mt-4 font-display text-lg", children: title }),
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h3", { className: "mt-4 font-display text-h6", children: title }),
     /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "mt-2 text-sm text-muted-foreground", children: body })
   ] });
 }

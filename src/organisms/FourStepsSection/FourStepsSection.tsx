@@ -28,7 +28,7 @@ export function FourStepsSection({ heading, description, image, imageAlt, steps 
         <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]">
           <div className="grid items-center gap-8 px-6 pb-10 pt-10 md:grid-cols-[1.1fr_1fr] md:px-14 md:pb-16 md:pt-14">
             <div>
-              <h2 id="four-steps-title" className="max-w-2xl font-display text-[32px] leading-[1.05] md:text-[56px]">
+              <h2 id="four-steps-title" className="max-w-2xl font-display text-h2">
                 {heading}
               </h2>
               <p className="mt-6 max-w-xl text-muted-foreground md:text-[17px]">{description}</p>

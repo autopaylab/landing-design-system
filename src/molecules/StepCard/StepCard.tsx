@@ -14,7 +14,7 @@ export function StepCard({ className, index, title, body, ...props }: StepCardPr
   return (
     <li className={cn("p-8", className)} {...props}>
       <StepNumber value={index} />
-      <h3 className="mt-4 font-display text-lg">{title}</h3>
+      <h3 className="mt-4 font-display text-h6">{title}</h3>
       <p className="mt-2 text-sm text-muted-foreground">{body}</p>
     </li>
   );

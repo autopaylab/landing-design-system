@@ -230,7 +230,7 @@ function Footer({
         className: "relative min-h-[420px] bg-cover bg-center md:min-h-[520px]",
         style: { backgroundImage: `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${bannerImage}')` },
         children: /* @__PURE__ */ jsxs2("div", { className: "absolute inset-0 grid grid-cols-1 items-start gap-8 px-8 py-12 md:grid-cols-2 md:px-16 md:py-16", children: [
-          /* @__PURE__ */ jsx5("h3", { className: "font-display text-4xl leading-[1.05] text-white md:text-[56px]", children: ctaHeading }),
+          /* @__PURE__ */ jsx5("h3", { className: "font-display text-h2 text-white", children: ctaHeading }),
           /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl text-white md:text-right md:text-[44px]", children: ctaSubheading })
         ] })
       }

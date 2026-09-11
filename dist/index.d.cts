@@ -4,7 +4,7 @@ export { I as IconCard, a as IconCardProps, b as IconFeatureItem, c as IconFeatu
 export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from './Footer-8cnZzh6n.cjs';
 export { ContactSection, ContactSectionProps, DataLeverageItem, DataLeverageSection, DataLeverageSectionProps, FaqAccordionSection, FaqAccordionSectionProps, FaqEntry, FloatingPaymentBadge, FourStepsSection, FourStepsSectionProps, GlobalCoverageSection, GlobalCoverageSectionProps, HeroImageOverlay, HeroImageOverlayProps, HeroVideoSplit, HeroVideoSplitProps, IndustriesGridSection, IndustriesGridSectionProps, IndustriesStackedSection, IndustriesStackedSectionProps, IndustryEntry, PlatformFeature, PlatformFeatureShowcase, PlatformFeatureShowcaseProps, PromoCtaSection, PromoCtaSectionProps, ReportingPeriod, SecuritySection, SecuritySectionProps, SingleIntegrationSection, SingleIntegrationSectionProps, StatsSection, StatsSectionProps, Step, TrustedByLogo, TrustedByLogos, TrustedByLogosProps } from './organisms/index.cjs';
 export { LandingPageTemplate, LandingPageTemplateProps } from './templates/index.cjs';
-export { colorTokens, fontTokens, radiusTokens } from './tokens/index.cjs';
+export { colorTokens, fontTokens, headingScale, radiusTokens } from './tokens/index.cjs';
 import 'react';
 import '@radix-ui/react-accordion';
 import 'class-variance-authority/types';

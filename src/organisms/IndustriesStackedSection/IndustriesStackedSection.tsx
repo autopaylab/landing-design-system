@@ -30,7 +30,7 @@ export function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabe
       <div className="mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20">
         <div className="text-center">
           <Badge variant="eyebrow">{eyebrow}</Badge>
-          <h2 className="mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]">{heading}</h2>
+          <h2 className="mt-6 font-display text-h2">{heading}</h2>
         </div>
         <div className="mt-12">
           {industries.map((ind, i) => (

@@ -230,7 +230,7 @@ function Footer({
         className: "relative min-h-[420px] bg-cover bg-center md:min-h-[520px]",
         style: { backgroundImage: `linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('${bannerImage}')` },
         children: /* @__PURE__ */ jsxs2("div", { className: "absolute inset-0 grid grid-cols-1 items-start gap-8 px-8 py-12 md:grid-cols-2 md:px-16 md:py-16", children: [
-          /* @__PURE__ */ jsx5("h3", { className: "font-display text-4xl leading-[1.05] text-white md:text-[56px]", children: ctaHeading }),
+          /* @__PURE__ */ jsx5("h3", { className: "font-display text-h2 text-white", children: ctaHeading }),
           /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl text-white md:text-right md:text-[44px]", children: ctaSubheading })
         ] })
       }
@@ -283,7 +283,7 @@ function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc 
   return /* @__PURE__ */ jsx7("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ jsxs3("div", { className: "grid items-center gap-10 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs3("div", { children: [
       eyebrow && /* @__PURE__ */ jsx7("div", { className: "mb-6", children: /* @__PURE__ */ jsx7(Badge, { variant: "eyebrow", children: eyebrow }) }),
-      /* @__PURE__ */ jsx7("h1", { className: "font-display text-[48px] leading-[1.05] tracking-[-0.02em] md:text-[72px]", children: title }),
+      /* @__PURE__ */ jsx7("h1", { className: "font-display text-h1", children: title }),
       /* @__PURE__ */ jsx7("p", { className: "mt-8 max-w-md text-base leading-relaxed text-muted-foreground md:text-[17px]", children: subtitle }),
       /* @__PURE__ */ jsx7("div", { className: "mt-10", children: /* @__PURE__ */ jsx7(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx7("a", { href: ctaHref, children: ctaLabel }) }) })
     ] }),
@@ -308,11 +308,11 @@ function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondar
       }
     ),
     layout === "stacked" ? /* @__PURE__ */ jsx8("div", { className: "relative px-6 py-20 text-background sm:px-10 md:px-16 md:py-32 lg:py-40", children: /* @__PURE__ */ jsxs4("div", { className: "max-w-3xl", children: [
-      /* @__PURE__ */ jsx8("h2", { className: "font-display text-[40px] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl", children: title }),
+      /* @__PURE__ */ jsx8("h2", { className: "font-display text-h1", children: title }),
       subtitle && /* @__PURE__ */ jsx8("p", { className: "mt-6 max-w-2xl text-base text-background/80 md:text-xl", children: subtitle }),
       /* @__PURE__ */ jsx8("div", { className: "mt-9", children: ctas })
     ] }) }) : /* @__PURE__ */ jsx8("div", { className: "relative px-6 py-20 sm:px-10 md:px-14 md:py-28", children: /* @__PURE__ */ jsxs4("div", { className: "grid gap-10 md:grid-cols-2 md:items-center", children: [
-      /* @__PURE__ */ jsx8("h2", { className: "max-w-xl font-display text-[36px] leading-[1.05] text-background md:text-[56px]", children: title }),
+      /* @__PURE__ */ jsx8("h2", { className: "max-w-xl font-display text-h2 text-background", children: title }),
       /* @__PURE__ */ jsx8("div", { className: "md:justify-self-end", children: ctas })
     ] }) })
   ] }) });
@@ -322,7 +322,7 @@ function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondar
 import { jsx as jsx9, jsxs as jsxs5 } from "react/jsx-runtime";
 function TrustedByLogos({ heading, logos }) {
   return /* @__PURE__ */ jsxs5("section", { id: "trusted-by", className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
-    /* @__PURE__ */ jsx9("h2", { className: "text-center font-display text-[32px] md:text-[40px]", children: heading }),
+    /* @__PURE__ */ jsx9("h2", { className: "text-center font-display text-h3", children: heading }),
     /* @__PURE__ */ jsx9("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ jsx9(
       "img",
       {
@@ -357,7 +357,7 @@ import { jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
 function StepCard({ className, index, title, body, ...props }) {
   return /* @__PURE__ */ jsxs6("li", { className: cn("p-8", className), ...props, children: [
     /* @__PURE__ */ jsx11(StepNumber, { value: index }),
-    /* @__PURE__ */ jsx11("h3", { className: "mt-4 font-display text-lg", children: title }),
+    /* @__PURE__ */ jsx11("h3", { className: "mt-4 font-display text-h6", children: title }),
     /* @__PURE__ */ jsx11("p", { className: "mt-2 text-sm text-muted-foreground", children: body })
   ] });
 }
@@ -368,7 +368,7 @@ function FourStepsSection({ heading, description, image, imageAlt, steps }) {
   return /* @__PURE__ */ jsx12("section", { "aria-labelledby": "four-steps-title", className: "px-5 py-14 md:py-20", children: /* @__PURE__ */ jsx12("div", { className: "mx-auto max-w-[1280px]", children: /* @__PURE__ */ jsxs7("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
     /* @__PURE__ */ jsxs7("div", { className: "grid items-center gap-8 px-6 pb-10 pt-10 md:grid-cols-[1.1fr_1fr] md:px-14 md:pb-16 md:pt-14", children: [
       /* @__PURE__ */ jsxs7("div", { children: [
-        /* @__PURE__ */ jsx12("h2", { id: "four-steps-title", className: "max-w-2xl font-display text-[32px] leading-[1.05] md:text-[56px]", children: heading }),
+        /* @__PURE__ */ jsx12("h2", { id: "four-steps-title", className: "max-w-2xl font-display text-h2", children: heading }),
         /* @__PURE__ */ jsx12("p", { className: "mt-6 max-w-xl text-muted-foreground md:text-[17px]", children: description })
       ] }),
       /* @__PURE__ */ jsx12("img", { src: image, alt: imageAlt, width: 700, height: 400, loading: "lazy", className: "w-full max-w-[560px] justify-self-end" })
@@ -401,7 +401,7 @@ function IconFeatureItem({
   return /* @__PURE__ */ jsxs8("li", { className: cn("flex gap-4", className), ...props, children: [
     /* @__PURE__ */ jsx13(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
     /* @__PURE__ */ jsxs8("div", { children: [
-      /* @__PURE__ */ jsx13(Heading, { className: "font-display text-lg", children: title }),
+      /* @__PURE__ */ jsx13(Heading, { className: "font-display text-h6", children: title }),
       /* @__PURE__ */ jsx13("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });
@@ -420,11 +420,11 @@ function SingleIntegrationSection({
   return /* @__PURE__ */ jsx14("section", { id: "platform", className: "mt-32 w-full overflow-hidden bg-white pb-0 pt-24", children: /* @__PURE__ */ jsxs9("div", { className: "mx-auto max-w-[1280px] px-6", children: [
     /* @__PURE__ */ jsxs9("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx14(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx14("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[64px]", children: heading })
+      /* @__PURE__ */ jsx14("h2", { className: "mt-6 font-display text-h2", children: heading })
     ] }),
     /* @__PURE__ */ jsxs9("div", { className: "mt-20 grid items-end gap-10 md:grid-cols-2", children: [
       /* @__PURE__ */ jsxs9("div", { className: "pb-24", children: [
-        /* @__PURE__ */ jsx14("h3", { className: "font-display text-[28px]", children: subheading }),
+        /* @__PURE__ */ jsx14("h3", { className: "font-display text-h4", children: subheading }),
         /* @__PURE__ */ jsx14("p", { className: "mt-2 text-muted-foreground", children: subheadingCaption }),
         /* @__PURE__ */ jsx14("ul", { className: "mt-10 space-y-8", children: features.map((f) => /* @__PURE__ */ jsx14(IconFeatureItem, { ...f }, f.title)) })
       ] }),
@@ -455,7 +455,7 @@ function PlatformFeatureShowcase({ features }) {
   };
   return /* @__PURE__ */ jsxs10(Fragment, { children: [
     /* @__PURE__ */ jsx15("div", { className: "flex flex-col gap-6 md:hidden", children: features.map((f) => /* @__PURE__ */ jsxs10("div", { className: "rounded-3xl bg-card p-6 shadow-sm", children: [
-      /* @__PURE__ */ jsx15("h4", { className: "font-display text-xl", children: f.title }),
+      /* @__PURE__ */ jsx15("h4", { className: "font-display text-h5", children: f.title }),
       /* @__PURE__ */ jsx15("p", { className: "mt-2 text-[15px] leading-relaxed text-muted-foreground", children: f.desc }),
       /* @__PURE__ */ jsx15("div", { className: "mt-5 flex items-center justify-center overflow-hidden rounded-lg bg-[oklch(0.97_0.02_240)] p-4", children: /* @__PURE__ */ jsx15("video", { src: f.video, autoPlay: true, muted: true, loop: true, playsInline: true, preload: "metadata", className: "w-full max-w-full object-contain" }) })
     ] }, f.key)) }),
@@ -521,7 +521,7 @@ import { jsx as jsx17, jsxs as jsxs12 } from "react/jsx-runtime";
 function IconCard({ className, icon: Icon, title, bullets, color, ...props }) {
   return /* @__PURE__ */ jsxs12("div", { className: cn("rounded-3xl bg-card p-8 shadow-sm", className), ...props, children: [
     /* @__PURE__ */ jsxs12("div", { className: "flex items-start justify-between gap-4", children: [
-      /* @__PURE__ */ jsx17("h3", { className: "font-display text-2xl", children: title }),
+      /* @__PURE__ */ jsx17("h3", { className: "font-display text-h4", children: title }),
       /* @__PURE__ */ jsx17(
         "div",
         {
@@ -541,7 +541,7 @@ function SecuritySection({ eyebrow, heading, description, schemeBadges, cards })
   return /* @__PURE__ */ jsxs13("section", { id: "security", className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
     /* @__PURE__ */ jsxs13("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx18(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx18("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[64px]", children: heading }),
+      /* @__PURE__ */ jsx18("h2", { className: "mt-6 font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx18("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description })
     ] }),
     /* @__PURE__ */ jsx18("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale", children: schemeBadges.map((label) => /* @__PURE__ */ jsx18("span", { className: "text-sm font-bold text-foreground/60", children: label }, label)) }),
@@ -555,7 +555,7 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
   return /* @__PURE__ */ jsx19("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs14("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs14("div", { children: [
       /* @__PURE__ */ jsx19(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx19("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading }),
+      /* @__PURE__ */ jsx19("h2", { className: "mt-6 font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx19("ul", { className: "mt-12 space-y-8", children: features.map((f) => (
         // No h3 sits between this list and the section's h2 above (unlike
         // SingleIntegrationSection, which has one), so these need to be h3
@@ -584,12 +584,12 @@ function DataLeverageSection({ eyebrow, heading, description, items, reportingPe
   return /* @__PURE__ */ jsxs15("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: [
     /* @__PURE__ */ jsxs15("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx20(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx20("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading }),
+      /* @__PURE__ */ jsx20("h2", { className: "mt-6 font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx20("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description })
     ] }),
     /* @__PURE__ */ jsxs15("div", { className: "mt-16 grid gap-10 md:grid-cols-2", children: [
       /* @__PURE__ */ jsx20("ul", { className: "divide-y divide-border", children: items.map((d) => /* @__PURE__ */ jsxs15("li", { className: "py-8 first:pt-0", children: [
-        /* @__PURE__ */ jsx20("h3", { className: "font-display text-2xl", children: d.title }),
+        /* @__PURE__ */ jsx20("h3", { className: "font-display text-h4", children: d.title }),
         /* @__PURE__ */ jsx20("p", { className: "mt-3 text-sm leading-relaxed text-muted-foreground md:text-base", children: d.desc })
       ] }, d.title)) }),
       /* @__PURE__ */ jsxs15("div", { className: "relative min-h-[480px] rounded-3xl bg-gradient-to-br from-[oklch(0.9_0.06_280)] to-[oklch(0.95_0.04_260)] p-6", children: [
@@ -636,7 +636,7 @@ import { jsx as jsx22, jsxs as jsxs17 } from "react/jsx-runtime";
 function StatsSection({ heading, description, stats }) {
   return /* @__PURE__ */ jsx22("section", { className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs17("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
     /* @__PURE__ */ jsxs17("div", { className: "max-w-2xl", children: [
-      /* @__PURE__ */ jsx22("h2", { className: "font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading }),
+      /* @__PURE__ */ jsx22("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx22("p", { className: "mt-6 text-muted-foreground md:text-[17px]", children: description })
     ] }),
     /* @__PURE__ */ jsx22("div", { className: "mt-16 grid grid-cols-2 gap-px md:grid-cols-4", children: stats.map((s) => /* @__PURE__ */ jsx22(StatBlock, { ...s }, s.label)) })
@@ -722,7 +722,7 @@ function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCt
   return /* @__PURE__ */ jsx24("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ jsxs19("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ jsxs19("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx24(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx24("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading })
+      /* @__PURE__ */ jsx24("h2", { className: "mt-6 font-display text-h2", children: heading })
     ] }),
     /* @__PURE__ */ jsx24("div", { className: "mt-12", children: industries.map((ind, i) => /* @__PURE__ */ jsx24(
       IndustryCard,
@@ -752,7 +752,7 @@ function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaCl
   return /* @__PURE__ */ jsx25("section", { className: "mt-32 w-full bg-surface", children: /* @__PURE__ */ jsxs20("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
     /* @__PURE__ */ jsxs20("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx25(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx25("h2", { className: "mt-6 font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading })
+      /* @__PURE__ */ jsx25("h2", { className: "mt-6 font-display text-h2", children: heading })
     ] }),
     /* @__PURE__ */ jsx25("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: industries.map((ind) => /* @__PURE__ */ jsx25(
       IndustryCard,
@@ -851,11 +851,11 @@ function ContactSection({
 }) {
   return /* @__PURE__ */ jsx31("section", { id: "contact", className: "mx-auto mt-32 max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs23("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs23("div", { children: [
-      /* @__PURE__ */ jsx31("h2", { className: "font-display text-[44px] leading-[1.05] md:text-[56px]", children: heading }),
+      /* @__PURE__ */ jsx31("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx31("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
     ] }),
     /* @__PURE__ */ jsxs23("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
-      /* @__PURE__ */ jsx31("h3", { className: "font-display text-3xl", children: formHeading }),
+      /* @__PURE__ */ jsx31("h3", { className: "font-display text-h4", children: formHeading }),
       /* @__PURE__ */ jsxs23("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
         /* @__PURE__ */ jsxs23("div", { className: "grid grid-cols-2 gap-4", children: [
           /* @__PURE__ */ jsx31(FormField, { label: "First name", name: "firstName", placeholder: "Jane" }),
@@ -918,7 +918,7 @@ function FaqItem({ value, question, answer }) {
 import { jsx as jsx34, jsxs as jsxs26 } from "react/jsx-runtime";
 function FaqAccordionSection({ heading, entries }) {
   return /* @__PURE__ */ jsx34("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ jsxs26("div", { className: "mx-auto max-w-[1280px]", children: [
-    /* @__PURE__ */ jsx34("h2", { id: "faq-title", className: "font-display text-3xl md:text-4xl", children: heading }),
+    /* @__PURE__ */ jsx34("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
     /* @__PURE__ */ jsx34(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ jsx34(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
   ] }) });
 }
@@ -942,7 +942,7 @@ function PromoCtaSection({
     /* @__PURE__ */ jsx35("div", { "aria-hidden": "true", className: "absolute inset-0 bg-ink/40" }),
     /* @__PURE__ */ jsxs27("div", { className: "relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24", children: [
       /* @__PURE__ */ jsxs27("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
-        /* @__PURE__ */ jsx35("h2", { className: "max-w-xl font-display text-3xl text-background md:text-5xl", children: heading }),
+        /* @__PURE__ */ jsx35("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
         /* @__PURE__ */ jsxs27("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
           /* @__PURE__ */ jsx35(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ jsx35("a", { href: primaryCta.href, children: primaryCta.label }) }),
           /* @__PURE__ */ jsx35(

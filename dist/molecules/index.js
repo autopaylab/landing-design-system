@@ -126,7 +126,7 @@ function IconFeatureItem({
   return /* @__PURE__ */ jsxs4("li", { className: cn("flex gap-4", className), ...props, children: [
     /* @__PURE__ */ jsx8(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
     /* @__PURE__ */ jsxs4("div", { children: [
-      /* @__PURE__ */ jsx8(Heading, { className: "font-display text-lg", children: title }),
+      /* @__PURE__ */ jsx8(Heading, { className: "font-display text-h6", children: title }),
       /* @__PURE__ */ jsx8("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });
@@ -146,7 +146,7 @@ import { jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
 function IconCard({ className, icon: Icon, title, bullets, color, ...props }) {
   return /* @__PURE__ */ jsxs6("div", { className: cn("rounded-3xl bg-card p-8 shadow-sm", className), ...props, children: [
     /* @__PURE__ */ jsxs6("div", { className: "flex items-start justify-between gap-4", children: [
-      /* @__PURE__ */ jsx10("h3", { className: "font-display text-2xl", children: title }),
+      /* @__PURE__ */ jsx10("h3", { className: "font-display text-h4", children: title }),
       /* @__PURE__ */ jsx10(
         "div",
         {
@@ -181,7 +181,7 @@ import { jsx as jsx12, jsxs as jsxs7 } from "react/jsx-runtime";
 function StepCard({ className, index, title, body, ...props }) {
   return /* @__PURE__ */ jsxs7("li", { className: cn("p-8", className), ...props, children: [
     /* @__PURE__ */ jsx12(StepNumber, { value: index }),
-    /* @__PURE__ */ jsx12("h3", { className: "mt-4 font-display text-lg", children: title }),
+    /* @__PURE__ */ jsx12("h3", { className: "mt-4 font-display text-h6", children: title }),
     /* @__PURE__ */ jsx12("p", { className: "mt-2 text-sm text-muted-foreground", children: body })
   ] });
 }
