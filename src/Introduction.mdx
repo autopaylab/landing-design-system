@@ -6,6 +6,40 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 A component library extracted from `landing-page-kit`'s real, rendered markup — every atom, molecule, organism and template here is a documented, observed variant, not an invented one. See [`AUDIT.md`](https://github.com/autopaylab/landing-design-system/blob/main/AUDIT.md) for the full extraction rationale and every judgment call made.
 
+## Tech stack & requirements
+
+- **React** ≥18, **react-dom** ≥18 (peer dependencies — bring your own).
+- **Tailwind CSS** ≥3.4 (peer dependency). This package ships a `tailwind.config.ts` preset and a plain CSS file of custom properties (colors, spacing, the `text-h1`-`h6` type scale) — Tailwind utility classes reference those variables, so your app's own Tailwind build generates the actual CSS.
+- **TypeScript** — fully typed, `.d.ts` shipped for every export; props tables in each component's Docs tab are generated from these types, not hand-written.
+- **Fonts** are self-hosted via `@fontsource` (Bricolage Grotesque display, Open Sans body) — real files served same-origin by your bundler, zero requests to Google Fonts. Requires a real bundler that resolves npm packages inside CSS `@import` (webpack, Vite, Next.js, Turbopack all do; a plain static file server won't).
+- Built and tested against **Next.js App Router** — organisms are plain Server Components by default; the four with real client-side interactivity (`Navbar`, `ContactSection`, `IndustryCard`, `PlatformFeatureShowcase`) are pre-marked `"use client"` in the shipped build, so they work correctly inside a Server Component tree without extra setup. See `AUDIT.md` §8 for the one known limitation (bundle-level, not per-component, directive granularity).
+- No runtime dependency on shadcn/ui or any Lovable tooling, despite the extraction history — see `AUDIT.md` §3.
+
+### Installing
+
+**Not published to npm or any registry** — deliberately, so only people with GitHub access to this repo can pull it in (see `CONTRIBUTING.md` "Releases"). Install it as a git dependency, pinned to a released tag:
+
+```bash
+npm install github:autopaylab/landing-design-system#v0.7.0
+```
+
+(`#main` tracks the latest commit instead of a pinned release — fine for local experiments, not recommended for a real app.) Then wire up Tailwind and the stylesheet once:
+
+```ts
+// tailwind.config.ts
+import base from "@autopaylab/landing-design-system/tailwind.config";
+
+export default {
+  ...base,
+  content: [...base.content, "./app/**/*.{ts,tsx}"],
+};
+```
+
+```css
+/* your global CSS */
+@import "@autopaylab/landing-design-system/styles.css";
+```
+
 ## Where things are
 
 - **Atoms** — the smallest primitives (`Button`, `Badge`, `Input`, `Logo`, …).
