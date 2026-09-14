@@ -4,8 +4,14 @@ import type { Preview } from "@storybook/react";
 import "./preview.css";
 
 const preview: Preview = {
+  tags: ["autodocs"],
   parameters: {
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
+    options: {
+      storySort: {
+        order: ["Introduction", "Atoms", "Molecules", "Organisms", "Templates"],
+      },
+    },
   },
   globalTypes: {
     theme: {

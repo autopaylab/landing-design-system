@@ -9,6 +9,8 @@ A standalone, Atomic Design component package extracted from [`autopaylab/landin
 
 Contributing? See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the extraction discipline this package holds itself to. Found a vulnerability? See [`SECURITY.md`](./SECURITY.md). Licensed under [MIT](./LICENSE).
 
+**Browse it live:** [chromatic.com/library?appId=6aa104b411b5b49179275bdc](https://www.chromatic.com/library?appId=6aa104b411b5b49179275bdc) — sidebar search + categories, and an "Introduction" homepage. Published automatically by CI on every push to `main` (`.github/workflows/ci.yml`'s `chromatic` job) — always current, no separate deploy step to maintain.
+
 ## Install
 
 ```bash

@@ -1,0 +1,64 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# @autopaylab/landing-design-system
+
+A component library extracted from `landing-page-kit`'s real, rendered markup — every atom, molecule, organism and template here is a documented, observed variant, not an invented one. See [`AUDIT.md`](https://github.com/autopaylab/landing-design-system/blob/main/AUDIT.md) for the full extraction rationale and every judgment call made.
+
+## Where things are
+
+- **Atoms** — the smallest primitives (`Button`, `Badge`, `Input`, `Logo`, …).
+- **Molecules** — small compositions of atoms (`FormField`, `IconCard`, `StepCard`, …).
+- **Organisms** — full page sections (`HeroVideoSplit`, `SecuritySection`, `ContactSection`, …). This is what you reach for when building a landing page.
+- **Templates** — a complete page composed entirely from this package's own organisms (`LandingPageTemplate`).
+
+Use the sidebar search (**⌘K** / **Ctrl K**) or browse by category on the left.
+
+## Quick usage
+
+```tsx
+import { Button, Badge } from "@autopaylab/landing-design-system/atoms";
+import { HeroVideoSplit, ContactSection } from "@autopaylab/landing-design-system/organisms";
+
+function Page() {
+  return (
+    <>
+      <HeroVideoSplit
+        title="One platform. Full control over global payments."
+        subtitle="Increase revenue, reduce costs and ensure seamless compliance."
+        ctaLabel="Contact us"
+        ctaHref="#contact"
+        videoSrc="/hero.webm"
+      />
+      <ContactSection heading="Talk to us" description="..." formHeading="Schedule a consultation" consentText="..." controllerText="..." />
+    </>
+  );
+}
+```
+
+Don't forget the stylesheet once, alongside Tailwind:
+
+```css
+@import "@autopaylab/landing-design-system/styles.css";
+```
+
+## Always include on a real landing page
+
+**`CookieConsentScript`** (Organisms) — Autopay's production cookie-consent banner, ported byte-for-byte from autopaylab.com. Place it as the very first child of `<body>`. It's the one deliberate exception in this package: not built or styled by us, not to be redesigned — see its own doc comment and [`AUDIT.md` §12](https://github.com/autopaylab/landing-design-system/blob/main/AUDIT.md).
+
+## Harmonization status vs. Autopay Design System 2.0
+
+| Layer | Status |
+|---|---|
+| Typography (families & sizes) | ✅ Aligned — see `DS2-HARMONIZATION.md` §1, §6 |
+| Brand accent colors | ✅ Aligned |
+| Neutral/semantic colors | ✅ Harmonized to real DS2 swatches |
+| Spacing | ➖ No DS2 source exists to compare against |
+
+Full detail: [`DS2-HARMONIZATION.md`](https://github.com/autopaylab/landing-design-system/blob/main/DS2-HARMONIZATION.md).
+
+## Also available
+
+- `npm run build:styleguide` — a single, standalone HTML export of every component on one page (no server needed) — see the README's "Component gallery" section.
+- This site rebuilds and redeploys automatically on every push to `main`.

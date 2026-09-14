@@ -5,3 +5,5 @@ storybook-static/
 docs/
 styleguide-dist/
 landing-design-system-styleguide.html
+
+.vercel
