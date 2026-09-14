@@ -19,5 +19,5 @@
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "vitest.setup.ts", "vitest.config.ts"]
+  "include": ["src", "styleguide", "vitest.setup.ts", "vitest.config.ts"]
 }

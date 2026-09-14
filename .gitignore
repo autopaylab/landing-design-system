@@ -3,3 +3,5 @@ node_modules/
 .DS_Store
 storybook-static/
 docs/
+styleguide-dist/
+landing-design-system-styleguide.html

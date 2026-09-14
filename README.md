@@ -121,6 +121,18 @@ npm run storybook   # dev server at localhost:6006 — visual catalog of every s
 
 All four (build/typecheck/lint/test) run in CI (`.github/workflows/ci.yml`) on every push/PR to `main`, along with a check that `dist/` is actually up to date with `src/` (a build whose `dist/` diff wasn't committed fails CI rather than shipping stale output).
 
+## Component gallery (single-file export)
+
+```bash
+npm run build:styleguide
+```
+
+Produces `landing-design-system-styleguide.html` — one standalone file with every component and every documented story variant on a single scrollable page, grouped and linked from a top nav. Open it directly (double-click, no server, no `node_modules` needed) — everything is inlined: the compiled Tailwind CSS, the self-hosted fonts (as base64), and a real React bundle, so most interactive components (`Accordion`, `Navbar`'s mobile menu, `PlatformFeatureShowcase`'s tabs) still work, not just a static screenshot. `CookieConsentScript`'s vendor script renders inertly here, same as in Storybook — see that component's own doc comment.
+
+Discovery mirrors `src/a11y.test.tsx` exactly (same story-glob pattern, same args/render resolution), so the gallery always reflects real, already-documented variants, never invented ones. Regenerate it any time the components change — it's gitignored, not committed, since it's a large (~1.4 MB), fully-reproducible build output, same as `storybook-static/`.
+
+Storybook (`npm run storybook`) remains the primary dev tool (controls, docs, a11y addon); this export exists for handing someone a single file to open without running anything.
+
 ## Testing
 
 `npm test` runs two things:

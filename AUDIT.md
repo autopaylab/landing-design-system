@@ -217,3 +217,15 @@ Also applied to `autopaylab-landing`'s own section components (`ApplicationForm`
 Fixed: `layout === "stacked"` → `text-h3`, `layout === "grid"` → `text-h4`. No props, structure, or non-heading styling touched.
 
 **Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (72 tests, axe a11y suite included, no violations), `npm run build`, `npx size-limit` (unaffected) all pass; visually confirmed both `IndustryCard` stories (`Grid`, `Stacked`) in Storybook — grid variant renders visibly smaller than stacked, correct hierarchy.
+
+## 15. Single-file component gallery export (2026-09-14)
+
+Requested: a single HTML file to open and see every component/section, no server. `npm run build:styleguide` (new: `styleguide/entry.tsx`, `styleguide/index.html`, `styleguide/vite.config.ts`, `scripts/inline-styleguide.mjs`) — a plain Vite build (reusing `.storybook/preview.css` for identical styling) that renders every story via the same discovery pattern as `src/a11y.test.tsx`, then a Node script inlines the built JS/CSS into one standalone `.html`.
+
+**Real problem hit and fixed, not glossed over:** `@tailwindcss/postcss` (Tailwind v4) flattens `@import` chains internally (via its own bundler) before Vite's asset pipeline ever sees `tokens.css`'s nested `@import "@fontsource/...";` — so the font `url()`s inside that chain never get rebased/inlined, left as broken `./files/...`-relative paths. (This doesn't affect real consuming apps — their own bundler, e.g. Next.js's, handles it correctly; it's specific to this ad hoc Vite setup.) Fixed by re-importing the same `@fontsource` CSS a second time directly in `entry.tsx`, outside that chain — Vite resolves and inlines those correctly as base64 — then stripping the dead duplicate `@font-face` rules from the tokens.css-chain copy in the inline script. `tokens.css` itself was not touched.
+
+Not a limitation for this deliverable, but disclosed: a few stories reference demo media (`videoSrc="/hero.webm"`, `image="/industries/..."`) that only resolve inside a real consuming app's `public/` folder — same as in Storybook, not a regression introduced here. `CookieConsentScript` renders as an inert `<script>` here too, exactly as documented (§12) — client-rendered, never executes, no network calls.
+
+Gitignored, not committed (matches `storybook-static/`'s existing precedent) — it's a large (~1.4 MB), fully reproducible build output, not source.
+
+**Verified, not assumed:** `npm run typecheck`/`lint` extended to cover `styleguide/` (real TSX, now actually type-checked and linted, not just transpiled); a clean rebuild from scratch reproduces byte-for-byte the same structure; opened the generated file in a real browser (via a local static server, since the browser tool's own file:// access is restricted) — confirmed zero console errors, zero external network requests, correct fonts (Bricolage Grotesque/Open Sans, not a fallback), real interactivity (clicked an `Accordion` story and it expanded), and correct computed styles on a spot-checked organism (`OverlappingCardsSection`'s card background/heading class, read via `getComputedStyle`/`elementsFromPoint`, not just eyeballed).
