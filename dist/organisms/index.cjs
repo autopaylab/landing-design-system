@@ -728,10 +728,7 @@ function IndustryCard({
     /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
       "h3",
       {
-        className: cn(
-          "font-display whitespace-pre-line",
-          layout === "stacked" ? "text-[32px] leading-[1.05] md:text-[40px]" : "text-[28px] leading-[1.05]"
-        ),
+        className: cn("font-display whitespace-pre-line", layout === "stacked" ? "text-h3" : "text-h4"),
         children: name
       }
     ),

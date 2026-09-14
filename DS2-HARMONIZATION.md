@@ -127,6 +127,8 @@ Unlike font *families* (§1), heading *sizes* had never been checked against DS2
 | `StatsSection` h2 | 44→56 | `text-h2` | Direct match |
 | `TrustedByLogos` h2 | 32→40 | `text-h3` | Mobile 32 is an exact H3-mobile match |
 | `IconCard` h3 (card title, molecule) | flat 24px | `text-h4` | Exact H4-mobile match; now grows to 32 on desktop (previously flat) |
+| `IndustryCard` h3, stacked variant (molecule) | 32→40 | `text-h3` | Missed in the original pass — the class lived inside a multi-line `cn()` call the original single-line grep didn't match. Fixed 2026-09-14 (see §10). |
+| `IndustryCard` h3, grid variant (molecule) | flat 28px | `text-h4` | Same miss as above. 28px is equidistant between H3-mobile (32) and H4-mobile (24); matched to H4 for consistency with every other flat-28px heading already mapped that way (`SingleIntegrationSection`'s subheading). |
 | `IconFeatureItem` heading (h3/h4, molecule) | flat 18px | `text-h6` | Exact H6-mobile match |
 | `StepCard` h3 (molecule) | flat 18px | `text-h6` | Exact H6-mobile match |
 
@@ -196,6 +198,10 @@ DS2's "Overlapping cards" example ("Vignettes": a salmon split-card with "Buy no
 - `OverlappingCardsSection` (organism, `src/organisms/OverlappingCardsSection`) — the sticky-stack container, reusing `IndustriesStackedSection`'s exact `top`/`zIndex`/`marginBottom` sticky mechanism over the generic card data shape.
 
 See `AUDIT.md` §11 for the full verification (typecheck/lint/71 tests incl. axe/build/size-limit, plus a visual sticky-overlap check in Storybook).
+
+## 10. Missed heading fixed: `IndustryCard` (2026-09-14)
+
+While building `OverlappingCardsSection` (§9), noticed `src/molecules/IndustryCard/IndustryCard.tsx` still carried ad hoc `text-[32px] ... md:text-[40px]` / flat `text-[28px]` literals — a real gap in the §6 migration, not a deliberate exclusion. It was missed because the class list lived inside a multi-line `cn()` call; the original migration's grep pattern only matched a single-line `<h1-6 ... font-display` attribute. Fixed: stacked variant → `text-h3` (32→48, growing on desktop like every other §6 mapping), grid variant → `text-h4` (matching the existing flat-28px precedent). See the updated §6 table.
 
 ## Summary
 

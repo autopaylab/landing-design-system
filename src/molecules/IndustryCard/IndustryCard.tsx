@@ -51,10 +51,7 @@ export function IndustryCard({
   const content = (
     <div className={cn(layout === "stacked" ? "flex flex-col justify-between p-10 md:p-12" : "p-8")}>
       <h3
-        className={cn(
-          "font-display whitespace-pre-line",
-          layout === "stacked" ? "text-[32px] leading-[1.05] md:text-[40px]" : "text-[28px] leading-[1.05]",
-        )}
+        className={cn("font-display whitespace-pre-line", layout === "stacked" ? "text-h3" : "text-h4")}
       >
         {name}
       </h3>

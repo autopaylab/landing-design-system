@@ -209,3 +209,11 @@ Root cause: 10 organisms (`ContactSection`, `DataLeverageSection`, `GlobalCovera
 **Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (72 tests, axe a11y suite included, no violations), `npm run build`, `npx size-limit` (unaffected, pure Tailwind class change, no bundle-size impact) all pass; visually confirmed in Storybook (`LandingPageTemplate` "Full Page" story, 375px viewport) that the gap between `TrustedByLogos` and `SingleIntegrationSection` is now visibly tighter and proportionate to the viewport.
 
 Also applied to `autopaylab-landing`'s own section components (`ApplicationForm`, `AudienceCards`, `CredibilityStrip`, `MissionSection`, `SiteFooter`, `UseCasesGrid`) — same `mt-32` pattern, same fix, own atomic commit in that repo, since that app doesn't yet consume these organisms directly and the maintainer's original complaint was observed on that live site specifically.
+
+## 14. Missed heading fixed: `IndustryCard` (2026-09-14)
+
+`src/molecules/IndustryCard/IndustryCard.tsx` was missed by the original typography-scale migration (§9/§12 in this doc's earlier numbering are unrelated — see `DS2-HARMONIZATION.md` §10 for the mapping detail). Its heading's ad hoc size classes lived inside a multi-line `cn()` call, which the migration's single-line grep pattern didn't match — a real gap, caught while building `OverlappingCardsSection`, flagged at the time as a separate follow-up rather than silently folded into that unrelated work.
+
+Fixed: `layout === "stacked"` → `text-h3`, `layout === "grid"` → `text-h4`. No props, structure, or non-heading styling touched.
+
+**Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (72 tests, axe a11y suite included, no violations), `npm run build`, `npx size-limit` (unaffected) all pass; visually confirmed both `IndustryCard` stories (`Grid`, `Stacked`) in Storybook — grid variant renders visibly smaller than stacked, correct hierarchy.
