@@ -1,7 +1,7 @@
 export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from '../Footer-8cnZzh6n.js';
 import * as React from 'react';
-import { c as IconFeatureItemProps, a as IconCardProps, g as StatBlockProps, d as OverlapCardCta, f as PricingTierProps } from '../OverlapCard-Cd1qh30h.js';
-import '../Button-raF3Dn30.js';
+import { c as IconFeatureItemProps, a as IconCardProps, g as StatBlockProps, d as OverlapCardCta, f as PricingTierProps } from '../OverlapCard-EL2fbRPF.js';
+import { b as SelectOption } from '../Select-CmdSVFIc.js';
 import 'class-variance-authority/types';
 import 'class-variance-authority';
 
@@ -397,4 +397,49 @@ interface AudienceScenariosSectionProps {
 }
 declare function AudienceScenariosSection({ eyebrow, heading, description, scenarios }: AudienceScenariosSectionProps): React.JSX.Element;
 
-export { type AudienceScenario, AudienceScenariosSection, type AudienceScenariosSectionProps, ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };
+type LeadFormField = {
+    kind: "text";
+    name: string;
+    label: string;
+    type?: string;
+    placeholder?: string;
+    required?: boolean;
+} | {
+    kind: "textarea";
+    name: string;
+    label: string;
+    placeholder?: string;
+    rows?: number;
+    required?: boolean;
+} | {
+    kind: "select";
+    name: string;
+    label: string;
+    placeholder?: string;
+    options: SelectOption[];
+    required?: boolean;
+};
+/**
+ * A composable lead-generation form — unlike `ContactSection` (a faithful,
+ * fixed-field extraction of one specific source form, see AUDIT.md #17/#21),
+ * this renders whatever `fields` you pass. Built because real autopay.pl
+ * forms vary a lot: /lp/platnosci-online-1 has name/email/phone/NIP/message,
+ * /lp/payfac-08 has name/email/company/phone plus 4 dropdowns — neither
+ * fits ContactSection's hardcoded 4 fields, and retrofitting that organism
+ * would blur the line between "faithful extraction" and "new capability".
+ * All fields render full-width, single-column — every real form audited
+ * uses that layout (not a first-name/last-name split row).
+ */
+interface LeadFormSectionProps {
+    heading: React.ReactNode;
+    description?: string;
+    formHeading: string;
+    fields: LeadFormField[];
+    consentText: React.ReactNode;
+    controllerText?: React.ReactNode;
+    submitLabel?: string;
+    onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+declare function LeadFormSection({ heading, description, formHeading, fields, consentText, controllerText, submitLabel, onSubmit, }: LeadFormSectionProps): React.JSX.Element;
+
+export { type AudienceScenario, AudienceScenariosSection, type AudienceScenariosSectionProps, ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type LeadFormField, LeadFormSection, type LeadFormSectionProps, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };

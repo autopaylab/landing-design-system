@@ -19,3 +19,4 @@ export * from "./PromoCtaSection";
 export * from "./CookieConsentScript";
 export * from "./PricingSection";
 export * from "./AudienceScenariosSection";
+export * from "./LeadFormSection";

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { a as ButtonProps } from './Button-raF3Dn30.cjs';
+import { a as ButtonProps } from './Select-CmdSVFIc.js';
 
 interface PricingTierProps {
     name: string;

@@ -7,12 +7,12 @@
   {
     "name": "molecules",
     "path": "dist/molecules/index.js",
-    "limit": "5 KB"
+    "limit": "7 KB"
   },
   {
     "name": "organisms",
     "path": "dist/organisms/index.js",
-    "limit": "15 KB"
+    "limit": "22 KB"
   },
   {
     "name": "templates",
@@ -27,6 +27,6 @@
   {
     "name": "everything (main entry)",
     "path": "dist/index.js",
-    "limit": "16 KB"
+    "limit": "23 KB"
   }
 ]

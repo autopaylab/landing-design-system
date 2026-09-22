@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-export { B as Button, a as ButtonProps, b as buttonVariants } from '../Button-raF3Dn30.cjs';
+export { B as Button, a as ButtonProps, S as Select, b as SelectOption, c as SelectProps, d as buttonVariants } from '../Select-CmdSVFIc.cjs';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import { VariantProps } from 'class-variance-authority';
-export { S as Select, a as SelectOption, b as SelectProps } from '../Select-Bfdbg8EH.cjs';
 
 /**
  * Vendored from src/components/ui/accordion.tsx — the only shadcn/ui

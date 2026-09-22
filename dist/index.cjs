@@ -60,6 +60,7 @@ __export(src_exports, {
   Input: () => Input,
   Label: () => Label,
   LandingPageTemplate: () => LandingPageTemplate,
+  LeadFormSection: () => LeadFormSection,
   Link: () => Link,
   Logo: () => Logo,
   Navbar: () => Navbar,
@@ -1331,17 +1332,83 @@ function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) 
   ] });
 }
 
-// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+// src/organisms/LeadFormSection/LeadFormSection.tsx
 var import_jsx_runtime47 = require("react/jsx-runtime");
+function LeadFormSection({
+  heading,
+  description,
+  formHeading,
+  fields,
+  consentText,
+  controllerText,
+  submitLabel = "Wy\u015Blij",
+  onSubmit
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h2", { className: "font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description }) : null
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h3", { className: "font-display text-h4", children: formHeading }),
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
+        fields.map((field) => {
+          if (field.kind === "textarea") {
+            return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+              TextareaField,
+              {
+                label: field.label,
+                name: field.name,
+                placeholder: field.placeholder,
+                rows: field.rows ?? 4,
+                required: field.required
+              },
+              field.name
+            );
+          }
+          if (field.kind === "select") {
+            return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+              SelectField,
+              {
+                label: field.label,
+                name: field.name,
+                placeholder: field.placeholder,
+                options: field.options,
+                required: field.required
+              },
+              field.name
+            );
+          }
+          return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+            FormField,
+            {
+              label: field.label,
+              name: field.name,
+              type: field.type,
+              placeholder: field.placeholder,
+              required: field.required
+            },
+            field.name
+          );
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ConsentCheckboxField, { name: "consent", consentText, controllerText, required: true }),
+        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
+      ] })
+    ] })
+  ] }) });
+}
+
+// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+var import_jsx_runtime48 = require("react/jsx-runtime");
 function LandingPageTemplate({ navbar, hero, sections, footer }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "flex min-h-screen flex-col", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Navbar, { ...navbar }),
-    /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("main", { className: "flex-1", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { id: "top" }),
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex min-h-screen flex-col", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(Navbar, { ...navbar }),
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("main", { className: "flex-1", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", { id: "top" }),
       hero,
       sections
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Footer, { ...footer })
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(Footer, { ...footer })
   ] });
 }
 
@@ -1446,6 +1513,7 @@ var headingScale = {
   Input,
   Label,
   LandingPageTemplate,
+  LeadFormSection,
   Link,
   Logo,
   Navbar,

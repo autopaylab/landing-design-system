@@ -295,3 +295,15 @@ Plain cards — title + description, deliberately **no** icon, image, or per-car
 No molecule extracted for the card itself — at two fields (title, description) with no shared logic, a separate molecule would be premature abstraction; the map lives directly in the organism, matching how `TrustedByLogos` doesn't extract a "LogoItem" molecule either.
 
 **Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (83 tests — 82 plus 1 new story fixture, axe suite included, no new violations), `npm run build`, `npx size-limit` (all packages still under budget) all pass; visually confirmed in Storybook that the 3-column grid and uppercase scenario titles render correctly.
+
+## 21. New: `LeadFormSection` organism — composable contact form (2026-09-22)
+
+Fourth fix from §17: `ContactSection` has exactly 4 hardcoded fields, faithfully extracted from one specific source form (see its own doc comment) — real autopay.pl forms don't match it. `/lp/platnosci-online-1` needs name/email/phone/**NIP**/**message**; `/lp/payfac-08` needs name/email/company/phone plus **four dropdowns**. Neither fits, and retrofitting `ContactSection` would blur "faithful extraction" with "new capability" — so this is a new, separate, deliberately generic organism, `ContactSection` is untouched.
+
+`LeadFormSection` takes a `fields: LeadFormField[]` array (`"text" | "textarea" | "select"`, each mapping straight to `FormField`/`TextareaField`/`SelectField`) instead of fixed props — same two-column heading+form-card layout as `ContactSection`, all fields full-width/single-column (every real form audited uses that, not a first/last-name split row).
+
+Two story fixtures reproduce the two real forms exactly (field-for-field, real Polish labels and option values, not invented): `ContactWithNipAndMessage` (platnosci-online-1's 5 fields) and `PayFacLeadForm` (payfac-08's 4 text fields + 4 selects + textarea, 9 fields total).
+
+Also bumped `.size-limit.json` (`molecules` 5→7KB, `organisms` 15→22KB, root 16→23KB) ahead of the remaining PayFac-specific organisms still to come (§22+), instead of repeatedly nudging it commit-by-commit — real, expected growth from closing a real coverage gap, not waste.
+
+**Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (85 tests — 83 plus 2 new story fixtures, axe suite included, no violations even on the 9-field PayFac form — every label correctly linked), `npm run build`, `npx size-limit` (green against the revised budgets) all pass; visually confirmed in Storybook that every field kind (text, select with chevron, textarea, consent checkbox) renders correctly on the `PayFacLeadForm` story.

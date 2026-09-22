@@ -1238,17 +1238,83 @@ function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) 
   ] });
 }
 
-// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+// src/organisms/LeadFormSection/LeadFormSection.tsx
 import { jsx as jsx47, jsxs as jsxs37 } from "react/jsx-runtime";
+function LeadFormSection({
+  heading,
+  description,
+  formHeading,
+  fields,
+  consentText,
+  controllerText,
+  submitLabel = "Wy\u015Blij",
+  onSubmit
+}) {
+  return /* @__PURE__ */ jsx47("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs37("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ jsxs37("div", { children: [
+      /* @__PURE__ */ jsx47("h2", { className: "font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ jsx47("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description }) : null
+    ] }),
+    /* @__PURE__ */ jsxs37("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
+      /* @__PURE__ */ jsx47("h3", { className: "font-display text-h4", children: formHeading }),
+      /* @__PURE__ */ jsxs37("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
+        fields.map((field) => {
+          if (field.kind === "textarea") {
+            return /* @__PURE__ */ jsx47(
+              TextareaField,
+              {
+                label: field.label,
+                name: field.name,
+                placeholder: field.placeholder,
+                rows: field.rows ?? 4,
+                required: field.required
+              },
+              field.name
+            );
+          }
+          if (field.kind === "select") {
+            return /* @__PURE__ */ jsx47(
+              SelectField,
+              {
+                label: field.label,
+                name: field.name,
+                placeholder: field.placeholder,
+                options: field.options,
+                required: field.required
+              },
+              field.name
+            );
+          }
+          return /* @__PURE__ */ jsx47(
+            FormField,
+            {
+              label: field.label,
+              name: field.name,
+              type: field.type,
+              placeholder: field.placeholder,
+              required: field.required
+            },
+            field.name
+          );
+        }),
+        /* @__PURE__ */ jsx47(ConsentCheckboxField, { name: "consent", consentText, controllerText, required: true }),
+        /* @__PURE__ */ jsx47(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
+      ] })
+    ] })
+  ] }) });
+}
+
+// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+import { jsx as jsx48, jsxs as jsxs38 } from "react/jsx-runtime";
 function LandingPageTemplate({ navbar, hero, sections, footer }) {
-  return /* @__PURE__ */ jsxs37("div", { className: "flex min-h-screen flex-col", children: [
-    /* @__PURE__ */ jsx47(Navbar, { ...navbar }),
-    /* @__PURE__ */ jsxs37("main", { className: "flex-1", children: [
-      /* @__PURE__ */ jsx47("div", { id: "top" }),
+  return /* @__PURE__ */ jsxs38("div", { className: "flex min-h-screen flex-col", children: [
+    /* @__PURE__ */ jsx48(Navbar, { ...navbar }),
+    /* @__PURE__ */ jsxs38("main", { className: "flex-1", children: [
+      /* @__PURE__ */ jsx48("div", { id: "top" }),
       hero,
       sections
     ] }),
-    /* @__PURE__ */ jsx47(Footer, { ...footer })
+    /* @__PURE__ */ jsx48(Footer, { ...footer })
   ] });
 }
 
@@ -1352,6 +1418,7 @@ export {
   Input,
   Label,
   LandingPageTemplate,
+  LeadFormSection,
   Link,
   Logo,
   Navbar,

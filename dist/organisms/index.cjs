@@ -43,6 +43,7 @@ __export(organisms_exports, {
   HeroVideoSplit: () => HeroVideoSplit,
   IndustriesGridSection: () => IndustriesGridSection,
   IndustriesStackedSection: () => IndustriesStackedSection,
+  LeadFormSection: () => LeadFormSection,
   Navbar: () => Navbar,
   OverlappingCardsSection: () => OverlappingCardsSection,
   PlatformFeatureShowcase: () => PlatformFeatureShowcase,
@@ -1210,6 +1211,147 @@ function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) 
     ] }, scenario.title)) })
   ] });
 }
+
+// src/molecules/TextareaField/TextareaField.tsx
+var React11 = __toESM(require("react"), 1);
+
+// src/atoms/Textarea/Textarea.tsx
+var React10 = __toESM(require("react"), 1);
+var import_jsx_runtime42 = require("react/jsx-runtime");
+var Textarea = React10.forwardRef(
+  ({ className, ...props }, ref) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+      "textarea",
+      {
+        ref,
+        className: cn(
+          "w-full resize-none rounded-xl bg-muted px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        ),
+        ...props
+      }
+    );
+  }
+);
+Textarea.displayName = "Textarea";
+
+// src/molecules/TextareaField/TextareaField.tsx
+var import_jsx_runtime43 = require("react/jsx-runtime");
+var TextareaField = React11.forwardRef(
+  ({ label, id, ...textareaProps }, ref) => /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)("label", { className: "block", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Label, { children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Textarea, { ref, id, className: "mt-2", ...textareaProps })
+  ] })
+);
+TextareaField.displayName = "TextareaField";
+
+// src/molecules/SelectField/SelectField.tsx
+var React13 = __toESM(require("react"), 1);
+
+// src/atoms/Select/Select.tsx
+var React12 = __toESM(require("react"), 1);
+var import_lucide_react4 = require("lucide-react");
+var import_jsx_runtime44 = require("react/jsx-runtime");
+var Select = React12.forwardRef(
+  ({ className, options, placeholder, children, defaultValue, ...props }, ref) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)("div", { className: "relative", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
+        "select",
+        {
+          ref,
+          defaultValue: defaultValue ?? (placeholder ? "" : void 0),
+          className: cn(
+            "w-full appearance-none rounded-xl bg-muted px-4 py-3 pr-10 text-sm outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          ),
+          ...props,
+          children: [
+            placeholder ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("option", { value: "", disabled: true, children: placeholder }) : null,
+            options ? options.map((option) => /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("option", { value: option.value, children: option.label }, option.value)) : children
+          ]
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react4.ChevronDown, { className: "pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" })
+    ] });
+  }
+);
+Select.displayName = "Select";
+
+// src/molecules/SelectField/SelectField.tsx
+var import_jsx_runtime45 = require("react/jsx-runtime");
+var SelectField = React13.forwardRef(
+  ({ label, id, ...selectProps }, ref) => /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)("label", { className: "block", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Label, { children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Select, { ref, id, className: "mt-2", ...selectProps })
+  ] })
+);
+SelectField.displayName = "SelectField";
+
+// src/organisms/LeadFormSection/LeadFormSection.tsx
+var import_jsx_runtime46 = require("react/jsx-runtime");
+function LeadFormSection({
+  heading,
+  description,
+  formHeading,
+  fields,
+  consentText,
+  controllerText,
+  submitLabel = "Wy\u015Blij",
+  onSubmit
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h2", { className: "font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description }) : null
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h3", { className: "font-display text-h4", children: formHeading }),
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
+        fields.map((field) => {
+          if (field.kind === "textarea") {
+            return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
+              TextareaField,
+              {
+                label: field.label,
+                name: field.name,
+                placeholder: field.placeholder,
+                rows: field.rows ?? 4,
+                required: field.required
+              },
+              field.name
+            );
+          }
+          if (field.kind === "select") {
+            return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
+              SelectField,
+              {
+                label: field.label,
+                name: field.name,
+                placeholder: field.placeholder,
+                options: field.options,
+                required: field.required
+              },
+              field.name
+            );
+          }
+          return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
+            FormField,
+            {
+              label: field.label,
+              name: field.name,
+              type: field.type,
+              placeholder: field.placeholder,
+              required: field.required
+            },
+            field.name
+          );
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(ConsentCheckboxField, { name: "consent", consentText, controllerText, required: true }),
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
+      ] })
+    ] })
+  ] }) });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AudienceScenariosSection,
@@ -1224,6 +1366,7 @@ function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) 
   HeroVideoSplit,
   IndustriesGridSection,
   IndustriesStackedSection,
+  LeadFormSection,
   Navbar,
   OverlappingCardsSection,
   PlatformFeatureShowcase,
