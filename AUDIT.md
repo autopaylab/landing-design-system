@@ -239,3 +239,38 @@ Requested: sidebar navigation with search and categories, a homepage, and an aut
 **A real mistake caught before it shipped, not silently left in:** built and deployed a brand-new Vercel project (`landing-design-system-docs`) for this, including `vercel link` (which auto-connected the GitHub repo for deploy-on-push) and a live deploy — before noticing this repo already had a working, auto-publishing hosted Storybook via **Chromatic** (`.github/workflows/ci.yml`'s `chromatic` job, gated behind `CHROMATIC_PROJECT_TOKEN` — confirmed actually live by reading that job's own CI logs, not assumed from the README badge alone: `https://www.chromatic.com/library?appId=6aa104b411b5b49179275bdc`, already publishing a new build on every push to `main`). Flagged to the maintainer immediately; per their decision, the Vercel project was deleted (`vercel project remove`) and never committed (`vercel.json`, `.vercel/`) — Chromatic's existing Library view is the one, real answer to "an auto-updating hosted site with search and categories." The `styleguide-deploy` Vercel project from the earlier single-file-gallery request is unrelated and was left untouched.
 
 **Verified, not assumed:** confirmed the addon-docs/Introduction setup working in two independent real builds — the local dev server (Docs tab renders, autodocs props table populated, Introduction loads by default with sidebar search filtering correctly) and a real production static build served live (the since-deleted Vercel deploy, before removal — same `storybook-static` output Chromatic's own CI job builds). Chromatic's currently-published Library predates this commit (its last build was from the prior push), so it will pick up the Introduction page and autodocs on its next CI run after this merges — not separately re-verified there, since it's the identical build artifact already confirmed working. `npm run typecheck`/`lint`/`test`/`build`/`size-limit` all still pass — this is Storybook-only tooling, `dist/` is untouched.
+
+## 17. Coverage audit against real, live autopay.pl landing pages (2026-09-22)
+
+Requested: check whether this package can reproduce 4 real, currently-live marketing pages 1:1 — `autopay.pl/lp/platnosci-online-1/2/3` (three A/B variants of the same e-commerce-merchant template) and `autopay.pl/lp/payfac-08` (a materially different, B2B/enterprise Payment Facilitator page). Read each page directly (text extraction + targeted screenshots at real breakpoints), not guessed from memory.
+
+**Already fully covered:** cookie banner (`CookieConsentScript` — the exact same ConsentManager script), numbered steps with side image (`FourStepsSection`, genuinely step-count-flexible despite the name), stats callouts, partner/plugin logo strips (`TrustedByLogos`), icon+title+description grids (`IconCard`/`IconFeatureItem`).
+
+**Real gaps found, used on all 4 pages (highest priority — fixed first, see §18+):**
+1. **Pricing table** — 3-tier cards, one highlighted with a "NAJPOPULARNIEJSZY" ribbon, checkmark feature list, per-tier CTA. No equivalent existed. This was already flagged as a gap from the original `landing-page-kit` source (§5 item 9 in this doc) — now confirmed as an actively-used, high-value pattern on real production pages, not just a hypothetical.
+2. **Flexible contact form** — `ContactSection` has exactly 4 hardcoded fields (first/last name, phone, email). Real pages need a NIP field, a free-text message/notes field (no `Textarea` atom existed at all), and (on the PayFac page specifically) four dropdown fields (no `Select` atom existed at all).
+
+**Partial coverage:**
+3. Persona/scenario picker cards ("Dla kogo jest Autopay" — 3 plain cards, no icon, title+description) — no exact organism match; closest is `IndustriesGridSection`, which assumes an image + single CTA per card that this pattern doesn't have.
+4. Partial text-highlight inside a heading (a lime background behind part of the PayFac hero's heading) — no current way to mark up part of a heading differently; a styling gap, not a missing component.
+
+**PayFac-specific patterns (used once, on one page — lower reuse priority unless more enterprise/B2B pages are planned):**
+5. Two-parallel-timeline comparison ("Dwie drogi do startu" — two step sequences with duration badges, compared side by side).
+6. Three-way positioning/spectrum chart with a "Jesteś tutaj" (you-are-here) highlight (ISO / PayFac / Acquirer).
+7. Numbered requirement rows with a trailing checkmark on a dark background (distinct from `BulletItem`'s plain light-background bullet).
+8. An additive cost-breakdown "formula" (Interchange + card-scheme fees + Autopay margin, shown as three boxes joined by "+").
+9. A dark, self-contained stats card with a trailing row of badge pills (Visa/Mastercard/Principal Member) — a styling variant of `StatsSection`'s pattern, not a structural gap.
+
+Full findings (with screenshots) were given directly in chat before this doc entry; this section is the durable record. See §18 onward for what's actually been built to close these gaps, in the order tackled.
+
+## 18. Form primitives: `Textarea`, `Select` (atoms) + `TextareaField`, `SelectField` (molecules) (2026-09-22)
+
+First fix from §17 — the two missing form field types, needed before the pricing table or the contact-form flexibility work (§19+) can use them.
+
+- **`Textarea`** — not built from scratch: `autopaylab-landing` already had one (`src/components/atoms/Textarea/Textarea.tsx`), built there specifically because this package had none, with its own comment flagging it as "a candidate to contribute back once a second consumer needs it." §17's audit is that second consumer (real "Wiadomość"/"Dodatkowe informacje" fields on live pages) — ported verbatim, matching `Input`'s exact filled/`rounded-xl` styling.
+- **`Select`** — no prior art existed anywhere (autopaylab-landing has no dropdowns), built fresh: a real native `<select>` (not a custom listbox) styled to match `Input`, with a trailing `ChevronDown` (the same icon already used in `Navbar`/`Accordion`, not a new choice) and an `options`/`placeholder` convenience API for the common case, falling back to raw `children` for `<optgroup>` or anything else `options` can't express.
+- **`TextareaField`/`SelectField`** — Label + atom, mirroring `FormField`'s exact shape. `TextareaField` was likewise already built in `autopaylab-landing` and ported verbatim.
+
+**A real, expected finding, not a bug:** the bare `Select` story failed the axe a11y suite (`select-name`: no accessible name) — exactly the same, already-documented situation as the bare `Checkbox` atom (§6's `KNOWN_LIMITATIONS`): standalone it's genuinely unlabeled by design, correctly labeled only inside `SelectField`. Added as a new, same-shaped entry in `src/a11y.test.tsx`'s `KNOWN_LIMITATIONS`, not silently worked around.
+
+**Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (78 tests — 72 plus 6 new story fixtures, axe suite included, only the expected/documented bare-`Select` exception), `npm run build`, `npx size-limit` (all packages still under budget) all pass; visually confirmed `SelectField` renders correctly (label, placeholder, chevron) in a real browser via Storybook.

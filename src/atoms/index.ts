@@ -2,6 +2,8 @@ export * from "./Accordion";
 export * from "./Button";
 export * from "./Badge";
 export * from "./Input";
+export * from "./Textarea";
+export * from "./Select";
 export * from "./Label";
 export * from "./Checkbox";
 export * from "./Link";

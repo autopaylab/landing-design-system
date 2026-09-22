@@ -134,25 +134,74 @@ var Input = React3.forwardRef(
 );
 Input.displayName = "Input";
 
-// src/atoms/Label/Label.tsx
+// src/atoms/Textarea/Textarea.tsx
+import * as React4 from "react";
 import { jsx as jsx5 } from "react/jsx-runtime";
+var Textarea = React4.forwardRef(
+  ({ className, ...props }, ref) => {
+    return /* @__PURE__ */ jsx5(
+      "textarea",
+      {
+        ref,
+        className: cn(
+          "w-full resize-none rounded-xl bg-muted px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        ),
+        ...props
+      }
+    );
+  }
+);
+Textarea.displayName = "Textarea";
+
+// src/atoms/Select/Select.tsx
+import * as React5 from "react";
+import { ChevronDown as ChevronDown2 } from "lucide-react";
+import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
+var Select = React5.forwardRef(
+  ({ className, options, placeholder, children, defaultValue, ...props }, ref) => {
+    return /* @__PURE__ */ jsxs2("div", { className: "relative", children: [
+      /* @__PURE__ */ jsxs2(
+        "select",
+        {
+          ref,
+          defaultValue: defaultValue ?? (placeholder ? "" : void 0),
+          className: cn(
+            "w-full appearance-none rounded-xl bg-muted px-4 py-3 pr-10 text-sm outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          ),
+          ...props,
+          children: [
+            placeholder ? /* @__PURE__ */ jsx6("option", { value: "", disabled: true, children: placeholder }) : null,
+            options ? options.map((option) => /* @__PURE__ */ jsx6("option", { value: option.value, children: option.label }, option.value)) : children
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsx6(ChevronDown2, { className: "pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" })
+    ] });
+  }
+);
+Select.displayName = "Select";
+
+// src/atoms/Label/Label.tsx
+import { jsx as jsx7 } from "react/jsx-runtime";
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ jsx5("span", { className: cn("text-xs text-muted-foreground", className), ...props });
+  return /* @__PURE__ */ jsx7("span", { className: cn("text-xs text-muted-foreground", className), ...props });
 }
 
 // src/atoms/Checkbox/Checkbox.tsx
-import * as React4 from "react";
-import { jsx as jsx6 } from "react/jsx-runtime";
-var Checkbox = React4.forwardRef(
-  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ jsx6("input", { type, className: cn("mt-1", className), ref, ...props })
+import * as React6 from "react";
+import { jsx as jsx8 } from "react/jsx-runtime";
+var Checkbox = React6.forwardRef(
+  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ jsx8("input", { type, className: cn("mt-1", className), ref, ...props })
 );
 Checkbox.displayName = "Checkbox";
 
 // src/atoms/Link/Link.tsx
-import * as React5 from "react";
+import * as React7 from "react";
 import { Slot as Slot2 } from "@radix-ui/react-slot";
 import { cva as cva3 } from "class-variance-authority";
-import { jsx as jsx7 } from "react/jsx-runtime";
+import { jsx as jsx9 } from "react/jsx-runtime";
 var linkVariants = cva3("transition-colors", {
   variants: {
     variant: {
@@ -165,17 +214,17 @@ var linkVariants = cva3("transition-colors", {
     variant: "plain"
   }
 });
-var Link = React5.forwardRef(
+var Link = React7.forwardRef(
   ({ className, variant, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot2 : "a";
-    return /* @__PURE__ */ jsx7(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+    return /* @__PURE__ */ jsx9(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
   }
 );
 Link.displayName = "Link";
 
 // src/atoms/Logo/Logo.tsx
 import { cva as cva4 } from "class-variance-authority";
-import { jsx as jsx8 } from "react/jsx-runtime";
+import { jsx as jsx10 } from "react/jsx-runtime";
 var logoVariants = cva4("w-auto", {
   variants: {
     size: {
@@ -189,13 +238,13 @@ var logoVariants = cva4("w-auto", {
   }
 });
 function Logo({ className, size, src, alt, ...props }) {
-  return /* @__PURE__ */ jsx8("img", { src, alt, className: cn(logoVariants({ size }), className), ...props });
+  return /* @__PURE__ */ jsx10("img", { src, alt, className: cn(logoVariants({ size }), className), ...props });
 }
 
 // src/atoms/StepNumber/StepNumber.tsx
-import { jsx as jsx9 } from "react/jsx-runtime";
+import { jsx as jsx11 } from "react/jsx-runtime";
 function StepNumber({ className, value, ...props }) {
-  return /* @__PURE__ */ jsx9(
+  return /* @__PURE__ */ jsx11(
     "span",
     {
       className: cn(
@@ -219,7 +268,9 @@ export {
   Label,
   Link,
   Logo,
+  Select,
   StepNumber,
+  Textarea,
   badgeVariants,
   buttonVariants,
   linkVariants

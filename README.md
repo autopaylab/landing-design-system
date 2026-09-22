@@ -84,8 +84,8 @@ See `src/templates/LandingPageTemplate/LandingPageTemplate.stories.tsx` for a co
 
 | Layer | Count | Location |
 |---|---|---|
-| Atoms | 9 (incl. vendored `Accordion`) | `src/atoms/` |
-| Molecules | 12 | `src/molecules/` |
+| Atoms | 11 (incl. vendored `Accordion`) | `src/atoms/` |
+| Molecules | 14 | `src/molecules/` |
 | Organisms | 19 | `src/organisms/` |
 | Templates | 1 | `src/templates/` |
 

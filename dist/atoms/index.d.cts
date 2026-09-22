@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import { VariantProps } from 'class-variance-authority';
+export { S as Select, a as SelectOption, b as SelectProps } from '../Select-Bfdbg8EH.cjs';
 
 /**
  * Vendored from src/components/ui/accordion.tsx — the only shadcn/ui
@@ -51,6 +52,16 @@ declare function Badge({ className, variant, ...props }: BadgeProps): React.JSX.
  * primitive. See AUDIT.md, "Input — 2 competing visual systems".
  */
 declare const Input: React.ForwardRefExoticComponent<Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref"> & React.RefAttributes<HTMLInputElement>>;
+
+/**
+ * Contributed back from autopaylab-landing, where it was built (matching
+ * this package's Input atom styling exactly) because no multi-line field
+ * existed here. Confirmed a second real consumer needs it: several of
+ * autopay.pl's live contact forms (e.g. /lp/platnosci-online-1, /lp/payfac-08)
+ * have a "Wiadomość"/"Dodatkowe informacje" field with no equivalent in this
+ * package. See AUDIT.md for the audit that found this gap.
+ */
+declare const Textarea: React.ForwardRefExoticComponent<Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, "ref"> & React.RefAttributes<HTMLTextAreaElement>>;
 
 /**
  * Matches the plain <span> used above every contact-form field
@@ -104,4 +115,4 @@ interface StepNumberProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 declare function StepNumber({ className, value, ...props }: StepNumberProps): React.JSX.Element;
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, type BadgeProps, Button, type ButtonProps, Checkbox, Input, Label, Link, type LinkProps, Logo, type LogoProps, StepNumber, type StepNumberProps, badgeVariants, buttonVariants, linkVariants };
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, type BadgeProps, Button, type ButtonProps, Checkbox, Input, Label, Link, type LinkProps, Logo, type LogoProps, StepNumber, type StepNumberProps, Textarea, badgeVariants, buttonVariants, linkVariants };

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { b as SelectProps } from '../Select-Bfdbg8EH.js';
 export { I as IconCard, a as IconCardProps, b as IconFeatureItem, c as IconFeatureItemProps, O as OverlapCard, d as OverlapCardCta, e as OverlapCardProps, S as StatBlock, f as StatBlockProps } from '../OverlapCard-DnLktg2T.js';
 
 /** Label + Input, matching the contact-form fields in HomeContent.tsx. */
@@ -6,6 +7,18 @@ interface FormFieldProps extends React.ComponentProps<"input"> {
     label: string;
 }
 declare const FormField: React.ForwardRefExoticComponent<Omit<FormFieldProps, "ref"> & React.RefAttributes<HTMLInputElement>>;
+
+/** Label + Textarea, mirroring FormField (Label + Input). Contributed back from autopaylab-landing. */
+interface TextareaFieldProps extends React.ComponentProps<"textarea"> {
+    label: string;
+}
+declare const TextareaField: React.ForwardRefExoticComponent<Omit<TextareaFieldProps, "ref"> & React.RefAttributes<HTMLTextAreaElement>>;
+
+/** Label + Select, mirroring FormField (Label + Input). */
+interface SelectFieldProps extends SelectProps {
+    label: string;
+}
+declare const SelectField: React.ForwardRefExoticComponent<Omit<SelectFieldProps, "ref"> & React.RefAttributes<HTMLSelectElement>>;
 
 /** Checkbox + legal copy + "More" link, from the contact-form consent row in HomeContent.tsx. */
 interface ConsentCheckboxFieldProps extends Omit<React.ComponentProps<"input">, "type" | "children"> {
@@ -70,4 +83,4 @@ interface PartnerCountBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare function PartnerCountBadge({ className, count, label, ...props }: PartnerCountBadgeProps): React.JSX.Element;
 
-export { BulletItem, ConsentCheckboxField, type ConsentCheckboxFieldProps, FaqItem, type FaqItemProps, FormField, type FormFieldProps, IndustryCard, type IndustryCardProps, PartnerCountBadge, type PartnerCountBadgeProps, StepCard, type StepCardProps };
+export { BulletItem, ConsentCheckboxField, type ConsentCheckboxFieldProps, FaqItem, type FaqItemProps, FormField, type FormFieldProps, IndustryCard, type IndustryCardProps, PartnerCountBadge, type PartnerCountBadgeProps, SelectField, type SelectFieldProps, StepCard, type StepCardProps, TextareaField, type TextareaFieldProps };

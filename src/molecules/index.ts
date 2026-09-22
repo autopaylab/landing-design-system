@@ -1,4 +1,6 @@
 export * from "./FormField";
+export * from "./TextareaField";
+export * from "./SelectField";
 export * from "./ConsentCheckboxField";
 export * from "./StatBlock";
 export * from "./IconFeatureItem";

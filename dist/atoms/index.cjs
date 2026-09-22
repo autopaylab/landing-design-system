@@ -41,7 +41,9 @@ __export(atoms_exports, {
   Label: () => Label,
   Link: () => Link,
   Logo: () => Logo,
+  Select: () => Select,
   StepNumber: () => StepNumber,
+  Textarea: () => Textarea,
   badgeVariants: () => badgeVariants,
   buttonVariants: () => buttonVariants,
   linkVariants: () => linkVariants
@@ -184,25 +186,74 @@ var Input = React3.forwardRef(
 );
 Input.displayName = "Input";
 
-// src/atoms/Label/Label.tsx
+// src/atoms/Textarea/Textarea.tsx
+var React4 = __toESM(require("react"), 1);
 var import_jsx_runtime5 = require("react/jsx-runtime");
+var Textarea = React4.forwardRef(
+  ({ className, ...props }, ref) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+      "textarea",
+      {
+        ref,
+        className: cn(
+          "w-full resize-none rounded-xl bg-muted px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        ),
+        ...props
+      }
+    );
+  }
+);
+Textarea.displayName = "Textarea";
+
+// src/atoms/Select/Select.tsx
+var React5 = __toESM(require("react"), 1);
+var import_lucide_react2 = require("lucide-react");
+var import_jsx_runtime6 = require("react/jsx-runtime");
+var Select = React5.forwardRef(
+  ({ className, options, placeholder, children, defaultValue, ...props }, ref) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "relative", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+        "select",
+        {
+          ref,
+          defaultValue: defaultValue ?? (placeholder ? "" : void 0),
+          className: cn(
+            "w-full appearance-none rounded-xl bg-muted px-4 py-3 pr-10 text-sm outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          ),
+          ...props,
+          children: [
+            placeholder ? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("option", { value: "", disabled: true, children: placeholder }) : null,
+            options ? options.map((option) => /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("option", { value: option.value, children: option.label }, option.value)) : children
+          ]
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_lucide_react2.ChevronDown, { className: "pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" })
+    ] });
+  }
+);
+Select.displayName = "Select";
+
+// src/atoms/Label/Label.tsx
+var import_jsx_runtime7 = require("react/jsx-runtime");
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: cn("text-xs text-muted-foreground", className), ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: cn("text-xs text-muted-foreground", className), ...props });
 }
 
 // src/atoms/Checkbox/Checkbox.tsx
-var React4 = __toESM(require("react"), 1);
-var import_jsx_runtime6 = require("react/jsx-runtime");
-var Checkbox = React4.forwardRef(
-  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("input", { type, className: cn("mt-1", className), ref, ...props })
+var React6 = __toESM(require("react"), 1);
+var import_jsx_runtime8 = require("react/jsx-runtime");
+var Checkbox = React6.forwardRef(
+  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("input", { type, className: cn("mt-1", className), ref, ...props })
 );
 Checkbox.displayName = "Checkbox";
 
 // src/atoms/Link/Link.tsx
-var React5 = __toESM(require("react"), 1);
+var React7 = __toESM(require("react"), 1);
 var import_react_slot2 = require("@radix-ui/react-slot");
 var import_class_variance_authority3 = require("class-variance-authority");
-var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors", {
   variants: {
     variant: {
@@ -215,17 +266,17 @@ var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors"
     variant: "plain"
   }
 });
-var Link = React5.forwardRef(
+var Link = React7.forwardRef(
   ({ className, variant, asChild = false, ...props }, ref) => {
     const Comp = asChild ? import_react_slot2.Slot : "a";
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
   }
 );
 Link.displayName = "Link";
 
 // src/atoms/Logo/Logo.tsx
 var import_class_variance_authority4 = require("class-variance-authority");
-var import_jsx_runtime8 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 var logoVariants = (0, import_class_variance_authority4.cva)("w-auto", {
   variants: {
     size: {
@@ -239,13 +290,13 @@ var logoVariants = (0, import_class_variance_authority4.cva)("w-auto", {
   }
 });
 function Logo({ className, size, src, alt, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("img", { src, alt, className: cn(logoVariants({ size }), className), ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("img", { src, alt, className: cn(logoVariants({ size }), className), ...props });
 }
 
 // src/atoms/StepNumber/StepNumber.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function StepNumber({ className, value, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     "span",
     {
       className: cn(
@@ -270,7 +321,9 @@ function StepNumber({ className, value, ...props }) {
   Label,
   Link,
   Logo,
+  Select,
   StepNumber,
+  Textarea,
   badgeVariants,
   buttonVariants,
   linkVariants

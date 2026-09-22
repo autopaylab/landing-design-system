@@ -31,6 +31,10 @@ const KNOWN_LIMITATIONS: Record<string, string> = {
     "The source page used a bare, unstyled native checkbox with no label of its own (AUDIT.md, Atoms classification note on Checkbox) -- it only ever appears correctly labeled when composed inside ConsentCheckboxField. Standalone, it's genuinely unlabeled by design; inventing a label here would misrepresent the source.",
   "Atoms/Checkbox / Checked":
     "Same as Atoms/Checkbox / Default -- the bare atom has no label in isolation.",
+  "Atoms/Select / Default":
+    "Same situation as Atoms/Checkbox: a bare, unlabeled native <select>, correctly labeled only when composed inside SelectField (see Molecules/SelectField). Standalone, it's genuinely unlabeled by design.",
+  "Atoms/Select / Disabled":
+    "Same as Atoms/Select / Default -- the bare atom has no label in isolation.",
 };
 
 interface StoryCase {
