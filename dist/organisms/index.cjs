@@ -31,6 +31,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/organisms/index.ts
 var organisms_exports = {};
 __export(organisms_exports, {
+  AudienceScenariosSection: () => AudienceScenariosSection,
   ContactSection: () => ContactSection,
   CookieConsentScript: () => CookieConsentScript,
   DataLeverageSection: () => DataLeverageSection,
@@ -1193,8 +1194,25 @@ function PricingSection({ eyebrow, heading, tiers, footnotes }) {
     ] }, footnote.label)) }) : null
   ] });
 }
+
+// src/organisms/AudienceScenariosSection/AudienceScenariosSection.tsx
+var import_jsx_runtime41 = require("react/jsx-runtime");
+function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "text-center", children: [
+      eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("h2", { className: "mt-4 font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description }) : null
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: scenarios.map((scenario) => /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "rounded-3xl border border-border bg-card p-8 shadow-sm", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("h3", { className: "font-display text-sm font-semibold uppercase tracking-[0.08em] text-primary", children: scenario.title }),
+      /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: scenario.description })
+    ] }, scenario.title)) })
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  AudienceScenariosSection,
   ContactSection,
   CookieConsentScript,
   DataLeverageSection,

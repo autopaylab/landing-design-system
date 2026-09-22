@@ -35,6 +35,7 @@ __export(src_exports, {
   AccordionContent: () => AccordionContent,
   AccordionItem: () => AccordionItem,
   AccordionTrigger: () => AccordionTrigger,
+  AudienceScenariosSection: () => AudienceScenariosSection,
   Badge: () => Badge,
   BulletItem: () => BulletItem,
   Button: () => Button,
@@ -1314,17 +1315,33 @@ function PricingSection({ eyebrow, heading, tiers, footnotes }) {
   ] });
 }
 
-// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+// src/organisms/AudienceScenariosSection/AudienceScenariosSection.tsx
 var import_jsx_runtime46 = require("react/jsx-runtime");
+function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "text-center", children: [
+      eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h2", { className: "mt-4 font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description }) : null
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: scenarios.map((scenario) => /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "rounded-3xl border border-border bg-card p-8 shadow-sm", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h3", { className: "font-display text-sm font-semibold uppercase tracking-[0.08em] text-primary", children: scenario.title }),
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: scenario.description })
+    ] }, scenario.title)) })
+  ] });
+}
+
+// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+var import_jsx_runtime47 = require("react/jsx-runtime");
 function LandingPageTemplate({ navbar, hero, sections, footer }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "flex min-h-screen flex-col", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Navbar, { ...navbar }),
-    /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("main", { className: "flex-1", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { id: "top" }),
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "flex min-h-screen flex-col", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Navbar, { ...navbar }),
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("main", { className: "flex-1", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { id: "top" }),
       hero,
       sections
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Footer, { ...footer })
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Footer, { ...footer })
   ] });
 }
 
@@ -1404,6 +1421,7 @@ var headingScale = {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  AudienceScenariosSection,
   Badge,
   BulletItem,
   Button,

@@ -18,3 +18,4 @@ export * from "./FaqAccordionSection";
 export * from "./PromoCtaSection";
 export * from "./CookieConsentScript";
 export * from "./PricingSection";
+export * from "./AudienceScenariosSection";

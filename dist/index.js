@@ -1222,17 +1222,33 @@ function PricingSection({ eyebrow, heading, tiers, footnotes }) {
   ] });
 }
 
-// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+// src/organisms/AudienceScenariosSection/AudienceScenariosSection.tsx
 import { jsx as jsx46, jsxs as jsxs36 } from "react/jsx-runtime";
+function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) {
+  return /* @__PURE__ */ jsxs36("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ jsxs36("div", { className: "text-center", children: [
+      eyebrow ? /* @__PURE__ */ jsx46("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      /* @__PURE__ */ jsx46("h2", { className: "mt-4 font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ jsx46("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description }) : null
+    ] }),
+    /* @__PURE__ */ jsx46("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: scenarios.map((scenario) => /* @__PURE__ */ jsxs36("div", { className: "rounded-3xl border border-border bg-card p-8 shadow-sm", children: [
+      /* @__PURE__ */ jsx46("h3", { className: "font-display text-sm font-semibold uppercase tracking-[0.08em] text-primary", children: scenario.title }),
+      /* @__PURE__ */ jsx46("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: scenario.description })
+    ] }, scenario.title)) })
+  ] });
+}
+
+// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+import { jsx as jsx47, jsxs as jsxs37 } from "react/jsx-runtime";
 function LandingPageTemplate({ navbar, hero, sections, footer }) {
-  return /* @__PURE__ */ jsxs36("div", { className: "flex min-h-screen flex-col", children: [
-    /* @__PURE__ */ jsx46(Navbar, { ...navbar }),
-    /* @__PURE__ */ jsxs36("main", { className: "flex-1", children: [
-      /* @__PURE__ */ jsx46("div", { id: "top" }),
+  return /* @__PURE__ */ jsxs37("div", { className: "flex min-h-screen flex-col", children: [
+    /* @__PURE__ */ jsx47(Navbar, { ...navbar }),
+    /* @__PURE__ */ jsxs37("main", { className: "flex-1", children: [
+      /* @__PURE__ */ jsx47("div", { id: "top" }),
       hero,
       sections
     ] }),
-    /* @__PURE__ */ jsx46(Footer, { ...footer })
+    /* @__PURE__ */ jsx47(Footer, { ...footer })
   ] });
 }
 
@@ -1311,6 +1327,7 @@ export {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  AudienceScenariosSection,
   Badge,
   BulletItem,
   Button,

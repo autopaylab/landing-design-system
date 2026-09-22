@@ -377,4 +377,24 @@ interface PricingSectionProps {
 }
 declare function PricingSection({ eyebrow, heading, tiers, footnotes }: PricingSectionProps): React.JSX.Element;
 
-export { ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };
+interface AudienceScenario {
+    title: string;
+    description: string;
+}
+/**
+ * A "which scenario fits you" segment picker — plain cards, no icon/image/
+ * CTA per card (unlike IndustriesGridSection, which assumes all three). New
+ * pattern, not an extraction — see AUDIT.md #17/#20: autopay.pl's
+ * /lp/platnosci-online-1 ("Dla kogo jest Autopay" — masz już sklep /
+ * startujesz z nowym sklepem / skalujesz biznes) has this exact shape with
+ * no prior equivalent in this package.
+ */
+interface AudienceScenariosSectionProps {
+    eyebrow?: string;
+    heading: React.ReactNode;
+    description?: string;
+    scenarios: AudienceScenario[];
+}
+declare function AudienceScenariosSection({ eyebrow, heading, description, scenarios }: AudienceScenariosSectionProps): React.JSX.Element;
+
+export { type AudienceScenario, AudienceScenariosSection, type AudienceScenariosSectionProps, ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };

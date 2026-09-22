@@ -285,3 +285,13 @@ Second fix from §17 — the highest-priority gap, since a tiered pricing table 
 Both are new patterns, not extractions — there was nothing to extract, since this is a genuine gap. No copy was invented: the story fixtures use the real tier names, prices, and feature text read directly from `autopay.pl/lp/platnosci-online-1`.
 
 **Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (82 tests — 78 plus 4 new story fixtures, axe suite included, no new violations — the featured badge and CTA are correctly accessible), `npm run build`, `npx size-limit` (all packages still under budget, though `molecules` and the root bundle now have less headroom — worth watching on the next addition) all pass; visually confirmed in a real browser (Storybook, desktop width) that the 3-tier grid, the featured card's border/badge/lime CTA, and the footnotes grid all render correctly — a close visual match to the real page.
+
+## 20. New: `AudienceScenariosSection` organism (2026-09-22)
+
+Third fix from §17 — the "which scenario fits you" segment picker used on 3 of the 4 audited pages ("Dla kogo jest Autopay": masz już sklep / startujesz z nowym sklepem / skalujesz biznes).
+
+Plain cards — title + description, deliberately **no** icon, image, or per-card CTA, since the real page has none of those. This is why it isn't `IndustriesGridSection` with different copy: that organism structurally assumes an image and a CTA per card, which would mean inventing UI the real page doesn't have. Kept as its own organism rather than forced into an existing one, with a `scenarios` array (not hardcoded to 3).
+
+No molecule extracted for the card itself — at two fields (title, description) with no shared logic, a separate molecule would be premature abstraction; the map lives directly in the organism, matching how `TrustedByLogos` doesn't extract a "LogoItem" molecule either.
+
+**Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (83 tests — 82 plus 1 new story fixture, axe suite included, no new violations), `npm run build`, `npx size-limit` (all packages still under budget) all pass; visually confirmed in Storybook that the 3-column grid and uppercase scenario titles render correctly.
