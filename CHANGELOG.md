@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.0
+
+### Minor Changes
+
+- b525d3e: Add `AudienceScenariosSection` (organisms) — a plain-card "which scenario fits you" segment picker (title + description, no icon/image/CTA per card). Closes a gap found auditing this package against live autopay.pl landing pages, used on 3 of 4 audited pages.
+- 3166960: Add `Textarea` and `Select` atoms, plus `TextareaField` and `SelectField` molecules (Label + atom, matching `FormField`). Closes a real gap found auditing this package against live autopay.pl landing pages: several real contact forms need a message field or dropdown fields, and neither existed.
+- c7c87a8: Add `LeadFormSection` (organisms) — a composable lead-generation form driven by a `fields` array (text/textarea/select), for real forms that don't fit `ContactSection`'s fixed 4 fields. Also raises `.size-limit.json` budgets (molecules, organisms, root) ahead of further gap-closing components.
+- ba3141d: Add four PayFac-specific organisms: `ComparisonTimelineSection` (two paths compared side by side with duration badges), `PositioningSpectrumSection` (a 3-way comparison with a "you are here" highlight), `RequirementsChecklistSection` (a numbered checklist on a dark background), and `CostBreakdownSection` (an additive "+"-joined cost formula). Closes the remaining gaps found auditing this package against autopay.pl/lp/payfac-08.
+- b5ddd3c: Add `PricingSection` (organisms) and `PricingTier` (molecules) — a tiered pricing table with an optional featured/highlighted tier and small-print footnotes. Closes the highest-priority gap found auditing this package against live autopay.pl landing pages: a pricing table appears on every audited page with no prior equivalent.
+
 ## 0.7.0
 
 ### Minor Changes
