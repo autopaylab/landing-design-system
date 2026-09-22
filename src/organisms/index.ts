@@ -20,3 +20,7 @@ export * from "./CookieConsentScript";
 export * from "./PricingSection";
 export * from "./AudienceScenariosSection";
 export * from "./LeadFormSection";
+export * from "./ComparisonTimelineSection";
+export * from "./PositioningSpectrumSection";
+export * from "./RequirementsChecklistSection";
+export * from "./CostBreakdownSection";

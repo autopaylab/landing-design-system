@@ -32,8 +32,10 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var organisms_exports = {};
 __export(organisms_exports, {
   AudienceScenariosSection: () => AudienceScenariosSection,
+  ComparisonTimelineSection: () => ComparisonTimelineSection,
   ContactSection: () => ContactSection,
   CookieConsentScript: () => CookieConsentScript,
+  CostBreakdownSection: () => CostBreakdownSection,
   DataLeverageSection: () => DataLeverageSection,
   FaqAccordionSection: () => FaqAccordionSection,
   Footer: () => Footer,
@@ -47,8 +49,10 @@ __export(organisms_exports, {
   Navbar: () => Navbar,
   OverlappingCardsSection: () => OverlappingCardsSection,
   PlatformFeatureShowcase: () => PlatformFeatureShowcase,
+  PositioningSpectrumSection: () => PositioningSpectrumSection,
   PricingSection: () => PricingSection,
   PromoCtaSection: () => PromoCtaSection,
+  RequirementsChecklistSection: () => RequirementsChecklistSection,
   SecuritySection: () => SecuritySection,
   SingleIntegrationSection: () => SingleIntegrationSection,
   StatsSection: () => StatsSection,
@@ -1352,11 +1356,135 @@ function LeadFormSection({
     ] })
   ] }) });
 }
+
+// src/organisms/ComparisonTimelineSection/ComparisonTimelineSection.tsx
+var import_jsx_runtime47 = require("react/jsx-runtime");
+function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
+    eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h2", { className: "mt-4 font-display text-h3", children: heading }),
+    highlight ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("p", { className: "mt-3 font-semibold text-primary", children: highlight }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "mt-8 grid gap-8 md:grid-cols-2", children: paths.map((path) => /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "flex flex-wrap items-center gap-3", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("span", { className: "font-display text-h5", children: path.name }),
+        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("span", { className: "rounded-full bg-muted px-4 py-1.5 text-sm text-muted-foreground", children: path.duration })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3", children: path.steps.map((step) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+        "div",
+        {
+          className: cn(
+            "rounded-xl px-3 py-4 text-center text-sm font-medium",
+            path.highlighted ? "bg-lime text-lime-foreground" : "bg-primary text-primary-foreground"
+          ),
+          children: step
+        },
+        step
+      )) }),
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("p", { className: "mt-4 text-sm text-muted-foreground", children: path.caption })
+    ] }, path.name)) })
+  ] }) });
+}
+
+// src/organisms/PositioningSpectrumSection/PositioningSpectrumSection.tsx
+var import_jsx_runtime48 = require("react/jsx-runtime");
+function PositioningSpectrumSection({
+  eyebrow,
+  heading,
+  options,
+  currentLabel = "You are here"
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", { className: "mt-8 grid gap-6 md:grid-cols-3", children: options.map((option) => /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(
+      "div",
+      {
+        className: cn(
+          "relative rounded-3xl border p-8",
+          option.current ? "border-primary shadow-lg" : "border-border"
+        ),
+        children: [
+          option.current ? /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("span", { className: "absolute -top-3 left-8 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground", children: [
+            currentLabel,
+            " \u2192"
+          ] }) : null,
+          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("p", { className: "text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground", children: option.eyebrow }),
+          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("h3", { className: "mt-2 font-display text-h5", children: option.title }),
+          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: option.description })
+        ]
+      },
+      option.title
+    )) })
+  ] });
+}
+
+// src/organisms/RequirementsChecklistSection/RequirementsChecklistSection.tsx
+var import_lucide_react5 = require("lucide-react");
+var import_jsx_runtime49 = require("react/jsx-runtime");
+function RequirementsChecklistSection({
+  eyebrow,
+  heading,
+  description,
+  items,
+  caption,
+  footnote
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
+    description ? /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "mt-8 space-y-3 rounded-3xl bg-foreground p-6 md:p-8", children: [
+      items.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center justify-between gap-4 rounded-2xl bg-background/10 px-5 py-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("span", { className: "flex items-center gap-4 text-sm text-background", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "font-mono text-xs text-background/60", children: String(i + 1).padStart(2, "0") }),
+          item.label,
+          item.hasFootnote ? /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "text-background/60", children: "*" }) : null
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react5.Check, { className: "h-4 w-4 shrink-0 text-lime" })
+      ] }, item.label)),
+      caption ? /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "pt-3 text-sm text-background/70", children: caption }) : null,
+      footnote ? /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "border-t border-background/20 pt-4 text-xs text-background/60", children: footnote }) : null
+    ] })
+  ] });
+}
+
+// src/organisms/CostBreakdownSection/CostBreakdownSection.tsx
+var React14 = __toESM(require("react"), 1);
+var import_jsx_runtime50 = require("react/jsx-runtime");
+function CostBreakdownSection({ eyebrow, heading, description, components }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("h2", { className: "mt-4 font-display text-h3", children: heading }),
+    description ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "mt-8 flex flex-col items-stretch gap-4 md:flex-row md:items-center", children: components.map((component, i) => /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(React14.Fragment, { children: [
+      i > 0 ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "self-center font-display text-h4 text-muted-foreground", children: "+" }) : null,
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "flex-1 rounded-3xl border border-border bg-card p-6", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("h3", { className: "font-display text-h6", children: component.title }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("p", { className: "mt-2 text-sm text-muted-foreground", children: component.description }),
+        component.linkLabel ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Link, { variant: "underline", href: component.linkHref ?? "#", className: "mt-3 inline-block text-sm", children: component.linkLabel }) : null
+      ] })
+    ] }, component.title)) })
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AudienceScenariosSection,
+  ComparisonTimelineSection,
   ContactSection,
   CookieConsentScript,
+  CostBreakdownSection,
   DataLeverageSection,
   FaqAccordionSection,
   Footer,
@@ -1370,8 +1498,10 @@ function LeadFormSection({
   Navbar,
   OverlappingCardsSection,
   PlatformFeatureShowcase,
+  PositioningSpectrumSection,
   PricingSection,
   PromoCtaSection,
+  RequirementsChecklistSection,
   SecuritySection,
   SingleIntegrationSection,
   StatsSection,

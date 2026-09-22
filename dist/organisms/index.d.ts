@@ -442,4 +442,101 @@ interface LeadFormSectionProps {
 }
 declare function LeadFormSection({ heading, description, formHeading, fields, consentText, controllerText, submitLabel, onSubmit, }: LeadFormSectionProps): React.JSX.Element;
 
-export { type AudienceScenario, AudienceScenariosSection, type AudienceScenariosSectionProps, ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type LeadFormField, LeadFormSection, type LeadFormSectionProps, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };
+interface ComparisonPath {
+    name: string;
+    /** A short duration label shown next to the name, e.g. "kilkanaście miesięcy". */
+    duration: string;
+    steps: string[];
+    caption: string;
+    /** The faster/recommended path — step pills use the brand accent instead of a plain dark fill. */
+    highlighted?: boolean;
+}
+/**
+ * Two (or more) step-by-step paths compared side by side, each with its own
+ * duration badge. New pattern, not an extraction — see AUDIT.md #17/#22:
+ * autopay.pl/lp/payfac-08's "Dwie drogi do startu" (principal membership,
+ * kilkanaście miesięcy, 5 steps vs. PayFac z Autopay, kilka miesięcy,
+ * 5 steps) has no equivalent anywhere in this package — `FourStepsSection`
+ * renders one linear sequence, not two compared against each other.
+ */
+interface ComparisonTimelineSectionProps {
+    eyebrow?: string;
+    heading: React.ReactNode;
+    /** A short standout line above the paths, e.g. "60–80% szybciej niż principal membership". */
+    highlight?: string;
+    paths: ComparisonPath[];
+}
+declare function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }: ComparisonTimelineSectionProps): React.JSX.Element;
+
+interface PositioningOption {
+    eyebrow: string;
+    title: string;
+    description: string;
+    /** The option matching the reader's current position — gets a border highlight and a "you are here" pill. */
+    current?: boolean;
+}
+/**
+ * A 3-(or more)-way "where do you fit" comparison, one option highlighted
+ * as the reader's current position. New pattern, not an extraction — see
+ * AUDIT.md #17/#23: autopay.pl/lp/payfac-08's ISO / PayFac / Acquirer
+ * spectrum (with a "Jesteś tutaj" pill on the middle option) has no
+ * equivalent anywhere in this package.
+ */
+interface PositioningSpectrumSectionProps {
+    eyebrow?: string;
+    heading: React.ReactNode;
+    options: PositioningOption[];
+    /** Label on the highlighted option's pill, e.g. "Jesteś tutaj". Defaults to "You are here". */
+    currentLabel?: string;
+}
+declare function PositioningSpectrumSection({ eyebrow, heading, options, currentLabel, }: PositioningSpectrumSectionProps): React.JSX.Element;
+
+interface RequirementItem {
+    label: string;
+    /** Marks this row with a trailing "*" for a footnote reference. */
+    hasFootnote?: boolean;
+}
+/**
+ * A numbered checklist on a dark background, each row ending in a
+ * checkmark — distinct from `BulletItem`'s plain light-background bullet.
+ * New pattern, not an extraction — see AUDIT.md #17/#24:
+ * autopay.pl/lp/payfac-08's "Czego to naprawdę wymaga" (6 numbered
+ * responsibility areas, each with a checkmark) has no equivalent anywhere
+ * in this package.
+ */
+interface RequirementsChecklistSectionProps {
+    eyebrow?: string;
+    heading: React.ReactNode;
+    description?: string;
+    items: RequirementItem[];
+    /** A closing line below the list, e.g. "Każdy obszar wymaga własnych zespołów...". */
+    caption?: string;
+    /** The footnote text referenced by items with `hasFootnote`. */
+    footnote?: React.ReactNode;
+}
+declare function RequirementsChecklistSection({ eyebrow, heading, description, items, caption, footnote, }: RequirementsChecklistSectionProps): React.JSX.Element;
+
+interface CostComponent {
+    title: string;
+    description: string;
+    /** Optional trailing link, e.g. "uzgodniona z Tobą →". */
+    linkLabel?: string;
+    linkHref?: string;
+}
+/**
+ * An additive cost-breakdown "formula" — boxes joined by "+", each one
+ * component of the total price. New pattern, not an extraction — see
+ * AUDIT.md #17/#25: autopay.pl/lp/payfac-08's "Przejrzysty cennik IC++"
+ * (Interchange + card-scheme fees + Autopay margin) has no equivalent
+ * anywhere in this package — `PricingSection` is tiered plans, not an
+ * additive formula.
+ */
+interface CostBreakdownSectionProps {
+    eyebrow?: string;
+    heading: React.ReactNode;
+    description?: string;
+    components: CostComponent[];
+}
+declare function CostBreakdownSection({ eyebrow, heading, description, components }: CostBreakdownSectionProps): React.JSX.Element;
+
+export { type AudienceScenario, AudienceScenariosSection, type AudienceScenariosSectionProps, type ComparisonPath, ComparisonTimelineSection, type ComparisonTimelineSectionProps, ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, CostBreakdownSection, type CostBreakdownSectionProps, type CostComponent, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type LeadFormField, LeadFormSection, type LeadFormSectionProps, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PositioningOption, PositioningSpectrumSection, type PositioningSpectrumSectionProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, type RequirementItem, RequirementsChecklistSection, type RequirementsChecklistSectionProps, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };

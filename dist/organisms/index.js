@@ -1294,10 +1294,134 @@ function LeadFormSection({
     ] })
   ] }) });
 }
+
+// src/organisms/ComparisonTimelineSection/ComparisonTimelineSection.tsx
+import { jsx as jsx47, jsxs as jsxs37 } from "react/jsx-runtime";
+function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }) {
+  return /* @__PURE__ */ jsx47("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs37("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
+    eyebrow ? /* @__PURE__ */ jsxs37("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ jsx47("h2", { className: "mt-4 font-display text-h3", children: heading }),
+    highlight ? /* @__PURE__ */ jsx47("p", { className: "mt-3 font-semibold text-primary", children: highlight }) : null,
+    /* @__PURE__ */ jsx47("div", { className: "mt-8 grid gap-8 md:grid-cols-2", children: paths.map((path) => /* @__PURE__ */ jsxs37("div", { children: [
+      /* @__PURE__ */ jsxs37("div", { className: "flex flex-wrap items-center gap-3", children: [
+        /* @__PURE__ */ jsx47("span", { className: "font-display text-h5", children: path.name }),
+        /* @__PURE__ */ jsx47("span", { className: "rounded-full bg-muted px-4 py-1.5 text-sm text-muted-foreground", children: path.duration })
+      ] }),
+      /* @__PURE__ */ jsx47("div", { className: "mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3", children: path.steps.map((step) => /* @__PURE__ */ jsx47(
+        "div",
+        {
+          className: cn(
+            "rounded-xl px-3 py-4 text-center text-sm font-medium",
+            path.highlighted ? "bg-lime text-lime-foreground" : "bg-primary text-primary-foreground"
+          ),
+          children: step
+        },
+        step
+      )) }),
+      /* @__PURE__ */ jsx47("p", { className: "mt-4 text-sm text-muted-foreground", children: path.caption })
+    ] }, path.name)) })
+  ] }) });
+}
+
+// src/organisms/PositioningSpectrumSection/PositioningSpectrumSection.tsx
+import { jsx as jsx48, jsxs as jsxs38 } from "react/jsx-runtime";
+function PositioningSpectrumSection({
+  eyebrow,
+  heading,
+  options,
+  currentLabel = "You are here"
+}) {
+  return /* @__PURE__ */ jsxs38("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsxs38("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ jsx48("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
+    /* @__PURE__ */ jsx48("div", { className: "mt-8 grid gap-6 md:grid-cols-3", children: options.map((option) => /* @__PURE__ */ jsxs38(
+      "div",
+      {
+        className: cn(
+          "relative rounded-3xl border p-8",
+          option.current ? "border-primary shadow-lg" : "border-border"
+        ),
+        children: [
+          option.current ? /* @__PURE__ */ jsxs38("span", { className: "absolute -top-3 left-8 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground", children: [
+            currentLabel,
+            " \u2192"
+          ] }) : null,
+          /* @__PURE__ */ jsx48("p", { className: "text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground", children: option.eyebrow }),
+          /* @__PURE__ */ jsx48("h3", { className: "mt-2 font-display text-h5", children: option.title }),
+          /* @__PURE__ */ jsx48("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: option.description })
+        ]
+      },
+      option.title
+    )) })
+  ] });
+}
+
+// src/organisms/RequirementsChecklistSection/RequirementsChecklistSection.tsx
+import { Check as Check2 } from "lucide-react";
+import { jsx as jsx49, jsxs as jsxs39 } from "react/jsx-runtime";
+function RequirementsChecklistSection({
+  eyebrow,
+  heading,
+  description,
+  items,
+  caption,
+  footnote
+}) {
+  return /* @__PURE__ */ jsxs39("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsxs39("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ jsx49("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
+    description ? /* @__PURE__ */ jsx49("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
+    /* @__PURE__ */ jsxs39("div", { className: "mt-8 space-y-3 rounded-3xl bg-foreground p-6 md:p-8", children: [
+      items.map((item, i) => /* @__PURE__ */ jsxs39("div", { className: "flex items-center justify-between gap-4 rounded-2xl bg-background/10 px-5 py-4", children: [
+        /* @__PURE__ */ jsxs39("span", { className: "flex items-center gap-4 text-sm text-background", children: [
+          /* @__PURE__ */ jsx49("span", { className: "font-mono text-xs text-background/60", children: String(i + 1).padStart(2, "0") }),
+          item.label,
+          item.hasFootnote ? /* @__PURE__ */ jsx49("span", { className: "text-background/60", children: "*" }) : null
+        ] }),
+        /* @__PURE__ */ jsx49(Check2, { className: "h-4 w-4 shrink-0 text-lime" })
+      ] }, item.label)),
+      caption ? /* @__PURE__ */ jsx49("p", { className: "pt-3 text-sm text-background/70", children: caption }) : null,
+      footnote ? /* @__PURE__ */ jsx49("p", { className: "border-t border-background/20 pt-4 text-xs text-background/60", children: footnote }) : null
+    ] })
+  ] });
+}
+
+// src/organisms/CostBreakdownSection/CostBreakdownSection.tsx
+import * as React14 from "react";
+import { jsx as jsx50, jsxs as jsxs40 } from "react/jsx-runtime";
+function CostBreakdownSection({ eyebrow, heading, description, components }) {
+  return /* @__PURE__ */ jsxs40("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsxs40("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+      "\u2014 ",
+      eyebrow
+    ] }) : null,
+    /* @__PURE__ */ jsx50("h2", { className: "mt-4 font-display text-h3", children: heading }),
+    description ? /* @__PURE__ */ jsx50("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
+    /* @__PURE__ */ jsx50("div", { className: "mt-8 flex flex-col items-stretch gap-4 md:flex-row md:items-center", children: components.map((component, i) => /* @__PURE__ */ jsxs40(React14.Fragment, { children: [
+      i > 0 ? /* @__PURE__ */ jsx50("span", { className: "self-center font-display text-h4 text-muted-foreground", children: "+" }) : null,
+      /* @__PURE__ */ jsxs40("div", { className: "flex-1 rounded-3xl border border-border bg-card p-6", children: [
+        /* @__PURE__ */ jsx50("h3", { className: "font-display text-h6", children: component.title }),
+        /* @__PURE__ */ jsx50("p", { className: "mt-2 text-sm text-muted-foreground", children: component.description }),
+        component.linkLabel ? /* @__PURE__ */ jsx50(Link, { variant: "underline", href: component.linkHref ?? "#", className: "mt-3 inline-block text-sm", children: component.linkLabel }) : null
+      ] })
+    ] }, component.title)) })
+  ] });
+}
 export {
   AudienceScenariosSection,
+  ComparisonTimelineSection,
   ContactSection,
   CookieConsentScript,
+  CostBreakdownSection,
   DataLeverageSection,
   FaqAccordionSection,
   Footer,
@@ -1311,8 +1435,10 @@ export {
   Navbar,
   OverlappingCardsSection,
   PlatformFeatureShowcase,
+  PositioningSpectrumSection,
   PricingSection,
   PromoCtaSection,
+  RequirementsChecklistSection,
   SecuritySection,
   SingleIntegrationSection,
   StatsSection,

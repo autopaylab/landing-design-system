@@ -307,3 +307,19 @@ Two story fixtures reproduce the two real forms exactly (field-for-field, real P
 Also bumped `.size-limit.json` (`molecules` 5→7KB, `organisms` 15→22KB, root 16→23KB) ahead of the remaining PayFac-specific organisms still to come (§22+), instead of repeatedly nudging it commit-by-commit — real, expected growth from closing a real coverage gap, not waste.
 
 **Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (85 tests — 83 plus 2 new story fixtures, axe suite included, no violations even on the 9-field PayFac form — every label correctly linked), `npm run build`, `npx size-limit` (green against the revised budgets) all pass; visually confirmed in Storybook that every field kind (text, select with chevron, textarea, consent checkbox) renders correctly on the `PayFacLeadForm` story.
+
+## 22–25. Four new PayFac-specific organisms (2026-09-22)
+
+Closes the remaining §17 gaps, all found only on `/lp/payfac-08` (lower reuse priority than §18–21's gaps, since they're each used once — but built as requested, in order, alongside everything else). All four share the same `— {eyebrow}` plain-text eyebrow style (uppercase, `text-primary`, dash-prefixed) rather than the `Badge` pill used elsewhere in this package — a real, deliberate distinction observed on the PayFac page itself (its every section eyebrow uses this dash style; the merchant pages' eyebrows are pills), not an inconsistency introduced here. None extract a molecule for their repeated card/row shape — each is a single, cohesive visual unit specific to that organism, not a generically reusable primitive elsewhere.
+
+**§22 — `ComparisonTimelineSection`:** two (or more) named paths compared side by side, each with a duration badge and a grid of step pills. `highlighted` swaps a path's pills from dark-navy to the `lime` brand accent. Matches "Dwie drogi do startu" (principal membership vs. PayFac z Autopay). `FourStepsSection` renders one linear sequence; this compares two against each other, which that organism's shape can't express.
+
+**§23 — `PositioningSpectrumSection`:** a 3-way "where do you fit" comparison, one option highlighted with a border and a "you are here"-style pill overlapping its top edge (`currentLabel`, defaults to English, real page uses "Jesteś tutaj"). Matches ISO / PayFac / Acquirer.
+
+**§24 — `RequirementsChecklistSection`:** a numbered checklist on a dark (`bg-foreground`) card, each row ending in a `lime` checkmark, with an optional per-item footnote marker and a closing caption/footnote. Distinct from `BulletItem`'s plain light-background bullet. Matches "Czego to naprawdę wymaga" (6 responsibility areas).
+
+**§25 — `CostBreakdownSection`:** an additive cost formula — boxes joined by literal "+" glyphs between them, the last one able to carry a trailing link. Distinct from `PricingSection`, which is tiered plans, not parts of one price. Matches "Przejrzysty cennik IC++" (Interchange + card-scheme fees + Autopay margin).
+
+**Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (89 tests — 85 plus 4 new story fixtures, axe suite included, no new violations), `npm run build`, `npx size-limit` (green: organisms 15.3/22KB, root 16.32/23KB — real headroom left) all pass; visually confirmed all four in a real browser via Storybook (desktop width) — each is a close visual match to its real `/lp/payfac-08` counterpart (pill grids, the "Jesteś tutaj" overlap badge, the checkmark rows, the "+"-joined formula boxes).
+
+This closes every gap identified in §17 except the two explicitly deprioritized there: the partial text-highlight inside a heading (a styling detail, not a missing component) and the dark stats-card-with-badges variant (a styling variant of the existing `StatsSection`, not a structural gap).
