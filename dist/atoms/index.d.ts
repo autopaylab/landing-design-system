@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
+export { B as Button, a as ButtonProps, b as buttonVariants } from '../Button-raF3Dn30.js';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import { VariantProps } from 'class-variance-authority';
 export { S as Select, a as SelectOption, b as SelectProps } from '../Select-Bfdbg8EH.js';
@@ -14,23 +15,6 @@ declare const Accordion: React.ForwardRefExoticComponent<(AccordionPrimitive.Acc
 declare const AccordionItem: React.ForwardRefExoticComponent<Omit<AccordionPrimitive.AccordionItemProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
 declare const AccordionTrigger: React.ForwardRefExoticComponent<Omit<AccordionPrimitive.AccordionTriggerProps & React.RefAttributes<HTMLButtonElement>, "ref"> & React.RefAttributes<HTMLButtonElement>>;
 declare const AccordionContent: React.ForwardRefExoticComponent<Omit<AccordionPrimitive.AccordionContentProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
-
-/**
- * Merges 11+ hand-rolled CTA markups found across landing-page-kit (hero CTAs,
- * header Login/Sign In, industry-card "Learn more", contact-form submit) into
- * one variant-driven atom. See AUDIT.md, "Buttons" section, for the full list
- * of source occurrences and the one inconsistency (a second product line's
- * footer CTA using a fixed h-12 + hover:bg-lime/90) that was NOT silently
- * folded in.
- */
-declare const buttonVariants: (props?: ({
-    variant?: "link" | "lime" | "outline-inverse" | "outline" | "solid" | "default" | "destructive" | "secondary" | "ghost" | null | undefined;
-    size?: "default" | "sm" | "lg" | "xs" | "icon" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-    asChild?: boolean;
-}
-declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
 
 /**
  * `eyebrow` merges three byte-identical implementations: `Eyebrow` in
@@ -115,4 +99,4 @@ interface StepNumberProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 declare function StepNumber({ className, value, ...props }: StepNumberProps): React.JSX.Element;
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, type BadgeProps, Button, type ButtonProps, Checkbox, Input, Label, Link, type LinkProps, Logo, type LogoProps, StepNumber, type StepNumberProps, Textarea, badgeVariants, buttonVariants, linkVariants };
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, type BadgeProps, Checkbox, Input, Label, Link, type LinkProps, Logo, type LogoProps, StepNumber, type StepNumberProps, Textarea, badgeVariants, linkVariants };

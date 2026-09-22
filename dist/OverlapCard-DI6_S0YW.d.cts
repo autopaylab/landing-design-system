@@ -1,4 +1,31 @@
 import * as React from 'react';
+import { a as ButtonProps } from './Button-raF3Dn30.cjs';
+
+interface PricingTierProps {
+    name: string;
+    /** The headline price, e.g. "29,99 zł", "1,19% + 0,34 zł", or "Dopasowany" for a custom/contact-us tier. */
+    price: string;
+    /** Text after the price, e.g. "/m-c". */
+    priceSuffix?: string;
+    /** Small print under the price, e.g. "przy płatności rocznej". */
+    priceNote?: string;
+    description: string;
+    features: string[];
+    ctaLabel: string;
+    onCtaClick?: () => void;
+    ctaVariant?: ButtonProps["variant"];
+    /** Highlights this tier as the recommended one (border, shadow, ribbon badge). */
+    featured?: boolean;
+    /** Ribbon text shown above a featured tier, e.g. "NAJPOPULARNIEJSZY". */
+    badgeLabel?: string;
+}
+/**
+ * One card in a `PricingSection` tiered-pricing table. New pattern, not an
+ * extraction — see AUDIT.md #17/#19: real autopay.pl landing pages
+ * (e.g. /lp/platnosci-online-1) have a 3-tier pricing table with no prior
+ * equivalent anywhere in this package.
+ */
+declare function PricingTier({ name, price, priceSuffix, priceNote, description, features, ctaLabel, onCtaClick, ctaVariant, featured, badgeLabel, }: PricingTierProps): React.JSX.Element;
 
 /** One tile from the Stats section grid in HomeContent.tsx ("UP TO" + value + label). */
 interface StatBlockProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -68,4 +95,4 @@ interface OverlapCardProps extends React.HTMLAttributes<HTMLElement> {
 }
 declare function OverlapCard({ className, title, description, image, backgroundColor, primaryCta, secondaryCta, style, ...props }: OverlapCardProps): React.JSX.Element;
 
-export { IconCard as I, OverlapCard as O, StatBlock as S, type IconCardProps as a, IconFeatureItem as b, type IconFeatureItemProps as c, type OverlapCardCta as d, type OverlapCardProps as e, type StatBlockProps as f };
+export { IconCard as I, OverlapCard as O, PricingTier as P, StatBlock as S, type IconCardProps as a, IconFeatureItem as b, type IconFeatureItemProps as c, type OverlapCardCta as d, type OverlapCardProps as e, type PricingTierProps as f, type StatBlockProps as g };

@@ -1,6 +1,9 @@
 export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from '../Footer-8cnZzh6n.js';
 import * as React from 'react';
-import { c as IconFeatureItemProps, a as IconCardProps, f as StatBlockProps, d as OverlapCardCta } from '../OverlapCard-DnLktg2T.js';
+import { c as IconFeatureItemProps, a as IconCardProps, g as StatBlockProps, d as OverlapCardCta, f as PricingTierProps } from '../OverlapCard-Cd1qh30h.js';
+import '../Button-raF3Dn30.js';
+import 'class-variance-authority/types';
+import 'class-variance-authority';
 
 /** The primary two-column video hero from HomeContent.tsx (lines 142-165). */
 interface HeroVideoSplitProps {
@@ -355,4 +358,23 @@ declare function buildCookieConsentScript({ localeStorageKey }?: CookieConsentSc
  */
 declare function CookieConsentScript(props?: CookieConsentScriptProps): React.JSX.Element;
 
-export { ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };
+interface PricingFootnote {
+    value: string;
+    label: string;
+}
+/**
+ * A tiered pricing table. New pattern, not an extraction — see
+ * AUDIT.md #17/#19: real autopay.pl landing pages (e.g.
+ * /lp/platnosci-online-1) have this exact shape (3 tiers, one featured,
+ * small-print footnotes below) with no prior equivalent in this package.
+ */
+interface PricingSectionProps {
+    eyebrow?: string;
+    heading: React.ReactNode;
+    tiers: PricingTierProps[];
+    /** Small-print grid below the tiers, e.g. "49 zł" / "aktywacja", "0 zł" / "zwroty". */
+    footnotes?: PricingFootnote[];
+}
+declare function PricingSection({ eyebrow, heading, tiers, footnotes }: PricingSectionProps): React.JSX.Element;
+
+export { ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };

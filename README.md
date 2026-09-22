@@ -85,8 +85,8 @@ See `src/templates/LandingPageTemplate/LandingPageTemplate.stories.tsx` for a co
 | Layer | Count | Location |
 |---|---|---|
 | Atoms | 11 (incl. vendored `Accordion`) | `src/atoms/` |
-| Molecules | 14 | `src/molecules/` |
-| Organisms | 19 | `src/organisms/` |
+| Molecules | 15 | `src/molecules/` |
+| Organisms | 20 | `src/organisms/` |
 | Templates | 1 | `src/templates/` |
 
 Every component ships a `.stories.tsx` (CSF3 format) alongside its implementation, showing its real observed variants — no invented ones. Props tables are the exported TypeScript types themselves (`ButtonProps`, `IconCardProps`, etc.) rather than hand-written tables that can drift; run `npm run typecheck` or hover the export in your editor to see them.

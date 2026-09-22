@@ -45,6 +45,7 @@ __export(organisms_exports, {
   Navbar: () => Navbar,
   OverlappingCardsSection: () => OverlappingCardsSection,
   PlatformFeatureShowcase: () => PlatformFeatureShowcase,
+  PricingSection: () => PricingSection,
   PromoCtaSection: () => PromoCtaSection,
   SecuritySection: () => SecuritySection,
   SingleIntegrationSection: () => SingleIntegrationSection,
@@ -1134,6 +1135,64 @@ function buildCookieConsentScript({ localeStorageKey = "autopaylab-locale" } = {
 function CookieConsentScript(props = {}) {
   return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("script", { dangerouslySetInnerHTML: { __html: buildCookieConsentScript(props) } });
 }
+
+// src/molecules/PricingTier/PricingTier.tsx
+var import_lucide_react3 = require("lucide-react");
+var import_jsx_runtime39 = require("react/jsx-runtime");
+function PricingTier({
+  name,
+  price,
+  priceSuffix,
+  priceNote,
+  description,
+  features,
+  ctaLabel,
+  onCtaClick,
+  ctaVariant,
+  featured = false,
+  badgeLabel
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)(
+    "div",
+    {
+      className: cn(
+        "relative flex flex-col rounded-3xl border bg-card p-8",
+        featured ? "border-primary shadow-lg" : "border-border"
+      ),
+      children: [
+        featured && badgeLabel ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Badge, { className: "absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary-foreground", children: badgeLabel }) : null,
+        /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("h3", { className: "font-display text-h5", children: name }),
+        /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)("div", { className: "mt-4 flex items-baseline gap-1", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("span", { className: "font-display text-h3", children: price }),
+          priceSuffix ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("span", { className: "text-muted-foreground", children: priceSuffix }) : null
+        ] }),
+        priceNote ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("p", { className: "mt-1 text-sm text-muted-foreground", children: priceNote }) : null,
+        /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("p", { className: "mt-4 text-sm text-muted-foreground", children: description }),
+        /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("ul", { className: "mt-6 flex-1 space-y-3", children: features.map((feature) => /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)("li", { className: "flex items-start gap-2 text-sm", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(import_lucide_react3.Check, { className: "mt-0.5 h-4 w-4 shrink-0 text-primary" }),
+          /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("span", { children: feature })
+        ] }, feature)) }),
+        /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Button, { type: "button", variant: ctaVariant ?? (featured ? "lime" : "outline"), className: "mt-8 w-full", onClick: onCtaClick, children: ctaLabel })
+      ]
+    }
+  );
+}
+
+// src/organisms/PricingSection/PricingSection.tsx
+var import_jsx_runtime40 = require("react/jsx-runtime");
+function PricingSection({ eyebrow, heading, tiers, footnotes }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { className: "text-center", children: [
+      eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("h2", { className: "mt-4 font-display text-h2", children: heading })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { className: "mt-12 grid gap-8 md:grid-cols-3", children: tiers.map((tier) => /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(PricingTier, { ...tier }, tier.name)) }),
+    footnotes && footnotes.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { className: "mt-12 grid grid-cols-2 gap-6 text-center sm:grid-cols-4", children: footnotes.map((footnote) => /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { className: "font-display text-h5", children: footnote.value }),
+      /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { className: "mt-1 text-sm text-muted-foreground", children: footnote.label })
+    ] }, footnote.label)) }) : null
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   ContactSection,
@@ -1150,6 +1209,7 @@ function CookieConsentScript(props = {}) {
   Navbar,
   OverlappingCardsSection,
   PlatformFeatureShowcase,
+  PricingSection,
   PromoCtaSection,
   SecuritySection,
   SingleIntegrationSection,

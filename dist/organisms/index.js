@@ -1079,6 +1079,64 @@ function buildCookieConsentScript({ localeStorageKey = "autopaylab-locale" } = {
 function CookieConsentScript(props = {}) {
   return /* @__PURE__ */ jsx38("script", { dangerouslySetInnerHTML: { __html: buildCookieConsentScript(props) } });
 }
+
+// src/molecules/PricingTier/PricingTier.tsx
+import { Check } from "lucide-react";
+import { jsx as jsx39, jsxs as jsxs30 } from "react/jsx-runtime";
+function PricingTier({
+  name,
+  price,
+  priceSuffix,
+  priceNote,
+  description,
+  features,
+  ctaLabel,
+  onCtaClick,
+  ctaVariant,
+  featured = false,
+  badgeLabel
+}) {
+  return /* @__PURE__ */ jsxs30(
+    "div",
+    {
+      className: cn(
+        "relative flex flex-col rounded-3xl border bg-card p-8",
+        featured ? "border-primary shadow-lg" : "border-border"
+      ),
+      children: [
+        featured && badgeLabel ? /* @__PURE__ */ jsx39(Badge, { className: "absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary-foreground", children: badgeLabel }) : null,
+        /* @__PURE__ */ jsx39("h3", { className: "font-display text-h5", children: name }),
+        /* @__PURE__ */ jsxs30("div", { className: "mt-4 flex items-baseline gap-1", children: [
+          /* @__PURE__ */ jsx39("span", { className: "font-display text-h3", children: price }),
+          priceSuffix ? /* @__PURE__ */ jsx39("span", { className: "text-muted-foreground", children: priceSuffix }) : null
+        ] }),
+        priceNote ? /* @__PURE__ */ jsx39("p", { className: "mt-1 text-sm text-muted-foreground", children: priceNote }) : null,
+        /* @__PURE__ */ jsx39("p", { className: "mt-4 text-sm text-muted-foreground", children: description }),
+        /* @__PURE__ */ jsx39("ul", { className: "mt-6 flex-1 space-y-3", children: features.map((feature) => /* @__PURE__ */ jsxs30("li", { className: "flex items-start gap-2 text-sm", children: [
+          /* @__PURE__ */ jsx39(Check, { className: "mt-0.5 h-4 w-4 shrink-0 text-primary" }),
+          /* @__PURE__ */ jsx39("span", { children: feature })
+        ] }, feature)) }),
+        /* @__PURE__ */ jsx39(Button, { type: "button", variant: ctaVariant ?? (featured ? "lime" : "outline"), className: "mt-8 w-full", onClick: onCtaClick, children: ctaLabel })
+      ]
+    }
+  );
+}
+
+// src/organisms/PricingSection/PricingSection.tsx
+import { jsx as jsx40, jsxs as jsxs31 } from "react/jsx-runtime";
+function PricingSection({ eyebrow, heading, tiers, footnotes }) {
+  return /* @__PURE__ */ jsxs31("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ jsxs31("div", { className: "text-center", children: [
+      eyebrow ? /* @__PURE__ */ jsx40("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      /* @__PURE__ */ jsx40("h2", { className: "mt-4 font-display text-h2", children: heading })
+    ] }),
+    /* @__PURE__ */ jsx40("div", { className: "mt-12 grid gap-8 md:grid-cols-3", children: tiers.map((tier) => /* @__PURE__ */ jsx40(PricingTier, { ...tier }, tier.name)) }),
+    footnotes && footnotes.length > 0 ? /* @__PURE__ */ jsx40("div", { className: "mt-12 grid grid-cols-2 gap-6 text-center sm:grid-cols-4", children: footnotes.map((footnote) => /* @__PURE__ */ jsxs31("div", { children: [
+      /* @__PURE__ */ jsx40("div", { className: "font-display text-h5", children: footnote.value }),
+      /* @__PURE__ */ jsx40("div", { className: "mt-1 text-sm text-muted-foreground", children: footnote.label })
+    ] }, footnote.label)) }) : null
+  ] });
+}
 export {
   ContactSection,
   CookieConsentScript,
@@ -1094,6 +1152,7 @@ export {
   Navbar,
   OverlappingCardsSection,
   PlatformFeatureShowcase,
+  PricingSection,
   PromoCtaSection,
   SecuritySection,
   SingleIntegrationSection,

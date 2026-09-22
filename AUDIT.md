@@ -274,3 +274,14 @@ First fix from §17 — the two missing form field types, needed before the pric
 **A real, expected finding, not a bug:** the bare `Select` story failed the axe a11y suite (`select-name`: no accessible name) — exactly the same, already-documented situation as the bare `Checkbox` atom (§6's `KNOWN_LIMITATIONS`): standalone it's genuinely unlabeled by design, correctly labeled only inside `SelectField`. Added as a new, same-shaped entry in `src/a11y.test.tsx`'s `KNOWN_LIMITATIONS`, not silently worked around.
 
 **Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (78 tests — 72 plus 6 new story fixtures, axe suite included, only the expected/documented bare-`Select` exception), `npm run build`, `npx size-limit` (all packages still under budget) all pass; visually confirmed `SelectField` renders correctly (label, placeholder, chevron) in a real browser via Storybook.
+
+## 19. New: `PricingSection` organism + `PricingTier` molecule (2026-09-22)
+
+Second fix from §17 — the highest-priority gap, since a tiered pricing table appears on every one of the 4 audited live pages and had zero prior equivalent (already flagged as missing from the original `landing-page-kit` source too, §5 item 9).
+
+- **`PricingTier`** (molecule) — one card: name, price (+ optional suffix and small-print note, so it can render "29,99 zł /m-c" or "1,19% + 0,34 zł" or a plain "Dopasowany" for a contact-us tier), description, a checkmark feature list (`lucide-react`'s `Check`, not a new icon choice), and a CTA button. `featured` adds a `border-primary`/shadow highlight and an optional ribbon badge (reuses the `Badge` atom, absolutely positioned — not a new atom), and defaults its CTA to the `lime` `Button` variant instead of `outline`, matching the real page's visual hierarchy (the highlighted tier gets the brand-color button).
+- **`PricingSection`** (organism) — heading/eyebrow, a `tiers` array of `PricingTier` props (3 on the real page, but not hardcoded to 3), and an optional `footnotes` grid for the small print below the tiers (the real page's "49 zł aktywacja", "0 zł zwroty", etc.).
+
+Both are new patterns, not extractions — there was nothing to extract, since this is a genuine gap. No copy was invented: the story fixtures use the real tier names, prices, and feature text read directly from `autopay.pl/lp/platnosci-online-1`.
+
+**Verified, not assumed:** `npm run typecheck`, `npm run lint`, `npm test` (82 tests — 78 plus 4 new story fixtures, axe suite included, no new violations — the featured badge and CTA are correctly accessible), `npm run build`, `npx size-limit` (all packages still under budget, though `molecules` and the root bundle now have less headroom — worth watching on the next addition) all pass; visually confirmed in a real browser (Storybook, desktop width) that the 3-tier grid, the featured card's border/badge/lime CTA, and the footnotes grid all render correctly — a close visual match to the real page.
