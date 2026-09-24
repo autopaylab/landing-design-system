@@ -296,13 +296,19 @@ declare function PromoCtaSection({ backgroundImage, heading, primaryCta, seconda
  * rendering on the client") — expected, not a sign of misconfiguration,
  * just a reminder this only does its job server-rendered.
  *
- * `cmp_cdid` is tied to Autopay's specific ConsentManager account and
- * domain registration. Reusing this component only makes sense for other
- * autopaylab.com pages under the same legal entity / consent record — NOT
- * for an unrelated site, which would need its own cdid from its own
- * ConsentManager account. Do not change this value when reusing the
- * component; if a genuinely different property needs a consent banner, it
- * needs its own ConsentManager setup, not this one repointed.
+ * `cmp_cdid` is tied to a specific ConsentManager account and domain
+ * registration — it identifies which ConsentManager "website" config (its
+ * consent scope, banner design, vendor list) actually loads. It defaults to
+ * Autopay's own autopaylab.com value ("136af463a10ba"), which is correct
+ * for any page living under that same registered domain/consent scope (see
+ * ConsentManager's own dashboard for what `consentscope` covers). It is
+ * almost certainly WRONG for a page on an unrelated domain, which needs its
+ * own cdid from its own ConsentManager account — passing the wrong one
+ * either shows the wrong banner/policy or, worse, silently gates consent
+ * against a config that was never meant to cover that domain. That's why
+ * `buildCookieConsentScript`/`CookieConsentScript` log a one-time
+ * console warning whenever `cmpCdid` is left at its default — treat that
+ * warning as a prompt to actually verify, not as noise to suppress.
  *
  * Two fixes were applied, once, to the vendor snippet as originally pasted
  * into chat (carried forward unchanged from the original port in
@@ -340,8 +346,19 @@ interface CookieConsentScriptProps {
      * browser language — a harmless degrade, not a break.
      */
     localeStorageKey?: string;
+    /**
+     * ConsentManager `cmp_cdid` — which ConsentManager account/website config
+     * this banner loads. Defaults to Autopay's own autopaylab.com value,
+     * correct for any page sharing that domain's consent scope. Override it
+     * ONLY after confirming the right id with whoever administers
+     * ConsentManager for the domain this page actually lives on — see the
+     * file-level doc comment above. Leaving it at the default logs a
+     * one-time console warning as a reminder to make that check, not because
+     * anything is actually broken.
+     */
+    cmpCdid?: string;
 }
-declare function buildCookieConsentScript({ localeStorageKey }?: CookieConsentScriptProps): string;
+declare function buildCookieConsentScript({ localeStorageKey, cmpCdid, }?: CookieConsentScriptProps): string;
 /**
  * Renders the loader as a raw `<script>` tag. Must be the very first thing
  * inside `<body>`, before anything else can set cookies or run tracking
