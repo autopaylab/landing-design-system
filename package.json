@@ -39,13 +39,14 @@
       "import": "./dist/tokens/index.js",
       "require": "./dist/tokens/index.cjs"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./tailwind.css": "./dist/tailwind.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup && node -e \"require('fs').copyFileSync('src/tokens/tokens.css','dist/styles.css')\" && node scripts/prepend-use-client.mjs",
+    "build": "tsup && node -e \"require('fs').copyFileSync('src/tokens/tokens.css','dist/styles.css');require('fs').copyFileSync('src/tokens/tailwind.css','dist/tailwind.css')\" && node scripts/prepend-use-client.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src styleguide",
@@ -62,7 +63,7 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "tailwindcss": ">=3.4.0"
+    "tailwindcss": ">=4.0.0"
   },
   "dependencies": {
     "@fontsource/bricolage-grotesque": "^5.3.0",

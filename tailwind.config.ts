@@ -1,11 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Base Tailwind config for consumers of @autopaylab/landing-design-system.
- * Extend this from a host app's tailwind.config.ts:
- *
- *   import base from "@autopaylab/landing-design-system/tailwind.config";
- *   export default { ...base, content: [...base.content, "./app/**\/*.tsx"] };
+ * Theme for this package's own Storybook (via .storybook/tailwind.config.ts
+ * and `@config`). Not shipped to consumers: they import the Tailwind v4
+ * equivalent, src/tokens/tailwind.css (`@autopaylab/landing-design-system/tailwind.css`).
+ * Keep the two in sync -- src/tokens/tailwind-theme.test.ts enforces it.
  *
  * Colors below are the raw values observed in landing-page-kit's src/styles.css.
  * They are NOT Autopay Design System 2.0 brand tokens — see AUDIT.md.
