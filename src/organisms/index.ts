@@ -24,3 +24,4 @@ export * from "./ComparisonTimelineSection";
 export * from "./PositioningSpectrumSection";
 export * from "./RequirementsChecklistSection";
 export * from "./CostBreakdownSection";
+export * from "./ComparisonCardsSection";

@@ -32,6 +32,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var organisms_exports = {};
 __export(organisms_exports, {
   AudienceScenariosSection: () => AudienceScenariosSection,
+  ComparisonCardsSection: () => ComparisonCardsSection,
   ComparisonTimelineSection: () => ComparisonTimelineSection,
   ContactSection: () => ContactSection,
   CookieConsentScript: () => CookieConsentScript,
@@ -1489,9 +1490,49 @@ function CostBreakdownSection({ eyebrow, heading, description, components }) {
     ] }, component.title)) })
   ] });
 }
+
+// src/organisms/ComparisonCardsSection/ComparisonCardsSection.tsx
+var import_lucide_react6 = require("lucide-react");
+var import_jsx_runtime51 = require("react/jsx-runtime");
+function ComparisonCardsSection({ eyebrow, heading, cards }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("h2", { className: "mt-4 font-display text-h2", children: heading }),
+    /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("div", { className: "mt-8 grid gap-6 md:grid-cols-2", children: cards.map((card) => /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)(
+      "div",
+      {
+        className: cn(
+          "rounded-3xl p-8",
+          card.highlighted ? "bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)]" : "bg-muted"
+        ),
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("h3", { className: "font-display text-h4", children: card.name }),
+          /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("ul", { className: "mt-6 space-y-4", children: card.criteria.map((criterion) => /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("li", { className: "flex items-start gap-3", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
+              "span",
+              {
+                className: cn(
+                  "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+                  criterion.positive ? "bg-lime text-lime-foreground" : "bg-background/60 text-muted-foreground"
+                ),
+                children: criterion.positive ? /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(import_lucide_react6.Check, { className: "h-3 w-3" }) : /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(import_lucide_react6.X, { className: "h-3 w-3" })
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("span", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("span", { className: "block text-sm font-semibold", children: criterion.label }),
+              /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("span", { className: "text-sm text-muted-foreground", children: criterion.description })
+            ] })
+          ] }, criterion.label)) })
+        ]
+      },
+      card.name
+    )) })
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AudienceScenariosSection,
+  ComparisonCardsSection,
   ComparisonTimelineSection,
   ContactSection,
   CookieConsentScript,

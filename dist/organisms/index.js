@@ -1427,8 +1427,48 @@ function CostBreakdownSection({ eyebrow, heading, description, components }) {
     ] }, component.title)) })
   ] });
 }
+
+// src/organisms/ComparisonCardsSection/ComparisonCardsSection.tsx
+import { Check as Check3, X as X2 } from "lucide-react";
+import { jsx as jsx51, jsxs as jsxs41 } from "react/jsx-runtime";
+function ComparisonCardsSection({ eyebrow, heading, cards }) {
+  return /* @__PURE__ */ jsxs41("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsx51("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+    /* @__PURE__ */ jsx51("h2", { className: "mt-4 font-display text-h2", children: heading }),
+    /* @__PURE__ */ jsx51("div", { className: "mt-8 grid gap-6 md:grid-cols-2", children: cards.map((card) => /* @__PURE__ */ jsxs41(
+      "div",
+      {
+        className: cn(
+          "rounded-3xl p-8",
+          card.highlighted ? "bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)]" : "bg-muted"
+        ),
+        children: [
+          /* @__PURE__ */ jsx51("h3", { className: "font-display text-h4", children: card.name }),
+          /* @__PURE__ */ jsx51("ul", { className: "mt-6 space-y-4", children: card.criteria.map((criterion) => /* @__PURE__ */ jsxs41("li", { className: "flex items-start gap-3", children: [
+            /* @__PURE__ */ jsx51(
+              "span",
+              {
+                className: cn(
+                  "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+                  criterion.positive ? "bg-lime text-lime-foreground" : "bg-background/60 text-muted-foreground"
+                ),
+                children: criterion.positive ? /* @__PURE__ */ jsx51(Check3, { className: "h-3 w-3" }) : /* @__PURE__ */ jsx51(X2, { className: "h-3 w-3" })
+              }
+            ),
+            /* @__PURE__ */ jsxs41("span", { children: [
+              /* @__PURE__ */ jsx51("span", { className: "block text-sm font-semibold", children: criterion.label }),
+              /* @__PURE__ */ jsx51("span", { className: "text-sm text-muted-foreground", children: criterion.description })
+            ] })
+          ] }, criterion.label)) })
+        ]
+      },
+      card.name
+    )) })
+  ] });
+}
 export {
   AudienceScenariosSection,
+  ComparisonCardsSection,
   ComparisonTimelineSection,
   ContactSection,
   CookieConsentScript,

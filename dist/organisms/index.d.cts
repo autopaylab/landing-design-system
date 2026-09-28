@@ -556,4 +556,33 @@ interface CostBreakdownSectionProps {
 }
 declare function CostBreakdownSection({ eyebrow, heading, description, components }: CostBreakdownSectionProps): React.JSX.Element;
 
-export { type AudienceScenario, AudienceScenariosSection, type AudienceScenariosSectionProps, type ComparisonPath, ComparisonTimelineSection, type ComparisonTimelineSectionProps, ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, CostBreakdownSection, type CostBreakdownSectionProps, type CostComponent, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type LeadFormField, LeadFormSection, type LeadFormSectionProps, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PositioningOption, PositioningSpectrumSection, type PositioningSpectrumSectionProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, type RequirementItem, RequirementsChecklistSection, type RequirementsChecklistSectionProps, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };
+interface ComparisonCriterion {
+    label: string;
+    description: string;
+    /** Whether this criterion counts as a positive (check) or negative (cross) for this card. */
+    positive: boolean;
+}
+interface ComparisonCard {
+    name: string;
+    criteria: ComparisonCriterion[];
+    /** The "us" card — gradient background (reusing StatsSection's brand-blue gradient) instead of plain. */
+    highlighted?: boolean;
+}
+/**
+ * An "us vs. them" comparison — two or more named cards, each listing the
+ * *same* set of criteria with a per-card check/cross verdict. New pattern,
+ * not an extraction — see AUDIT.md #17/#27: kalendarz.autopay.pl's "Co
+ * wyróżnia Kalendarz Autopay?" (Marketplace, all crosses, vs. Autopay
+ * Calendar, all checks — same 5 criteria) has no equivalent anywhere in
+ * this package. Distinct from `RequirementsChecklistSection` (one
+ * dark-background list, every row a checkmark, no per-card ✗ state) and
+ * from `PricingSection` (tiered plans, not a same-criteria comparison).
+ */
+interface ComparisonCardsSectionProps {
+    eyebrow?: string;
+    heading: React.ReactNode;
+    cards: ComparisonCard[];
+}
+declare function ComparisonCardsSection({ eyebrow, heading, cards }: ComparisonCardsSectionProps): React.JSX.Element;
+
+export { type AudienceScenario, AudienceScenariosSection, type AudienceScenariosSectionProps, type ComparisonCard, ComparisonCardsSection, type ComparisonCardsSectionProps, type ComparisonCriterion, type ComparisonPath, ComparisonTimelineSection, type ComparisonTimelineSectionProps, ContactSection, type ContactSectionProps, CookieConsentScript, type CookieConsentScriptProps, CostBreakdownSection, type CostBreakdownSectionProps, type CostComponent, type DataLeverageItem, DataLeverageSection, type DataLeverageSectionProps, FaqAccordionSection, type FaqAccordionSectionProps, type FaqEntry, type FloatingPaymentBadge, FourStepsSection, type FourStepsSectionProps, GlobalCoverageSection, type GlobalCoverageSectionProps, HeroImageOverlay, type HeroImageOverlayProps, HeroVideoSplit, type HeroVideoSplitProps, IndustriesGridSection, type IndustriesGridSectionProps, IndustriesStackedSection, type IndustriesStackedSectionProps, type IndustryEntry, type LeadFormField, LeadFormSection, type LeadFormSectionProps, type OverlapCardEntry, OverlappingCardsSection, type OverlappingCardsSectionProps, type PlatformFeature, PlatformFeatureShowcase, type PlatformFeatureShowcaseProps, type PositioningOption, PositioningSpectrumSection, type PositioningSpectrumSectionProps, type PricingFootnote, PricingSection, type PricingSectionProps, PromoCtaSection, type PromoCtaSectionProps, type ReportingPeriod, type RequirementItem, RequirementsChecklistSection, type RequirementsChecklistSectionProps, SecuritySection, type SecuritySectionProps, SingleIntegrationSection, type SingleIntegrationSectionProps, StatsSection, type StatsSectionProps, type Step, type TrustedByLogo, TrustedByLogos, type TrustedByLogosProps, buildCookieConsentScript };

@@ -1437,17 +1437,56 @@ function CostBreakdownSection({ eyebrow, heading, description, components }) {
   ] });
 }
 
-// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+// src/organisms/ComparisonCardsSection/ComparisonCardsSection.tsx
+import { Check as Check3, X as X2 } from "lucide-react";
 import { jsx as jsx52, jsxs as jsxs42 } from "react/jsx-runtime";
+function ComparisonCardsSection({ eyebrow, heading, cards }) {
+  return /* @__PURE__ */ jsxs42("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsx52("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+    /* @__PURE__ */ jsx52("h2", { className: "mt-4 font-display text-h2", children: heading }),
+    /* @__PURE__ */ jsx52("div", { className: "mt-8 grid gap-6 md:grid-cols-2", children: cards.map((card) => /* @__PURE__ */ jsxs42(
+      "div",
+      {
+        className: cn(
+          "rounded-3xl p-8",
+          card.highlighted ? "bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)]" : "bg-muted"
+        ),
+        children: [
+          /* @__PURE__ */ jsx52("h3", { className: "font-display text-h4", children: card.name }),
+          /* @__PURE__ */ jsx52("ul", { className: "mt-6 space-y-4", children: card.criteria.map((criterion) => /* @__PURE__ */ jsxs42("li", { className: "flex items-start gap-3", children: [
+            /* @__PURE__ */ jsx52(
+              "span",
+              {
+                className: cn(
+                  "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+                  criterion.positive ? "bg-lime text-lime-foreground" : "bg-background/60 text-muted-foreground"
+                ),
+                children: criterion.positive ? /* @__PURE__ */ jsx52(Check3, { className: "h-3 w-3" }) : /* @__PURE__ */ jsx52(X2, { className: "h-3 w-3" })
+              }
+            ),
+            /* @__PURE__ */ jsxs42("span", { children: [
+              /* @__PURE__ */ jsx52("span", { className: "block text-sm font-semibold", children: criterion.label }),
+              /* @__PURE__ */ jsx52("span", { className: "text-sm text-muted-foreground", children: criterion.description })
+            ] })
+          ] }, criterion.label)) })
+        ]
+      },
+      card.name
+    )) })
+  ] });
+}
+
+// src/templates/LandingPageTemplate/LandingPageTemplate.tsx
+import { jsx as jsx53, jsxs as jsxs43 } from "react/jsx-runtime";
 function LandingPageTemplate({ navbar, hero, sections, footer }) {
-  return /* @__PURE__ */ jsxs42("div", { className: "flex min-h-screen flex-col", children: [
-    /* @__PURE__ */ jsx52(Navbar, { ...navbar }),
-    /* @__PURE__ */ jsxs42("main", { className: "flex-1", children: [
-      /* @__PURE__ */ jsx52("div", { id: "top" }),
+  return /* @__PURE__ */ jsxs43("div", { className: "flex min-h-screen flex-col", children: [
+    /* @__PURE__ */ jsx53(Navbar, { ...navbar }),
+    /* @__PURE__ */ jsxs43("main", { className: "flex-1", children: [
+      /* @__PURE__ */ jsx53("div", { id: "top" }),
       hero,
       sections
     ] }),
-    /* @__PURE__ */ jsx52(Footer, { ...footer })
+    /* @__PURE__ */ jsx53(Footer, { ...footer })
   ] });
 }
 
@@ -1531,6 +1570,7 @@ export {
   BulletItem,
   Button,
   Checkbox,
+  ComparisonCardsSection,
   ComparisonTimelineSection,
   ConsentCheckboxField,
   ContactSection,
