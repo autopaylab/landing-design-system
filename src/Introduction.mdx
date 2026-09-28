@@ -79,7 +79,7 @@ Don't forget the stylesheet once, alongside Tailwind:
 
 ## Always include on a real landing page
 
-**`CookieConsentScript`** (Organisms) — Autopay's production cookie-consent banner, ported byte-for-byte from autopaylab.com. Place it as the very first child of `<body>`. It's the one deliberate exception in this package: not built or styled by us, not to be redesigned — see its own doc comment and [`AUDIT.md` §12](https://github.com/autopaylab/landing-design-system/blob/main/AUDIT.md).
+**`CookieConsentScript`** (Organisms) — Autopay's production cookie-consent banner, ported byte-for-byte from autopaylab.com. Place it as the very first child of `<body>`. It's the one deliberate exception in this package: not built or styled by us, not to be redesigned — see its own doc comment and [`AUDIT.md` §12/§26](https://github.com/autopaylab/landing-design-system/blob/main/AUDIT.md). Defaults to autopaylab.com's ConsentManager account (`cmp_cdid`); pass a `cmpCdid` prop to reuse it on a different domain, once you've confirmed the right value with whoever administers ConsentManager for that domain.
 
 ## Harmonization status vs. Autopay Design System 2.0
 
