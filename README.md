@@ -13,31 +13,41 @@ Contributing? See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the extraction disc
 
 ## Install
 
-**Not published to npm or any registry** — deliberately, so only people with GitHub access to this repo can pull it in (see `CONTRIBUTING.md` "Releases"). Install as a git dependency, pinned to a released tag:
+**Not published to npm or any registry** — deliberately, so only people with GitHub access to this repo can pull it in (see `CONTRIBUTING.md` "Releases"). Install as a git dependency, always pinned to a released tag — never `#main`, which moves under you on every merge:
 
 ```bash
-npm install github:autopaylab/landing-design-system#v0.7.0
+npm install github:autopaylab/landing-design-system#v0.11.0
 ```
 
-(`#main` tracks the latest commit instead of a pinned release — fine for local experiments, not for a real app.)
+Peer dependencies: `react` ≥18, `react-dom` ≥18, `tailwindcss` ≥4. Tailwind v3 is not supported. Fully typed (TypeScript `.d.ts` shipped for every export). No runtime dependency on shadcn/ui or Lovable tooling — see [`AUDIT.md`](./AUDIT.md) #3. Built and tested against Next.js App Router — see `AUDIT.md` §8 for Server/Client Component notes.
 
-Peer dependencies: `react` ≥18, `react-dom` ≥18, `tailwindcss` ≥3.4. Fully typed (TypeScript `.d.ts` shipped for every export). No runtime dependency on shadcn/ui or Lovable tooling — see [`AUDIT.md`](./AUDIT.md) #3. Built and tested against Next.js App Router — see `AUDIT.md` §8 for Server/Client Component notes.
+### Tailwind CSS v4 setup
 
-Add the base Tailwind config and the raw CSS tokens to your app:
-
-```ts
-// tailwind.config.ts
-import base from "@autopaylab/landing-design-system/tailwind.config";
-
-export default {
-  ...base,
-  content: [...base.content, "./app/**/*.{ts,tsx}"],
-};
-```
+Tested against a fresh `create-next-app` (TypeScript, App Router, Tailwind, no `src/`). Replace the whole contents of `app/globals.css` with:
 
 ```css
-/* your global CSS */
-@import "@autopaylab/landing-design-system/styles.css";
+@import "tailwindcss";
+@import "@autopaylab/landing-design-system/tailwind.css";
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+```
+
+No `tailwind.config.ts` is needed. `tailwind.css` does all three things the components depend on:
+
+- imports `styles.css` (the raw CSS tokens and self-hosted fonts, see "Fonts" below),
+- maps those tokens into Tailwind's theme with `@theme` (`bg-primary`, `text-muted-foreground`, `rounded-lg`, `font-display`, `text-h1`..`text-h6`, …) and makes Open Sans the default font,
+- adds an `@source` for this package's own `dist/`. Tailwind v4 skips `node_modules` during automatic source detection, so without it none of the classes used inside the components would be generated.
+
+Replace the file instead of appending to it: create-next-app's default `globals.css` defines its own `:root` colors and an `@theme inline` block (`--font-sans: var(--font-geist-sans)`, `--color-background`, …) that come after the import and override this package's fonts and colors.
+
+Then use the components, e.g. in `app/page.tsx`:
+
+```tsx
+import { Button } from "@autopaylab/landing-design-system/atoms";
+import { LeadFormSection } from "@autopaylab/landing-design-system/organisms";
 ```
 
 ### Fonts
@@ -168,7 +178,7 @@ anyone, which isn't wanted here). It still gets real semver versions and a
 changelog via [Changesets](https://github.com/changesets/changesets) — see
 `CONTRIBUTING.md` for how a release is cut.
 
-Storybook (10.6, `@storybook/react-vite`) runs directly on the same `src/**/*.stories.tsx` files used by the a11y test suite — `npm run storybook` for the dev server, `npm run build-storybook` for a static build (output: `storybook-static/`, gitignored). Tailwind v4 (`@tailwindcss/postcss`) is wired up via `postcss.config.cjs` + `.storybook/preview.css`'s `@import "tailwindcss";`; the `@config "./tailwind.config.ts";` directive there points Tailwind at `.storybook/tailwind.config.ts` — a dev-only override of the package's own exported `tailwind.config.ts` (which targets consumers' `dist/`, not `src/`) using the same v3-style `content`/`theme.extend` shape, which v4 still fully supports via `@config`. `.storybook/main.ts`'s `viteFinal` also adds the `@/*` alias (mirroring `vitest.config.ts`) and forces `react`/`react-dom` into `optimizeDeps` — both needed for Storybook's own Vite pipeline, not required by consumers.
+Storybook (10.6, `@storybook/react-vite`) runs directly on the same `src/**/*.stories.tsx` files used by the a11y test suite — `npm run storybook` for the dev server, `npm run build-storybook` for a static build (output: `storybook-static/`, gitignored). Tailwind v4 (`@tailwindcss/postcss`) is wired up via `postcss.config.cjs` + `.storybook/preview.css`'s `@import "tailwindcss";`; the `@config "./tailwind.config.ts";` directive there points Tailwind at `.storybook/tailwind.config.ts` — a dev-only override of the repo-root `tailwind.config.ts` pointing `content` at `src/` instead of `dist/`, using the v3-style `content`/`theme.extend` shape v4 still supports via `@config`. That root config is Storybook-only; consumers get the same theme from `tailwind.css` (see "Install"), and `src/tokens/tailwind-theme.test.ts` fails if the two drift apart. `.storybook/main.ts`'s `viteFinal` also adds the `@/*` alias (mirroring `vitest.config.ts`) and forces `react`/`react-dom` into `optimizeDeps` — both needed for Storybook's own Vite pipeline, not required by consumers.
 
 Every push/PR to `main` also publishes the built Storybook to [Chromatic](https://www.chromatic.com/builds?appId=6aa104b411b5b49179275bdc) (the `chromatic` CI job, gated on the `CHROMATIC_PROJECT_TOKEN` repo secret) — a visual, browsable catalog of every story, and the foundation for visual regression testing if that's added later.
 
