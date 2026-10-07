@@ -46,3 +46,39 @@ describe("Navbar mobile menu", () => {
     expect(screen.queryAllByText("Platform")).toHaveLength(1);
   });
 });
+
+describe("Navbar single call to action", () => {
+  const singleCtaProps = {
+    logoSrc: "/logo.svg",
+    logoAlt: "Product",
+    navItems: [],
+    showAuthButtons: false,
+    cta: { label: "Apply", href: "#apply" },
+    languageLink: { label: "EN", href: "/en", hrefLang: "en", lang: "en", srLabel: "(English version)" },
+  };
+
+  it("renders the CTA as a link and hides the Login/Sign In pair", () => {
+    render(<Navbar {...singleCtaProps} />);
+    expect(screen.getByRole("link", { name: "Apply" })).toHaveAttribute("href", "#apply");
+    expect(screen.queryByRole("button", { name: "Login" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Sign In" })).toBeNull();
+  });
+
+  it("renders the language switch as a link with hreflang, whose name starts with the visible label", () => {
+    render(<Navbar {...singleCtaProps} />);
+    const link = screen.getByRole("link", { name: /^EN\s*\(English version\)$/ });
+    expect(link).toHaveAttribute("href", "/en");
+    expect(link).toHaveAttribute("hreflang", "en");
+    expect(link).toHaveAttribute("lang", "en");
+  });
+
+  it("does not render a mobile menu toggle when the menu would be empty", () => {
+    render(<Navbar {...singleCtaProps} />);
+    expect(screen.queryByRole("button", { name: "Open menu" })).toBeNull();
+  });
+
+  it("keeps the Login/Sign In pair by default", () => {
+    render(<Navbar {...baseProps} />);
+    expect(screen.getAllByRole("button", { name: "Login" }).length).toBeGreaterThan(0);
+  });
+});

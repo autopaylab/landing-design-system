@@ -26,3 +26,17 @@ export const Default: Story = {
     ],
   },
 };
+
+/** Three steps, no illustration, and an emphasized note under the steps. */
+export const ThreeStepsWithNote: Story = {
+  args: {
+    heading: "How it works",
+    description: "Three steps from the first question to a completed payment.",
+    steps: [
+      { title: "Step one", body: "The first thing that happens." },
+      { title: "Step two", body: "The second thing that happens." },
+      { title: "Step three", body: "The third thing that happens." },
+    ],
+    note: "An emphasized sentence that must stand out under the steps.",
+  },
+};

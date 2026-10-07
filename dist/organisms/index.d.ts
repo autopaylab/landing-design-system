@@ -1,20 +1,29 @@
-export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarProps } from '../Footer-8cnZzh6n.js';
+export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarCta, f as NavbarLanguageLink, g as NavbarProps } from '../Footer-B6L2lkAc.js';
 import * as React from 'react';
 import { c as IconFeatureItemProps, a as IconCardProps, g as StatBlockProps, d as OverlapCardCta, f as PricingTierProps } from '../OverlapCard-EL2fbRPF.js';
 import { b as SelectOption } from '../Select-CmdSVFIc.js';
 import 'class-variance-authority/types';
 import 'class-variance-authority';
 
-/** The primary two-column video hero from HomeContent.tsx (lines 142-165). */
+/**
+ * The primary two-column video hero from HomeContent.tsx (lines 142-165).
+ *
+ * `videoSrc` is optional and `mediaCaption` is new (neither extracted): a
+ * consuming landing page (paytalkpl) has no hero video yet, and must label
+ * any product recording it does add as a demo. Without `videoSrc` the hero
+ * renders as a single text column.
+ */
 interface HeroVideoSplitProps {
     eyebrow?: string;
     title: React.ReactNode;
     subtitle: string;
     ctaLabel: string;
     ctaHref: string;
-    videoSrc: string;
+    videoSrc?: string;
+    /** Visible caption under the video, e.g. "Demo". Only rendered with `videoSrc`. */
+    mediaCaption?: string;
 }
-declare function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc }: HeroVideoSplitProps): React.JSX.Element;
+declare function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc, mediaCaption }: HeroVideoSplitProps): React.JSX.Element;
 
 /**
  * Merges the source's two hero-overlay variants ("stacked": gradient
@@ -62,15 +71,23 @@ interface Step {
  * source; kept as a real, working organism but flagged in AUDIT.md #1 as
  * likely wrong-product content for a payments-platform page. No copy from
  * that product line is reused here — see the story for placeholder content.
+ *
+ * `image` is optional and `note` is new (neither extracted): a consuming
+ * landing page (paytalkpl) has a three-step flow with no illustration yet,
+ * and one sentence that must stand out under the steps. With three steps the
+ * grid uses three columns on large screens instead of leaving a fourth empty.
  */
 interface FourStepsSectionProps {
     heading: React.ReactNode;
     description: string;
-    image: string;
-    imageAlt: string;
+    /** Omit to render the heading block full width, without an illustration. */
+    image?: string;
+    imageAlt?: string;
     steps: Step[];
+    /** A short emphasized line rendered below the steps. */
+    note?: React.ReactNode;
 }
-declare function FourStepsSection({ heading, description, image, imageAlt, steps }: FourStepsSectionProps): React.JSX.Element;
+declare function FourStepsSection({ heading, description, image, imageAlt, steps, note }: FourStepsSectionProps): React.JSX.Element;
 
 /** HomeContent.tsx "Single Integration" section (lines 179-227). */
 interface SingleIntegrationSectionProps {
@@ -357,8 +374,16 @@ interface CookieConsentScriptProps {
      * anything is actually broken.
      */
     cmpCdid?: string;
+    /**
+     * The page's language, for apps that render each locale at its own URL
+     * (e.g. `/` and `/en`) and so know it at render time. When set, it wins
+     * over `localeStorageKey` and is written straight into `cmp_setlang`. New,
+     * not extracted -- a consuming landing page (paytalkpl) has per-URL
+     * locales and no localStorage locale at all.
+     */
+    locale?: "pl" | "en";
 }
-declare function buildCookieConsentScript({ localeStorageKey, cmpCdid, }?: CookieConsentScriptProps): string;
+declare function buildCookieConsentScript({ localeStorageKey, cmpCdid, locale, }?: CookieConsentScriptProps): string;
 /**
  * Renders the loader as a raw `<script>` tag. Must be the very first thing
  * inside `<body>`, before anything else can set cookies or run tracking

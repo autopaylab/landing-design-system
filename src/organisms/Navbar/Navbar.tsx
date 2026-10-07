@@ -12,6 +12,33 @@ export interface NavItem {
   href: string;
 }
 
+/**
+ * A single primary call to action rendered as a real link (not a click
+ * handler), for landing pages whose only header action is "go to the form".
+ * New, not extracted -- a consuming landing page (paytalkpl) needed one CTA
+ * instead of the source's Login/Sign In pair.
+ */
+export interface NavbarCta {
+  label: string;
+  href: string;
+}
+
+/**
+ * A language switch that navigates to the other locale's URL. New, not
+ * extracted: the source's language control is a button with an onClick,
+ * which can't carry `hreflang` and isn't crawlable. `srLabel` is appended
+ * as visually hidden text, so the accessible name still starts with the
+ * visible label (WCAG 2.5.3 Label in Name), e.g. "EN" + " (English version)".
+ */
+export interface NavbarLanguageLink {
+  label: string;
+  href: string;
+  hrefLang: string;
+  /** Language of the link text itself, e.g. "en" on a Polish page. */
+  lang?: string;
+  srLabel?: string;
+}
+
 /** SiteHeader.tsx: sticky pill navbar, logo, nav links, Login/Sign In, language switcher. */
 export interface NavbarProps {
   logoSrc: string;
@@ -22,17 +49,40 @@ export interface NavbarProps {
   onLoginClick?: () => void;
   signInLabel?: string;
   onSignInClick?: () => void;
+  /**
+   * Defaults to true, matching the source. Set to false on pages that have
+   * no accounts to log into, so the Login/Sign In pair isn't shown as
+   * competing calls to action.
+   */
+  showAuthButtons?: boolean;
+  cta?: NavbarCta;
   /** e.g. a flag emoji or short region code, as observed on the page ("🇬🇧"). */
   languageLabel?: React.ReactNode;
   onLanguageClick?: () => void;
   /** Accessible name for the language button — the visible label alone (a flag/code) isn't a name assistive tech can announce. */
   languageButtonAriaLabel?: string;
+  /** Link-based alternative to `languageLabel`/`onLanguageClick`. When set, the language button is not rendered. */
+  languageLink?: NavbarLanguageLink;
   /** Accessible name for the primary nav landmark, so it's distinguishable from other <nav> regions (e.g. a footer nav) on the same page. */
   navAriaLabel?: string;
   /** Accessible name for the mobile menu toggle button when the menu is closed. */
   openMenuAriaLabel?: string;
   /** Accessible name for the mobile menu toggle button when the menu is open. */
   closeMenuAriaLabel?: string;
+}
+
+function LanguageLink({ link, className }: { link: NavbarLanguageLink; className?: string }) {
+  return (
+    <a
+      href={link.href}
+      hrefLang={link.hrefLang}
+      lang={link.lang}
+      className={`inline-flex h-10 min-w-10 items-center justify-center rounded-lg px-2 text-sm font-semibold text-foreground hover:bg-muted ${className ?? ""}`}
+    >
+      {link.label}
+      {link.srLabel ? <span className="sr-only"> {link.srLabel}</span> : null}
+    </a>
+  );
 }
 
 export function Navbar({
@@ -44,15 +94,22 @@ export function Navbar({
   onLoginClick,
   signInLabel = "Sign In",
   onSignInClick,
+  showAuthButtons = true,
+  cta,
   languageLabel,
   onLanguageClick,
   languageButtonAriaLabel = "Change language",
+  languageLink,
   navAriaLabel = "Primary",
   openMenuAriaLabel = "Open menu",
   closeMenuAriaLabel = "Close menu",
 }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const menuId = React.useId();
+  const showLanguageButton = !languageLink && !!languageLabel;
+  // With no nav links, no auth buttons and no language button there is nothing
+  // to put in the mobile menu, so don't render a toggle that opens an empty panel.
+  const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
 
   return (
     <header className="sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6">
@@ -69,18 +126,28 @@ export function Navbar({
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              className="hidden px-6 py-2.5 text-[17px] md:inline-flex"
-              onClick={onLoginClick}
-            >
-              {loginLabel}
-            </Button>
-            <Button type="button" variant="lime" className="hidden px-6 py-2.5 text-[17px] md:inline-flex" onClick={onSignInClick}>
-              {signInLabel}
-            </Button>
-            {languageLabel && (
+            {showAuthButtons && (
+              <>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="hidden px-6 py-2.5 text-[17px] md:inline-flex"
+                  onClick={onLoginClick}
+                >
+                  {loginLabel}
+                </Button>
+                <Button type="button" variant="lime" className="hidden px-6 py-2.5 text-[17px] md:inline-flex" onClick={onSignInClick}>
+                  {signInLabel}
+                </Button>
+              </>
+            )}
+            {cta && (
+              <Button asChild variant="lime" className="px-4 py-2.5 text-sm md:px-6 md:text-[17px]">
+                <a href={cta.href}>{cta.label}</a>
+              </Button>
+            )}
+            {languageLink && <LanguageLink link={languageLink} />}
+            {showLanguageButton && (
               <button
                 type="button"
                 onClick={onLanguageClick}
@@ -93,19 +160,21 @@ export function Navbar({
                 <ChevronDown className="h-4 w-4" />
               </button>
             )}
-            <button
-              type="button"
-              onClick={() => setIsMenuOpen((open) => !open)}
-              aria-label={isMenuOpen ? closeMenuAriaLabel : openMenuAriaLabel}
-              aria-expanded={isMenuOpen}
-              aria-controls={menuId}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden"
-            >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+            {hasMobileMenu && (
+              <button
+                type="button"
+                onClick={() => setIsMenuOpen((open) => !open)}
+                aria-label={isMenuOpen ? closeMenuAriaLabel : openMenuAriaLabel}
+                aria-expanded={isMenuOpen}
+                aria-controls={menuId}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden"
+              >
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            )}
           </div>
         </div>
-        {isMenuOpen && (
+        {hasMobileMenu && isMenuOpen && (
           <nav
             id={menuId}
             aria-label={navAriaLabel}
@@ -122,15 +191,17 @@ export function Navbar({
                 {item.label}
               </Link>
             ))}
-            <div className="mt-3 flex flex-col gap-2">
-              <Button type="button" variant="outline" className="w-full py-2.5 text-[17px]" onClick={onLoginClick}>
-                {loginLabel}
-              </Button>
-              <Button type="button" variant="lime" className="w-full py-2.5 text-[17px]" onClick={onSignInClick}>
-                {signInLabel}
-              </Button>
-            </div>
-            {languageLabel && (
+            {showAuthButtons && (
+              <div className="mt-3 flex flex-col gap-2">
+                <Button type="button" variant="outline" className="w-full py-2.5 text-[17px]" onClick={onLoginClick}>
+                  {loginLabel}
+                </Button>
+                <Button type="button" variant="lime" className="w-full py-2.5 text-[17px]" onClick={onSignInClick}>
+                  {signInLabel}
+                </Button>
+              </div>
+            )}
+            {showLanguageButton && (
               <button
                 type="button"
                 onClick={onLanguageClick}

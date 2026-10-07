@@ -104,7 +104,25 @@ function Logo({ className, size, src, alt, ...props }) {
 }
 
 // src/organisms/Navbar/Navbar.tsx
-import { jsx as jsx4, jsxs } from "react/jsx-runtime";
+import { Fragment, jsx as jsx4, jsxs } from "react/jsx-runtime";
+function LanguageLink({ link, className }) {
+  return /* @__PURE__ */ jsxs(
+    "a",
+    {
+      href: link.href,
+      hrefLang: link.hrefLang,
+      lang: link.lang,
+      className: `inline-flex h-10 min-w-10 items-center justify-center rounded-lg px-2 text-sm font-semibold text-foreground hover:bg-muted ${className ?? ""}`,
+      children: [
+        link.label,
+        link.srLabel ? /* @__PURE__ */ jsxs("span", { className: "sr-only", children: [
+          " ",
+          link.srLabel
+        ] }) : null
+      ]
+    }
+  );
+}
 function Navbar({
   logoSrc,
   logoAlt,
@@ -114,32 +132,41 @@ function Navbar({
   onLoginClick,
   signInLabel = "Sign In",
   onSignInClick,
+  showAuthButtons = true,
+  cta,
   languageLabel,
   onLanguageClick,
   languageButtonAriaLabel = "Change language",
+  languageLink,
   navAriaLabel = "Primary",
   openMenuAriaLabel = "Open menu",
   closeMenuAriaLabel = "Close menu"
 }) {
   const [isMenuOpen, setIsMenuOpen] = React3.useState(false);
   const menuId = React3.useId();
+  const showLanguageButton = !languageLink && !!languageLabel;
+  const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
   return /* @__PURE__ */ jsx4("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
       /* @__PURE__ */ jsx4("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ jsx4(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ jsx4("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx4(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
       /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsx4(
-          Button,
-          {
-            type: "button",
-            variant: "outline",
-            className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
-            onClick: onLoginClick,
-            children: loginLabel
-          }
-        ),
-        /* @__PURE__ */ jsx4(Button, { type: "button", variant: "lime", className: "hidden px-6 py-2.5 text-[17px] md:inline-flex", onClick: onSignInClick, children: signInLabel }),
-        languageLabel && /* @__PURE__ */ jsxs(
+        showAuthButtons && /* @__PURE__ */ jsxs(Fragment, { children: [
+          /* @__PURE__ */ jsx4(
+            Button,
+            {
+              type: "button",
+              variant: "outline",
+              className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
+              onClick: onLoginClick,
+              children: loginLabel
+            }
+          ),
+          /* @__PURE__ */ jsx4(Button, { type: "button", variant: "lime", className: "hidden px-6 py-2.5 text-[17px] md:inline-flex", onClick: onSignInClick, children: signInLabel })
+        ] }),
+        cta && /* @__PURE__ */ jsx4(Button, { asChild: true, variant: "lime", className: "px-4 py-2.5 text-sm md:px-6 md:text-[17px]", children: /* @__PURE__ */ jsx4("a", { href: cta.href, children: cta.label }) }),
+        languageLink && /* @__PURE__ */ jsx4(LanguageLink, { link: languageLink }),
+        showLanguageButton && /* @__PURE__ */ jsxs(
           "button",
           {
             type: "button",
@@ -152,7 +179,7 @@ function Navbar({
             ]
           }
         ),
-        /* @__PURE__ */ jsx4(
+        hasMobileMenu && /* @__PURE__ */ jsx4(
           "button",
           {
             type: "button",
@@ -166,7 +193,7 @@ function Navbar({
         )
       ] })
     ] }),
-    isMenuOpen && /* @__PURE__ */ jsxs(
+    hasMobileMenu && isMenuOpen && /* @__PURE__ */ jsxs(
       "nav",
       {
         id: menuId,
@@ -184,11 +211,11 @@ function Navbar({
             },
             item.label
           )),
-          /* @__PURE__ */ jsxs("div", { className: "mt-3 flex flex-col gap-2", children: [
+          showAuthButtons && /* @__PURE__ */ jsxs("div", { className: "mt-3 flex flex-col gap-2", children: [
             /* @__PURE__ */ jsx4(Button, { type: "button", variant: "outline", className: "w-full py-2.5 text-[17px]", onClick: onLoginClick, children: loginLabel }),
             /* @__PURE__ */ jsx4(Button, { type: "button", variant: "lime", className: "w-full py-2.5 text-[17px]", onClick: onSignInClick, children: signInLabel })
           ] }),
-          languageLabel && /* @__PURE__ */ jsxs(
+          showLanguageButton && /* @__PURE__ */ jsxs(
             "button",
             {
               type: "button",
@@ -215,16 +242,18 @@ function Footer({
   bannerImage,
   logoSrc,
   logoAlt,
-  socialLinks,
+  secondaryLogoSrc,
+  secondaryLogoAlt,
+  socialLinks = [],
   tagline,
   navItems,
   address,
   legalText,
-  schemeBadges,
+  schemeBadges = [],
   navAriaLabel = "Footer"
 }) {
   return /* @__PURE__ */ jsxs2("footer", { className: "mt-24", children: [
-    /* @__PURE__ */ jsx5("section", { className: "relative mx-4 overflow-hidden rounded-t-3xl md:mx-8", children: /* @__PURE__ */ jsx5(
+    bannerImage && /* @__PURE__ */ jsx5("section", { className: "relative mx-4 overflow-hidden rounded-t-3xl md:mx-8", children: /* @__PURE__ */ jsx5(
       "div",
       {
         className: "relative min-h-[420px] bg-cover bg-center md:min-h-[520px]",
@@ -235,21 +264,32 @@ function Footer({
         ] })
       }
     ) }),
-    /* @__PURE__ */ jsxs2("section", { className: "mx-4 rounded-b-3xl bg-lime px-8 py-10 text-lime-foreground md:mx-8 md:px-16", children: [
-      /* @__PURE__ */ jsxs2("div", { className: "flex items-start justify-between gap-8", children: [
-        /* @__PURE__ */ jsx5(Logo, { src: logoSrc, alt: logoAlt, size: "sm" }),
-        /* @__PURE__ */ jsx5("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ jsx5("a", { href, "aria-label": label, className: "hover:opacity-70", children: /* @__PURE__ */ jsx5(Icon, { className: "h-5 w-5" }) }, label)) })
-      ] }),
-      /* @__PURE__ */ jsxs2("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
-        /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),
-        /* @__PURE__ */ jsx5("nav", { "aria-label": navAriaLabel, className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map((item) => /* @__PURE__ */ jsx5(Link, { variant: "underline", href: item.href, children: item.label }, item.label)) }),
-        /* @__PURE__ */ jsx5("address", { className: "text-sm not-italic leading-relaxed md:text-right", children: address })
-      ] }),
-      /* @__PURE__ */ jsxs2("div", { className: "mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-lime-foreground/20 pt-5 text-xs", children: [
-        /* @__PURE__ */ jsx5("span", { children: legalText }),
-        /* @__PURE__ */ jsx5("div", { className: "flex items-center gap-4 opacity-80", children: schemeBadges.map((badge) => /* @__PURE__ */ jsx5("span", { className: "font-bold", children: badge }, badge)) })
-      ] })
-    ] })
+    /* @__PURE__ */ jsxs2(
+      "section",
+      {
+        className: `mx-4 ${bannerImage ? "rounded-b-3xl" : "rounded-3xl"} bg-lime px-8 py-10 text-lime-foreground md:mx-8 md:px-16`,
+        children: [
+          /* @__PURE__ */ jsxs2("div", { className: "flex items-start justify-between gap-8", children: [
+            /* @__PURE__ */ jsxs2("div", { className: "flex flex-wrap items-center gap-6", children: [
+              /* @__PURE__ */ jsx5(Logo, { src: logoSrc, alt: logoAlt, size: "sm" }),
+              secondaryLogoSrc && /* @__PURE__ */ jsx5(Logo, { src: secondaryLogoSrc, alt: secondaryLogoAlt ?? "", size: "sm" })
+            ] }),
+            /* @__PURE__ */ jsx5("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ jsx5("a", { href, "aria-label": label, className: "hover:opacity-70", children: /* @__PURE__ */ jsx5(Icon, { className: "h-5 w-5" }) }, label)) })
+          ] }),
+          /* @__PURE__ */ jsxs2("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
+            /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),
+            /* @__PURE__ */ jsx5("nav", { "aria-label": navAriaLabel, className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map(
+              (item) => item.onClick && !item.href ? /* @__PURE__ */ jsx5(Link, { asChild: true, variant: "underline", children: /* @__PURE__ */ jsx5("button", { type: "button", onClick: item.onClick, className: "cursor-pointer", children: item.label }) }, item.label) : /* @__PURE__ */ jsx5(Link, { variant: "underline", href: item.href, onClick: item.onClick, children: item.label }, item.label)
+            ) }),
+            /* @__PURE__ */ jsx5("address", { className: "text-sm not-italic leading-relaxed md:text-right", children: address })
+          ] }),
+          /* @__PURE__ */ jsxs2("div", { className: "mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-lime-foreground/20 pt-5 text-xs", children: [
+            /* @__PURE__ */ jsx5("span", { children: legalText }),
+            /* @__PURE__ */ jsx5("div", { className: "flex items-center gap-4 opacity-80", children: schemeBadges.map((badge) => /* @__PURE__ */ jsx5("span", { className: "font-bold", children: badge }, badge)) })
+          ] })
+        ]
+      }
+    )
   ] });
 }
 
@@ -279,15 +319,18 @@ function Badge({ className, variant, ...props }) {
 
 // src/organisms/HeroVideoSplit/HeroVideoSplit.tsx
 import { jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
-function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc }) {
-  return /* @__PURE__ */ jsx7("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ jsxs3("div", { className: "grid items-center gap-10 md:grid-cols-2", children: [
-    /* @__PURE__ */ jsxs3("div", { children: [
+function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc, mediaCaption }) {
+  return /* @__PURE__ */ jsx7("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ jsxs3("div", { className: `grid items-center gap-10 ${videoSrc ? "md:grid-cols-2" : ""}`, children: [
+    /* @__PURE__ */ jsxs3("div", { className: videoSrc ? void 0 : "max-w-3xl", children: [
       eyebrow && /* @__PURE__ */ jsx7("div", { className: "mb-6", children: /* @__PURE__ */ jsx7(Badge, { variant: "eyebrow", children: eyebrow }) }),
       /* @__PURE__ */ jsx7("h1", { className: "font-display text-h1", children: title }),
-      /* @__PURE__ */ jsx7("p", { className: "mt-8 max-w-md text-base leading-relaxed text-muted-foreground md:text-[17px]", children: subtitle }),
+      /* @__PURE__ */ jsx7("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${videoSrc ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
       /* @__PURE__ */ jsx7("div", { className: "mt-10", children: /* @__PURE__ */ jsx7(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx7("a", { href: ctaHref, children: ctaLabel }) }) })
     ] }),
-    /* @__PURE__ */ jsx7("div", { className: "relative", children: /* @__PURE__ */ jsx7("video", { src: videoSrc, autoPlay: true, loop: true, muted: true, playsInline: true, className: "h-auto w-full" }) })
+    videoSrc && /* @__PURE__ */ jsxs3("figure", { className: "relative", children: [
+      /* @__PURE__ */ jsx7("video", { src: videoSrc, autoPlay: true, loop: true, muted: true, playsInline: true, className: "h-auto w-full" }),
+      mediaCaption && /* @__PURE__ */ jsx7("figcaption", { className: "mt-2 text-sm text-muted-foreground", children: mediaCaption })
+    ] })
   ] }) });
 }
 
@@ -364,25 +407,38 @@ function StepCard({ className, index, title, body, ...props }) {
 
 // src/organisms/FourStepsSection/FourStepsSection.tsx
 import { jsx as jsx12, jsxs as jsxs7 } from "react/jsx-runtime";
-function FourStepsSection({ heading, description, image, imageAlt, steps }) {
+function FourStepsSection({ heading, description, image, imageAlt = "", steps, note }) {
   return /* @__PURE__ */ jsx12("section", { "aria-labelledby": "four-steps-title", className: "px-5 py-14 md:py-20", children: /* @__PURE__ */ jsx12("div", { className: "mx-auto max-w-[1280px]", children: /* @__PURE__ */ jsxs7("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
-    /* @__PURE__ */ jsxs7("div", { className: "grid items-center gap-8 px-6 pb-10 pt-10 md:grid-cols-[1.1fr_1fr] md:px-14 md:pb-16 md:pt-14", children: [
-      /* @__PURE__ */ jsxs7("div", { children: [
-        /* @__PURE__ */ jsx12("h2", { id: "four-steps-title", className: "max-w-2xl font-display text-h2", children: heading }),
-        /* @__PURE__ */ jsx12("p", { className: "mt-6 max-w-xl text-muted-foreground md:text-[17px]", children: description })
-      ] }),
-      /* @__PURE__ */ jsx12("img", { src: image, alt: imageAlt, width: 700, height: 400, loading: "lazy", className: "w-full max-w-[560px] justify-self-end" })
-    ] }),
-    /* @__PURE__ */ jsx12("ol", { className: "grid border-t border-primary/20 sm:grid-cols-2 lg:grid-cols-4", children: steps.map((step, i) => /* @__PURE__ */ jsx12(
-      StepCard,
+    /* @__PURE__ */ jsxs7(
+      "div",
       {
-        index: i + 1,
-        title: step.title,
-        body: step.body,
-        className: "border-t border-border/40 first:border-t-0 sm:border-l sm:border-t-0 sm:[&:nth-child(odd)]:border-l-0 lg:border-l lg:[&:nth-child(odd)]:border-l"
-      },
-      step.title
-    )) })
+        className: `grid items-center gap-8 px-6 pb-10 pt-10 md:px-14 md:pb-16 md:pt-14 ${image ? "md:grid-cols-[1.1fr_1fr]" : ""}`,
+        children: [
+          /* @__PURE__ */ jsxs7("div", { children: [
+            /* @__PURE__ */ jsx12("h2", { id: "four-steps-title", className: "max-w-2xl font-display text-h2", children: heading }),
+            /* @__PURE__ */ jsx12("p", { className: "mt-6 max-w-xl text-muted-foreground md:text-[17px]", children: description })
+          ] }),
+          image && /* @__PURE__ */ jsx12("img", { src: image, alt: imageAlt, width: 700, height: 400, loading: "lazy", className: "w-full max-w-[560px] justify-self-end" })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsx12(
+      "ol",
+      {
+        className: `grid border-t border-primary/20 sm:grid-cols-2 ${steps.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`,
+        children: steps.map((step, i) => /* @__PURE__ */ jsx12(
+          StepCard,
+          {
+            index: i + 1,
+            title: step.title,
+            body: step.body,
+            className: "border-t border-border/40 first:border-t-0 sm:border-l sm:border-t-0 sm:[&:nth-child(odd)]:border-l-0 lg:border-l lg:[&:nth-child(odd)]:border-l"
+          },
+          step.title
+        ))
+      }
+    ),
+    note && /* @__PURE__ */ jsx12("p", { className: "border-t border-primary/20 px-6 py-8 font-display text-lg md:px-14 md:text-xl", children: note })
   ] }) }) });
 }
 
@@ -435,7 +491,7 @@ function SingleIntegrationSection({
 
 // src/organisms/PlatformFeatureShowcase/PlatformFeatureShowcase.tsx
 import * as React4 from "react";
-import { Fragment, jsx as jsx15, jsxs as jsxs10 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx15, jsxs as jsxs10 } from "react/jsx-runtime";
 function PlatformFeatureShowcase({ features }) {
   const [active, setActive] = React4.useState(features[0]?.key);
   const [hovered, setHovered] = React4.useState(null);
@@ -453,7 +509,7 @@ function PlatformFeatureShowcase({ features }) {
     setHovered(null);
     tabRefs.current[next.key]?.focus();
   };
-  return /* @__PURE__ */ jsxs10(Fragment, { children: [
+  return /* @__PURE__ */ jsxs10(Fragment2, { children: [
     /* @__PURE__ */ jsx15("div", { className: "flex flex-col gap-6 md:hidden", children: features.map((f) => /* @__PURE__ */ jsxs10("div", { className: "rounded-3xl bg-card p-6 shadow-sm", children: [
       /* @__PURE__ */ jsx15("h4", { className: "font-display text-h5", children: f.title }),
       /* @__PURE__ */ jsx15("p", { className: "mt-2 text-[15px] leading-relaxed text-muted-foreground", children: f.desc }),
@@ -644,7 +700,7 @@ function StatsSection({ heading, description, stats }) {
 }
 
 // src/molecules/IndustryCard/IndustryCard.tsx
-import { Fragment as Fragment2, jsx as jsx23, jsxs as jsxs18 } from "react/jsx-runtime";
+import { Fragment as Fragment3, jsx as jsx23, jsxs as jsxs18 } from "react/jsx-runtime";
 function IndustryCard({
   className,
   name,
@@ -702,10 +758,10 @@ function IndustryCard({
       ),
       style: { backgroundColor, ...style },
       ...props,
-      children: layout === "stacked" ? /* @__PURE__ */ jsxs18(Fragment2, { children: [
+      children: layout === "stacked" ? /* @__PURE__ */ jsxs18(Fragment3, { children: [
         content,
         imageBlock
-      ] }) : /* @__PURE__ */ jsxs18(Fragment2, { children: [
+      ] }) : /* @__PURE__ */ jsxs18(Fragment3, { children: [
         imageBlock,
         content
       ] })
@@ -1067,9 +1123,20 @@ function PromoCtaSection({
 import { jsx as jsx38 } from "react/jsx-runtime";
 var AUTOPAYLAB_CMP_CDID = "136af463a10ba";
 var warnedAboutDefaultCdid = false;
+function buildSetLangSnippet(localeStorageKey, locale) {
+  if (locale) {
+    return `window.cmp_setlang = ${JSON.stringify(locale === "pl" ? "PL" : "EN")};`;
+  }
+  return `
+  try {
+    var storedLocale = window.localStorage.getItem(${JSON.stringify(localeStorageKey)});
+    window.cmp_setlang = storedLocale === "pl" ? "PL" : "EN";
+  } catch (e) {}`;
+}
 function buildCookieConsentScript({
   localeStorageKey = "autopaylab-locale",
-  cmpCdid = AUTOPAYLAB_CMP_CDID
+  cmpCdid = AUTOPAYLAB_CMP_CDID,
+  locale
 } = {}) {
   if (cmpCdid === AUTOPAYLAB_CMP_CDID && !warnedAboutDefaultCdid) {
     warnedAboutDefaultCdid = true;
@@ -1079,10 +1146,7 @@ function buildCookieConsentScript({
   }
   return `
 (function () {
-  try {
-    var storedLocale = window.localStorage.getItem(${JSON.stringify(localeStorageKey)});
-    window.cmp_setlang = storedLocale === "pl" ? "PL" : "EN";
-  } catch (e) {}
+  ${buildSetLangSnippet(localeStorageKey, locale)}
 })();
 "gdprAppliesGlobally"in window||(window.gdprAppliesGlobally=!0),(!("cmp_id"in window)||window.cmp_id<1)&&(window.cmp_id=0),"cmp_cdid"in window||(window.cmp_cdid=${JSON.stringify(cmpCdid)}),"cmp_params"in window||(window.cmp_params=""),"cmp_host"in window||(window.cmp_host="c.delivery.consentmanager.net"),"cmp_cdn"in window||(window.cmp_cdn="cdn.consentmanager.net"),"cmp_proto"in window||(window.cmp_proto="https:"),"cmp_codesrc"in window||(window.cmp_codesrc="0"),window.cmp_getsupportedLangs=function(){var n=["DE","EN","FR","IT","NO","DA","FI","ES","PT","RO","BG","ET","EL","GA","HR","LV","LT","MT","NL","PL","SV","SK","SL","CS","HU","RU","SR","ZH","TR","UK","AR","BS","JA","CY"];if("cmp_customlanguages"in window)for(var e=0;e<window.cmp_customlanguages.length;e++)n.push(window.cmp_customlanguages[e].l.toUpperCase());return n},window.cmp_getRTLLangs=function(){var n=["AR"];if("cmp_customlanguages"in window)for(var e=0;e<window.cmp_customlanguages.length;e++)"r"in window.cmp_customlanguages[e]&&window.cmp_customlanguages[e].r&&n.push(window.cmp_customlanguages[e].l);return n},window.cmp_getlang=function(n){return"boolean"!=typeof n&&(n=!0),n&&"string"==typeof cmp_getlang.usedlang&&""!==cmp_getlang.usedlang?cmp_getlang.usedlang:window.cmp_getlangs()[0]},window.cmp_extractlang=function(n){return-1!=n.indexOf("cmplang=")?-1!=(n=n.substr(n.indexOf("cmplang=")+8,2).toUpperCase()).indexOf("&")&&(n=n.substr(0,n.indexOf("&"))):n="",n},window.cmp_getlangs=function(){var n=window.cmp_getsupportedLangs(),e=[],t=location.hash,i=location.search,a="cmp_params"in window?window.cmp_params:"";""!=cmp_extractlang(t)?e.push(cmp_extractlang(t)):""!=cmp_extractlang(i)?e.push(cmp_extractlang(i)):""!=cmp_extractlang(a)?e.push(cmp_extractlang(a)):"cmp_setlang"in window&&""!=window.cmp_setlang?e.push(window.cmp_setlang.toUpperCase()):"cmp_langdetect"in window&&1==window.cmp_langdetect?e.push(window.cmp_getPageLang()):e=window.cmp_getBrowserLangs();for(var p=[],c=0;c<e.length;c++){var s=e[c].toUpperCase();s.length<2||(-1!=n.indexOf(s)?p.push(s):(-1!=s.indexOf("-")&&(s=s.substr(0,2)),-1!=n.indexOf(s)&&p.push(s)))}return 0==p.length&&"string"==typeof cmp_getlang.defaultlang&&""!==cmp_getlang.defaultlang?[cmp_getlang.defaultlang.toUpperCase()]:p.length>0?p:["EN"]},window.cmp_getPageLangs=function(){var n=window.cmp_getXMLLang();return(n=(n=""!=n?[n.toUpperCase()]:[]).concat(window.cmp_getLangsFromURL())).length>0?n:["EN"]},window.cmp_getPageLang=function(){var n=window.cmp_getPageLangs();return n.length>0?n[0]:""},window.cmp_getLangsFromURL=function(){var n=window.cmp_getsupportedLangs(),e=location,t="toUpperCase",i=e.hostname[t]()+".",a="/"+e.pathname[t]()+"/";a=(a=(a=a.split("").join("-")).split("//").join("/")).split("//").join("/");for(var p=[],c=0;c<n.length;c++){var s=a.substring(0,n[c].length+2);if(i.substring(0,n[c].length+1)==n[c]+".")p.push(n[c][t]());else if(5==n[c].length){var o=n[c].substring(3,5)+"-"+n[c].substring(0,2);i.substring(0,o.length+1)==o+"."&&p.push(n[c][t]())}else if(s=="/"+n[c]+"/"||s=="/"+n[c]+"-")p.push(n[c][t]());else if(s=="/"+n[c].replace("-","/")+"/"||s=="/"+n[c].replace("-","/")+"/")p.push(n[c][t]());else if(5==n[c].length){o=n[c].substring(3,5)+"-"+n[c].substring(0,2);var d=a.substring(0,o.length+1);d!="/"+o+"/"&&d!="/"+o.replace("-","/")+"/"||p.push(n[c][t]())}}return p},window.cmp_getXMLLang=function(){var n=document.getElementsByTagName("html");if((n=n.length>0?n[0]:document.documentElement)&&n.getAttribute){var e=n.getAttribute("xml:lang");if("string"==typeof e&&""!=e||(e=n.getAttribute("lang")),"string"==typeof e&&""!=e){e=e.split("").join("-").toUpperCase();var t=window.cmp_getsupportedLangs();return-1!=t.indexOf(e)||-1!=t.indexOf(e.substr(0,2))?e:""}return""}},window.cmp_getBrowserLangs=function(){var n="languages"in navigator?navigator.languages:[],e=[];if(n.length>0)for(var t=0;t<n.length;t++)e.push(n[t]);return"language"in navigator&&e.push(navigator.language),"userLanguage"in navigator&&e.push(navigator.userLanguage),e},function(){var n=document,e=window,t="",i="",a="",p=function(e){for(var t="data-cmp-"+e,i=["[data-cmp-id]","[data-cmp-cdid]","[data-cmp-host]","[data-cmp-cdn]"],a=0;a<i.length;a++){var p=n.querySelector(i[a]);if(p&&p.hasAttribute(t))return p.getAttribute(t)}return!1},c=function(n){var t="cmp_"+n,i="",a=(n="cmp"+n+"=").length,p=location,c=p.hash,s=p.search,o=c.indexOf(n),d=s.indexOf(n);if(-1!=o)i=c.substring(o+a,9999);else{if(-1==d)return t in e&&"function"!=typeof e[t]?e[t]:"";i=s.substring(d+a,9999)}var r=i.indexOf("&");return-1!=r&&(i=i.substring(0,r)),i},s=c("lang");if(""!=s)a=t=s;else if("cmp_getlang"in e&&(t=e.cmp_getlang().toLowerCase(),i=e.cmp_getlangs().slice(0,3).join(""),a=e.cmp_getPageLangs().slice(0,3).join(""),"cmp_customlanguages"in e))for(var o=e.cmp_customlanguages,d=0;d<o.length;d++){o[d].l.toLowerCase()==t&&(t="en")}var r="cmp_proto"in e?e.cmp_proto:"https:";"http:"!=r&&"https:"!=r&&(r="https:");var l="cmp_ref"in e?e.cmp_ref:location.href;l.length>300&&(l=l.substring(0,300));var g,m=function(n){var e=document,t=e.createElement("script");t.setAttribute("data-cmp-ab","1"),t.type="text/javascript",t.async=!0,t.src=n;var i=["body","div","span","script","head"],a="currentScript",p="parentElement",c="appendChild",s="body";if(e[a]&&e[a][p])e[a][p][c](t);else if(e[s])e[s][c](t);else for(var o=0;o<i.length;o++){var d=e.getElementsByTagName(i[o]);if(d.length>0){d[0][c](t);break}}},w=c("design"),u=c("regulationkey"),_=c("gppkey"),f=c("att"),h=e.encodeURIComponent;try{g=n.cookie.length>0}catch(n){g=!1}var v=c("darkmode");if("0"==v)v=0;else if("1"==v)v=1;else try{if("matchMedia"in window&&window.matchMedia){var b=window.matchMedia("(prefers-color-scheme: dark)");"matches"in b&&b.matches&&(v=1)}}catch(n){v=0}var y=p("host")||e.cmp_host,L=p("cdn")||e.cmp_cdn,x=r+"//"+y+"/delivery/cmp.php?";if(x+=("cmp_id"in e&&e.cmp_id>0?"id="+e.cmp_id:"")+("cmp_cdid"in e?"&cdid="+e.cmp_cdid:"")+"&h="+h(l),x+=(""!=w?"&cmpdesign="+h(w):"")+(""!=u?"&cmpregulationkey="+h(u):"")+(""!=_?"&cmpgppkey="+h(_):""),x+=(""!=f?"&cmpatt="+h(f):"")+("cmp_params"in e?"&"+e.cmp_params:"")+(g?"&cmpfcc=1":""),m((x+=v>0?"&cmpdarkmode=1":"")+"&l="+h(t)+"&ls="+h(i)+"&lp="+h(a)+"&o="+(new Date).getTime()),!("cmp_quickstub"in window)){var S="js",O=""!=c("debugunminimized")?"":".min";"1"==c("debugcoverage")&&(S="instrumented",O=""),"1"==c("debugtest")&&(S="jstests",O="");var C=new Date;m(r+"//"+L+"/delivery/"+S+"/cmp_final"+O+".js?t="+(C.getFullYear()+"-"+(C.getMonth()+1)+"-"+C.getDate()))}}(),window.cmp_rc=function(n,e){var t;try{t=document.cookie}catch(n){t=""}for(var i="",a=0,p=!1;""!=t&&a<100;){for(a++;" "==t.substr(0,1);)t=t.substr(1,t.length);var c=t.substring(0,t.indexOf("="));if(-1!=t.indexOf(";"))var s=t.substring(t.indexOf("=")+1,t.indexOf(";"));else s=t.substr(t.indexOf("=")+1,t.length);n==c&&(i=s,p=!0);var o=t.indexOf(";")+1;0==o&&(o=t.length),t=t.substring(o,t.length)}return p||"string"!=typeof e||(i=e),i},window.cmp_stub=function(){var n=arguments;if(cmp.a=cmp.a||[],!n.length)return cmp.a;"ping"===n[0]?2===n[1]?n[2]({gdprApplies:gdprAppliesGlobally,cmpLoaded:!1,cmpStatus:"stub",displayStatus:"hidden",apiVersion:"2.3",cmpId:31},!0):n[2](!1,!0):"getTCData"===n[0]||"addEventListener"===n[0]||"removeEventListener"===n[0]?cmp.a.push([].slice.apply(n)):4==n.length&&!1===n[3]?n[2]({},!1):cmp.a.push([].slice.apply(n))},window.cmp_dsastub=function(){var n=arguments;n[0]="dsa."+n[0],window.cmp_gppstub(n)},window.cmp_gppstub=function(){var n=arguments;if(gpp.q=gpp.q||[],!n.length)return gpp.q;var e=n[0],t=n.length>1?n[1]:null,i=n.length>2?n[2]:null,a=null,p=!1;if("ping"===e)a=window.cmp_gpp_ping(),p=!0;else if("addEventListener"===e){gpp.e=gpp.e||[],"lastId"in gpp||(gpp.lastId=0),gpp.lastId++;var c=gpp.lastId;gpp.e.push({id:c,callback:t}),a={eventName:"listenerRegistered",listenerId:c,data:!0,pingData:window.cmp_gpp_ping()},p=!0}else if("removeEventListener"===e){gpp.e=gpp.e||[],a=!1;for(var s=0;s<gpp.e.length;s++)if(gpp.e[s].id==i){gpp.e[s].splice(s,1),a=!0;break}p=!0}else gpp.q.push([].slice.apply(n));null!==a&&"function"==typeof t&&t(a,p)},window.cmp_gpp_ping=function(){return{gppVersion:"1.1",cmpStatus:"stub",cmpDisplayStatus:"hidden",signalStatus:"not ready",supportedAPIs:["2:tcfeuv2","5:tcfcav1","7:usnat","8:usca","9:usva","10:usco","11:usut","12:usct","13:usfl","14:usmt","15:usor","16:ustx","17:usde","18:usia","19:usne","20:usnh","21:usnj","22:ustn","23:usmn","24:usmd","25:usin","26:usky","27:usri"],cmpId:31,sectionList:[],applicableSections:[0],gppString:"",parsedSections:{}}},window.cmp_addFrame=function(n){if(!window.frames[n])if(document.body){var e=document.createElement("iframe");if(e.style.cssText="display:none","cmp_cdn"in window&&"cmp_ultrablocking"in window&&window.cmp_ultrablocking>0){for(var t=window.cmp_cdn,i=["[data-cmp-id]","[data-cmp-cdid]","[data-cmp-host]","[data-cmp-cdn]"],a=0;a<i.length;a++){var p=document.querySelector(i[a]);if(p&&p.hasAttribute("data-cmp-cdn")){t=p.getAttribute("data-cmp-cdn");break}}e.src="//"+t+"/delivery/empty.html"}e.name=n,e.setAttribute("title","Intentionally hidden, please ignore"),e.setAttribute("role","none"),e.setAttribute("tabindex","-1"),document.body.appendChild(e)}else window.setTimeout(window.cmp_addFrame,10,n)},window.cmp_msghandler=function(n){var e="string"==typeof n.data;try{var t=e?JSON.parse(n.data):n.data}catch(n){t=null}if("object"==typeof t&&null!==t&&"cmpCall"in t){var i=t.cmpCall;window.cmp(i.command,i.parameter,function(t,a){var p={cmpReturn:{returnValue:t,success:a,callId:i.callId}};n.source.postMessage(e?JSON.stringify(p):p,"")})}if("object"==typeof t&&null!==t&&"tcfapiCall"in t){i=t.tcfapiCall;window.tcfapi(i.command,i.version,function(t,a){var p={tcfapiReturn:{returnValue:t,success:a,callId:i.callId}};n.source.postMessage(e?JSON.stringify(p):p,"")},i.parameter)}if("object"==typeof t&&null!==t&&"gppCall"in t){i=t.gppCall;window.gpp(i.command,function(t,a){var p={gppReturn:{returnValue:t,success:a,callId:i.callId}};n.source.postMessage(e?JSON.stringify(p):p,"")},"parameter"in i?i.parameter:null,"version"in i?i.version:1)}if("object"==typeof t&&null!==t&&"dsaCall"in t){i=t.dsaCall;window.dsa(i.command,function(t,a){var p={dsaReturn:{returnValue:t,success:a,callId:i.callId}};n.source.postMessage(e?JSON.stringify(p):p,"")},"parameter"in i?i.parameter:null,"version"in i?i.version:1)}},window.cmp_setStub=function(n){n in window&&("function"==typeof window[n]||"object"==typeof window[n]||void 0!==window[n]&&null===window[n])||(window[n]=window.cmp_stub,window[n].msgHandler=window.cmp_msghandler,window.addEventListener("message",window.cmp_msghandler,!1))},window.cmp_setGppStub=function(n){n in window&&("function"==typeof window[n]||"object"==typeof window[n]||void 0!==window[n]&&null===window[n])||(window[n]=window.cmp_gppstub,window[n].msgHandler=window.cmp_msghandler,window.addEventListener("message",window.cmp_msghandler,!1))},"cmp_noiframepixel"in window||window.cmp_addFrame("cmpLocator"),"cmp_disabletcf"in window&&window.cmp_disabletcf||"cmp_noiframepixel"in window||window.cmp_addFrame("tcfapiLocator"),"cmp_disablegpp"in window&&window.cmp_disablegpp||"cmp_noiframepixel"in window||window.cmp_addFrame("gppLocator"),"cmp_disabledsa"in window&&window.cmp_disabledsa||"cmp_noiframepixel"in window||window.cmp_addFrame("dsaLocator"),window.cmp_setStub("cmp"),"cmp_disabletcf"in window&&window.cmp_disabletcf||window.cmp_setStub("tcfapi"),"cmp_disablegpp"in window&&window.cmp_disablegpp||window.cmp_setGppStub("gpp"),"cmp_disabledsa"in window&&window.cmp_disabledsa||window.cmp_setGppStub("dsa");
 `;

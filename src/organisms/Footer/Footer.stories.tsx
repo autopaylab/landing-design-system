@@ -87,3 +87,21 @@ export const Default: Story = {
     schemeBadges: ["Verified by VISA", "Mastercard SecureCode", "PCI DSS"],
   },
 };
+
+/** No photo banner, a second logo, and a button-style nav entry (e.g. reopening a cookie consent panel). */
+export const WithoutBanner: Story = {
+  args: {
+    logoSrc: placeholderLogo,
+    logoAlt: "Product",
+    secondaryLogoSrc: placeholderLogo,
+    secondaryLogoAlt: "Autopay",
+    tagline: "Product by Autopay",
+    navItems: [
+      { label: "Privacy Policy", href: "#" },
+      { label: "Cookie settings", onClick: () => {} },
+      { label: "Contact", href: "#contact" },
+    ],
+    address: "Autopay S.A.",
+    legalText: "Autopay S.A.",
+  },
+};

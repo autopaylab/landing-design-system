@@ -104,7 +104,25 @@ function Logo({ className, size, src, alt, ...props }) {
 }
 
 // src/organisms/Navbar/Navbar.tsx
-import { jsx as jsx4, jsxs } from "react/jsx-runtime";
+import { Fragment, jsx as jsx4, jsxs } from "react/jsx-runtime";
+function LanguageLink({ link, className }) {
+  return /* @__PURE__ */ jsxs(
+    "a",
+    {
+      href: link.href,
+      hrefLang: link.hrefLang,
+      lang: link.lang,
+      className: `inline-flex h-10 min-w-10 items-center justify-center rounded-lg px-2 text-sm font-semibold text-foreground hover:bg-muted ${className ?? ""}`,
+      children: [
+        link.label,
+        link.srLabel ? /* @__PURE__ */ jsxs("span", { className: "sr-only", children: [
+          " ",
+          link.srLabel
+        ] }) : null
+      ]
+    }
+  );
+}
 function Navbar({
   logoSrc,
   logoAlt,
@@ -114,32 +132,41 @@ function Navbar({
   onLoginClick,
   signInLabel = "Sign In",
   onSignInClick,
+  showAuthButtons = true,
+  cta,
   languageLabel,
   onLanguageClick,
   languageButtonAriaLabel = "Change language",
+  languageLink,
   navAriaLabel = "Primary",
   openMenuAriaLabel = "Open menu",
   closeMenuAriaLabel = "Close menu"
 }) {
   const [isMenuOpen, setIsMenuOpen] = React3.useState(false);
   const menuId = React3.useId();
+  const showLanguageButton = !languageLink && !!languageLabel;
+  const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
   return /* @__PURE__ */ jsx4("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
       /* @__PURE__ */ jsx4("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ jsx4(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ jsx4("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx4(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
       /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsx4(
-          Button,
-          {
-            type: "button",
-            variant: "outline",
-            className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
-            onClick: onLoginClick,
-            children: loginLabel
-          }
-        ),
-        /* @__PURE__ */ jsx4(Button, { type: "button", variant: "lime", className: "hidden px-6 py-2.5 text-[17px] md:inline-flex", onClick: onSignInClick, children: signInLabel }),
-        languageLabel && /* @__PURE__ */ jsxs(
+        showAuthButtons && /* @__PURE__ */ jsxs(Fragment, { children: [
+          /* @__PURE__ */ jsx4(
+            Button,
+            {
+              type: "button",
+              variant: "outline",
+              className: "hidden px-6 py-2.5 text-[17px] md:inline-flex",
+              onClick: onLoginClick,
+              children: loginLabel
+            }
+          ),
+          /* @__PURE__ */ jsx4(Button, { type: "button", variant: "lime", className: "hidden px-6 py-2.5 text-[17px] md:inline-flex", onClick: onSignInClick, children: signInLabel })
+        ] }),
+        cta && /* @__PURE__ */ jsx4(Button, { asChild: true, variant: "lime", className: "px-4 py-2.5 text-sm md:px-6 md:text-[17px]", children: /* @__PURE__ */ jsx4("a", { href: cta.href, children: cta.label }) }),
+        languageLink && /* @__PURE__ */ jsx4(LanguageLink, { link: languageLink }),
+        showLanguageButton && /* @__PURE__ */ jsxs(
           "button",
           {
             type: "button",
@@ -152,7 +179,7 @@ function Navbar({
             ]
           }
         ),
-        /* @__PURE__ */ jsx4(
+        hasMobileMenu && /* @__PURE__ */ jsx4(
           "button",
           {
             type: "button",
@@ -166,7 +193,7 @@ function Navbar({
         )
       ] })
     ] }),
-    isMenuOpen && /* @__PURE__ */ jsxs(
+    hasMobileMenu && isMenuOpen && /* @__PURE__ */ jsxs(
       "nav",
       {
         id: menuId,
@@ -184,11 +211,11 @@ function Navbar({
             },
             item.label
           )),
-          /* @__PURE__ */ jsxs("div", { className: "mt-3 flex flex-col gap-2", children: [
+          showAuthButtons && /* @__PURE__ */ jsxs("div", { className: "mt-3 flex flex-col gap-2", children: [
             /* @__PURE__ */ jsx4(Button, { type: "button", variant: "outline", className: "w-full py-2.5 text-[17px]", onClick: onLoginClick, children: loginLabel }),
             /* @__PURE__ */ jsx4(Button, { type: "button", variant: "lime", className: "w-full py-2.5 text-[17px]", onClick: onSignInClick, children: signInLabel })
           ] }),
-          languageLabel && /* @__PURE__ */ jsxs(
+          showLanguageButton && /* @__PURE__ */ jsxs(
             "button",
             {
               type: "button",
@@ -215,16 +242,18 @@ function Footer({
   bannerImage,
   logoSrc,
   logoAlt,
-  socialLinks,
+  secondaryLogoSrc,
+  secondaryLogoAlt,
+  socialLinks = [],
   tagline,
   navItems,
   address,
   legalText,
-  schemeBadges,
+  schemeBadges = [],
   navAriaLabel = "Footer"
 }) {
   return /* @__PURE__ */ jsxs2("footer", { className: "mt-24", children: [
-    /* @__PURE__ */ jsx5("section", { className: "relative mx-4 overflow-hidden rounded-t-3xl md:mx-8", children: /* @__PURE__ */ jsx5(
+    bannerImage && /* @__PURE__ */ jsx5("section", { className: "relative mx-4 overflow-hidden rounded-t-3xl md:mx-8", children: /* @__PURE__ */ jsx5(
       "div",
       {
         className: "relative min-h-[420px] bg-cover bg-center md:min-h-[520px]",
@@ -235,21 +264,32 @@ function Footer({
         ] })
       }
     ) }),
-    /* @__PURE__ */ jsxs2("section", { className: "mx-4 rounded-b-3xl bg-lime px-8 py-10 text-lime-foreground md:mx-8 md:px-16", children: [
-      /* @__PURE__ */ jsxs2("div", { className: "flex items-start justify-between gap-8", children: [
-        /* @__PURE__ */ jsx5(Logo, { src: logoSrc, alt: logoAlt, size: "sm" }),
-        /* @__PURE__ */ jsx5("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ jsx5("a", { href, "aria-label": label, className: "hover:opacity-70", children: /* @__PURE__ */ jsx5(Icon, { className: "h-5 w-5" }) }, label)) })
-      ] }),
-      /* @__PURE__ */ jsxs2("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
-        /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),
-        /* @__PURE__ */ jsx5("nav", { "aria-label": navAriaLabel, className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map((item) => /* @__PURE__ */ jsx5(Link, { variant: "underline", href: item.href, children: item.label }, item.label)) }),
-        /* @__PURE__ */ jsx5("address", { className: "text-sm not-italic leading-relaxed md:text-right", children: address })
-      ] }),
-      /* @__PURE__ */ jsxs2("div", { className: "mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-lime-foreground/20 pt-5 text-xs", children: [
-        /* @__PURE__ */ jsx5("span", { children: legalText }),
-        /* @__PURE__ */ jsx5("div", { className: "flex items-center gap-4 opacity-80", children: schemeBadges.map((badge) => /* @__PURE__ */ jsx5("span", { className: "font-bold", children: badge }, badge)) })
-      ] })
-    ] })
+    /* @__PURE__ */ jsxs2(
+      "section",
+      {
+        className: `mx-4 ${bannerImage ? "rounded-b-3xl" : "rounded-3xl"} bg-lime px-8 py-10 text-lime-foreground md:mx-8 md:px-16`,
+        children: [
+          /* @__PURE__ */ jsxs2("div", { className: "flex items-start justify-between gap-8", children: [
+            /* @__PURE__ */ jsxs2("div", { className: "flex flex-wrap items-center gap-6", children: [
+              /* @__PURE__ */ jsx5(Logo, { src: logoSrc, alt: logoAlt, size: "sm" }),
+              secondaryLogoSrc && /* @__PURE__ */ jsx5(Logo, { src: secondaryLogoSrc, alt: secondaryLogoAlt ?? "", size: "sm" })
+            ] }),
+            /* @__PURE__ */ jsx5("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ jsx5("a", { href, "aria-label": label, className: "hover:opacity-70", children: /* @__PURE__ */ jsx5(Icon, { className: "h-5 w-5" }) }, label)) })
+          ] }),
+          /* @__PURE__ */ jsxs2("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
+            /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),
+            /* @__PURE__ */ jsx5("nav", { "aria-label": navAriaLabel, className: "flex flex-wrap items-end gap-x-10 gap-y-3 text-base font-medium", children: navItems.map(
+              (item) => item.onClick && !item.href ? /* @__PURE__ */ jsx5(Link, { asChild: true, variant: "underline", children: /* @__PURE__ */ jsx5("button", { type: "button", onClick: item.onClick, className: "cursor-pointer", children: item.label }) }, item.label) : /* @__PURE__ */ jsx5(Link, { variant: "underline", href: item.href, onClick: item.onClick, children: item.label }, item.label)
+            ) }),
+            /* @__PURE__ */ jsx5("address", { className: "text-sm not-italic leading-relaxed md:text-right", children: address })
+          ] }),
+          /* @__PURE__ */ jsxs2("div", { className: "mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-lime-foreground/20 pt-5 text-xs", children: [
+            /* @__PURE__ */ jsx5("span", { children: legalText }),
+            /* @__PURE__ */ jsx5("div", { className: "flex items-center gap-4 opacity-80", children: schemeBadges.map((badge) => /* @__PURE__ */ jsx5("span", { className: "font-bold", children: badge }, badge)) })
+          ] })
+        ]
+      }
+    )
   ] });
 }
 
