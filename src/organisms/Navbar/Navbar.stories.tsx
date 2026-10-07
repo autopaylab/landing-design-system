@@ -24,3 +24,19 @@ export const Default: Story = {
     languageLabel: "🇬🇧",
   },
 };
+
+/**
+ * One link-based call to action instead of the Login/Sign In pair, and a
+ * link-based language switch -- the shape a single-goal landing page
+ * (paytalkpl) needs. With no nav items the mobile menu toggle is not shown.
+ */
+export const SingleCtaWithLanguageLink: Story = {
+  args: {
+    logoSrc: placeholderLogo,
+    logoAlt: "Autopay",
+    navItems: [],
+    showAuthButtons: false,
+    cta: { label: "Apply", href: "#apply" },
+    languageLink: { label: "PL", href: "/", hrefLang: "pl", lang: "pl", srLabel: "(wersja polska)" },
+  },
+};

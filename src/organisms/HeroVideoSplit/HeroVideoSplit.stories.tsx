@@ -26,3 +26,21 @@ export const Default: Story = {
     videoSrc: "/hero.webm",
   },
 };
+
+/** Without `videoSrc`: a single text column. */
+export const TextOnly: Story = {
+  args: {
+    title: "One platform. Full control over global payments.",
+    subtitle: "Increase revenue, reduce costs and ensure seamless compliance through a single integration.",
+    ctaLabel: "Contact us",
+    ctaHref: "#contact",
+  },
+};
+
+/** With a recording labelled as a demo. */
+export const WithMediaCaption: Story = {
+  args: {
+    ...Default.args,
+    mediaCaption: "Demo",
+  },
+};
