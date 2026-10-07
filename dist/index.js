@@ -622,7 +622,7 @@ function Navbar({
   const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
   return /* @__PURE__ */ jsx26("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs17("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ jsxs17("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
-      /* @__PURE__ */ jsx26("a", { href: homeHref, className: "flex items-center", children: /* @__PURE__ */ jsx26(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
+      /* @__PURE__ */ jsx26("a", { href: homeHref, className: "flex shrink-0 items-center", children: /* @__PURE__ */ jsx26(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ jsx26("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx26(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
       /* @__PURE__ */ jsxs17("div", { className: "flex items-center gap-2", children: [
         showAuthButtons && /* @__PURE__ */ jsxs17(Fragment2, { children: [
@@ -638,7 +638,9 @@ function Navbar({
           ),
           /* @__PURE__ */ jsx26(Button, { type: "button", variant: "lime", className: "hidden px-6 py-2.5 text-[17px] md:inline-flex", onClick: onSignInClick, children: signInLabel })
         ] }),
-        cta && /* @__PURE__ */ jsx26(Button, { asChild: true, variant: "lime", className: "px-4 py-2.5 text-sm md:px-6 md:text-[17px]", children: /* @__PURE__ */ jsx26("a", { href: cta.href, children: cta.label }) }),
+        cta && // Hidden below sm: next to a full-width wordmark it would not fit on a phone, and
+        // single-goal pages repeat the same CTA in the hero right below.
+        /* @__PURE__ */ jsx26(Button, { asChild: true, variant: "lime", className: "hidden px-4 py-2.5 text-sm sm:inline-flex md:px-6 md:text-[17px]", children: /* @__PURE__ */ jsx26("a", { href: cta.href, children: cta.label }) }),
         languageLink && /* @__PURE__ */ jsx26(LanguageLink, { link: languageLink }),
         showLanguageButton && /* @__PURE__ */ jsxs17(
           "button",
