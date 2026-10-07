@@ -564,6 +564,37 @@ function PartnerCountBadge({ className, count, label, ...props }) {
     }
   );
 }
+
+// src/molecules/SectionMedia/SectionMedia.tsx
+import { jsx as jsx25, jsxs as jsxs17 } from "react/jsx-runtime";
+function SectionMedia({ videoSrc, image, caption, showVideoControls = false, className, mediaClassName }) {
+  if (!videoSrc && !image) return null;
+  return /* @__PURE__ */ jsxs17("figure", { className: cn("relative", className), children: [
+    videoSrc ? /* @__PURE__ */ jsx25(
+      "video",
+      {
+        src: videoSrc,
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        playsInline: true,
+        controls: showVideoControls,
+        className: cn("h-auto w-full", mediaClassName)
+      }
+    ) : /* @__PURE__ */ jsx25(
+      "img",
+      {
+        src: image.src,
+        alt: image.alt,
+        width: image.width,
+        height: image.height,
+        loading: "lazy",
+        className: cn("h-auto w-full", mediaClassName)
+      }
+    ),
+    caption ? /* @__PURE__ */ jsx25("figcaption", { className: "mt-2 text-sm text-muted-foreground", children: caption }) : null
+  ] });
+}
 export {
   BulletItem,
   ConsentCheckboxField,
@@ -575,6 +606,7 @@ export {
   OverlapCard,
   PartnerCountBadge,
   PricingTier,
+  SectionMedia,
   SelectField,
   StatBlock,
   StepCard,

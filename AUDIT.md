@@ -371,3 +371,16 @@ New, not extracted. A consuming landing page (`autopaylab/paytalkpl`) has exactl
 **Verified:** `npm run typecheck`, `npm run lint`, `npm test` (150 passing: new stories go through the axe suite, plus new unit tests for each prop), `npm run build`, `npm run size`.
 
 **Root cause of §28, found while building this:** with `core.autocrlf=true` (the Git for Windows default) every checked-out source file has CRLF line endings, and tsup embeds sources in `sourcesContent`, so the largest bundles' `.map` files differ from CI's LF checkout. Re-checking out with `core.autocrlf=false` makes a local Windows build reproduce the committed `dist/` byte for byte (checked on `main` before this change). The `dist/` in this change was built that way. A `.gitattributes` with `* text=auto eol=lf` would make this the default for every contributor; not added here to keep this change to one concern.
+
+## 30. Stills, captions and video controls in media slots: new `SectionMedia` molecule (2026-10-07)
+
+New, not extracted. paytalkpl needs a media slot in its "the shift" section, hero and steps section, but has no recordings yet: it shows labelled placeholders now and will swap in stills or recordings later, and must label product recordings as "Demo"/"Visualisation".
+
+- **`SectionMedia`** (molecule): a looping muted `<video>`, or an `<img>` when there is no video, inside a `<figure>` with an optional visible `<figcaption>`. Rendered by `HeroVideoSplit`, `SingleIntegrationSection` and `FourStepsSection` instead of three hand-rolled media blocks.
+- **`HeroVideoSplit`**: `image` (used without `videoSrc`), `showVideoControls`; `mediaCaption` now also captions an image.
+- **`SingleIntegrationSection`**: `videoSrc` optional, `image`, `mediaCaption`, `showVideoControls`.
+- **`FourStepsSection`**: `imageCaption`.
+
+**Accessibility, flagged not silently changed:** every extracted video autoplays in a loop with no way to pause it, which fails WCAG 2.2.2 (Pause, Stop, Hide) for anything longer than 5 seconds. `showVideoControls` renders native controls; it is off by default to keep the extracted look for current consumers, and its doc comment says to turn it on for any real recording.
+
+Defaults reproduce the previous output apart from the media now sitting inside a `<figure>`.

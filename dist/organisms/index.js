@@ -319,56 +319,95 @@ function Badge({ className, variant, ...props }) {
   return /* @__PURE__ */ jsx6("span", { className: cn(badgeVariants({ variant }), className), ...props });
 }
 
-// src/organisms/HeroVideoSplit/HeroVideoSplit.tsx
+// src/molecules/SectionMedia/SectionMedia.tsx
 import { jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
-function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc, mediaCaption }) {
-  return /* @__PURE__ */ jsx7("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ jsxs3("div", { className: `grid items-center gap-10 ${videoSrc ? "md:grid-cols-2" : ""}`, children: [
-    /* @__PURE__ */ jsxs3("div", { className: videoSrc ? void 0 : "max-w-3xl", children: [
-      eyebrow && /* @__PURE__ */ jsx7("div", { className: "mb-6", children: /* @__PURE__ */ jsx7(Badge, { variant: "eyebrow", children: eyebrow }) }),
-      /* @__PURE__ */ jsx7("h1", { className: "font-display text-h1", children: title }),
-      /* @__PURE__ */ jsx7("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${videoSrc ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
-      /* @__PURE__ */ jsx7("div", { className: "mt-10", children: /* @__PURE__ */ jsx7(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx7("a", { href: ctaHref, children: ctaLabel }) }) })
+function SectionMedia({ videoSrc, image, caption, showVideoControls = false, className, mediaClassName }) {
+  if (!videoSrc && !image) return null;
+  return /* @__PURE__ */ jsxs3("figure", { className: cn("relative", className), children: [
+    videoSrc ? /* @__PURE__ */ jsx7(
+      "video",
+      {
+        src: videoSrc,
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        playsInline: true,
+        controls: showVideoControls,
+        className: cn("h-auto w-full", mediaClassName)
+      }
+    ) : /* @__PURE__ */ jsx7(
+      "img",
+      {
+        src: image.src,
+        alt: image.alt,
+        width: image.width,
+        height: image.height,
+        loading: "lazy",
+        className: cn("h-auto w-full", mediaClassName)
+      }
+    ),
+    caption ? /* @__PURE__ */ jsx7("figcaption", { className: "mt-2 text-sm text-muted-foreground", children: caption }) : null
+  ] });
+}
+
+// src/organisms/HeroVideoSplit/HeroVideoSplit.tsx
+import { jsx as jsx8, jsxs as jsxs4 } from "react/jsx-runtime";
+function HeroVideoSplit({
+  eyebrow,
+  title,
+  subtitle,
+  ctaLabel,
+  ctaHref,
+  videoSrc,
+  image,
+  mediaCaption,
+  showVideoControls
+}) {
+  const hasMedia = !!videoSrc || !!image;
+  return /* @__PURE__ */ jsx8("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ jsxs4("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
+    /* @__PURE__ */ jsxs4("div", { className: hasMedia ? void 0 : "max-w-3xl", children: [
+      eyebrow && /* @__PURE__ */ jsx8("div", { className: "mb-6", children: /* @__PURE__ */ jsx8(Badge, { variant: "eyebrow", children: eyebrow }) }),
+      /* @__PURE__ */ jsx8("h1", { className: "font-display text-h1", children: title }),
+      /* @__PURE__ */ jsx8("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
+      /* @__PURE__ */ jsx8("div", { className: "mt-10", children: /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx8("a", { href: ctaHref, children: ctaLabel }) }) })
     ] }),
-    videoSrc && /* @__PURE__ */ jsxs3("figure", { className: "relative", children: [
-      /* @__PURE__ */ jsx7("video", { src: videoSrc, autoPlay: true, loop: true, muted: true, playsInline: true, className: "h-auto w-full" }),
-      mediaCaption && /* @__PURE__ */ jsx7("figcaption", { className: "mt-2 text-sm text-muted-foreground", children: mediaCaption })
-    ] })
+    /* @__PURE__ */ jsx8(SectionMedia, { videoSrc, image, caption: mediaCaption, showVideoControls })
   ] }) });
 }
 
 // src/organisms/HeroImageOverlay/HeroImageOverlay.tsx
-import { jsx as jsx8, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx9, jsxs as jsxs5 } from "react/jsx-runtime";
 function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondaryCta }) {
-  const ctas = /* @__PURE__ */ jsxs4("div", { className: "flex flex-col gap-3 sm:flex-row", children: [
-    /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx8("a", { href: primaryCta.href, children: primaryCta.label }) }),
-    /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ jsx8("a", { href: secondaryCta.href, children: secondaryCta.label }) })
+  const ctas = /* @__PURE__ */ jsxs5("div", { className: "flex flex-col gap-3 sm:flex-row", children: [
+    /* @__PURE__ */ jsx9(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx9("a", { href: primaryCta.href, children: primaryCta.label }) }),
+    /* @__PURE__ */ jsx9(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ jsx9("a", { href: secondaryCta.href, children: secondaryCta.label }) })
   ] });
-  return /* @__PURE__ */ jsx8("div", { className: "px-4 md:px-8", children: /* @__PURE__ */ jsxs4("section", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground", children: [
-    /* @__PURE__ */ jsx8("img", { src: image, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
-    /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsx9("div", { className: "px-4 md:px-8", children: /* @__PURE__ */ jsxs5("section", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground", children: [
+    /* @__PURE__ */ jsx9("img", { src: image, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
+    /* @__PURE__ */ jsx9(
       "div",
       {
         "aria-hidden": "true",
         className: cn("absolute inset-0", layout === "stacked" ? "bg-gradient-to-r from-foreground via-foreground/75 to-foreground/10" : "bg-foreground/50")
       }
     ),
-    layout === "stacked" ? /* @__PURE__ */ jsx8("div", { className: "relative px-6 py-20 text-background sm:px-10 md:px-16 md:py-32 lg:py-40", children: /* @__PURE__ */ jsxs4("div", { className: "max-w-3xl", children: [
-      /* @__PURE__ */ jsx8("h2", { className: "font-display text-h1", children: title }),
-      subtitle && /* @__PURE__ */ jsx8("p", { className: "mt-6 max-w-2xl text-base text-background/80 md:text-xl", children: subtitle }),
-      /* @__PURE__ */ jsx8("div", { className: "mt-9", children: ctas })
-    ] }) }) : /* @__PURE__ */ jsx8("div", { className: "relative px-6 py-20 sm:px-10 md:px-14 md:py-28", children: /* @__PURE__ */ jsxs4("div", { className: "grid gap-10 md:grid-cols-2 md:items-center", children: [
-      /* @__PURE__ */ jsx8("h2", { className: "max-w-xl font-display text-h2 text-background", children: title }),
-      /* @__PURE__ */ jsx8("div", { className: "md:justify-self-end", children: ctas })
+    layout === "stacked" ? /* @__PURE__ */ jsx9("div", { className: "relative px-6 py-20 text-background sm:px-10 md:px-16 md:py-32 lg:py-40", children: /* @__PURE__ */ jsxs5("div", { className: "max-w-3xl", children: [
+      /* @__PURE__ */ jsx9("h2", { className: "font-display text-h1", children: title }),
+      subtitle && /* @__PURE__ */ jsx9("p", { className: "mt-6 max-w-2xl text-base text-background/80 md:text-xl", children: subtitle }),
+      /* @__PURE__ */ jsx9("div", { className: "mt-9", children: ctas })
+    ] }) }) : /* @__PURE__ */ jsx9("div", { className: "relative px-6 py-20 sm:px-10 md:px-14 md:py-28", children: /* @__PURE__ */ jsxs5("div", { className: "grid gap-10 md:grid-cols-2 md:items-center", children: [
+      /* @__PURE__ */ jsx9("h2", { className: "max-w-xl font-display text-h2 text-background", children: title }),
+      /* @__PURE__ */ jsx9("div", { className: "md:justify-self-end", children: ctas })
     ] }) })
   ] }) });
 }
 
 // src/organisms/TrustedByLogos/TrustedByLogos.tsx
-import { jsx as jsx9, jsxs as jsxs5 } from "react/jsx-runtime";
+import { jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
 function TrustedByLogos({ heading, logos }) {
-  return /* @__PURE__ */ jsxs5("section", { id: "trusted-by", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    /* @__PURE__ */ jsx9("h2", { className: "text-center font-display text-h3", children: heading }),
-    /* @__PURE__ */ jsx9("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ jsx9(
+  return /* @__PURE__ */ jsxs6("section", { id: "trusted-by", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ jsx10("h2", { className: "text-center font-display text-h3", children: heading }),
+    /* @__PURE__ */ jsx10("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ jsx10(
       "img",
       {
         src: l.src,
@@ -382,9 +421,9 @@ function TrustedByLogos({ heading, logos }) {
 }
 
 // src/atoms/StepNumber/StepNumber.tsx
-import { jsx as jsx10 } from "react/jsx-runtime";
+import { jsx as jsx11 } from "react/jsx-runtime";
 function StepNumber({ className, value, ...props }) {
-  return /* @__PURE__ */ jsx10(
+  return /* @__PURE__ */ jsx11(
     "span",
     {
       className: cn(
@@ -398,37 +437,44 @@ function StepNumber({ className, value, ...props }) {
 }
 
 // src/molecules/StepCard/StepCard.tsx
-import { jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
+import { jsx as jsx12, jsxs as jsxs7 } from "react/jsx-runtime";
 function StepCard({ className, index, title, body, ...props }) {
-  return /* @__PURE__ */ jsxs6("li", { className: cn("p-8", className), ...props, children: [
-    /* @__PURE__ */ jsx11(StepNumber, { value: index }),
-    /* @__PURE__ */ jsx11("h3", { className: "mt-4 font-display text-h6", children: title }),
-    /* @__PURE__ */ jsx11("p", { className: "mt-2 text-sm text-muted-foreground", children: body })
+  return /* @__PURE__ */ jsxs7("li", { className: cn("p-8", className), ...props, children: [
+    /* @__PURE__ */ jsx12(StepNumber, { value: index }),
+    /* @__PURE__ */ jsx12("h3", { className: "mt-4 font-display text-h6", children: title }),
+    /* @__PURE__ */ jsx12("p", { className: "mt-2 text-sm text-muted-foreground", children: body })
   ] });
 }
 
 // src/organisms/FourStepsSection/FourStepsSection.tsx
-import { jsx as jsx12, jsxs as jsxs7 } from "react/jsx-runtime";
-function FourStepsSection({ heading, description, image, imageAlt = "", steps, note }) {
-  return /* @__PURE__ */ jsx12("section", { "aria-labelledby": "four-steps-title", className: "px-5 py-14 md:py-20", children: /* @__PURE__ */ jsx12("div", { className: "mx-auto max-w-[1280px]", children: /* @__PURE__ */ jsxs7("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
-    /* @__PURE__ */ jsxs7(
+import { jsx as jsx13, jsxs as jsxs8 } from "react/jsx-runtime";
+function FourStepsSection({ heading, description, image, imageAlt = "", imageCaption, steps, note }) {
+  return /* @__PURE__ */ jsx13("section", { "aria-labelledby": "four-steps-title", className: "px-5 py-14 md:py-20", children: /* @__PURE__ */ jsx13("div", { className: "mx-auto max-w-[1280px]", children: /* @__PURE__ */ jsxs8("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
+    /* @__PURE__ */ jsxs8(
       "div",
       {
         className: `grid items-center gap-8 px-6 pb-10 pt-10 md:px-14 md:pb-16 md:pt-14 ${image ? "md:grid-cols-[1.1fr_1fr]" : ""}`,
         children: [
-          /* @__PURE__ */ jsxs7("div", { children: [
-            /* @__PURE__ */ jsx12("h2", { id: "four-steps-title", className: "max-w-2xl font-display text-h2", children: heading }),
-            /* @__PURE__ */ jsx12("p", { className: "mt-6 max-w-xl text-muted-foreground md:text-[17px]", children: description })
+          /* @__PURE__ */ jsxs8("div", { children: [
+            /* @__PURE__ */ jsx13("h2", { id: "four-steps-title", className: "max-w-2xl font-display text-h2", children: heading }),
+            /* @__PURE__ */ jsx13("p", { className: "mt-6 max-w-xl text-muted-foreground md:text-[17px]", children: description })
           ] }),
-          image && /* @__PURE__ */ jsx12("img", { src: image, alt: imageAlt, width: 700, height: 400, loading: "lazy", className: "w-full max-w-[560px] justify-self-end" })
+          image && /* @__PURE__ */ jsx13(
+            SectionMedia,
+            {
+              image: { src: image, alt: imageAlt, width: 700, height: 400 },
+              caption: imageCaption,
+              className: "w-full max-w-[560px] justify-self-end"
+            }
+          )
         ]
       }
     ),
-    /* @__PURE__ */ jsx12(
+    /* @__PURE__ */ jsx13(
       "ol",
       {
         className: `grid border-t border-primary/20 sm:grid-cols-2 ${steps.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`,
-        children: steps.map((step, i) => /* @__PURE__ */ jsx12(
+        children: steps.map((step, i) => /* @__PURE__ */ jsx13(
           StepCard,
           {
             index: i + 1,
@@ -440,12 +486,12 @@ function FourStepsSection({ heading, description, image, imageAlt = "", steps, n
         ))
       }
     ),
-    note && /* @__PURE__ */ jsx12("p", { className: "border-t border-primary/20 px-6 py-8 font-display text-lg md:px-14 md:text-xl", children: note })
+    note && /* @__PURE__ */ jsx13("p", { className: "border-t border-primary/20 px-6 py-8 font-display text-lg md:px-14 md:text-xl", children: note })
   ] }) }) });
 }
 
 // src/molecules/IconFeatureItem/IconFeatureItem.tsx
-import { jsx as jsx13, jsxs as jsxs8 } from "react/jsx-runtime";
+import { jsx as jsx14, jsxs as jsxs9 } from "react/jsx-runtime";
 function IconFeatureItem({
   className,
   icon: Icon,
@@ -456,44 +502,57 @@ function IconFeatureItem({
   ...props
 }) {
   const Heading = headingLevel;
-  return /* @__PURE__ */ jsxs8("li", { className: cn("flex gap-4", className), ...props, children: [
-    /* @__PURE__ */ jsx13(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
-    /* @__PURE__ */ jsxs8("div", { children: [
-      /* @__PURE__ */ jsx13(Heading, { className: "font-display text-h6", children: title }),
-      /* @__PURE__ */ jsx13("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
+  return /* @__PURE__ */ jsxs9("li", { className: cn("flex gap-4", className), ...props, children: [
+    /* @__PURE__ */ jsx14(Icon, { className: cn("mt-1 h-5 w-5 shrink-0", iconClassName) }),
+    /* @__PURE__ */ jsxs9("div", { children: [
+      /* @__PURE__ */ jsx14(Heading, { className: "font-display text-h6", children: title }),
+      /* @__PURE__ */ jsx14("p", { className: "mt-1 text-sm text-muted-foreground", children: description })
     ] })
   ] });
 }
 
 // src/organisms/SingleIntegrationSection/SingleIntegrationSection.tsx
-import { jsx as jsx14, jsxs as jsxs9 } from "react/jsx-runtime";
+import { jsx as jsx15, jsxs as jsxs10 } from "react/jsx-runtime";
 function SingleIntegrationSection({
   eyebrow,
   heading,
   subheading,
   subheadingCaption,
   features,
-  videoSrc
+  videoSrc,
+  image,
+  mediaCaption,
+  showVideoControls
 }) {
-  return /* @__PURE__ */ jsx14("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ jsxs9("div", { className: "mx-auto max-w-[1280px] px-6", children: [
-    /* @__PURE__ */ jsxs9("div", { className: "text-center", children: [
-      /* @__PURE__ */ jsx14(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx14("h2", { className: "mt-6 font-display text-h2", children: heading })
+  return /* @__PURE__ */ jsx15("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ jsxs10("div", { className: "mx-auto max-w-[1280px] px-6", children: [
+    /* @__PURE__ */ jsxs10("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx15(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx15("h2", { className: "mt-6 font-display text-h2", children: heading })
     ] }),
-    /* @__PURE__ */ jsxs9("div", { className: "mt-20 grid items-end gap-10 md:grid-cols-2", children: [
-      /* @__PURE__ */ jsxs9("div", { className: "pb-24", children: [
-        /* @__PURE__ */ jsx14("h3", { className: "font-display text-h4", children: subheading }),
-        /* @__PURE__ */ jsx14("p", { className: "mt-2 text-muted-foreground", children: subheadingCaption }),
-        /* @__PURE__ */ jsx14("ul", { className: "mt-10 space-y-8", children: features.map((f) => /* @__PURE__ */ jsx14(IconFeatureItem, { ...f }, f.title)) })
+    /* @__PURE__ */ jsxs10("div", { className: "mt-20 grid items-end gap-10 md:grid-cols-2", children: [
+      /* @__PURE__ */ jsxs10("div", { className: "pb-24", children: [
+        /* @__PURE__ */ jsx15("h3", { className: "font-display text-h4", children: subheading }),
+        /* @__PURE__ */ jsx15("p", { className: "mt-2 text-muted-foreground", children: subheadingCaption }),
+        /* @__PURE__ */ jsx15("ul", { className: "mt-10 space-y-8", children: features.map((f) => /* @__PURE__ */ jsx15(IconFeatureItem, { ...f }, f.title)) })
       ] }),
-      /* @__PURE__ */ jsx14("div", { className: "flex justify-center self-end md:justify-end", children: /* @__PURE__ */ jsx14("video", { src: videoSrc, autoPlay: true, muted: true, loop: true, playsInline: true, className: "block h-auto w-full max-w-[720px] object-contain" }) })
+      /* @__PURE__ */ jsx15("div", { className: "flex justify-center self-end md:justify-end", children: /* @__PURE__ */ jsx15(
+        SectionMedia,
+        {
+          videoSrc,
+          image,
+          caption: mediaCaption,
+          showVideoControls,
+          className: "w-full max-w-[720px]",
+          mediaClassName: "block object-contain"
+        }
+      ) })
     ] })
   ] }) });
 }
 
 // src/organisms/PlatformFeatureShowcase/PlatformFeatureShowcase.tsx
 import * as React4 from "react";
-import { Fragment as Fragment2, jsx as jsx15, jsxs as jsxs10 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx16, jsxs as jsxs11 } from "react/jsx-runtime";
 function PlatformFeatureShowcase({ features }) {
   const [active, setActive] = React4.useState(features[0]?.key);
   const [hovered, setHovered] = React4.useState(null);
@@ -511,14 +570,14 @@ function PlatformFeatureShowcase({ features }) {
     setHovered(null);
     tabRefs.current[next.key]?.focus();
   };
-  return /* @__PURE__ */ jsxs10(Fragment2, { children: [
-    /* @__PURE__ */ jsx15("div", { className: "flex flex-col gap-6 md:hidden", children: features.map((f) => /* @__PURE__ */ jsxs10("div", { className: "rounded-3xl bg-card p-6 shadow-sm", children: [
-      /* @__PURE__ */ jsx15("h4", { className: "font-display text-h5", children: f.title }),
-      /* @__PURE__ */ jsx15("p", { className: "mt-2 text-[15px] leading-relaxed text-muted-foreground", children: f.desc }),
-      /* @__PURE__ */ jsx15("div", { className: "mt-5 flex items-center justify-center overflow-hidden rounded-lg bg-[oklch(0.97_0.02_240)] p-4", children: /* @__PURE__ */ jsx15("video", { src: f.video, autoPlay: true, muted: true, loop: true, playsInline: true, preload: "metadata", className: "w-full max-w-full object-contain" }) })
+  return /* @__PURE__ */ jsxs11(Fragment2, { children: [
+    /* @__PURE__ */ jsx16("div", { className: "flex flex-col gap-6 md:hidden", children: features.map((f) => /* @__PURE__ */ jsxs11("div", { className: "rounded-3xl bg-card p-6 shadow-sm", children: [
+      /* @__PURE__ */ jsx16("h4", { className: "font-display text-h5", children: f.title }),
+      /* @__PURE__ */ jsx16("p", { className: "mt-2 text-[15px] leading-relaxed text-muted-foreground", children: f.desc }),
+      /* @__PURE__ */ jsx16("div", { className: "mt-5 flex items-center justify-center overflow-hidden rounded-lg bg-[oklch(0.97_0.02_240)] p-4", children: /* @__PURE__ */ jsx16("video", { src: f.video, autoPlay: true, muted: true, loop: true, playsInline: true, preload: "metadata", className: "w-full max-w-full object-contain" }) })
     ] }, f.key)) }),
-    /* @__PURE__ */ jsxs10("div", { className: "hidden items-stretch gap-6 md:grid md:grid-cols-[1.35fr_1fr]", children: [
-      /* @__PURE__ */ jsx15("div", { className: "flex min-h-[460px] items-center justify-center overflow-hidden rounded-3xl bg-[oklch(0.97_0.02_240)] p-8", children: features.map((f) => /* @__PURE__ */ jsx15("div", { role: "tabpanel", id: panelId(f.key), "aria-labelledby": tabId(f.key), hidden: shown !== f.key, children: /* @__PURE__ */ jsx15(
+    /* @__PURE__ */ jsxs11("div", { className: "hidden items-stretch gap-6 md:grid md:grid-cols-[1.35fr_1fr]", children: [
+      /* @__PURE__ */ jsx16("div", { className: "flex min-h-[460px] items-center justify-center overflow-hidden rounded-3xl bg-[oklch(0.97_0.02_240)] p-8", children: features.map((f) => /* @__PURE__ */ jsx16("div", { role: "tabpanel", id: panelId(f.key), "aria-labelledby": tabId(f.key), hidden: shown !== f.key, children: /* @__PURE__ */ jsx16(
         "video",
         {
           src: f.video,
@@ -529,9 +588,9 @@ function PlatformFeatureShowcase({ features }) {
           className: "max-h-[420px] w-auto max-w-full object-contain transition-opacity duration-300"
         }
       ) }, f.key)) }),
-      /* @__PURE__ */ jsx15("div", { className: "flex flex-col gap-5", role: "tablist", "aria-orientation": "vertical", children: features.map((f, i) => {
+      /* @__PURE__ */ jsx16("div", { className: "flex flex-col gap-5", role: "tablist", "aria-orientation": "vertical", children: features.map((f, i) => {
         const isActive = active === f.key;
-        return /* @__PURE__ */ jsxs10(
+        return /* @__PURE__ */ jsxs11(
           "button",
           {
             ref: (el) => {
@@ -554,8 +613,8 @@ function PlatformFeatureShowcase({ features }) {
             onKeyDown: (e) => onKeyDown(e, i),
             className: `flex-1 cursor-pointer rounded-lg p-8 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary ${isActive ? "bg-card shadow-sm" : "bg-muted/60"}`,
             children: [
-              /* @__PURE__ */ jsx15("span", { className: "block font-display text-2xl", children: f.title }),
-              /* @__PURE__ */ jsx15("span", { className: "mt-3 block text-[15px] leading-relaxed text-muted-foreground", children: f.desc })
+              /* @__PURE__ */ jsx16("span", { className: "block font-display text-2xl", children: f.title }),
+              /* @__PURE__ */ jsx16("span", { className: "mt-3 block text-[15px] leading-relaxed text-muted-foreground", children: f.desc })
             ]
           },
           f.key
@@ -566,64 +625,64 @@ function PlatformFeatureShowcase({ features }) {
 }
 
 // src/molecules/BulletItem/BulletItem.tsx
-import { jsx as jsx16, jsxs as jsxs11 } from "react/jsx-runtime";
+import { jsx as jsx17, jsxs as jsxs12 } from "react/jsx-runtime";
 function BulletItem({ className, children, ...props }) {
-  return /* @__PURE__ */ jsxs11("li", { className: cn("flex gap-3", className), ...props, children: [
-    /* @__PURE__ */ jsx16("span", { className: "mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-muted-foreground" }),
+  return /* @__PURE__ */ jsxs12("li", { className: cn("flex gap-3", className), ...props, children: [
+    /* @__PURE__ */ jsx17("span", { className: "mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-muted-foreground" }),
     children
   ] });
 }
 
 // src/molecules/IconCard/IconCard.tsx
-import { jsx as jsx17, jsxs as jsxs12 } from "react/jsx-runtime";
+import { jsx as jsx18, jsxs as jsxs13 } from "react/jsx-runtime";
 function IconCard({ className, icon: Icon, title, bullets, color, ...props }) {
-  return /* @__PURE__ */ jsxs12("div", { className: cn("rounded-3xl bg-card p-8 shadow-sm", className), ...props, children: [
-    /* @__PURE__ */ jsxs12("div", { className: "flex items-start justify-between gap-4", children: [
-      /* @__PURE__ */ jsx17("h3", { className: "font-display text-h4", children: title }),
-      /* @__PURE__ */ jsx17(
+  return /* @__PURE__ */ jsxs13("div", { className: cn("rounded-3xl bg-card p-8 shadow-sm", className), ...props, children: [
+    /* @__PURE__ */ jsxs13("div", { className: "flex items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsx18("h3", { className: "font-display text-h4", children: title }),
+      /* @__PURE__ */ jsx18(
         "div",
         {
           className: "grid h-12 w-12 shrink-0 place-items-center rounded-xl",
           style: { background: `linear-gradient(135deg, ${color}, color-mix(in oklab, ${color} 40%, white))` },
-          children: /* @__PURE__ */ jsx17(Icon, { className: "h-5 w-5 text-foreground" })
+          children: /* @__PURE__ */ jsx18(Icon, { className: "h-5 w-5 text-foreground" })
         }
       )
     ] }),
-    /* @__PURE__ */ jsx17("ul", { className: "mt-8 space-y-2 text-muted-foreground", children: bullets.map((bullet) => /* @__PURE__ */ jsx17(BulletItem, { children: bullet }, bullet)) })
+    /* @__PURE__ */ jsx18("ul", { className: "mt-8 space-y-2 text-muted-foreground", children: bullets.map((bullet) => /* @__PURE__ */ jsx18(BulletItem, { children: bullet }, bullet)) })
   ] });
 }
 
 // src/organisms/SecuritySection/SecuritySection.tsx
-import { jsx as jsx18, jsxs as jsxs13 } from "react/jsx-runtime";
+import { jsx as jsx19, jsxs as jsxs14 } from "react/jsx-runtime";
 function SecuritySection({ eyebrow, heading, description, schemeBadges, cards }) {
-  return /* @__PURE__ */ jsxs13("section", { id: "security", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    /* @__PURE__ */ jsxs13("div", { className: "text-center", children: [
-      /* @__PURE__ */ jsx18(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx18("h2", { className: "mt-6 font-display text-h2", children: heading }),
-      /* @__PURE__ */ jsx18("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description })
+  return /* @__PURE__ */ jsxs14("section", { id: "security", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ jsxs14("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx19(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx19("h2", { className: "mt-6 font-display text-h2", children: heading }),
+      /* @__PURE__ */ jsx19("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description })
     ] }),
-    /* @__PURE__ */ jsx18("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale", children: schemeBadges.map((label) => /* @__PURE__ */ jsx18("span", { className: "text-sm font-bold text-foreground/60", children: label }, label)) }),
-    /* @__PURE__ */ jsx18("div", { className: "mt-12 grid gap-6 md:grid-cols-2", children: cards.map((c) => /* @__PURE__ */ jsx18(IconCard, { ...c }, c.title)) })
+    /* @__PURE__ */ jsx19("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale", children: schemeBadges.map((label) => /* @__PURE__ */ jsx19("span", { className: "text-sm font-bold text-foreground/60", children: label }, label)) }),
+    /* @__PURE__ */ jsx19("div", { className: "mt-12 grid gap-6 md:grid-cols-2", children: cards.map((c) => /* @__PURE__ */ jsx19(IconCard, { ...c }, c.title)) })
   ] });
 }
 
 // src/organisms/GlobalCoverageSection/GlobalCoverageSection.tsx
-import { jsx as jsx19, jsxs as jsxs14 } from "react/jsx-runtime";
+import { jsx as jsx20, jsxs as jsxs15 } from "react/jsx-runtime";
 function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
-  return /* @__PURE__ */ jsx19("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs14("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
-    /* @__PURE__ */ jsxs14("div", { children: [
-      /* @__PURE__ */ jsx19(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx19("h2", { className: "mt-6 font-display text-h2", children: heading }),
-      /* @__PURE__ */ jsx19("ul", { className: "mt-12 space-y-8", children: features.map((f) => (
+  return /* @__PURE__ */ jsx20("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs15("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ jsxs15("div", { children: [
+      /* @__PURE__ */ jsx20(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx20("h2", { className: "mt-6 font-display text-h2", children: heading }),
+      /* @__PURE__ */ jsx20("ul", { className: "mt-12 space-y-8", children: features.map((f) => (
         // No h3 sits between this list and the section's h2 above (unlike
         // SingleIntegrationSection, which has one), so these need to be h3
         // themselves or heading levels skip -- see AUDIT.md section 6.
-        /* @__PURE__ */ jsx19(IconFeatureItem, { headingLevel: "h3", ...f }, f.title)
+        /* @__PURE__ */ jsx20(IconFeatureItem, { headingLevel: "h3", ...f }, f.title)
       )) })
     ] }),
-    /* @__PURE__ */ jsxs14("div", { className: "relative aspect-square rounded-3xl bg-gradient-to-br from-muted to-background", children: [
-      /* @__PURE__ */ jsx19("div", { className: "absolute right-8 top-8 grid h-20 w-20 place-items-center rounded-full bg-card shadow-lg", children: /* @__PURE__ */ jsx19("div", { className: "h-9 w-6 rounded-t-full bg-[oklch(0.6_0.22_255)]" }) }),
-      floatingBadges.map((b) => /* @__PURE__ */ jsx19(
+    /* @__PURE__ */ jsxs15("div", { className: "relative aspect-square rounded-3xl bg-gradient-to-br from-muted to-background", children: [
+      /* @__PURE__ */ jsx20("div", { className: "absolute right-8 top-8 grid h-20 w-20 place-items-center rounded-full bg-card shadow-lg", children: /* @__PURE__ */ jsx20("div", { className: "h-9 w-6 rounded-t-full bg-[oklch(0.6_0.22_255)]" }) }),
+      floatingBadges.map((b) => /* @__PURE__ */ jsx20(
         "div",
         {
           className: `absolute grid h-14 w-14 place-items-center rounded-full text-xs font-bold shadow-lg ${b.className}`,
@@ -637,41 +696,41 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
 }
 
 // src/organisms/DataLeverageSection/DataLeverageSection.tsx
-import { jsx as jsx20, jsxs as jsxs15 } from "react/jsx-runtime";
+import { jsx as jsx21, jsxs as jsxs16 } from "react/jsx-runtime";
 function DataLeverageSection({ eyebrow, heading, description, items, reportingPeriods }) {
-  return /* @__PURE__ */ jsxs15("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    /* @__PURE__ */ jsxs15("div", { className: "text-center", children: [
-      /* @__PURE__ */ jsx20(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx20("h2", { className: "mt-6 font-display text-h2", children: heading }),
-      /* @__PURE__ */ jsx20("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description })
+  return /* @__PURE__ */ jsxs16("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ jsxs16("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx21(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx21("h2", { className: "mt-6 font-display text-h2", children: heading }),
+      /* @__PURE__ */ jsx21("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description })
     ] }),
-    /* @__PURE__ */ jsxs15("div", { className: "mt-16 grid gap-10 md:grid-cols-2", children: [
-      /* @__PURE__ */ jsx20("ul", { className: "divide-y divide-border", children: items.map((d) => /* @__PURE__ */ jsxs15("li", { className: "py-8 first:pt-0", children: [
-        /* @__PURE__ */ jsx20("h3", { className: "font-display text-h4", children: d.title }),
-        /* @__PURE__ */ jsx20("p", { className: "mt-3 text-sm leading-relaxed text-muted-foreground md:text-base", children: d.desc })
+    /* @__PURE__ */ jsxs16("div", { className: "mt-16 grid gap-10 md:grid-cols-2", children: [
+      /* @__PURE__ */ jsx21("ul", { className: "divide-y divide-border", children: items.map((d) => /* @__PURE__ */ jsxs16("li", { className: "py-8 first:pt-0", children: [
+        /* @__PURE__ */ jsx21("h3", { className: "font-display text-h4", children: d.title }),
+        /* @__PURE__ */ jsx21("p", { className: "mt-3 text-sm leading-relaxed text-muted-foreground md:text-base", children: d.desc })
       ] }, d.title)) }),
-      /* @__PURE__ */ jsxs15("div", { className: "relative min-h-[480px] rounded-3xl bg-gradient-to-br from-[oklch(0.9_0.06_280)] to-[oklch(0.95_0.04_260)] p-6", children: [
-        /* @__PURE__ */ jsxs15("div", { className: "absolute right-6 top-6 w-[85%] rounded-2xl bg-card p-4 shadow-xl", children: [
-          /* @__PURE__ */ jsxs15("div", { className: "flex items-center justify-between text-[10px] text-muted-foreground", children: [
-            /* @__PURE__ */ jsx20("span", { className: "rounded bg-muted px-2 py-1", children: "Number of transactions \u25BE" }),
-            /* @__PURE__ */ jsx20("span", { className: "rounded bg-muted px-2 py-1", children: "Operator" }),
-            /* @__PURE__ */ jsx20("span", { className: "rounded bg-muted px-2 py-1", children: "Method" })
+      /* @__PURE__ */ jsxs16("div", { className: "relative min-h-[480px] rounded-3xl bg-gradient-to-br from-[oklch(0.9_0.06_280)] to-[oklch(0.95_0.04_260)] p-6", children: [
+        /* @__PURE__ */ jsxs16("div", { className: "absolute right-6 top-6 w-[85%] rounded-2xl bg-card p-4 shadow-xl", children: [
+          /* @__PURE__ */ jsxs16("div", { className: "flex items-center justify-between text-[10px] text-muted-foreground", children: [
+            /* @__PURE__ */ jsx21("span", { className: "rounded bg-muted px-2 py-1", children: "Number of transactions \u25BE" }),
+            /* @__PURE__ */ jsx21("span", { className: "rounded bg-muted px-2 py-1", children: "Operator" }),
+            /* @__PURE__ */ jsx21("span", { className: "rounded bg-muted px-2 py-1", children: "Method" })
           ] }),
-          /* @__PURE__ */ jsxs15("svg", { viewBox: "0 0 300 100", className: "mt-3 h-24 w-full", children: [
-            /* @__PURE__ */ jsx20("path", { d: "M0,60 Q40,20 80,50 T160,40 T240,70 T300,30", stroke: "oklch(0.55 0.2 255)", strokeWidth: "2", fill: "none" }),
-            /* @__PURE__ */ jsx20("path", { d: "M0,70 Q40,40 80,60 T160,55 T240,40 T300,60", stroke: "oklch(0.7 0.18 140)", strokeWidth: "2", fill: "none" }),
-            /* @__PURE__ */ jsx20("path", { d: "M0,50 Q40,70 80,45 T160,65 T240,55 T300,45", stroke: "oklch(0.65 0.22 25)", strokeWidth: "2", fill: "none" })
+          /* @__PURE__ */ jsxs16("svg", { viewBox: "0 0 300 100", className: "mt-3 h-24 w-full", children: [
+            /* @__PURE__ */ jsx21("path", { d: "M0,60 Q40,20 80,50 T160,40 T240,70 T300,30", stroke: "oklch(0.55 0.2 255)", strokeWidth: "2", fill: "none" }),
+            /* @__PURE__ */ jsx21("path", { d: "M0,70 Q40,40 80,60 T160,55 T240,40 T300,60", stroke: "oklch(0.7 0.18 140)", strokeWidth: "2", fill: "none" }),
+            /* @__PURE__ */ jsx21("path", { d: "M0,50 Q40,70 80,45 T160,65 T240,55 T300,45", stroke: "oklch(0.65 0.22 25)", strokeWidth: "2", fill: "none" })
           ] })
         ] }),
-        /* @__PURE__ */ jsxs15("div", { className: "absolute bottom-6 left-6 w-[88%] rounded-2xl bg-card p-4 shadow-xl", children: [
-          /* @__PURE__ */ jsxs15("div", { className: "flex items-center justify-between border-b border-border pb-2 text-[10px] font-semibold", children: [
-            /* @__PURE__ */ jsx20("span", { children: "Autopay" }),
-            /* @__PURE__ */ jsx20("span", { className: "text-muted-foreground", children: "Reporting Periods" })
+        /* @__PURE__ */ jsxs16("div", { className: "absolute bottom-6 left-6 w-[88%] rounded-2xl bg-card p-4 shadow-xl", children: [
+          /* @__PURE__ */ jsxs16("div", { className: "flex items-center justify-between border-b border-border pb-2 text-[10px] font-semibold", children: [
+            /* @__PURE__ */ jsx21("span", { children: "Autopay" }),
+            /* @__PURE__ */ jsx21("span", { className: "text-muted-foreground", children: "Reporting Periods" })
           ] }),
-          /* @__PURE__ */ jsx20("div", { className: "mt-3 space-y-1.5 text-[9px]", children: reportingPeriods.map((p) => /* @__PURE__ */ jsxs15("div", { className: "flex items-center justify-between border-b border-border/50 py-1", children: [
-            /* @__PURE__ */ jsx20("span", { children: p.month }),
-            /* @__PURE__ */ jsx20("span", { className: "rounded-full bg-[oklch(0.92_0.15_85)] px-2 py-0.5 text-[8px] font-medium", children: p.status }),
-            /* @__PURE__ */ jsx20("span", { className: "text-muted-foreground", children: p.date })
+          /* @__PURE__ */ jsx21("div", { className: "mt-3 space-y-1.5 text-[9px]", children: reportingPeriods.map((p) => /* @__PURE__ */ jsxs16("div", { className: "flex items-center justify-between border-b border-border/50 py-1", children: [
+            /* @__PURE__ */ jsx21("span", { children: p.month }),
+            /* @__PURE__ */ jsx21("span", { className: "rounded-full bg-[oklch(0.92_0.15_85)] px-2 py-0.5 text-[8px] font-medium", children: p.status }),
+            /* @__PURE__ */ jsx21("span", { className: "text-muted-foreground", children: p.date })
           ] }, p.month)) })
         ] })
       ] })
@@ -680,29 +739,29 @@ function DataLeverageSection({ eyebrow, heading, description, items, reportingPe
 }
 
 // src/molecules/StatBlock/StatBlock.tsx
-import { jsx as jsx21, jsxs as jsxs16 } from "react/jsx-runtime";
+import { jsx as jsx22, jsxs as jsxs17 } from "react/jsx-runtime";
 function StatBlock({ className, eyebrow = "UP TO", value, label, ...props }) {
-  return /* @__PURE__ */ jsxs16("div", { className: cn("bg-transparent pr-6", className), ...props, children: [
-    /* @__PURE__ */ jsx21("div", { className: "text-[10px] font-semibold uppercase tracking-wider text-muted-foreground", children: eyebrow }),
-    /* @__PURE__ */ jsx21("div", { className: "mt-3 font-display text-[56px] leading-none md:text-[72px]", children: value }),
-    /* @__PURE__ */ jsx21("div", { className: "mt-6 text-sm text-muted-foreground", children: label })
+  return /* @__PURE__ */ jsxs17("div", { className: cn("bg-transparent pr-6", className), ...props, children: [
+    /* @__PURE__ */ jsx22("div", { className: "text-[10px] font-semibold uppercase tracking-wider text-muted-foreground", children: eyebrow }),
+    /* @__PURE__ */ jsx22("div", { className: "mt-3 font-display text-[56px] leading-none md:text-[72px]", children: value }),
+    /* @__PURE__ */ jsx22("div", { className: "mt-6 text-sm text-muted-foreground", children: label })
   ] });
 }
 
 // src/organisms/StatsSection/StatsSection.tsx
-import { jsx as jsx22, jsxs as jsxs17 } from "react/jsx-runtime";
+import { jsx as jsx23, jsxs as jsxs18 } from "react/jsx-runtime";
 function StatsSection({ heading, description, stats }) {
-  return /* @__PURE__ */ jsx22("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs17("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
-    /* @__PURE__ */ jsxs17("div", { className: "max-w-2xl", children: [
-      /* @__PURE__ */ jsx22("h2", { className: "font-display text-h2", children: heading }),
-      /* @__PURE__ */ jsx22("p", { className: "mt-6 text-muted-foreground md:text-[17px]", children: description })
+  return /* @__PURE__ */ jsx23("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs18("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
+    /* @__PURE__ */ jsxs18("div", { className: "max-w-2xl", children: [
+      /* @__PURE__ */ jsx23("h2", { className: "font-display text-h2", children: heading }),
+      /* @__PURE__ */ jsx23("p", { className: "mt-6 text-muted-foreground md:text-[17px]", children: description })
     ] }),
-    /* @__PURE__ */ jsx22("div", { className: "mt-16 grid grid-cols-2 gap-px md:grid-cols-4", children: stats.map((s) => /* @__PURE__ */ jsx22(StatBlock, { ...s }, s.label)) })
+    /* @__PURE__ */ jsx23("div", { className: "mt-16 grid grid-cols-2 gap-px md:grid-cols-4", children: stats.map((s) => /* @__PURE__ */ jsx23(StatBlock, { ...s }, s.label)) })
   ] }) });
 }
 
 // src/molecules/IndustryCard/IndustryCard.tsx
-import { Fragment as Fragment3, jsx as jsx23, jsxs as jsxs18 } from "react/jsx-runtime";
+import { Fragment as Fragment3, jsx as jsx24, jsxs as jsxs19 } from "react/jsx-runtime";
 function IndustryCard({
   className,
   name,
@@ -715,7 +774,7 @@ function IndustryCard({
   style,
   ...props
 }) {
-  const imageBlock = /* @__PURE__ */ jsx23(
+  const imageBlock = /* @__PURE__ */ jsx24(
     "div",
     {
       className: cn(
@@ -727,17 +786,17 @@ function IndustryCard({
       "aria-label": `${name.replace("\n", " ")} \u2014 use case`
     }
   );
-  const content = /* @__PURE__ */ jsxs18("div", { className: cn(layout === "stacked" ? "flex flex-col justify-between p-10 md:p-12" : "p-8"), children: [
-    /* @__PURE__ */ jsx23(
+  const content = /* @__PURE__ */ jsxs19("div", { className: cn(layout === "stacked" ? "flex flex-col justify-between p-10 md:p-12" : "p-8"), children: [
+    /* @__PURE__ */ jsx24(
       "h3",
       {
         className: cn("font-display whitespace-pre-line", layout === "stacked" ? "text-h3" : "text-h4"),
         children: name
       }
     ),
-    /* @__PURE__ */ jsxs18("div", { className: layout === "grid" ? "mt-4" : void 0, children: [
-      /* @__PURE__ */ jsx23("p", { className: cn("max-w-md text-sm leading-relaxed text-foreground/75", layout === "stacked" && "mt-8"), children: description }),
-      /* @__PURE__ */ jsx23(
+    /* @__PURE__ */ jsxs19("div", { className: layout === "grid" ? "mt-4" : void 0, children: [
+      /* @__PURE__ */ jsx24("p", { className: cn("max-w-md text-sm leading-relaxed text-foreground/75", layout === "stacked" && "mt-8"), children: description }),
+      /* @__PURE__ */ jsx24(
         Button,
         {
           type: "button",
@@ -750,7 +809,7 @@ function IndustryCard({
       )
     ] })
   ] });
-  return /* @__PURE__ */ jsx23(
+  return /* @__PURE__ */ jsx24(
     "article",
     {
       className: cn(
@@ -760,10 +819,10 @@ function IndustryCard({
       ),
       style: { backgroundColor, ...style },
       ...props,
-      children: layout === "stacked" ? /* @__PURE__ */ jsxs18(Fragment3, { children: [
+      children: layout === "stacked" ? /* @__PURE__ */ jsxs19(Fragment3, { children: [
         content,
         imageBlock
-      ] }) : /* @__PURE__ */ jsxs18(Fragment3, { children: [
+      ] }) : /* @__PURE__ */ jsxs19(Fragment3, { children: [
         imageBlock,
         content
       ] })
@@ -772,14 +831,14 @@ function IndustryCard({
 }
 
 // src/organisms/IndustriesStackedSection/IndustriesStackedSection.tsx
-import { jsx as jsx24, jsxs as jsxs19 } from "react/jsx-runtime";
+import { jsx as jsx25, jsxs as jsxs20 } from "react/jsx-runtime";
 function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ jsx24("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs19("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
-    /* @__PURE__ */ jsxs19("div", { className: "text-center", children: [
-      /* @__PURE__ */ jsx24(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx24("h2", { className: "mt-6 font-display text-h2", children: heading })
+  return /* @__PURE__ */ jsx25("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs20("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+    /* @__PURE__ */ jsxs20("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx25(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx25("h2", { className: "mt-6 font-display text-h2", children: heading })
     ] }),
-    /* @__PURE__ */ jsx24("div", { className: "mt-12", children: industries.map((ind, i) => /* @__PURE__ */ jsx24(
+    /* @__PURE__ */ jsx25("div", { className: "mt-12", children: industries.map((ind, i) => /* @__PURE__ */ jsx25(
       IndustryCard,
       {
         layout: "stacked",
@@ -802,14 +861,14 @@ function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCt
 }
 
 // src/organisms/IndustriesGridSection/IndustriesGridSection.tsx
-import { jsx as jsx25, jsxs as jsxs20 } from "react/jsx-runtime";
+import { jsx as jsx26, jsxs as jsxs21 } from "react/jsx-runtime";
 function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ jsx25("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs20("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
-    /* @__PURE__ */ jsxs20("div", { className: "text-center", children: [
-      /* @__PURE__ */ jsx25(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx25("h2", { className: "mt-6 font-display text-h2", children: heading })
+  return /* @__PURE__ */ jsx26("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs21("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+    /* @__PURE__ */ jsxs21("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx26(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx26("h2", { className: "mt-6 font-display text-h2", children: heading })
     ] }),
-    /* @__PURE__ */ jsx25("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: industries.map((ind) => /* @__PURE__ */ jsx25(
+    /* @__PURE__ */ jsx26("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: industries.map((ind) => /* @__PURE__ */ jsx26(
       IndustryCard,
       {
         layout: "grid",
@@ -826,7 +885,7 @@ function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaCl
 }
 
 // src/molecules/OverlapCard/OverlapCard.tsx
-import { jsx as jsx26, jsxs as jsxs21 } from "react/jsx-runtime";
+import { jsx as jsx27, jsxs as jsxs22 } from "react/jsx-runtime";
 function OverlapCard({
   className,
   title,
@@ -838,7 +897,7 @@ function OverlapCard({
   style,
   ...props
 }) {
-  return /* @__PURE__ */ jsxs21(
+  return /* @__PURE__ */ jsxs22(
     "article",
     {
       className: cn(
@@ -848,13 +907,13 @@ function OverlapCard({
       style: { backgroundColor, ...style },
       ...props,
       children: [
-        /* @__PURE__ */ jsxs21("div", { className: "flex flex-col justify-between p-10 md:p-12", children: [
-          /* @__PURE__ */ jsx26("h3", { className: "font-display text-h3 whitespace-pre-line", children: title }),
-          /* @__PURE__ */ jsxs21("div", { className: "mt-8", children: [
-            /* @__PURE__ */ jsx26("p", { className: "max-w-md text-sm leading-relaxed text-foreground/75", children: description }),
-            /* @__PURE__ */ jsxs21("div", { className: "mt-8 flex flex-wrap gap-3", children: [
-              /* @__PURE__ */ jsx26(Button, { type: "button", variant: "solid", size: "xs", onClick: primaryCta.onClick, children: primaryCta.label }),
-              /* @__PURE__ */ jsx26(
+        /* @__PURE__ */ jsxs22("div", { className: "flex flex-col justify-between p-10 md:p-12", children: [
+          /* @__PURE__ */ jsx27("h3", { className: "font-display text-h3 whitespace-pre-line", children: title }),
+          /* @__PURE__ */ jsxs22("div", { className: "mt-8", children: [
+            /* @__PURE__ */ jsx27("p", { className: "max-w-md text-sm leading-relaxed text-foreground/75", children: description }),
+            /* @__PURE__ */ jsxs22("div", { className: "mt-8 flex flex-wrap gap-3", children: [
+              /* @__PURE__ */ jsx27(Button, { type: "button", variant: "solid", size: "xs", onClick: primaryCta.onClick, children: primaryCta.label }),
+              /* @__PURE__ */ jsx27(
                 Button,
                 {
                   type: "button",
@@ -868,7 +927,7 @@ function OverlapCard({
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ jsx26(
+        /* @__PURE__ */ jsx27(
           "div",
           {
             className: "min-h-[260px] bg-cover bg-center md:min-h-[420px]",
@@ -883,14 +942,14 @@ function OverlapCard({
 }
 
 // src/organisms/OverlappingCardsSection/OverlappingCardsSection.tsx
-import { jsx as jsx27, jsxs as jsxs22 } from "react/jsx-runtime";
+import { jsx as jsx28, jsxs as jsxs23 } from "react/jsx-runtime";
 function OverlappingCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ jsx27("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs22("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
-    /* @__PURE__ */ jsxs22("div", { className: "text-center", children: [
-      /* @__PURE__ */ jsx27(Badge, { variant: "eyebrow", children: eyebrow }),
-      /* @__PURE__ */ jsx27("h2", { className: "mt-6 font-display text-h2", children: heading })
+  return /* @__PURE__ */ jsx28("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs23("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+    /* @__PURE__ */ jsxs23("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx28(Badge, { variant: "eyebrow", children: eyebrow }),
+      /* @__PURE__ */ jsx28("h2", { className: "mt-6 font-display text-h2", children: heading })
     ] }),
-    /* @__PURE__ */ jsx27("div", { className: "mt-12", children: cards.map((c, i) => /* @__PURE__ */ jsx27(
+    /* @__PURE__ */ jsx28("div", { className: "mt-12", children: cards.map((c, i) => /* @__PURE__ */ jsx28(
       OverlapCard,
       {
         title: c.title,
@@ -916,10 +975,10 @@ import * as React6 from "react";
 
 // src/atoms/Input/Input.tsx
 import * as React5 from "react";
-import { jsx as jsx28 } from "react/jsx-runtime";
+import { jsx as jsx29 } from "react/jsx-runtime";
 var Input = React5.forwardRef(
   ({ className, type, ...props }, ref) => {
-    return /* @__PURE__ */ jsx28(
+    return /* @__PURE__ */ jsx29(
       "input",
       {
         type,
@@ -936,17 +995,17 @@ var Input = React5.forwardRef(
 Input.displayName = "Input";
 
 // src/atoms/Label/Label.tsx
-import { jsx as jsx29 } from "react/jsx-runtime";
+import { jsx as jsx30 } from "react/jsx-runtime";
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ jsx29("span", { className: cn("text-xs text-muted-foreground", className), ...props });
+  return /* @__PURE__ */ jsx30("span", { className: cn("text-xs text-muted-foreground", className), ...props });
 }
 
 // src/molecules/FormField/FormField.tsx
-import { jsx as jsx30, jsxs as jsxs23 } from "react/jsx-runtime";
+import { jsx as jsx31, jsxs as jsxs24 } from "react/jsx-runtime";
 var FormField = React6.forwardRef(
-  ({ label, id, ...inputProps }, ref) => /* @__PURE__ */ jsxs23("label", { className: "block", children: [
-    /* @__PURE__ */ jsx30(Label, { children: label }),
-    /* @__PURE__ */ jsx30(Input, { ref, id, className: "mt-2", ...inputProps })
+  ({ label, id, ...inputProps }, ref) => /* @__PURE__ */ jsxs24("label", { className: "block", children: [
+    /* @__PURE__ */ jsx31(Label, { children: label }),
+    /* @__PURE__ */ jsx31(Input, { ref, id, className: "mt-2", ...inputProps })
   ] })
 );
 FormField.displayName = "FormField";
@@ -956,23 +1015,23 @@ import * as React8 from "react";
 
 // src/atoms/Checkbox/Checkbox.tsx
 import * as React7 from "react";
-import { jsx as jsx31 } from "react/jsx-runtime";
+import { jsx as jsx32 } from "react/jsx-runtime";
 var Checkbox = React7.forwardRef(
-  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ jsx31("input", { type, className: cn("mt-1", className), ref, ...props })
+  ({ className, type = "checkbox", ...props }, ref) => /* @__PURE__ */ jsx32("input", { type, className: cn("mt-1", className), ref, ...props })
 );
 Checkbox.displayName = "Checkbox";
 
 // src/molecules/ConsentCheckboxField/ConsentCheckboxField.tsx
-import { jsx as jsx32, jsxs as jsxs24 } from "react/jsx-runtime";
+import { jsx as jsx33, jsxs as jsxs25 } from "react/jsx-runtime";
 var ConsentCheckboxField = React8.forwardRef(
-  ({ consentText, controllerText, moreHref = "#", ...props }, ref) => /* @__PURE__ */ jsxs24("label", { className: "flex gap-3 text-xs text-muted-foreground", children: [
-    /* @__PURE__ */ jsx32(Checkbox, { ref, ...props }),
-    /* @__PURE__ */ jsxs24("span", { children: [
+  ({ consentText, controllerText, moreHref = "#", ...props }, ref) => /* @__PURE__ */ jsxs25("label", { className: "flex gap-3 text-xs text-muted-foreground", children: [
+    /* @__PURE__ */ jsx33(Checkbox, { ref, ...props }),
+    /* @__PURE__ */ jsxs25("span", { children: [
       consentText,
-      /* @__PURE__ */ jsxs24("span", { className: "mt-2 block text-[11px]", children: [
+      /* @__PURE__ */ jsxs25("span", { className: "mt-2 block text-[11px]", children: [
         controllerText,
         " ",
-        /* @__PURE__ */ jsx32(Link, { variant: "underline", href: moreHref, children: "More" })
+        /* @__PURE__ */ jsx33(Link, { variant: "underline", href: moreHref, children: "More" })
       ] })
     ] })
   ] })
@@ -980,7 +1039,7 @@ var ConsentCheckboxField = React8.forwardRef(
 ConsentCheckboxField.displayName = "ConsentCheckboxField";
 
 // src/organisms/ContactSection/ContactSection.tsx
-import { jsx as jsx33, jsxs as jsxs25 } from "react/jsx-runtime";
+import { jsx as jsx34, jsxs as jsxs26 } from "react/jsx-runtime";
 function ContactSection({
   heading,
   description,
@@ -990,22 +1049,22 @@ function ContactSection({
   submitLabel = "Send",
   onSubmit
 }) {
-  return /* @__PURE__ */ jsx33("section", { id: "contact", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs25("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
-    /* @__PURE__ */ jsxs25("div", { children: [
-      /* @__PURE__ */ jsx33("h2", { className: "font-display text-h2", children: heading }),
-      /* @__PURE__ */ jsx33("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
+  return /* @__PURE__ */ jsx34("section", { id: "contact", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs26("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ jsxs26("div", { children: [
+      /* @__PURE__ */ jsx34("h2", { className: "font-display text-h2", children: heading }),
+      /* @__PURE__ */ jsx34("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
     ] }),
-    /* @__PURE__ */ jsxs25("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
-      /* @__PURE__ */ jsx33("h3", { className: "font-display text-h4", children: formHeading }),
-      /* @__PURE__ */ jsxs25("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
-        /* @__PURE__ */ jsxs25("div", { className: "grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsx33(FormField, { label: "First name", name: "firstName", placeholder: "Jane" }),
-          /* @__PURE__ */ jsx33(FormField, { label: "Last name", name: "lastName", placeholder: "Doe" })
+    /* @__PURE__ */ jsxs26("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
+      /* @__PURE__ */ jsx34("h3", { className: "font-display text-h4", children: formHeading }),
+      /* @__PURE__ */ jsxs26("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
+        /* @__PURE__ */ jsxs26("div", { className: "grid grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsx34(FormField, { label: "First name", name: "firstName", placeholder: "Jane" }),
+          /* @__PURE__ */ jsx34(FormField, { label: "Last name", name: "lastName", placeholder: "Doe" })
         ] }),
-        /* @__PURE__ */ jsx33(FormField, { label: "Phone number", name: "phone", placeholder: "123456789" }),
-        /* @__PURE__ */ jsx33(FormField, { label: "Business e-mail", name: "email", type: "email", placeholder: "jane@example.com" }),
-        /* @__PURE__ */ jsx33(ConsentCheckboxField, { name: "consent", consentText, controllerText }),
-        /* @__PURE__ */ jsx33(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
+        /* @__PURE__ */ jsx34(FormField, { label: "Phone number", name: "phone", placeholder: "123456789" }),
+        /* @__PURE__ */ jsx34(FormField, { label: "Business e-mail", name: "email", type: "email", placeholder: "jane@example.com" }),
+        /* @__PURE__ */ jsx34(ConsentCheckboxField, { name: "consent", consentText, controllerText }),
+        /* @__PURE__ */ jsx34(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
       ] })
     ] })
   ] }) });
@@ -1015,11 +1074,11 @@ function ContactSection({
 import * as React9 from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown as ChevronDown2 } from "lucide-react";
-import { jsx as jsx34, jsxs as jsxs26 } from "react/jsx-runtime";
+import { jsx as jsx35, jsxs as jsxs27 } from "react/jsx-runtime";
 var Accordion = AccordionPrimitive.Root;
-var AccordionItem = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx34(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
+var AccordionItem = React9.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx35(AccordionPrimitive.Item, { ref, className: cn("border-b", className), ...props }));
 AccordionItem.displayName = "AccordionItem";
-var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx34(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs26(
+var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx35(AccordionPrimitive.Header, { className: "flex", children: /* @__PURE__ */ jsxs27(
   AccordionPrimitive.Trigger,
   {
     ref,
@@ -1030,42 +1089,42 @@ var AccordionTrigger = React9.forwardRef(({ className, children, ...props }, ref
     ...props,
     children: [
       children,
-      /* @__PURE__ */ jsx34(ChevronDown2, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
+      /* @__PURE__ */ jsx35(ChevronDown2, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
     ]
   }
 ) }));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
-var AccordionContent = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx34(
+var AccordionContent = React9.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsx35(
   AccordionPrimitive.Content,
   {
     ref,
     className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
     ...props,
-    children: /* @__PURE__ */ jsx34("div", { className: cn("pb-4 pt-0", className), children })
+    children: /* @__PURE__ */ jsx35("div", { className: cn("pb-4 pt-0", className), children })
   }
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 // src/molecules/FaqItem/FaqItem.tsx
-import { jsx as jsx35, jsxs as jsxs27 } from "react/jsx-runtime";
+import { jsx as jsx36, jsxs as jsxs28 } from "react/jsx-runtime";
 function FaqItem({ value, question, answer }) {
-  return /* @__PURE__ */ jsxs27(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
-    /* @__PURE__ */ jsx35(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
-    /* @__PURE__ */ jsx35(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
+  return /* @__PURE__ */ jsxs28(AccordionItem, { value, className: "rounded-2xl border-0 bg-card px-6 py-1 md:px-8", children: [
+    /* @__PURE__ */ jsx36(AccordionTrigger, { className: "py-6 text-left text-lg font-semibold hover:no-underline md:text-xl [&>svg]:size-5", children: question }),
+    /* @__PURE__ */ jsx36(AccordionContent, { className: "pb-8 pt-2 text-base text-muted-foreground md:text-[17px]", children: answer })
   ] });
 }
 
 // src/organisms/FaqAccordionSection/FaqAccordionSection.tsx
-import { jsx as jsx36, jsxs as jsxs28 } from "react/jsx-runtime";
+import { jsx as jsx37, jsxs as jsxs29 } from "react/jsx-runtime";
 function FaqAccordionSection({ heading, entries }) {
-  return /* @__PURE__ */ jsx36("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ jsxs28("div", { className: "mx-auto max-w-[1280px]", children: [
-    /* @__PURE__ */ jsx36("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
-    /* @__PURE__ */ jsx36(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ jsx36(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
+  return /* @__PURE__ */ jsx37("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ jsxs29("div", { className: "mx-auto max-w-[1280px]", children: [
+    /* @__PURE__ */ jsx37("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
+    /* @__PURE__ */ jsx37(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ jsx37(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
   ] }) });
 }
 
 // src/organisms/PromoCtaSection/PromoCtaSection.tsx
-import { jsx as jsx37, jsxs as jsxs29 } from "react/jsx-runtime";
+import { jsx as jsx38, jsxs as jsxs30 } from "react/jsx-runtime";
 function PromoCtaSection({
   backgroundImage,
   heading,
@@ -1078,33 +1137,33 @@ function PromoCtaSection({
   privacyLabel,
   privacyHref
 }) {
-  return /* @__PURE__ */ jsx37("section", { className: "bg-surface px-4 pb-6 md:px-8 md:pb-8", children: /* @__PURE__ */ jsxs29("div", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl", children: [
-    /* @__PURE__ */ jsx37("img", { src: backgroundImage, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
-    /* @__PURE__ */ jsx37("div", { "aria-hidden": "true", className: "absolute inset-0 bg-ink/40" }),
-    /* @__PURE__ */ jsxs29("div", { className: "relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24", children: [
-      /* @__PURE__ */ jsxs29("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
-        /* @__PURE__ */ jsx37("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
-        /* @__PURE__ */ jsxs29("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
-          /* @__PURE__ */ jsx37(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ jsx37("a", { href: primaryCta.href, children: primaryCta.label }) }),
-          /* @__PURE__ */ jsx37(
+  return /* @__PURE__ */ jsx38("section", { className: "bg-surface px-4 pb-6 md:px-8 md:pb-8", children: /* @__PURE__ */ jsxs30("div", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl", children: [
+    /* @__PURE__ */ jsx38("img", { src: backgroundImage, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
+    /* @__PURE__ */ jsx38("div", { "aria-hidden": "true", className: "absolute inset-0 bg-ink/40" }),
+    /* @__PURE__ */ jsxs30("div", { className: "relative px-6 pt-16 sm:px-10 md:px-14 md:pt-24", children: [
+      /* @__PURE__ */ jsxs30("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
+        /* @__PURE__ */ jsx38("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
+        /* @__PURE__ */ jsxs30("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
+          /* @__PURE__ */ jsx38(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ jsx38("a", { href: primaryCta.href, children: primaryCta.label }) }),
+          /* @__PURE__ */ jsx38(
             Button,
             {
               asChild: true,
               variant: "outline-inverse",
               className: "h-12 border-background/30 px-7 text-base",
-              children: /* @__PURE__ */ jsx37("a", { href: secondaryCta.href, target: secondaryCta.external ? "_blank" : void 0, rel: secondaryCta.external ? "noopener noreferrer" : void 0, children: secondaryCta.label })
+              children: /* @__PURE__ */ jsx38("a", { href: secondaryCta.href, target: secondaryCta.external ? "_blank" : void 0, rel: secondaryCta.external ? "noopener noreferrer" : void 0, children: secondaryCta.label })
             }
           )
         ] })
       ] }),
-      /* @__PURE__ */ jsxs29("div", { className: "mt-14 rounded-3xl bg-lime p-8 text-lime-foreground md:mt-24 md:p-12", children: [
-        /* @__PURE__ */ jsxs29("div", { className: "flex flex-col gap-6 md:flex-row md:items-center md:gap-10", children: [
-          /* @__PURE__ */ jsx37(Logo, { src: logoSrc, alt: logoAlt, size: "sm", className: "md:h-8" }),
-          /* @__PURE__ */ jsx37("p", { className: "font-display text-2xl leading-tight md:text-3xl", children: promoText })
+      /* @__PURE__ */ jsxs30("div", { className: "mt-14 rounded-3xl bg-lime p-8 text-lime-foreground md:mt-24 md:p-12", children: [
+        /* @__PURE__ */ jsxs30("div", { className: "flex flex-col gap-6 md:flex-row md:items-center md:gap-10", children: [
+          /* @__PURE__ */ jsx38(Logo, { src: logoSrc, alt: logoAlt, size: "sm", className: "md:h-8" }),
+          /* @__PURE__ */ jsx38("p", { className: "font-display text-2xl leading-tight md:text-3xl", children: promoText })
         ] }),
-        /* @__PURE__ */ jsxs29("div", { className: "mt-8 flex flex-col justify-between gap-4 border-t border-lime-foreground/15 pt-6 sm:flex-row sm:items-center", children: [
-          /* @__PURE__ */ jsx37("p", { className: "text-sm text-lime-foreground/70", children: copyrightText }),
-          /* @__PURE__ */ jsx37(
+        /* @__PURE__ */ jsxs30("div", { className: "mt-8 flex flex-col justify-between gap-4 border-t border-lime-foreground/15 pt-6 sm:flex-row sm:items-center", children: [
+          /* @__PURE__ */ jsx38("p", { className: "text-sm text-lime-foreground/70", children: copyrightText }),
+          /* @__PURE__ */ jsx38(
             "a",
             {
               href: privacyHref,
@@ -1116,13 +1175,13 @@ function PromoCtaSection({
           )
         ] })
       ] }),
-      /* @__PURE__ */ jsx37("div", { className: "h-6 md:h-8" })
+      /* @__PURE__ */ jsx38("div", { className: "h-6 md:h-8" })
     ] })
   ] }) });
 }
 
 // src/organisms/CookieConsentScript/CookieConsentScript.tsx
-import { jsx as jsx38 } from "react/jsx-runtime";
+import { jsx as jsx39 } from "react/jsx-runtime";
 var AUTOPAYLAB_CMP_CDID = "136af463a10ba";
 var warnedAboutDefaultCdid = false;
 function buildSetLangSnippet(localeStorageKey, locale) {
@@ -1154,12 +1213,12 @@ function buildCookieConsentScript({
 `;
 }
 function CookieConsentScript(props = {}) {
-  return /* @__PURE__ */ jsx38("script", { dangerouslySetInnerHTML: { __html: buildCookieConsentScript(props) } });
+  return /* @__PURE__ */ jsx39("script", { dangerouslySetInnerHTML: { __html: buildCookieConsentScript(props) } });
 }
 
 // src/molecules/PricingTier/PricingTier.tsx
 import { Check } from "lucide-react";
-import { jsx as jsx39, jsxs as jsxs30 } from "react/jsx-runtime";
+import { jsx as jsx40, jsxs as jsxs31 } from "react/jsx-runtime";
 function PricingTier({
   name,
   price,
@@ -1173,7 +1232,7 @@ function PricingTier({
   featured = false,
   badgeLabel
 }) {
-  return /* @__PURE__ */ jsxs30(
+  return /* @__PURE__ */ jsxs31(
     "div",
     {
       className: cn(
@@ -1181,52 +1240,52 @@ function PricingTier({
         featured ? "border-primary shadow-lg" : "border-border"
       ),
       children: [
-        featured && badgeLabel ? /* @__PURE__ */ jsx39(Badge, { className: "absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary-foreground", children: badgeLabel }) : null,
-        /* @__PURE__ */ jsx39("h3", { className: "font-display text-h5", children: name }),
-        /* @__PURE__ */ jsxs30("div", { className: "mt-4 flex items-baseline gap-1", children: [
-          /* @__PURE__ */ jsx39("span", { className: "font-display text-h3", children: price }),
-          priceSuffix ? /* @__PURE__ */ jsx39("span", { className: "text-muted-foreground", children: priceSuffix }) : null
+        featured && badgeLabel ? /* @__PURE__ */ jsx40(Badge, { className: "absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary-foreground", children: badgeLabel }) : null,
+        /* @__PURE__ */ jsx40("h3", { className: "font-display text-h5", children: name }),
+        /* @__PURE__ */ jsxs31("div", { className: "mt-4 flex items-baseline gap-1", children: [
+          /* @__PURE__ */ jsx40("span", { className: "font-display text-h3", children: price }),
+          priceSuffix ? /* @__PURE__ */ jsx40("span", { className: "text-muted-foreground", children: priceSuffix }) : null
         ] }),
-        priceNote ? /* @__PURE__ */ jsx39("p", { className: "mt-1 text-sm text-muted-foreground", children: priceNote }) : null,
-        /* @__PURE__ */ jsx39("p", { className: "mt-4 text-sm text-muted-foreground", children: description }),
-        /* @__PURE__ */ jsx39("ul", { className: "mt-6 flex-1 space-y-3", children: features.map((feature) => /* @__PURE__ */ jsxs30("li", { className: "flex items-start gap-2 text-sm", children: [
-          /* @__PURE__ */ jsx39(Check, { className: "mt-0.5 h-4 w-4 shrink-0 text-primary" }),
-          /* @__PURE__ */ jsx39("span", { children: feature })
+        priceNote ? /* @__PURE__ */ jsx40("p", { className: "mt-1 text-sm text-muted-foreground", children: priceNote }) : null,
+        /* @__PURE__ */ jsx40("p", { className: "mt-4 text-sm text-muted-foreground", children: description }),
+        /* @__PURE__ */ jsx40("ul", { className: "mt-6 flex-1 space-y-3", children: features.map((feature) => /* @__PURE__ */ jsxs31("li", { className: "flex items-start gap-2 text-sm", children: [
+          /* @__PURE__ */ jsx40(Check, { className: "mt-0.5 h-4 w-4 shrink-0 text-primary" }),
+          /* @__PURE__ */ jsx40("span", { children: feature })
         ] }, feature)) }),
-        /* @__PURE__ */ jsx39(Button, { type: "button", variant: ctaVariant ?? (featured ? "lime" : "outline"), className: "mt-8 w-full", onClick: onCtaClick, children: ctaLabel })
+        /* @__PURE__ */ jsx40(Button, { type: "button", variant: ctaVariant ?? (featured ? "lime" : "outline"), className: "mt-8 w-full", onClick: onCtaClick, children: ctaLabel })
       ]
     }
   );
 }
 
 // src/organisms/PricingSection/PricingSection.tsx
-import { jsx as jsx40, jsxs as jsxs31 } from "react/jsx-runtime";
+import { jsx as jsx41, jsxs as jsxs32 } from "react/jsx-runtime";
 function PricingSection({ eyebrow, heading, tiers, footnotes }) {
-  return /* @__PURE__ */ jsxs31("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    /* @__PURE__ */ jsxs31("div", { className: "text-center", children: [
-      eyebrow ? /* @__PURE__ */ jsx40("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
-      /* @__PURE__ */ jsx40("h2", { className: "mt-4 font-display text-h2", children: heading })
+  return /* @__PURE__ */ jsxs32("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ jsxs32("div", { className: "text-center", children: [
+      eyebrow ? /* @__PURE__ */ jsx41("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      /* @__PURE__ */ jsx41("h2", { className: "mt-4 font-display text-h2", children: heading })
     ] }),
-    /* @__PURE__ */ jsx40("div", { className: "mt-12 grid gap-8 md:grid-cols-3", children: tiers.map((tier) => /* @__PURE__ */ jsx40(PricingTier, { ...tier }, tier.name)) }),
-    footnotes && footnotes.length > 0 ? /* @__PURE__ */ jsx40("div", { className: "mt-12 grid grid-cols-2 gap-6 text-center sm:grid-cols-4", children: footnotes.map((footnote) => /* @__PURE__ */ jsxs31("div", { children: [
-      /* @__PURE__ */ jsx40("div", { className: "font-display text-h5", children: footnote.value }),
-      /* @__PURE__ */ jsx40("div", { className: "mt-1 text-sm text-muted-foreground", children: footnote.label })
+    /* @__PURE__ */ jsx41("div", { className: "mt-12 grid gap-8 md:grid-cols-3", children: tiers.map((tier) => /* @__PURE__ */ jsx41(PricingTier, { ...tier }, tier.name)) }),
+    footnotes && footnotes.length > 0 ? /* @__PURE__ */ jsx41("div", { className: "mt-12 grid grid-cols-2 gap-6 text-center sm:grid-cols-4", children: footnotes.map((footnote) => /* @__PURE__ */ jsxs32("div", { children: [
+      /* @__PURE__ */ jsx41("div", { className: "font-display text-h5", children: footnote.value }),
+      /* @__PURE__ */ jsx41("div", { className: "mt-1 text-sm text-muted-foreground", children: footnote.label })
     ] }, footnote.label)) }) : null
   ] });
 }
 
 // src/organisms/AudienceScenariosSection/AudienceScenariosSection.tsx
-import { jsx as jsx41, jsxs as jsxs32 } from "react/jsx-runtime";
+import { jsx as jsx42, jsxs as jsxs33 } from "react/jsx-runtime";
 function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) {
-  return /* @__PURE__ */ jsxs32("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    /* @__PURE__ */ jsxs32("div", { className: "text-center", children: [
-      eyebrow ? /* @__PURE__ */ jsx41("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
-      /* @__PURE__ */ jsx41("h2", { className: "mt-4 font-display text-h2", children: heading }),
-      description ? /* @__PURE__ */ jsx41("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description }) : null
+  return /* @__PURE__ */ jsxs33("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    /* @__PURE__ */ jsxs33("div", { className: "text-center", children: [
+      eyebrow ? /* @__PURE__ */ jsx42("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      /* @__PURE__ */ jsx42("h2", { className: "mt-4 font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ jsx42("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description }) : null
     ] }),
-    /* @__PURE__ */ jsx41("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: scenarios.map((scenario) => /* @__PURE__ */ jsxs32("div", { className: "rounded-3xl border border-border bg-card p-8 shadow-sm", children: [
-      /* @__PURE__ */ jsx41("h3", { className: "font-display text-sm font-semibold uppercase tracking-[0.08em] text-primary", children: scenario.title }),
-      /* @__PURE__ */ jsx41("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: scenario.description })
+    /* @__PURE__ */ jsx42("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: scenarios.map((scenario) => /* @__PURE__ */ jsxs33("div", { className: "rounded-3xl border border-border bg-card p-8 shadow-sm", children: [
+      /* @__PURE__ */ jsx42("h3", { className: "font-display text-sm font-semibold uppercase tracking-[0.08em] text-primary", children: scenario.title }),
+      /* @__PURE__ */ jsx42("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: scenario.description })
     ] }, scenario.title)) })
   ] });
 }
@@ -1236,10 +1295,10 @@ import * as React11 from "react";
 
 // src/atoms/Textarea/Textarea.tsx
 import * as React10 from "react";
-import { jsx as jsx42 } from "react/jsx-runtime";
+import { jsx as jsx43 } from "react/jsx-runtime";
 var Textarea = React10.forwardRef(
   ({ className, ...props }, ref) => {
-    return /* @__PURE__ */ jsx42(
+    return /* @__PURE__ */ jsx43(
       "textarea",
       {
         ref,
@@ -1255,11 +1314,11 @@ var Textarea = React10.forwardRef(
 Textarea.displayName = "Textarea";
 
 // src/molecules/TextareaField/TextareaField.tsx
-import { jsx as jsx43, jsxs as jsxs33 } from "react/jsx-runtime";
+import { jsx as jsx44, jsxs as jsxs34 } from "react/jsx-runtime";
 var TextareaField = React11.forwardRef(
-  ({ label, id, ...textareaProps }, ref) => /* @__PURE__ */ jsxs33("label", { className: "block", children: [
-    /* @__PURE__ */ jsx43(Label, { children: label }),
-    /* @__PURE__ */ jsx43(Textarea, { ref, id, className: "mt-2", ...textareaProps })
+  ({ label, id, ...textareaProps }, ref) => /* @__PURE__ */ jsxs34("label", { className: "block", children: [
+    /* @__PURE__ */ jsx44(Label, { children: label }),
+    /* @__PURE__ */ jsx44(Textarea, { ref, id, className: "mt-2", ...textareaProps })
   ] })
 );
 TextareaField.displayName = "TextareaField";
@@ -1270,11 +1329,11 @@ import * as React13 from "react";
 // src/atoms/Select/Select.tsx
 import * as React12 from "react";
 import { ChevronDown as ChevronDown3 } from "lucide-react";
-import { jsx as jsx44, jsxs as jsxs34 } from "react/jsx-runtime";
+import { jsx as jsx45, jsxs as jsxs35 } from "react/jsx-runtime";
 var Select = React12.forwardRef(
   ({ className, options, placeholder, children, defaultValue, ...props }, ref) => {
-    return /* @__PURE__ */ jsxs34("div", { className: "relative", children: [
-      /* @__PURE__ */ jsxs34(
+    return /* @__PURE__ */ jsxs35("div", { className: "relative", children: [
+      /* @__PURE__ */ jsxs35(
         "select",
         {
           ref,
@@ -1285,29 +1344,29 @@ var Select = React12.forwardRef(
           ),
           ...props,
           children: [
-            placeholder ? /* @__PURE__ */ jsx44("option", { value: "", disabled: true, children: placeholder }) : null,
-            options ? options.map((option) => /* @__PURE__ */ jsx44("option", { value: option.value, children: option.label }, option.value)) : children
+            placeholder ? /* @__PURE__ */ jsx45("option", { value: "", disabled: true, children: placeholder }) : null,
+            options ? options.map((option) => /* @__PURE__ */ jsx45("option", { value: option.value, children: option.label }, option.value)) : children
           ]
         }
       ),
-      /* @__PURE__ */ jsx44(ChevronDown3, { className: "pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" })
+      /* @__PURE__ */ jsx45(ChevronDown3, { className: "pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" })
     ] });
   }
 );
 Select.displayName = "Select";
 
 // src/molecules/SelectField/SelectField.tsx
-import { jsx as jsx45, jsxs as jsxs35 } from "react/jsx-runtime";
+import { jsx as jsx46, jsxs as jsxs36 } from "react/jsx-runtime";
 var SelectField = React13.forwardRef(
-  ({ label, id, ...selectProps }, ref) => /* @__PURE__ */ jsxs35("label", { className: "block", children: [
-    /* @__PURE__ */ jsx45(Label, { children: label }),
-    /* @__PURE__ */ jsx45(Select, { ref, id, className: "mt-2", ...selectProps })
+  ({ label, id, ...selectProps }, ref) => /* @__PURE__ */ jsxs36("label", { className: "block", children: [
+    /* @__PURE__ */ jsx46(Label, { children: label }),
+    /* @__PURE__ */ jsx46(Select, { ref, id, className: "mt-2", ...selectProps })
   ] })
 );
 SelectField.displayName = "SelectField";
 
 // src/organisms/LeadFormSection/LeadFormSection.tsx
-import { jsx as jsx46, jsxs as jsxs36 } from "react/jsx-runtime";
+import { jsx as jsx47, jsxs as jsxs37 } from "react/jsx-runtime";
 function LeadFormSection({
   heading,
   description,
@@ -1318,17 +1377,17 @@ function LeadFormSection({
   submitLabel = "Wy\u015Blij",
   onSubmit
 }) {
-  return /* @__PURE__ */ jsx46("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs36("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
-    /* @__PURE__ */ jsxs36("div", { children: [
-      /* @__PURE__ */ jsx46("h2", { className: "font-display text-h2", children: heading }),
-      description ? /* @__PURE__ */ jsx46("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description }) : null
+  return /* @__PURE__ */ jsx47("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs37("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+    /* @__PURE__ */ jsxs37("div", { children: [
+      /* @__PURE__ */ jsx47("h2", { className: "font-display text-h2", children: heading }),
+      description ? /* @__PURE__ */ jsx47("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description }) : null
     ] }),
-    /* @__PURE__ */ jsxs36("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
-      /* @__PURE__ */ jsx46("h3", { className: "font-display text-h4", children: formHeading }),
-      /* @__PURE__ */ jsxs36("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
+    /* @__PURE__ */ jsxs37("div", { className: "rounded-3xl bg-card p-8 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.1)] md:p-10", children: [
+      /* @__PURE__ */ jsx47("h3", { className: "font-display text-h4", children: formHeading }),
+      /* @__PURE__ */ jsxs37("form", { className: "mt-6 space-y-5", onSubmit: onSubmit ?? ((e) => e.preventDefault()), children: [
         fields.map((field) => {
           if (field.kind === "textarea") {
-            return /* @__PURE__ */ jsx46(
+            return /* @__PURE__ */ jsx47(
               TextareaField,
               {
                 label: field.label,
@@ -1341,7 +1400,7 @@ function LeadFormSection({
             );
           }
           if (field.kind === "select") {
-            return /* @__PURE__ */ jsx46(
+            return /* @__PURE__ */ jsx47(
               SelectField,
               {
                 label: field.label,
@@ -1353,7 +1412,7 @@ function LeadFormSection({
               field.name
             );
           }
-          return /* @__PURE__ */ jsx46(
+          return /* @__PURE__ */ jsx47(
             FormField,
             {
               label: field.label,
@@ -1365,29 +1424,29 @@ function LeadFormSection({
             field.name
           );
         }),
-        /* @__PURE__ */ jsx46(ConsentCheckboxField, { name: "consent", consentText, controllerText, required: true }),
-        /* @__PURE__ */ jsx46(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
+        /* @__PURE__ */ jsx47(ConsentCheckboxField, { name: "consent", consentText, controllerText, required: true }),
+        /* @__PURE__ */ jsx47(Button, { type: "submit", variant: "solid", className: "w-full py-4 text-sm", children: submitLabel })
       ] })
     ] })
   ] }) });
 }
 
 // src/organisms/ComparisonTimelineSection/ComparisonTimelineSection.tsx
-import { jsx as jsx47, jsxs as jsxs37 } from "react/jsx-runtime";
+import { jsx as jsx48, jsxs as jsxs38 } from "react/jsx-runtime";
 function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }) {
-  return /* @__PURE__ */ jsx47("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs37("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
-    eyebrow ? /* @__PURE__ */ jsxs37("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+  return /* @__PURE__ */ jsx48("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs38("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
+    eyebrow ? /* @__PURE__ */ jsxs38("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
     ] }) : null,
-    /* @__PURE__ */ jsx47("h2", { className: "mt-4 font-display text-h3", children: heading }),
-    highlight ? /* @__PURE__ */ jsx47("p", { className: "mt-3 font-semibold text-primary", children: highlight }) : null,
-    /* @__PURE__ */ jsx47("div", { className: "mt-8 grid gap-8 md:grid-cols-2", children: paths.map((path) => /* @__PURE__ */ jsxs37("div", { children: [
-      /* @__PURE__ */ jsxs37("div", { className: "flex flex-wrap items-center gap-3", children: [
-        /* @__PURE__ */ jsx47("span", { className: "font-display text-h5", children: path.name }),
-        /* @__PURE__ */ jsx47("span", { className: "rounded-full bg-muted px-4 py-1.5 text-sm text-muted-foreground", children: path.duration })
+    /* @__PURE__ */ jsx48("h2", { className: "mt-4 font-display text-h3", children: heading }),
+    highlight ? /* @__PURE__ */ jsx48("p", { className: "mt-3 font-semibold text-primary", children: highlight }) : null,
+    /* @__PURE__ */ jsx48("div", { className: "mt-8 grid gap-8 md:grid-cols-2", children: paths.map((path) => /* @__PURE__ */ jsxs38("div", { children: [
+      /* @__PURE__ */ jsxs38("div", { className: "flex flex-wrap items-center gap-3", children: [
+        /* @__PURE__ */ jsx48("span", { className: "font-display text-h5", children: path.name }),
+        /* @__PURE__ */ jsx48("span", { className: "rounded-full bg-muted px-4 py-1.5 text-sm text-muted-foreground", children: path.duration })
       ] }),
-      /* @__PURE__ */ jsx47("div", { className: "mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3", children: path.steps.map((step) => /* @__PURE__ */ jsx47(
+      /* @__PURE__ */ jsx48("div", { className: "mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3", children: path.steps.map((step) => /* @__PURE__ */ jsx48(
         "div",
         {
           className: cn(
@@ -1398,26 +1457,26 @@ function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }) {
         },
         step
       )) }),
-      /* @__PURE__ */ jsx47("p", { className: "mt-4 text-sm text-muted-foreground", children: path.caption })
+      /* @__PURE__ */ jsx48("p", { className: "mt-4 text-sm text-muted-foreground", children: path.caption })
     ] }, path.name)) })
   ] }) });
 }
 
 // src/organisms/PositioningSpectrumSection/PositioningSpectrumSection.tsx
-import { jsx as jsx48, jsxs as jsxs38 } from "react/jsx-runtime";
+import { jsx as jsx49, jsxs as jsxs39 } from "react/jsx-runtime";
 function PositioningSpectrumSection({
   eyebrow,
   heading,
   options,
   currentLabel = "You are here"
 }) {
-  return /* @__PURE__ */ jsxs38("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    eyebrow ? /* @__PURE__ */ jsxs38("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+  return /* @__PURE__ */ jsxs39("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsxs39("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
     ] }) : null,
-    /* @__PURE__ */ jsx48("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
-    /* @__PURE__ */ jsx48("div", { className: "mt-8 grid gap-6 md:grid-cols-3", children: options.map((option) => /* @__PURE__ */ jsxs38(
+    /* @__PURE__ */ jsx49("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
+    /* @__PURE__ */ jsx49("div", { className: "mt-8 grid gap-6 md:grid-cols-3", children: options.map((option) => /* @__PURE__ */ jsxs39(
       "div",
       {
         className: cn(
@@ -1425,13 +1484,13 @@ function PositioningSpectrumSection({
           option.current ? "border-primary shadow-lg" : "border-border"
         ),
         children: [
-          option.current ? /* @__PURE__ */ jsxs38("span", { className: "absolute -top-3 left-8 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground", children: [
+          option.current ? /* @__PURE__ */ jsxs39("span", { className: "absolute -top-3 left-8 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground", children: [
             currentLabel,
             " \u2192"
           ] }) : null,
-          /* @__PURE__ */ jsx48("p", { className: "text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground", children: option.eyebrow }),
-          /* @__PURE__ */ jsx48("h3", { className: "mt-2 font-display text-h5", children: option.title }),
-          /* @__PURE__ */ jsx48("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: option.description })
+          /* @__PURE__ */ jsx49("p", { className: "text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground", children: option.eyebrow }),
+          /* @__PURE__ */ jsx49("h3", { className: "mt-2 font-display text-h5", children: option.title }),
+          /* @__PURE__ */ jsx49("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: option.description })
         ]
       },
       option.title
@@ -1441,7 +1500,7 @@ function PositioningSpectrumSection({
 
 // src/organisms/RequirementsChecklistSection/RequirementsChecklistSection.tsx
 import { Check as Check2 } from "lucide-react";
-import { jsx as jsx49, jsxs as jsxs39 } from "react/jsx-runtime";
+import { jsx as jsx50, jsxs as jsxs40 } from "react/jsx-runtime";
 function RequirementsChecklistSection({
   eyebrow,
   heading,
@@ -1450,45 +1509,45 @@ function RequirementsChecklistSection({
   caption,
   footnote
 }) {
-  return /* @__PURE__ */ jsxs39("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    eyebrow ? /* @__PURE__ */ jsxs39("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+  return /* @__PURE__ */ jsxs40("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsxs40("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
     ] }) : null,
-    /* @__PURE__ */ jsx49("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
-    description ? /* @__PURE__ */ jsx49("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
-    /* @__PURE__ */ jsxs39("div", { className: "mt-8 space-y-3 rounded-3xl bg-foreground p-6 md:p-8", children: [
-      items.map((item, i) => /* @__PURE__ */ jsxs39("div", { className: "flex items-center justify-between gap-4 rounded-2xl bg-background/10 px-5 py-4", children: [
-        /* @__PURE__ */ jsxs39("span", { className: "flex items-center gap-4 text-sm text-background", children: [
-          /* @__PURE__ */ jsx49("span", { className: "font-mono text-xs text-background/60", children: String(i + 1).padStart(2, "0") }),
+    /* @__PURE__ */ jsx50("h2", { className: "mt-4 max-w-2xl font-display text-h3", children: heading }),
+    description ? /* @__PURE__ */ jsx50("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
+    /* @__PURE__ */ jsxs40("div", { className: "mt-8 space-y-3 rounded-3xl bg-foreground p-6 md:p-8", children: [
+      items.map((item, i) => /* @__PURE__ */ jsxs40("div", { className: "flex items-center justify-between gap-4 rounded-2xl bg-background/10 px-5 py-4", children: [
+        /* @__PURE__ */ jsxs40("span", { className: "flex items-center gap-4 text-sm text-background", children: [
+          /* @__PURE__ */ jsx50("span", { className: "font-mono text-xs text-background/60", children: String(i + 1).padStart(2, "0") }),
           item.label,
-          item.hasFootnote ? /* @__PURE__ */ jsx49("span", { className: "text-background/60", children: "*" }) : null
+          item.hasFootnote ? /* @__PURE__ */ jsx50("span", { className: "text-background/60", children: "*" }) : null
         ] }),
-        /* @__PURE__ */ jsx49(Check2, { className: "h-4 w-4 shrink-0 text-lime" })
+        /* @__PURE__ */ jsx50(Check2, { className: "h-4 w-4 shrink-0 text-lime" })
       ] }, item.label)),
-      caption ? /* @__PURE__ */ jsx49("p", { className: "pt-3 text-sm text-background/70", children: caption }) : null,
-      footnote ? /* @__PURE__ */ jsx49("p", { className: "border-t border-background/20 pt-4 text-xs text-background/60", children: footnote }) : null
+      caption ? /* @__PURE__ */ jsx50("p", { className: "pt-3 text-sm text-background/70", children: caption }) : null,
+      footnote ? /* @__PURE__ */ jsx50("p", { className: "border-t border-background/20 pt-4 text-xs text-background/60", children: footnote }) : null
     ] })
   ] });
 }
 
 // src/organisms/CostBreakdownSection/CostBreakdownSection.tsx
 import * as React14 from "react";
-import { jsx as jsx50, jsxs as jsxs40 } from "react/jsx-runtime";
+import { jsx as jsx51, jsxs as jsxs41 } from "react/jsx-runtime";
 function CostBreakdownSection({ eyebrow, heading, description, components }) {
-  return /* @__PURE__ */ jsxs40("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    eyebrow ? /* @__PURE__ */ jsxs40("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
+  return /* @__PURE__ */ jsxs41("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsxs41("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
     ] }) : null,
-    /* @__PURE__ */ jsx50("h2", { className: "mt-4 font-display text-h3", children: heading }),
-    description ? /* @__PURE__ */ jsx50("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
-    /* @__PURE__ */ jsx50("div", { className: "mt-8 flex flex-col items-stretch gap-4 md:flex-row md:items-center", children: components.map((component, i) => /* @__PURE__ */ jsxs40(React14.Fragment, { children: [
-      i > 0 ? /* @__PURE__ */ jsx50("span", { className: "self-center font-display text-h4 text-muted-foreground", children: "+" }) : null,
-      /* @__PURE__ */ jsxs40("div", { className: "flex-1 rounded-3xl border border-border bg-card p-6", children: [
-        /* @__PURE__ */ jsx50("h3", { className: "font-display text-h6", children: component.title }),
-        /* @__PURE__ */ jsx50("p", { className: "mt-2 text-sm text-muted-foreground", children: component.description }),
-        component.linkLabel ? /* @__PURE__ */ jsx50(Link, { variant: "underline", href: component.linkHref ?? "#", className: "mt-3 inline-block text-sm", children: component.linkLabel }) : null
+    /* @__PURE__ */ jsx51("h2", { className: "mt-4 font-display text-h3", children: heading }),
+    description ? /* @__PURE__ */ jsx51("p", { className: "mt-4 max-w-2xl text-muted-foreground", children: description }) : null,
+    /* @__PURE__ */ jsx51("div", { className: "mt-8 flex flex-col items-stretch gap-4 md:flex-row md:items-center", children: components.map((component, i) => /* @__PURE__ */ jsxs41(React14.Fragment, { children: [
+      i > 0 ? /* @__PURE__ */ jsx51("span", { className: "self-center font-display text-h4 text-muted-foreground", children: "+" }) : null,
+      /* @__PURE__ */ jsxs41("div", { className: "flex-1 rounded-3xl border border-border bg-card p-6", children: [
+        /* @__PURE__ */ jsx51("h3", { className: "font-display text-h6", children: component.title }),
+        /* @__PURE__ */ jsx51("p", { className: "mt-2 text-sm text-muted-foreground", children: component.description }),
+        component.linkLabel ? /* @__PURE__ */ jsx51(Link, { variant: "underline", href: component.linkHref ?? "#", className: "mt-3 inline-block text-sm", children: component.linkLabel }) : null
       ] })
     ] }, component.title)) })
   ] });
@@ -1496,12 +1555,12 @@ function CostBreakdownSection({ eyebrow, heading, description, components }) {
 
 // src/organisms/ComparisonCardsSection/ComparisonCardsSection.tsx
 import { Check as Check3, X as X2 } from "lucide-react";
-import { jsx as jsx51, jsxs as jsxs41 } from "react/jsx-runtime";
+import { jsx as jsx52, jsxs as jsxs42 } from "react/jsx-runtime";
 function ComparisonCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ jsxs41("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
-    eyebrow ? /* @__PURE__ */ jsx51("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
-    /* @__PURE__ */ jsx51("h2", { className: "mt-4 font-display text-h2", children: heading }),
-    /* @__PURE__ */ jsx51("div", { className: "mt-8 grid gap-6 md:grid-cols-2", children: cards.map((card) => /* @__PURE__ */ jsxs41(
+  return /* @__PURE__ */ jsxs42("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+    eyebrow ? /* @__PURE__ */ jsx52("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+    /* @__PURE__ */ jsx52("h2", { className: "mt-4 font-display text-h2", children: heading }),
+    /* @__PURE__ */ jsx52("div", { className: "mt-8 grid gap-6 md:grid-cols-2", children: cards.map((card) => /* @__PURE__ */ jsxs42(
       "div",
       {
         className: cn(
@@ -1509,21 +1568,21 @@ function ComparisonCardsSection({ eyebrow, heading, cards }) {
           card.highlighted ? "bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)]" : "bg-muted"
         ),
         children: [
-          /* @__PURE__ */ jsx51("h3", { className: "font-display text-h4", children: card.name }),
-          /* @__PURE__ */ jsx51("ul", { className: "mt-6 space-y-4", children: card.criteria.map((criterion) => /* @__PURE__ */ jsxs41("li", { className: "flex items-start gap-3", children: [
-            /* @__PURE__ */ jsx51(
+          /* @__PURE__ */ jsx52("h3", { className: "font-display text-h4", children: card.name }),
+          /* @__PURE__ */ jsx52("ul", { className: "mt-6 space-y-4", children: card.criteria.map((criterion) => /* @__PURE__ */ jsxs42("li", { className: "flex items-start gap-3", children: [
+            /* @__PURE__ */ jsx52(
               "span",
               {
                 className: cn(
                   "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
                   criterion.positive ? "bg-lime text-lime-foreground" : "bg-background/60 text-muted-foreground"
                 ),
-                children: criterion.positive ? /* @__PURE__ */ jsx51(Check3, { className: "h-3 w-3" }) : /* @__PURE__ */ jsx51(X2, { className: "h-3 w-3" })
+                children: criterion.positive ? /* @__PURE__ */ jsx52(Check3, { className: "h-3 w-3" }) : /* @__PURE__ */ jsx52(X2, { className: "h-3 w-3" })
               }
             ),
-            /* @__PURE__ */ jsxs41("span", { children: [
-              /* @__PURE__ */ jsx51("span", { className: "block text-sm font-semibold", children: criterion.label }),
-              /* @__PURE__ */ jsx51("span", { className: "text-sm text-muted-foreground", children: criterion.description })
+            /* @__PURE__ */ jsxs42("span", { children: [
+              /* @__PURE__ */ jsx52("span", { className: "block text-sm font-semibold", children: criterion.label }),
+              /* @__PURE__ */ jsx52("span", { className: "text-sm text-muted-foreground", children: criterion.description })
             ] })
           ] }, criterion.label)) })
         ]

@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { SectionMedia } from "@/molecules/SectionMedia";
 import { StepCard } from "@/molecules/StepCard";
 
 export interface Step {
@@ -24,12 +25,14 @@ export interface FourStepsSectionProps {
   /** Omit to render the heading block full width, without an illustration. */
   image?: string;
   imageAlt?: string;
+  /** Visible caption under the image, e.g. "Visualisation". */
+  imageCaption?: string;
   steps: Step[];
   /** A short emphasized line rendered below the steps. */
   note?: React.ReactNode;
 }
 
-export function FourStepsSection({ heading, description, image, imageAlt = "", steps, note }: FourStepsSectionProps) {
+export function FourStepsSection({ heading, description, image, imageAlt = "", imageCaption, steps, note }: FourStepsSectionProps) {
   return (
     <section aria-labelledby="four-steps-title" className="px-5 py-14 md:py-20">
       <div className="mx-auto max-w-[1280px]">
@@ -44,7 +47,11 @@ export function FourStepsSection({ heading, description, image, imageAlt = "", s
               <p className="mt-6 max-w-xl text-muted-foreground md:text-[17px]">{description}</p>
             </div>
             {image && (
-              <img src={image} alt={imageAlt} width={700} height={400} loading="lazy" className="w-full max-w-[560px] justify-self-end" />
+              <SectionMedia
+                image={{ src: image, alt: imageAlt, width: 700, height: 400 }}
+                caption={imageCaption}
+                className="w-full max-w-[560px] justify-self-end"
+              />
             )}
           </div>
 
