@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { a as ButtonProps } from './Select-CmdSVFIc.cjs';
+import { a as ButtonProps } from './Select-CmdSVFIc.js';
 
 interface PricingTierProps {
     name: string;
@@ -95,4 +95,32 @@ interface OverlapCardProps extends React.HTMLAttributes<HTMLElement> {
 }
 declare function OverlapCard({ className, title, description, image, backgroundColor, primaryCta, secondaryCta, style, ...props }: OverlapCardProps): React.JSX.Element;
 
-export { IconCard as I, OverlapCard as O, PricingTier as P, StatBlock as S, type IconCardProps as a, IconFeatureItem as b, type IconFeatureItemProps as c, type OverlapCardCta as d, type OverlapCardProps as e, type PricingTierProps as f, type StatBlockProps as g };
+interface SectionMediaImage {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+}
+/**
+ * The media slot of a section: a looping muted video, or a still image when
+ * there is no video, with an optional visible caption (e.g. "Demo",
+ * "Visualisation"). New, not extracted: a consuming landing page (paytalkpl)
+ * needed stills and placeholders where the source only ever had video, and
+ * must label product recordings as demos.
+ *
+ * `showVideoControls` renders native controls so visitors can pause the
+ * loop. Off by default to keep the source's look, but an autoplaying loop
+ * longer than 5 seconds needs a pause mechanism (WCAG 2.2.2), so turn it on
+ * for any real product recording.
+ */
+interface SectionMediaProps {
+    videoSrc?: string;
+    image?: SectionMediaImage;
+    caption?: string;
+    showVideoControls?: boolean;
+    className?: string;
+    mediaClassName?: string;
+}
+declare function SectionMedia({ videoSrc, image, caption, showVideoControls, className, mediaClassName }: SectionMediaProps): React.JSX.Element | null;
+
+export { IconCard as I, OverlapCard as O, PricingTier as P, SectionMedia as S, type IconCardProps as a, IconFeatureItem as b, type IconFeatureItemProps as c, type OverlapCardCta as d, type OverlapCardProps as e, type PricingTierProps as f, type SectionMediaImage as g, type SectionMediaProps as h, StatBlock as i, type StatBlockProps as j };

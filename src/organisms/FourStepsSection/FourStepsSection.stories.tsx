@@ -40,3 +40,13 @@ export const ThreeStepsWithNote: Story = {
     note: "An emphasized sentence that must stand out under the steps.",
   },
 };
+
+/** Illustration with a visible caption. */
+export const WithImageCaption: Story = {
+  args: {
+    ...ThreeStepsWithNote.args,
+    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='400'%3E%3Crect width='700' height='400' fill='%23ccc'/%3E%3C/svg%3E",
+    imageAlt: "Grey placeholder rectangle",
+    imageCaption: "Visualisation",
+  },
+};

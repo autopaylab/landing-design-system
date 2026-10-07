@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { c as SelectProps } from '../Select-CmdSVFIc.js';
-export { I as IconCard, a as IconCardProps, b as IconFeatureItem, c as IconFeatureItemProps, O as OverlapCard, d as OverlapCardCta, e as OverlapCardProps, P as PricingTier, f as PricingTierProps, S as StatBlock, g as StatBlockProps } from '../OverlapCard-EL2fbRPF.js';
+export { I as IconCard, a as IconCardProps, b as IconFeatureItem, c as IconFeatureItemProps, O as OverlapCard, d as OverlapCardCta, e as OverlapCardProps, P as PricingTier, f as PricingTierProps, S as SectionMedia, g as SectionMediaImage, h as SectionMediaProps, i as StatBlock, j as StatBlockProps } from '../SectionMedia-BBqSLAn4.js';
 import 'class-variance-authority/types';
 import 'class-variance-authority';
 

@@ -41,6 +41,7 @@ __export(molecules_exports, {
   OverlapCard: () => OverlapCard,
   PartnerCountBadge: () => PartnerCountBadge,
   PricingTier: () => PricingTier,
+  SectionMedia: () => SectionMedia,
   SelectField: () => SelectField,
   StatBlock: () => StatBlock,
   StepCard: () => StepCard,
@@ -613,6 +614,37 @@ function PartnerCountBadge({ className, count, label, ...props }) {
     }
   );
 }
+
+// src/molecules/SectionMedia/SectionMedia.tsx
+var import_jsx_runtime25 = require("react/jsx-runtime");
+function SectionMedia({ videoSrc, image, caption, showVideoControls = false, className, mediaClassName }) {
+  if (!videoSrc && !image) return null;
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("figure", { className: cn("relative", className), children: [
+    videoSrc ? /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+      "video",
+      {
+        src: videoSrc,
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        playsInline: true,
+        controls: showVideoControls,
+        className: cn("h-auto w-full", mediaClassName)
+      }
+    ) : /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+      "img",
+      {
+        src: image.src,
+        alt: image.alt,
+        width: image.width,
+        height: image.height,
+        loading: "lazy",
+        className: cn("h-auto w-full", mediaClassName)
+      }
+    ),
+    caption ? /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("figcaption", { className: "mt-2 text-sm text-muted-foreground", children: caption }) : null
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   BulletItem,
@@ -625,6 +657,7 @@ function PartnerCountBadge({ className, count, label, ...props }) {
   OverlapCard,
   PartnerCountBadge,
   PricingTier,
+  SectionMedia,
   SelectField,
   StatBlock,
   StepCard,

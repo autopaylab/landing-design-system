@@ -12,3 +12,4 @@ export * from "./IndustryCard";
 export * from "./OverlapCard";
 export * from "./FaqItem";
 export * from "./PartnerCountBadge";
+export * from "./SectionMedia";

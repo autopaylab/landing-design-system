@@ -23,3 +23,13 @@ export const Default: Story = {
     ],
   },
 };
+
+/** A still (or placeholder) instead of the video, labelled as a visualisation. */
+export const WithImage: Story = {
+  args: {
+    ...Default.args,
+    videoSrc: undefined,
+    image: { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='400'%3E%3Crect width='700' height='400' fill='%23ccc'/%3E%3C/svg%3E", alt: "Grey placeholder rectangle", width: 700, height: 400 },
+    mediaCaption: "Visualisation",
+  },
+};

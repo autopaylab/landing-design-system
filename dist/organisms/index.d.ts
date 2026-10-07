@@ -1,6 +1,6 @@
 export { F as Footer, a as FooterNavItem, b as FooterProps, c as FooterSocialLink, N as NavItem, d as Navbar, e as NavbarCta, f as NavbarLanguageLink, g as NavbarProps } from '../Footer-B6L2lkAc.js';
 import * as React from 'react';
-import { c as IconFeatureItemProps, a as IconCardProps, g as StatBlockProps, d as OverlapCardCta, f as PricingTierProps } from '../OverlapCard-EL2fbRPF.js';
+import { g as SectionMediaImage, c as IconFeatureItemProps, a as IconCardProps, j as StatBlockProps, d as OverlapCardCta, f as PricingTierProps } from '../SectionMedia-BBqSLAn4.js';
 import { b as SelectOption } from '../Select-CmdSVFIc.js';
 import 'class-variance-authority/types';
 import 'class-variance-authority';
@@ -10,8 +10,9 @@ import 'class-variance-authority';
  *
  * `videoSrc` is optional and `mediaCaption` is new (neither extracted): a
  * consuming landing page (paytalkpl) has no hero video yet, and must label
- * any product recording it does add as a demo. Without `videoSrc` the hero
- * renders as a single text column.
+ * any product recording it does add as a demo. Without `videoSrc` or
+ * `image` the hero renders as a single text column. `image` (a still or a
+ * placeholder) is used only when there is no `videoSrc`.
  */
 interface HeroVideoSplitProps {
     eyebrow?: string;
@@ -20,10 +21,13 @@ interface HeroVideoSplitProps {
     ctaLabel: string;
     ctaHref: string;
     videoSrc?: string;
-    /** Visible caption under the video, e.g. "Demo". Only rendered with `videoSrc`. */
+    image?: SectionMediaImage;
+    /** Visible caption under the video or image, e.g. "Demo". */
     mediaCaption?: string;
+    /** Native video controls, so the loop can be paused (WCAG 2.2.2). See SectionMedia. */
+    showVideoControls?: boolean;
 }
-declare function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc, mediaCaption }: HeroVideoSplitProps): React.JSX.Element;
+declare function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc, image, mediaCaption, showVideoControls, }: HeroVideoSplitProps): React.JSX.Element;
 
 /**
  * Merges the source's two hero-overlay variants ("stacked": gradient
@@ -83,22 +87,34 @@ interface FourStepsSectionProps {
     /** Omit to render the heading block full width, without an illustration. */
     image?: string;
     imageAlt?: string;
+    /** Visible caption under the image, e.g. "Visualisation". */
+    imageCaption?: string;
     steps: Step[];
     /** A short emphasized line rendered below the steps. */
     note?: React.ReactNode;
 }
-declare function FourStepsSection({ heading, description, image, imageAlt, steps, note }: FourStepsSectionProps): React.JSX.Element;
+declare function FourStepsSection({ heading, description, image, imageAlt, imageCaption, steps, note }: FourStepsSectionProps): React.JSX.Element;
 
-/** HomeContent.tsx "Single Integration" section (lines 179-227). */
+/**
+ * HomeContent.tsx "Single Integration" section (lines 179-227).
+ *
+ * `image`, `mediaCaption` and `showVideoControls` are new (not extracted):
+ * a consuming landing page (paytalkpl) needs a still or placeholder in this
+ * slot until a recording exists, labelled as a visualisation. `image` is
+ * used only when there is no `videoSrc`.
+ */
 interface SingleIntegrationSectionProps {
     eyebrow: string;
     heading: React.ReactNode;
     subheading: string;
     subheadingCaption: string;
     features: Array<Pick<IconFeatureItemProps, "icon" | "title" | "description" | "iconClassName">>;
-    videoSrc: string;
+    videoSrc?: string;
+    image?: SectionMediaImage;
+    mediaCaption?: string;
+    showVideoControls?: boolean;
 }
-declare function SingleIntegrationSection({ eyebrow, heading, subheading, subheadingCaption, features, videoSrc, }: SingleIntegrationSectionProps): React.JSX.Element;
+declare function SingleIntegrationSection({ eyebrow, heading, subheading, subheadingCaption, features, videoSrc, image, mediaCaption, showVideoControls, }: SingleIntegrationSectionProps): React.JSX.Element;
 
 interface PlatformFeature {
     key: string;
