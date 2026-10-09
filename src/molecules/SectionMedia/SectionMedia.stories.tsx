@@ -23,5 +23,6 @@ export const VideoWithControls: Story = {
     videoSrc: "/hero.webm",
     caption: "Demo",
     showVideoControls: true,
+    videoLabel: "Screen recording of a purchase made in a conversation",
   },
 };

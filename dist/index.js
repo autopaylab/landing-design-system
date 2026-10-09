@@ -577,7 +577,16 @@ function PartnerCountBadge({ className, count, label, ...props }) {
 
 // src/molecules/SectionMedia/SectionMedia.tsx
 import { jsx as jsx26, jsxs as jsxs17 } from "react/jsx-runtime";
-function SectionMedia({ videoSrc, image, caption, showVideoControls = false, className, mediaClassName }) {
+function SectionMedia({
+  videoSrc,
+  videoPoster,
+  videoLabel,
+  image,
+  caption,
+  showVideoControls = false,
+  className,
+  mediaClassName
+}) {
   if (!videoSrc && !image) return null;
   return /* @__PURE__ */ jsxs17("figure", { className: cn("relative", className), children: [
     videoSrc ? /* @__PURE__ */ jsx26(
@@ -589,6 +598,8 @@ function SectionMedia({ videoSrc, image, caption, showVideoControls = false, cla
         muted: true,
         playsInline: true,
         controls: showVideoControls,
+        poster: videoPoster,
+        "aria-label": videoLabel,
         className: cn("h-auto w-full", mediaClassName)
       }
     ) : /* @__PURE__ */ jsx26(
@@ -809,6 +820,8 @@ function HeroVideoSplit({
   ctaLabel,
   ctaHref,
   videoSrc,
+  videoPoster,
+  videoLabel,
   image,
   mediaCaption,
   showVideoControls
@@ -821,7 +834,7 @@ function HeroVideoSplit({
       /* @__PURE__ */ jsx29("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
       /* @__PURE__ */ jsx29("div", { className: "mt-10", children: /* @__PURE__ */ jsx29(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx29("a", { href: ctaHref, children: ctaLabel }) }) })
     ] }),
-    /* @__PURE__ */ jsx29(SectionMedia, { videoSrc, image, caption: mediaCaption, showVideoControls })
+    /* @__PURE__ */ jsx29(SectionMedia, { videoSrc, videoPoster, videoLabel, image, caption: mediaCaption, showVideoControls })
   ] }) });
 }
 
@@ -923,6 +936,8 @@ function SingleIntegrationSection({
   subheadingCaption,
   features,
   videoSrc,
+  videoPoster,
+  videoLabel,
   image,
   mediaCaption,
   showVideoControls
@@ -942,6 +957,8 @@ function SingleIntegrationSection({
         SectionMedia,
         {
           videoSrc,
+          videoPoster,
+          videoLabel,
           image,
           caption: mediaCaption,
           showVideoControls,

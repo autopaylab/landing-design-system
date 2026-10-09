@@ -567,7 +567,16 @@ function PartnerCountBadge({ className, count, label, ...props }) {
 
 // src/molecules/SectionMedia/SectionMedia.tsx
 import { jsx as jsx25, jsxs as jsxs17 } from "react/jsx-runtime";
-function SectionMedia({ videoSrc, image, caption, showVideoControls = false, className, mediaClassName }) {
+function SectionMedia({
+  videoSrc,
+  videoPoster,
+  videoLabel,
+  image,
+  caption,
+  showVideoControls = false,
+  className,
+  mediaClassName
+}) {
   if (!videoSrc && !image) return null;
   return /* @__PURE__ */ jsxs17("figure", { className: cn("relative", className), children: [
     videoSrc ? /* @__PURE__ */ jsx25(
@@ -579,6 +588,8 @@ function SectionMedia({ videoSrc, image, caption, showVideoControls = false, cla
         muted: true,
         playsInline: true,
         controls: showVideoControls,
+        poster: videoPoster,
+        "aria-label": videoLabel,
         className: cn("h-auto w-full", mediaClassName)
       }
     ) : /* @__PURE__ */ jsx25(

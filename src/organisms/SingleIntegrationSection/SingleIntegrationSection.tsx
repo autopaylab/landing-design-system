@@ -19,6 +19,10 @@ export interface SingleIntegrationSectionProps {
   subheadingCaption: string;
   features: Array<Pick<IconFeatureItemProps, "icon" | "title" | "description" | "iconClassName">>;
   videoSrc?: string;
+  /** See SectionMedia. */
+  videoPoster?: string;
+  /** Accessible name describing the video (WCAG 1.2.1). See SectionMedia. */
+  videoLabel?: string;
   image?: SectionMediaImage;
   mediaCaption?: string;
   showVideoControls?: boolean;
@@ -31,6 +35,8 @@ export function SingleIntegrationSection({
   subheadingCaption,
   features,
   videoSrc,
+  videoPoster,
+  videoLabel,
   image,
   mediaCaption,
   showVideoControls,
@@ -57,6 +63,8 @@ export function SingleIntegrationSection({
           <div className="flex justify-center self-end md:justify-end">
             <SectionMedia
               videoSrc={videoSrc}
+              videoPoster={videoPoster}
+              videoLabel={videoLabel}
               image={image}
               caption={mediaCaption}
               showVideoControls={showVideoControls}
