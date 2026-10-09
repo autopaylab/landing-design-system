@@ -417,16 +417,22 @@ function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondar
 
 // src/organisms/TrustedByLogos/TrustedByLogos.tsx
 import { jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
-function TrustedByLogos({ heading, logos }) {
+var MUTED_FILTER = "grayscale(100%) opacity(0.65)";
+function TrustedByLogos({ heading, description, logos, logoTone = "muted" }) {
   return /* @__PURE__ */ jsxs6("section", { id: "trusted-by", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
     /* @__PURE__ */ jsx10("h2", { className: "text-center font-display text-h3", children: heading }),
+    description ? /* @__PURE__ */ jsx10("p", { className: "mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:text-[17px]", children: description }) : null,
     /* @__PURE__ */ jsx10("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ jsx10(
       "img",
       {
         src: l.src,
         alt: l.alt,
-        className: "h-8 w-auto object-contain md:h-10",
-        style: { filter: "grayscale(100%) opacity(0.65)", maxWidth: l.width }
+        className: l.height ? "w-auto object-contain" : "h-8 w-auto object-contain md:h-10",
+        style: {
+          filter: logoTone === "muted" ? MUTED_FILTER : void 0,
+          maxWidth: l.width,
+          height: l.height
+        }
       },
       l.alt
     )) })

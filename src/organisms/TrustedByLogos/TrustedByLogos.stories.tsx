@@ -24,3 +24,16 @@ export const Default: Story = {
     ],
   },
 };
+
+/** A few named partners in full colour, with an intro and a taller stacked mark. */
+export const PartnersWithDescription: Story = {
+  args: {
+    heading: "Who is already building with us",
+    description: "A short paragraph introducing the partners shown below.",
+    logoTone: "original",
+    logos: [
+      { src: placeholder, alt: "Stacked partner mark", width: 160, height: 96 },
+      { src: placeholder, alt: "Wide partner wordmark", width: 320 },
+    ],
+  },
+};
