@@ -617,7 +617,16 @@ function PartnerCountBadge({ className, count, label, ...props }) {
 
 // src/molecules/SectionMedia/SectionMedia.tsx
 var import_jsx_runtime25 = require("react/jsx-runtime");
-function SectionMedia({ videoSrc, image, caption, showVideoControls = false, className, mediaClassName }) {
+function SectionMedia({
+  videoSrc,
+  videoPoster,
+  videoLabel,
+  image,
+  caption,
+  showVideoControls = false,
+  className,
+  mediaClassName
+}) {
   if (!videoSrc && !image) return null;
   return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("figure", { className: cn("relative", className), children: [
     videoSrc ? /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
@@ -629,6 +638,8 @@ function SectionMedia({ videoSrc, image, caption, showVideoControls = false, cla
         muted: true,
         playsInline: true,
         controls: showVideoControls,
+        poster: videoPoster,
+        "aria-label": videoLabel,
         className: cn("h-auto w-full", mediaClassName)
       }
     ) : /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(

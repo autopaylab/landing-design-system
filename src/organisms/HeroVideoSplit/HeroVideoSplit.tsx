@@ -20,6 +20,10 @@ export interface HeroVideoSplitProps {
   ctaLabel: string;
   ctaHref: string;
   videoSrc?: string;
+  /** See SectionMedia. */
+  videoPoster?: string;
+  /** Accessible name describing the video (WCAG 1.2.1). See SectionMedia. */
+  videoLabel?: string;
   image?: SectionMediaImage;
   /** Visible caption under the video or image, e.g. "Demo". */
   mediaCaption?: string;
@@ -34,6 +38,8 @@ export function HeroVideoSplit({
   ctaLabel,
   ctaHref,
   videoSrc,
+  videoPoster,
+  videoLabel,
   image,
   mediaCaption,
   showVideoControls,
@@ -58,7 +64,7 @@ export function HeroVideoSplit({
             </Button>
           </div>
         </div>
-        <SectionMedia videoSrc={videoSrc} image={image} caption={mediaCaption} showVideoControls={showVideoControls} />
+        <SectionMedia videoSrc={videoSrc} videoPoster={videoPoster} videoLabel={videoLabel} image={image} caption={mediaCaption} showVideoControls={showVideoControls} />
       </div>
     </section>
   );

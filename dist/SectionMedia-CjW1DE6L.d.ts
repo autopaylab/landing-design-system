@@ -112,15 +112,22 @@ interface SectionMediaImage {
  * loop. Off by default to keep the source's look, but an autoplaying loop
  * longer than 5 seconds needs a pause mechanism (WCAG 2.2.2), so turn it on
  * for any real product recording.
+ *
+ * `videoPoster` is shown until the video plays (and instead of it when
+ * autoplay is blocked). `videoLabel` gives the video an accessible name
+ * describing what it shows: a video-only clip needs a text alternative
+ * (WCAG 1.2.1), and the visible caption is usually just "Demo".
  */
 interface SectionMediaProps {
     videoSrc?: string;
+    videoPoster?: string;
+    videoLabel?: string;
     image?: SectionMediaImage;
     caption?: string;
     showVideoControls?: boolean;
     className?: string;
     mediaClassName?: string;
 }
-declare function SectionMedia({ videoSrc, image, caption, showVideoControls, className, mediaClassName }: SectionMediaProps): React.JSX.Element | null;
+declare function SectionMedia({ videoSrc, videoPoster, videoLabel, image, caption, showVideoControls, className, mediaClassName, }: SectionMediaProps): React.JSX.Element | null;
 
 export { IconCard as I, OverlapCard as O, PricingTier as P, SectionMedia as S, type IconCardProps as a, IconFeatureItem as b, type IconFeatureItemProps as c, type OverlapCardCta as d, type OverlapCardProps as e, type PricingTierProps as f, type SectionMediaImage as g, type SectionMediaProps as h, StatBlock as i, type StatBlockProps as j };

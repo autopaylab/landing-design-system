@@ -20,9 +20,16 @@ export interface SectionMediaImage {
  * loop. Off by default to keep the source's look, but an autoplaying loop
  * longer than 5 seconds needs a pause mechanism (WCAG 2.2.2), so turn it on
  * for any real product recording.
+ *
+ * `videoPoster` is shown until the video plays (and instead of it when
+ * autoplay is blocked). `videoLabel` gives the video an accessible name
+ * describing what it shows: a video-only clip needs a text alternative
+ * (WCAG 1.2.1), and the visible caption is usually just "Demo".
  */
 export interface SectionMediaProps {
   videoSrc?: string;
+  videoPoster?: string;
+  videoLabel?: string;
   image?: SectionMediaImage;
   caption?: string;
   showVideoControls?: boolean;
@@ -30,7 +37,16 @@ export interface SectionMediaProps {
   mediaClassName?: string;
 }
 
-export function SectionMedia({ videoSrc, image, caption, showVideoControls = false, className, mediaClassName }: SectionMediaProps) {
+export function SectionMedia({
+  videoSrc,
+  videoPoster,
+  videoLabel,
+  image,
+  caption,
+  showVideoControls = false,
+  className,
+  mediaClassName,
+}: SectionMediaProps) {
   if (!videoSrc && !image) return null;
   return (
     <figure className={cn("relative", className)}>
@@ -42,6 +58,8 @@ export function SectionMedia({ videoSrc, image, caption, showVideoControls = fal
           muted
           playsInline
           controls={showVideoControls}
+          poster={videoPoster}
+          aria-label={videoLabel}
           className={cn("h-auto w-full", mediaClassName)}
         />
       ) : (

@@ -27,4 +27,11 @@ describe("SectionMedia", () => {
     rerender(<SectionMedia videoSrc="/demo.webm" showVideoControls />);
     expect(container.querySelector("video")).toHaveAttribute("controls");
   });
+
+  it("gives the video a poster and an accessible name describing it", () => {
+    render(<SectionMedia videoSrc="/demo.mp4" videoPoster="/demo.webp" videoLabel="A purchase made in a conversation" />);
+    const video = screen.getByLabelText("A purchase made in a conversation");
+    expect(video.tagName).toBe("VIDEO");
+    expect(video).toHaveAttribute("poster", "/demo.webp");
+  });
 });

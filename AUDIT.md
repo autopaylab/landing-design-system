@@ -384,3 +384,7 @@ New, not extracted. paytalkpl needs a media slot in its "the shift" section, her
 **Accessibility, flagged not silently changed:** every extracted video autoplays in a loop with no way to pause it, which fails WCAG 2.2.2 (Pause, Stop, Hide) for anything longer than 5 seconds. `showVideoControls` renders native controls; it is off by default to keep the extracted look for current consumers, and its doc comment says to turn it on for any real recording.
 
 Defaults reproduce the previous output apart from the media now sitting inside a `<figure>`.
+
+## 31. `SectionMedia` video poster and accessible name (2026-10-09)
+
+New, not extracted. paytalkpl received its first real clips. `SectionMedia` gains `videoPoster` (shown until playback and when autoplay is blocked) and `videoLabel` (`aria-label` on the `<video>`), passed through by `HeroVideoSplit` and `SingleIntegrationSection`. A video-only clip needs a text alternative (WCAG 1.2.1); the visible caption is usually just "Demo", which isn't one. Both optional; existing output unchanged.
