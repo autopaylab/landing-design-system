@@ -62,13 +62,30 @@ interface TrustedByLogo {
     src: string;
     alt: string;
     width: number;
+    /**
+     * Display height in px, overriding the row default (32px, 40px from md).
+     * New, not extracted: stacked marks (a crest above a name) need more
+     * height than wide wordmarks to stay legible in the same row.
+     */
+    height?: number;
 }
-/** TrustedBySection.tsx: grayscale client-logo strip. */
+/**
+ * TrustedBySection.tsx: grayscale client-logo strip.
+ *
+ * `description` and `logoTone` are new (not extracted): a consuming landing
+ * page (paytalkpl) introduces a small set of named partners with a short
+ * paragraph, and shows their marks in full colour, as their owners supplied
+ * them, rather than as a muted wall of client logos.
+ */
 interface TrustedByLogosProps {
     heading: string;
+    /** Short text under the heading. */
+    description?: React.ReactNode;
     logos: TrustedByLogo[];
+    /** "muted" (default, as extracted): grayscale at 65% opacity. "original": logos as supplied. */
+    logoTone?: "muted" | "original";
 }
-declare function TrustedByLogos({ heading, logos }: TrustedByLogosProps): React.JSX.Element;
+declare function TrustedByLogos({ heading, description, logos, logoTone }: TrustedByLogosProps): React.JSX.Element;
 
 interface Step {
     title: string;

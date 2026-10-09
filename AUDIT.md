@@ -388,3 +388,13 @@ Defaults reproduce the previous output apart from the media now sitting inside a
 ## 31. `SectionMedia` video poster and accessible name (2026-10-09)
 
 New, not extracted. paytalkpl received its first real clips. `SectionMedia` gains `videoPoster` (shown until playback and when autoplay is blocked) and `videoLabel` (`aria-label` on the `<video>`), passed through by `HeroVideoSplit` and `SingleIntegrationSection`. A video-only clip needs a text alternative (WCAG 1.2.1); the visible caption is usually just "Demo", which isn't one. Both optional; existing output unchanged.
+
+## 32. `TrustedByLogos`: description, original-colour logos, per-logo height (2026-10-09)
+
+New, not extracted. paytalkpl introduces two named partners with a short paragraph and wants their marks as supplied, not muted, with a stacked crest-and-name mark legible next to a wide wordmark.
+
+- `description` (optional): paragraph under the heading.
+- `logoTone`: `"muted"` (default, the extracted grayscale at 65% opacity) or `"original"`.
+- `TrustedByLogo.height` (optional, px): overrides the row's `h-8 md:h-10` for that logo.
+
+Defaults reproduce the previous output.
