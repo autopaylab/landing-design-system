@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.0
+
+### Minor Changes
+
+- b9ff3b4: Optional props for single-goal landing pages: `Navbar` (`showAuthButtons`, `cta`, `languageLink`), `Footer` (optional banner, social links and scheme badges, button nav items, secondary logo), `HeroVideoSplit` (optional `videoSrc`, `mediaCaption`), `FourStepsSection` (optional `image`, `note`, three-column layout for three steps) and `CookieConsentScript` (`locale`). All defaults keep the previous output.
+- 4b0c708: New `SectionMedia` molecule (video or image with optional caption and video controls), used by `HeroVideoSplit` (`image`, `showVideoControls`), `SingleIntegrationSection` (optional `videoSrc`, `image`, `mediaCaption`, `showVideoControls`) and `FourStepsSection` (`imageCaption`).
+- 43df63e: `TrustedByLogos`: optional `description`, `logoTone` (`"muted"` default or `"original"`) and per-logo `height`.
+- 66daab8: `SectionMedia`, `HeroVideoSplit` and `SingleIntegrationSection`: optional `videoPoster` and `videoLabel` (accessible name for the video).
+
 ## 0.11.0
 
 ### Minor Changes
