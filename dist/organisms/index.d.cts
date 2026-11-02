@@ -57,7 +57,11 @@ interface HeroImageOverlayProps {
         label: string;
         href: string;
     };
-    secondaryCta: {
+    /**
+     * Optional since a consuming landing page (ai-autopay-pl) has a single
+     * call to action; the source always had a second, outlined button.
+     */
+    secondaryCta?: {
         label: string;
         href: string;
     };

@@ -18,7 +18,11 @@ export interface HeroImageOverlayProps {
   /** Only rendered in the "stacked" layout, matching the source (the "stacked" variant has a subtitle paragraph, "split" does not). */
   subtitle?: string;
   primaryCta: { label: string; href: string };
-  secondaryCta: { label: string; href: string };
+  /**
+   * Optional since a consuming landing page (ai-autopay-pl) has a single
+   * call to action; the source always had a second, outlined button.
+   */
+  secondaryCta?: { label: string; href: string };
   /**
    * New, not extracted: a consuming landing page (ai-autopay-pl) opens with
    * this organism, so its title is the page's one h1. Defaults to "h2", as
@@ -49,9 +53,11 @@ export function HeroImageOverlay({
       <Button asChild variant="lime" size="lg">
         <a href={primaryCta.href}>{primaryCta.label}</a>
       </Button>
-      <Button asChild variant="outline-inverse" size="lg">
-        <a href={secondaryCta.href}>{secondaryCta.label}</a>
-      </Button>
+      {secondaryCta && (
+        <Button asChild variant="outline-inverse" size="lg">
+          <a href={secondaryCta.href}>{secondaryCta.label}</a>
+        </Button>
+      )}
     </div>
   );
 

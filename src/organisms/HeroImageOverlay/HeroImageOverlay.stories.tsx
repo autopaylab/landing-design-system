@@ -23,10 +23,11 @@ export const Stacked: Story = {
   },
 };
 
-/** The first section of a page: its title is the page's h1 and the background loads eagerly. */
+/** The first section of a page: its title is the page's h1, the background loads eagerly, one call to action. */
 export const PageHero: Story = {
   args: {
     ...Stacked.args,
+    secondaryCta: undefined,
     headingLevel: "h1",
     imageLoading: "eager",
   },
