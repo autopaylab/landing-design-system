@@ -30,8 +30,14 @@ interface HeroVideoSplitProps {
     mediaCaption?: string;
     /** Native video controls, so the loop can be paused (WCAG 2.2.2). See SectionMedia. */
     showVideoControls?: boolean;
+    /**
+     * New, not extracted: a consuming landing page (ai-autopay-pl) uses this
+     * layout for a section further down, where the page's h1 is already
+     * taken by a HeroImageOverlay. Defaults to "h1", as extracted.
+     */
+    headingLevel?: "h1" | "h2";
 }
-declare function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc, videoPoster, videoLabel, image, mediaCaption, showVideoControls, }: HeroVideoSplitProps): React.JSX.Element;
+declare function HeroVideoSplit({ eyebrow, title, subtitle, ctaLabel, ctaHref, videoSrc, videoPoster, videoLabel, image, mediaCaption, showVideoControls, headingLevel, }: HeroVideoSplitProps): React.JSX.Element;
 
 /**
  * Merges the source's two hero-overlay variants ("stacked": gradient
@@ -55,8 +61,20 @@ interface HeroImageOverlayProps {
         label: string;
         href: string;
     };
+    /**
+     * New, not extracted: a consuming landing page (ai-autopay-pl) opens with
+     * this organism, so its title is the page's one h1. Defaults to "h2", as
+     * extracted; the visual size follows `layout`, not the level.
+     */
+    headingLevel?: "h1" | "h2";
+    /**
+     * New, not extracted: "eager" for the first section of a page, where a
+     * lazily loaded background delays the largest paint. Defaults to "lazy",
+     * as extracted.
+     */
+    imageLoading?: "lazy" | "eager";
 }
-declare function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondaryCta }: HeroImageOverlayProps): React.JSX.Element;
+declare function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondaryCta, headingLevel, imageLoading, }: HeroImageOverlayProps): React.JSX.Element;
 
 interface TrustedByLogo {
     src: string;

@@ -824,13 +824,15 @@ function HeroVideoSplit({
   videoLabel,
   image,
   mediaCaption,
-  showVideoControls
+  showVideoControls,
+  headingLevel = "h1"
 }) {
   const hasMedia = !!videoSrc || !!image;
+  const Heading = headingLevel;
   return /* @__PURE__ */ jsx29("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ jsxs20("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
     /* @__PURE__ */ jsxs20("div", { className: hasMedia ? void 0 : "max-w-3xl", children: [
       eyebrow && /* @__PURE__ */ jsx29("div", { className: "mb-6", children: /* @__PURE__ */ jsx29(Badge, { variant: "eyebrow", children: eyebrow }) }),
-      /* @__PURE__ */ jsx29("h1", { className: "font-display text-h1", children: title }),
+      /* @__PURE__ */ jsx29(Heading, { className: "font-display text-h1", children: title }),
       /* @__PURE__ */ jsx29("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
       /* @__PURE__ */ jsx29("div", { className: "mt-10", children: /* @__PURE__ */ jsx29(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx29("a", { href: ctaHref, children: ctaLabel }) }) })
     ] }),
@@ -840,13 +842,23 @@ function HeroVideoSplit({
 
 // src/organisms/HeroImageOverlay/HeroImageOverlay.tsx
 import { jsx as jsx30, jsxs as jsxs21 } from "react/jsx-runtime";
-function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondaryCta }) {
+function HeroImageOverlay({
+  layout,
+  image,
+  title,
+  subtitle,
+  primaryCta,
+  secondaryCta,
+  headingLevel = "h2",
+  imageLoading = "lazy"
+}) {
+  const Heading = headingLevel;
   const ctas = /* @__PURE__ */ jsxs21("div", { className: "flex flex-col gap-3 sm:flex-row", children: [
     /* @__PURE__ */ jsx30(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx30("a", { href: primaryCta.href, children: primaryCta.label }) }),
     /* @__PURE__ */ jsx30(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ jsx30("a", { href: secondaryCta.href, children: secondaryCta.label }) })
   ] });
   return /* @__PURE__ */ jsx30("div", { className: "px-4 md:px-8", children: /* @__PURE__ */ jsxs21("section", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground", children: [
-    /* @__PURE__ */ jsx30("img", { src: image, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
+    /* @__PURE__ */ jsx30("img", { src: image, alt: "", "aria-hidden": "true", loading: imageLoading, className: "absolute inset-0 size-full object-cover" }),
     /* @__PURE__ */ jsx30(
       "div",
       {
@@ -855,11 +867,11 @@ function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondar
       }
     ),
     layout === "stacked" ? /* @__PURE__ */ jsx30("div", { className: "relative px-6 py-20 text-background sm:px-10 md:px-16 md:py-32 lg:py-40", children: /* @__PURE__ */ jsxs21("div", { className: "max-w-3xl", children: [
-      /* @__PURE__ */ jsx30("h2", { className: "font-display text-h1", children: title }),
+      /* @__PURE__ */ jsx30(Heading, { className: "font-display text-h1", children: title }),
       subtitle && /* @__PURE__ */ jsx30("p", { className: "mt-6 max-w-2xl text-base text-background/80 md:text-xl", children: subtitle }),
       /* @__PURE__ */ jsx30("div", { className: "mt-9", children: ctas })
     ] }) }) : /* @__PURE__ */ jsx30("div", { className: "relative px-6 py-20 sm:px-10 md:px-14 md:py-28", children: /* @__PURE__ */ jsxs21("div", { className: "grid gap-10 md:grid-cols-2 md:items-center", children: [
-      /* @__PURE__ */ jsx30("h2", { className: "max-w-xl font-display text-h2 text-background", children: title }),
+      /* @__PURE__ */ jsx30(Heading, { className: "max-w-xl font-display text-h2 text-background", children: title }),
       /* @__PURE__ */ jsx30("div", { className: "md:justify-self-end", children: ctas })
     ] }) })
   ] }) });

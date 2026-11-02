@@ -29,6 +29,12 @@ export interface HeroVideoSplitProps {
   mediaCaption?: string;
   /** Native video controls, so the loop can be paused (WCAG 2.2.2). See SectionMedia. */
   showVideoControls?: boolean;
+  /**
+   * New, not extracted: a consuming landing page (ai-autopay-pl) uses this
+   * layout for a section further down, where the page's h1 is already
+   * taken by a HeroImageOverlay. Defaults to "h1", as extracted.
+   */
+  headingLevel?: "h1" | "h2";
 }
 
 export function HeroVideoSplit({
@@ -43,8 +49,10 @@ export function HeroVideoSplit({
   image,
   mediaCaption,
   showVideoControls,
+  headingLevel = "h1",
 }: HeroVideoSplitProps) {
   const hasMedia = !!videoSrc || !!image;
+  const Heading = headingLevel;
   return (
     <section className="mx-auto max-w-[1280px] px-6 pt-16 md:pt-24">
       <div className={`grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`}>
@@ -54,7 +62,7 @@ export function HeroVideoSplit({
               <Badge variant="eyebrow">{eyebrow}</Badge>
             </div>
           )}
-          <h1 className="font-display text-h1">{title}</h1>
+          <Heading className="font-display text-h1">{title}</Heading>
           <p className={`mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`}>
             {subtitle}
           </p>

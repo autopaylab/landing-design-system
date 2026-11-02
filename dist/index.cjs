@@ -924,13 +924,15 @@ function HeroVideoSplit({
   videoLabel,
   image,
   mediaCaption,
-  showVideoControls
+  showVideoControls,
+  headingLevel = "h1"
 }) {
   const hasMedia = !!videoSrc || !!image;
+  const Heading = headingLevel;
   return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: hasMedia ? void 0 : "max-w-3xl", children: [
       eyebrow && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mb-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Badge, { variant: "eyebrow", children: eyebrow }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h1", { className: "font-display text-h1", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Heading, { className: "font-display text-h1", children: title }),
       /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
       /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-10", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: ctaHref, children: ctaLabel }) }) })
     ] }),
@@ -940,13 +942,23 @@ function HeroVideoSplit({
 
 // src/organisms/HeroImageOverlay/HeroImageOverlay.tsx
 var import_jsx_runtime30 = require("react/jsx-runtime");
-function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondaryCta }) {
+function HeroImageOverlay({
+  layout,
+  image,
+  title,
+  subtitle,
+  primaryCta,
+  secondaryCta,
+  headingLevel = "h2",
+  imageLoading = "lazy"
+}) {
+  const Heading = headingLevel;
   const ctas = /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "flex flex-col gap-3 sm:flex-row", children: [
     /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("a", { href: primaryCta.href, children: primaryCta.label }) }),
     /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("a", { href: secondaryCta.href, children: secondaryCta.label }) })
   ] });
   return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "px-4 md:px-8", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("section", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("img", { src: image, alt: "", "aria-hidden": "true", loading: "lazy", className: "absolute inset-0 size-full object-cover" }),
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("img", { src: image, alt: "", "aria-hidden": "true", loading: imageLoading, className: "absolute inset-0 size-full object-cover" }),
     /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
       "div",
       {
@@ -955,11 +967,11 @@ function HeroImageOverlay({ layout, image, title, subtitle, primaryCta, secondar
       }
     ),
     layout === "stacked" ? /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "relative px-6 py-20 text-background sm:px-10 md:px-16 md:py-32 lg:py-40", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "max-w-3xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("h2", { className: "font-display text-h1", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Heading, { className: "font-display text-h1", children: title }),
       subtitle && /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("p", { className: "mt-6 max-w-2xl text-base text-background/80 md:text-xl", children: subtitle }),
       /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "mt-9", children: ctas })
     ] }) }) : /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "relative px-6 py-20 sm:px-10 md:px-14 md:py-28", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "grid gap-10 md:grid-cols-2 md:items-center", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("h2", { className: "max-w-xl font-display text-h2 text-background", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Heading, { className: "max-w-xl font-display text-h2 text-background", children: title }),
       /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "md:justify-self-end", children: ctas })
     ] }) })
   ] }) });
