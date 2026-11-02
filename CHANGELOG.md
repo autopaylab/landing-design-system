@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13.0
+
+### Minor Changes
+
+- a071290: Heading utilities `text-h1` to `text-h6` set `text-wrap: balance`, so a multi-line heading breaks into lines of similar length instead of leaving one short word alone on the last line. Font size and spacing are unchanged; only where the lines break moves, on every page that uses these headings.
+- eab6fff: Heading level, image loading and a single call to action for the two hero organisms, so either can open a page or sit further down: `HeroImageOverlay` gets optional `headingLevel` (`"h2"` default or `"h1"`) and `imageLoading` (`"lazy"` default or `"eager"`), and `secondaryCta` becomes optional; `HeroVideoSplit` gets optional `headingLevel` (`"h1"` default or `"h2"`). Defaults keep the previous output.
+
 ## 0.12.0
 
 ### Minor Changes
