@@ -398,3 +398,13 @@ New, not extracted. paytalkpl introduces two named partners with a short paragra
 - `TrustedByLogo.height` (optional, px): overrides the row's `h-8 md:h-10` for that logo.
 
 Defaults reproduce the previous output.
+
+## 33. Hero organisms as page opener or lower section; balanced headings (2026-11-02)
+
+New, not extracted. `autopaylab/ai-autopay-pl` opens its page with `HeroImageOverlay` (text on a photo) and shows `HeroVideoSplit` further down. Both had a hard-coded heading level, so the page would have had no h1 in its hero and a second h1 lower down.
+
+- **`HeroImageOverlay`**: `headingLevel` (`"h2"` default, `"h1"`), `imageLoading` (`"lazy"` default, `"eager"`: a lazily loaded background delays the largest paint when the organism opens a page), and `secondaryCta` is now optional (the page has a single call to action).
+- **`HeroVideoSplit`**: `headingLevel` (`"h1"` default, `"h2"`).
+- **Heading utilities**: `text-h1` to `text-h6` set `text-wrap: balance`. In a half-width column a heading left one short word alone on its last line at some desktop widths. **This one changes existing output** on every consumer: line breaks of multi-line headings move, font size and spacing don't.
+
+Prop defaults reproduce the previous output. **Verified:** `npm run typecheck`, `npm run lint`, `npm test` (173 passing, including new unit tests for both organisms and a `PageHero` story through the axe suite), `npm run build`. `dist/` was rebuilt from a `core.autocrlf=false` worktree (§29), which changed exactly the 8 `.map` files a CRLF checkout embeds differently.
