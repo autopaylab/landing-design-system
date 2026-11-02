@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/cn";
+import { pageContainer } from "@/lib/page-container";
 
 export interface PositioningOption {
   eyebrow: string;
@@ -32,7 +33,7 @@ export function PositioningSpectrumSection({
   currentLabel = "You are here",
 }: PositioningSpectrumSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.1em] text-primary">— {eyebrow}</p> : null}
       <h2 className="mt-4 max-w-2xl font-display text-h3">{heading}</h2>
 

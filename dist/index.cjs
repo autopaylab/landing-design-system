@@ -742,6 +742,11 @@ function SectionMedia({
 // src/organisms/Navbar/Navbar.tsx
 var React12 = __toESM(require("react"), 1);
 var import_lucide_react4 = require("lucide-react");
+
+// src/lib/page-container.ts
+var pageContainer = "mx-auto w-full px-6 sm:px-8 md:px-10 min-[1200px]:max-w-[1140px] min-[1200px]:px-3 min-[1400px]:max-w-[1320px]";
+
+// src/organisms/Navbar/Navbar.tsx
 var import_jsx_runtime27 = require("react/jsx-runtime");
 function LanguageLink({ link, className }) {
   return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
@@ -784,7 +789,7 @@ function Navbar({
   const menuId = React12.useId();
   const showLanguageButton = !languageLink && !!languageLabel;
   const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("header", { className: `${pageContainer} sticky top-5 z-40`, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
       /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("a", { href: homeHref, className: "flex shrink-0 items-center", ...externalLinkProps(homeHref), children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
@@ -951,7 +956,7 @@ function HeroVideoSplit({
 }) {
   const hasMedia = !!videoSrc || !!image;
   const Heading = headingLevel;
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { className: `${pageContainer} pt-16 md:pt-24`, children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: hasMedia ? void 0 : "max-w-3xl", children: [
       eyebrow && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mb-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Badge, { variant: "eyebrow", children: eyebrow }) }),
       /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Heading, { className: "font-display text-h1", children: title }),
@@ -1003,7 +1008,7 @@ function HeroImageOverlay({
 var import_jsx_runtime31 = require("react/jsx-runtime");
 var MUTED_FILTER = "grayscale(100%) opacity(0.65)";
 function TrustedByLogos({ heading, description, logos, logoTone = "muted" }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("section", { id: "trusted-by", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("section", { id: "trusted-by", className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h2", { className: "text-center font-display text-h3", children: heading }),
     description ? /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:text-[17px]", children: description }) : null,
     /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
@@ -1026,7 +1031,7 @@ function TrustedByLogos({ heading, description, logos, logoTone = "muted" }) {
 // src/organisms/FourStepsSection/FourStepsSection.tsx
 var import_jsx_runtime32 = require("react/jsx-runtime");
 function FourStepsSection({ heading, description, image, imageAlt = "", imageCaption, steps, note }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("section", { "aria-labelledby": "four-steps-title", className: "px-5 py-14 md:py-20", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "mx-auto max-w-[1280px]", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("section", { "aria-labelledby": "four-steps-title", className: "py-14 md:py-20", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: pageContainer, children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
     /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(
       "div",
       {
@@ -1082,7 +1087,7 @@ function SingleIntegrationSection({
   mediaCaption,
   showVideoControls
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "mx-auto max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: pageContainer, children: [
     /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -1187,7 +1192,7 @@ function PlatformFeatureShowcase({ features }) {
 // src/organisms/SecuritySection/SecuritySection.tsx
 var import_jsx_runtime35 = require("react/jsx-runtime");
 function SecuritySection({ eyebrow, heading, description, schemeBadges, cards }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("section", { id: "security", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("section", { id: "security", className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -1201,7 +1206,7 @@ function SecuritySection({ eyebrow, heading, description, schemeBadges, cards })
 // src/organisms/GlobalCoverageSection/GlobalCoverageSection.tsx
 var import_jsx_runtime36 = require("react/jsx-runtime");
 function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -1230,7 +1235,7 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
 // src/organisms/DataLeverageSection/DataLeverageSection.tsx
 var import_jsx_runtime37 = require("react/jsx-runtime");
 function DataLeverageSection({ eyebrow, heading, description, items, reportingPeriods }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -1273,7 +1278,7 @@ function DataLeverageSection({ eyebrow, heading, description, items, reportingPe
 // src/organisms/StatsSection/StatsSection.tsx
 var import_jsx_runtime38 = require("react/jsx-runtime");
 function StatsSection({ heading, description, stats }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
     /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { className: "max-w-2xl", children: [
       /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("p", { className: "mt-6 text-muted-foreground md:text-[17px]", children: description })
@@ -1285,7 +1290,7 @@ function StatsSection({ heading, description, stats }) {
 // src/organisms/IndustriesStackedSection/IndustriesStackedSection.tsx
 var import_jsx_runtime39 = require("react/jsx-runtime");
 function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)("div", { className: `${pageContainer} py-16 md:py-20`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -1315,7 +1320,7 @@ function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCt
 // src/organisms/IndustriesGridSection/IndustriesGridSection.tsx
 var import_jsx_runtime40 = require("react/jsx-runtime");
 function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { className: `${pageContainer} py-16 md:py-20`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -1339,7 +1344,7 @@ function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaCl
 // src/organisms/OverlappingCardsSection/OverlappingCardsSection.tsx
 var import_jsx_runtime41 = require("react/jsx-runtime");
 function OverlappingCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: `${pageContainer} py-16 md:py-20`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "text-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -1376,7 +1381,7 @@ function ContactSection({
   submitLabel = "Send",
   onSubmit
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("section", { id: "contact", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("section", { id: "contact", className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
@@ -1400,7 +1405,7 @@ function ContactSection({
 // src/organisms/FaqAccordionSection/FaqAccordionSection.tsx
 var import_jsx_runtime43 = require("react/jsx-runtime");
 function FaqAccordionSection({ heading, entries }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)("div", { className: "mx-auto max-w-[1280px]", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface py-14 md:py-20", children: /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)("div", { className: pageContainer, children: [
     /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
     /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
   ] }) });
@@ -1502,7 +1507,7 @@ function CookieConsentScript(props = {}) {
 // src/organisms/PricingSection/PricingSection.tsx
 var import_jsx_runtime46 = require("react/jsx-runtime");
 function PricingSection({ eyebrow, heading, tiers, footnotes }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "text-center", children: [
       eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
       /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h2", { className: "mt-4 font-display text-h2", children: heading })
@@ -1518,7 +1523,7 @@ function PricingSection({ eyebrow, heading, tiers, footnotes }) {
 // src/organisms/AudienceScenariosSection/AudienceScenariosSection.tsx
 var import_jsx_runtime47 = require("react/jsx-runtime");
 function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "text-center", children: [
       eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
       /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h2", { className: "mt-4 font-display text-h2", children: heading }),
@@ -1543,7 +1548,7 @@ function LeadFormSection({
   submitLabel = "Wy\u015Blij",
   onSubmit
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("h2", { className: "font-display text-h2", children: heading }),
       description ? /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description }) : null
@@ -1600,7 +1605,7 @@ function LeadFormSection({
 // src/organisms/ComparisonTimelineSection/ComparisonTimelineSection.tsx
 var import_jsx_runtime49 = require("react/jsx-runtime");
 function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
     eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1636,7 +1641,7 @@ function PositioningSpectrumSection({
   options,
   currentLabel = "You are here"
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1675,7 +1680,7 @@ function RequirementsChecklistSection({
   caption,
   footnote
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1701,7 +1706,7 @@ function RequirementsChecklistSection({
 var React14 = __toESM(require("react"), 1);
 var import_jsx_runtime52 = require("react/jsx-runtime");
 function CostBreakdownSection({ eyebrow, heading, description, components }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1723,7 +1728,7 @@ function CostBreakdownSection({ eyebrow, heading, description, components }) {
 var import_lucide_react6 = require("lucide-react");
 var import_jsx_runtime53 = require("react/jsx-runtime");
 function ComparisonCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
     /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("h2", { className: "mt-4 font-display text-h2", children: heading }),
     /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "mt-8 grid gap-6 md:grid-cols-2", children: cards.map((card) => /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(

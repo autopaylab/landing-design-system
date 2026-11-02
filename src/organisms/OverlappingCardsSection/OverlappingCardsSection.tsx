@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Badge } from "@/atoms/Badge";
 import { OverlapCard, type OverlapCardCta } from "@/molecules/OverlapCard";
+import { pageContainer } from "@/lib/page-container";
 
 export interface OverlapCardEntry {
   title: string;
@@ -29,7 +30,7 @@ export interface OverlappingCardsSectionProps {
 export function OverlappingCardsSection({ eyebrow, heading, cards }: OverlappingCardsSectionProps) {
   return (
     <section className="mt-16 w-full bg-surface md:mt-32">
-      <div className="mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20">
+      <div className={`${pageContainer} py-16 md:py-20`}>
         <div className="text-center">
           <Badge variant="eyebrow">{eyebrow}</Badge>
           <h2 className="mt-6 font-display text-h2">{heading}</h2>

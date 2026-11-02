@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Badge } from "@/atoms/Badge";
+import { pageContainer } from "@/lib/page-container";
 
 export interface DataLeverageItem {
   title: string;
@@ -24,7 +25,7 @@ export interface DataLeverageSectionProps {
 
 export function DataLeverageSection({ eyebrow, heading, description, items, reportingPeriods }: DataLeverageSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       <div className="text-center">
         <Badge variant="eyebrow">{eyebrow}</Badge>
         <h2 className="mt-6 font-display text-h2">{heading}</h2>

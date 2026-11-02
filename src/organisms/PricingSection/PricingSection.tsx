@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { PricingTier, type PricingTierProps } from "@/molecules/PricingTier";
+import { pageContainer } from "@/lib/page-container";
 
 export interface PricingFootnote {
   value: string;
@@ -23,7 +24,7 @@ export interface PricingSectionProps {
 
 export function PricingSection({ eyebrow, heading, tiers, footnotes }: PricingSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       <div className="text-center">
         {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">{eyebrow}</p> : null}
         <h2 className="mt-4 font-display text-h2">{heading}</h2>

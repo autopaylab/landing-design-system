@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Badge } from "@/atoms/Badge";
 import { IconCard, type IconCardProps } from "@/molecules/IconCard";
+import { pageContainer } from "@/lib/page-container";
 
 /** HomeContent.tsx Security section (lines 237-267). */
 export interface SecuritySectionProps {
@@ -14,7 +15,7 @@ export interface SecuritySectionProps {
 
 export function SecuritySection({ eyebrow, heading, description, schemeBadges, cards }: SecuritySectionProps) {
   return (
-    <section id="security" className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section id="security" className={`${pageContainer} mt-16 md:mt-32`}>
       <div className="text-center">
         <Badge variant="eyebrow">{eyebrow}</Badge>
         <h2 className="mt-6 font-display text-h2">{heading}</h2>

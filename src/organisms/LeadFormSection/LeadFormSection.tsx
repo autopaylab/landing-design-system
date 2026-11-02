@@ -8,6 +8,7 @@ import { FormField } from "@/molecules/FormField";
 import { TextareaField } from "@/molecules/TextareaField";
 import { SelectField } from "@/molecules/SelectField";
 import { ConsentCheckboxField } from "@/molecules/ConsentCheckboxField";
+import { pageContainer } from "@/lib/page-container";
 
 export type LeadFormField =
   | { kind: "text"; name: string; label: string; type?: string; placeholder?: string; required?: boolean }
@@ -47,7 +48,7 @@ export function LeadFormSection({
   onSubmit,
 }: LeadFormSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       <div className="grid items-start gap-12 md:grid-cols-2">
         <div>
           <h2 className="font-display text-h2">{heading}</h2>

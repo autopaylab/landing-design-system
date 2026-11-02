@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/cn";
+import { pageContainer } from "@/lib/page-container";
 
 export interface ComparisonPath {
   name: string;
@@ -30,7 +31,7 @@ export interface ComparisonTimelineSectionProps {
 
 export function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }: ComparisonTimelineSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       <div className="rounded-3xl border border-border p-6 md:p-10">
         {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.1em] text-primary">— {eyebrow}</p> : null}
         <h2 className="mt-4 font-display text-h3">{heading}</h2>

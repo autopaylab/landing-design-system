@@ -7,6 +7,7 @@ import { Button } from "@/atoms/Button";
 import { Link } from "@/atoms/Link";
 import { Logo } from "@/atoms/Logo";
 import { externalLinkProps } from "@/lib/external-link";
+import { pageContainer } from "@/lib/page-container";
 
 export interface NavItem {
   label: string;
@@ -113,7 +114,7 @@ export function Navbar({
   const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
 
   return (
-    <header className="sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6">
+    <header className={`${pageContainer} sticky top-5 z-40`}>
       <div className="rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]">
         <div className="flex items-center justify-between gap-6 px-6 py-3">
           <a href={homeHref} className="flex shrink-0 items-center" {...externalLinkProps(homeHref)}>

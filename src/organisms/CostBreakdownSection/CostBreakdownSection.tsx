@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Link } from "@/atoms/Link";
+import { pageContainer } from "@/lib/page-container";
 
 export interface CostComponent {
   title: string;
@@ -27,7 +28,7 @@ export interface CostBreakdownSectionProps {
 
 export function CostBreakdownSection({ eyebrow, heading, description, components }: CostBreakdownSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.1em] text-primary">— {eyebrow}</p> : null}
       <h2 className="mt-4 font-display text-h3">{heading}</h2>
       {description ? <p className="mt-4 max-w-2xl text-muted-foreground">{description}</p> : null}
