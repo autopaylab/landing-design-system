@@ -23,6 +23,15 @@ export const Stacked: Story = {
   },
 };
 
+/** The first section of a page: its title is the page's h1 and the background loads eagerly. */
+export const PageHero: Story = {
+  args: {
+    ...Stacked.args,
+    headingLevel: "h1",
+    imageLoading: "eager",
+  },
+};
+
 export const Split: Story = {
   args: {
     layout: "split",
