@@ -5,6 +5,7 @@ import * as React from "react";
 import { Button } from "@/atoms/Button";
 import { FormField } from "@/molecules/FormField";
 import { ConsentCheckboxField } from "@/molecules/ConsentCheckboxField";
+import { pageContainer } from "@/lib/page-container";
 
 /**
  * HomeContent.tsx Contact section + form (lines 433-473). The source form is
@@ -32,7 +33,7 @@ export function ContactSection({
   onSubmit,
 }: ContactSectionProps) {
   return (
-    <section id="contact" className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section id="contact" className={`${pageContainer} mt-16 md:mt-32`}>
       <div className="grid items-start gap-12 md:grid-cols-2">
         <div>
           <h2 className="font-display text-h2">{heading}</h2>

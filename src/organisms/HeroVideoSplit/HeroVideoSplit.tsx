@@ -4,6 +4,7 @@ import { Badge } from "@/atoms/Badge";
 import { Button } from "@/atoms/Button";
 import { SectionMedia, type SectionMediaImage } from "@/molecules/SectionMedia";
 import { externalLinkProps } from "@/lib/external-link";
+import { pageContainer } from "@/lib/page-container";
 
 /**
  * The primary two-column video hero from HomeContent.tsx (lines 142-165).
@@ -55,7 +56,7 @@ export function HeroVideoSplit({
   const hasMedia = !!videoSrc || !!image;
   const Heading = headingLevel;
   return (
-    <section className="mx-auto max-w-[1280px] px-6 pt-16 md:pt-24">
+    <section className={`${pageContainer} pt-16 md:pt-24`}>
       <div className={`grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`}>
         <div className={hasMedia ? undefined : "max-w-3xl"}>
           {eyebrow && (

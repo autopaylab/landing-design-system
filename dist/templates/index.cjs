@@ -161,6 +161,9 @@ function Logo({ className, size, src, alt, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src, alt, className: cn(logoVariants({ size }), className), ...props });
 }
 
+// src/lib/page-container.ts
+var pageContainer = "mx-auto w-full px-6 sm:px-8 md:px-10 min-[1200px]:max-w-[1196px] min-[1400px]:max-w-[1376px]";
+
 // src/organisms/Navbar/Navbar.tsx
 var import_jsx_runtime4 = require("react/jsx-runtime");
 function LanguageLink({ link, className }) {
@@ -204,7 +207,7 @@ function Navbar({
   const menuId = React3.useId();
   const showLanguageButton = !languageLink && !!languageLabel;
   const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("header", { className: `${pageContainer} sticky top-5 z-40`, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: homeHref, className: "flex shrink-0 items-center", ...externalLinkProps(homeHref), children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),

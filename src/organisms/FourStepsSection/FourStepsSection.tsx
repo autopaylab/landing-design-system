@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { SectionMedia } from "@/molecules/SectionMedia";
 import { StepCard } from "@/molecules/StepCard";
+import { pageContainer } from "@/lib/page-container";
 
 export interface Step {
   title: string;
@@ -34,8 +35,8 @@ export interface FourStepsSectionProps {
 
 export function FourStepsSection({ heading, description, image, imageAlt = "", imageCaption, steps, note }: FourStepsSectionProps) {
   return (
-    <section aria-labelledby="four-steps-title" className="px-5 py-14 md:py-20">
-      <div className="mx-auto max-w-[1280px]">
+    <section aria-labelledby="four-steps-title" className="py-14 md:py-20">
+      <div className={pageContainer}>
         <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]">
           <div
             className={`grid items-center gap-8 px-6 pb-10 pt-10 md:px-14 md:pb-16 md:pt-14 ${image ? "md:grid-cols-[1.1fr_1fr]" : ""}`}

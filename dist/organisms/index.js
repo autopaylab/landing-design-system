@@ -125,6 +125,9 @@ function Logo({ className, size, src, alt, ...props }) {
   return /* @__PURE__ */ jsx3("img", { src, alt, className: cn(logoVariants({ size }), className), ...props });
 }
 
+// src/lib/page-container.ts
+var pageContainer = "mx-auto w-full px-6 sm:px-8 md:px-10 min-[1200px]:max-w-[1196px] min-[1400px]:max-w-[1376px]";
+
 // src/organisms/Navbar/Navbar.tsx
 import { Fragment, jsx as jsx4, jsxs } from "react/jsx-runtime";
 function LanguageLink({ link, className }) {
@@ -168,7 +171,7 @@ function Navbar({
   const menuId = React3.useId();
   const showLanguageButton = !languageLink && !!languageLabel;
   const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
-  return /* @__PURE__ */ jsx4("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
+  return /* @__PURE__ */ jsx4("header", { className: `${pageContainer} sticky top-5 z-40`, children: /* @__PURE__ */ jsxs("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
       /* @__PURE__ */ jsx4("a", { href: homeHref, className: "flex shrink-0 items-center", ...externalLinkProps(homeHref), children: /* @__PURE__ */ jsx4(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ jsx4("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx4(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
@@ -401,7 +404,7 @@ function HeroVideoSplit({
 }) {
   const hasMedia = !!videoSrc || !!image;
   const Heading = headingLevel;
-  return /* @__PURE__ */ jsx8("section", { className: "mx-auto max-w-[1280px] px-6 pt-16 md:pt-24", children: /* @__PURE__ */ jsxs4("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
+  return /* @__PURE__ */ jsx8("section", { className: `${pageContainer} pt-16 md:pt-24`, children: /* @__PURE__ */ jsxs4("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
     /* @__PURE__ */ jsxs4("div", { className: hasMedia ? void 0 : "max-w-3xl", children: [
       eyebrow && /* @__PURE__ */ jsx8("div", { className: "mb-6", children: /* @__PURE__ */ jsx8(Badge, { variant: "eyebrow", children: eyebrow }) }),
       /* @__PURE__ */ jsx8(Heading, { className: "font-display text-h1", children: title }),
@@ -453,7 +456,7 @@ function HeroImageOverlay({
 import { jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
 var MUTED_FILTER = "grayscale(100%) opacity(0.65)";
 function TrustedByLogos({ heading, description, logos, logoTone = "muted" }) {
-  return /* @__PURE__ */ jsxs6("section", { id: "trusted-by", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs6("section", { id: "trusted-by", className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ jsx10("h2", { className: "text-center font-display text-h3", children: heading }),
     description ? /* @__PURE__ */ jsx10("p", { className: "mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:text-[17px]", children: description }) : null,
     /* @__PURE__ */ jsx10("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ jsx10(
@@ -502,7 +505,7 @@ function StepCard({ className, index, title, body, ...props }) {
 // src/organisms/FourStepsSection/FourStepsSection.tsx
 import { jsx as jsx13, jsxs as jsxs8 } from "react/jsx-runtime";
 function FourStepsSection({ heading, description, image, imageAlt = "", imageCaption, steps, note }) {
-  return /* @__PURE__ */ jsx13("section", { "aria-labelledby": "four-steps-title", className: "px-5 py-14 md:py-20", children: /* @__PURE__ */ jsx13("div", { className: "mx-auto max-w-[1280px]", children: /* @__PURE__ */ jsxs8("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
+  return /* @__PURE__ */ jsx13("section", { "aria-labelledby": "four-steps-title", className: "py-14 md:py-20", children: /* @__PURE__ */ jsx13("div", { className: pageContainer, children: /* @__PURE__ */ jsxs8("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.97_0.01_240)] via-[oklch(0.91_0.07_240)] to-[oklch(0.82_0.13_240)]", children: [
     /* @__PURE__ */ jsxs8(
       "div",
       {
@@ -579,7 +582,7 @@ function SingleIntegrationSection({
   mediaCaption,
   showVideoControls
 }) {
-  return /* @__PURE__ */ jsx15("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ jsxs10("div", { className: "mx-auto max-w-[1280px] px-6", children: [
+  return /* @__PURE__ */ jsx15("section", { id: "platform", className: "mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32", children: /* @__PURE__ */ jsxs10("div", { className: pageContainer, children: [
     /* @__PURE__ */ jsxs10("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx15(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx15("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -712,7 +715,7 @@ function IconCard({ className, icon: Icon, title, bullets, color, ...props }) {
 // src/organisms/SecuritySection/SecuritySection.tsx
 import { jsx as jsx19, jsxs as jsxs14 } from "react/jsx-runtime";
 function SecuritySection({ eyebrow, heading, description, schemeBadges, cards }) {
-  return /* @__PURE__ */ jsxs14("section", { id: "security", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs14("section", { id: "security", className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ jsxs14("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx19(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx19("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -726,7 +729,7 @@ function SecuritySection({ eyebrow, heading, description, schemeBadges, cards })
 // src/organisms/GlobalCoverageSection/GlobalCoverageSection.tsx
 import { jsx as jsx20, jsxs as jsxs15 } from "react/jsx-runtime";
 function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
-  return /* @__PURE__ */ jsx20("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs15("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ jsx20("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ jsxs15("div", { className: "grid items-center gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs15("div", { children: [
       /* @__PURE__ */ jsx20(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx20("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -755,7 +758,7 @@ function GlobalCoverageSection({ eyebrow, heading, features, floatingBadges }) {
 // src/organisms/DataLeverageSection/DataLeverageSection.tsx
 import { jsx as jsx21, jsxs as jsxs16 } from "react/jsx-runtime";
 function DataLeverageSection({ eyebrow, heading, description, items, reportingPeriods }) {
-  return /* @__PURE__ */ jsxs16("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs16("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ jsxs16("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx21(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx21("h2", { className: "mt-6 font-display text-h2", children: heading }),
@@ -808,7 +811,7 @@ function StatBlock({ className, eyebrow = "UP TO", value, label, ...props }) {
 // src/organisms/StatsSection/StatsSection.tsx
 import { jsx as jsx23, jsxs as jsxs18 } from "react/jsx-runtime";
 function StatsSection({ heading, description, stats }) {
-  return /* @__PURE__ */ jsx23("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs18("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
+  return /* @__PURE__ */ jsx23("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ jsxs18("div", { className: "overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16", children: [
     /* @__PURE__ */ jsxs18("div", { className: "max-w-2xl", children: [
       /* @__PURE__ */ jsx23("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx23("p", { className: "mt-6 text-muted-foreground md:text-[17px]", children: description })
@@ -890,7 +893,7 @@ function IndustryCard({
 // src/organisms/IndustriesStackedSection/IndustriesStackedSection.tsx
 import { jsx as jsx25, jsxs as jsxs20 } from "react/jsx-runtime";
 function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ jsx25("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs20("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ jsx25("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs20("div", { className: `${pageContainer} py-16 md:py-20`, children: [
     /* @__PURE__ */ jsxs20("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx25(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx25("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -920,7 +923,7 @@ function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCt
 // src/organisms/IndustriesGridSection/IndustriesGridSection.tsx
 import { jsx as jsx26, jsxs as jsxs21 } from "react/jsx-runtime";
 function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }) {
-  return /* @__PURE__ */ jsx26("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs21("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ jsx26("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs21("div", { className: `${pageContainer} py-16 md:py-20`, children: [
     /* @__PURE__ */ jsxs21("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx26(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx26("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -1001,7 +1004,7 @@ function OverlapCard({
 // src/organisms/OverlappingCardsSection/OverlappingCardsSection.tsx
 import { jsx as jsx28, jsxs as jsxs23 } from "react/jsx-runtime";
 function OverlappingCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ jsx28("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs23("div", { className: "mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20", children: [
+  return /* @__PURE__ */ jsx28("section", { className: "mt-16 w-full bg-surface md:mt-32", children: /* @__PURE__ */ jsxs23("div", { className: `${pageContainer} py-16 md:py-20`, children: [
     /* @__PURE__ */ jsxs23("div", { className: "text-center", children: [
       /* @__PURE__ */ jsx28(Badge, { variant: "eyebrow", children: eyebrow }),
       /* @__PURE__ */ jsx28("h2", { className: "mt-6 font-display text-h2", children: heading })
@@ -1106,7 +1109,7 @@ function ContactSection({
   submitLabel = "Send",
   onSubmit
 }) {
-  return /* @__PURE__ */ jsx34("section", { id: "contact", className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs26("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ jsx34("section", { id: "contact", className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ jsxs26("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs26("div", { children: [
       /* @__PURE__ */ jsx34("h2", { className: "font-display text-h2", children: heading }),
       /* @__PURE__ */ jsx34("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description })
@@ -1174,7 +1177,7 @@ function FaqItem({ value, question, answer }) {
 // src/organisms/FaqAccordionSection/FaqAccordionSection.tsx
 import { jsx as jsx37, jsxs as jsxs29 } from "react/jsx-runtime";
 function FaqAccordionSection({ heading, entries }) {
-  return /* @__PURE__ */ jsx37("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface px-5 py-14 md:py-20", children: /* @__PURE__ */ jsxs29("div", { className: "mx-auto max-w-[1280px]", children: [
+  return /* @__PURE__ */ jsx37("section", { id: "faq", "aria-labelledby": "faq-title", className: "bg-surface py-14 md:py-20", children: /* @__PURE__ */ jsxs29("div", { className: pageContainer, children: [
     /* @__PURE__ */ jsx37("h2", { id: "faq-title", className: "font-display text-h2", children: heading }),
     /* @__PURE__ */ jsx37(Accordion, { type: "single", collapsible: true, className: "mt-8 flex w-full flex-col gap-3", children: entries.map((entry, i) => /* @__PURE__ */ jsx37(FaqItem, { value: `item-${i}`, question: entry.question, answer: entry.answer }, entry.question)) })
   ] }) });
@@ -1318,7 +1321,7 @@ function PricingTier({
 // src/organisms/PricingSection/PricingSection.tsx
 import { jsx as jsx41, jsxs as jsxs32 } from "react/jsx-runtime";
 function PricingSection({ eyebrow, heading, tiers, footnotes }) {
-  return /* @__PURE__ */ jsxs32("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs32("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ jsxs32("div", { className: "text-center", children: [
       eyebrow ? /* @__PURE__ */ jsx41("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
       /* @__PURE__ */ jsx41("h2", { className: "mt-4 font-display text-h2", children: heading })
@@ -1334,7 +1337,7 @@ function PricingSection({ eyebrow, heading, tiers, footnotes }) {
 // src/organisms/AudienceScenariosSection/AudienceScenariosSection.tsx
 import { jsx as jsx42, jsxs as jsxs33 } from "react/jsx-runtime";
 function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) {
-  return /* @__PURE__ */ jsxs33("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs33("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ jsxs33("div", { className: "text-center", children: [
       eyebrow ? /* @__PURE__ */ jsx42("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
       /* @__PURE__ */ jsx42("h2", { className: "mt-4 font-display text-h2", children: heading }),
@@ -1434,7 +1437,7 @@ function LeadFormSection({
   submitLabel = "Wy\u015Blij",
   onSubmit
 }) {
-  return /* @__PURE__ */ jsx47("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs37("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
+  return /* @__PURE__ */ jsx47("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ jsxs37("div", { className: "grid items-start gap-12 md:grid-cols-2", children: [
     /* @__PURE__ */ jsxs37("div", { children: [
       /* @__PURE__ */ jsx47("h2", { className: "font-display text-h2", children: heading }),
       description ? /* @__PURE__ */ jsx47("p", { className: "mt-6 max-w-md text-muted-foreground md:text-[17px]", children: description }) : null
@@ -1491,7 +1494,7 @@ function LeadFormSection({
 // src/organisms/ComparisonTimelineSection/ComparisonTimelineSection.tsx
 import { jsx as jsx48, jsxs as jsxs38 } from "react/jsx-runtime";
 function ComparisonTimelineSection({ eyebrow, heading, highlight, paths }) {
-  return /* @__PURE__ */ jsx48("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: /* @__PURE__ */ jsxs38("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
+  return /* @__PURE__ */ jsx48("section", { className: `${pageContainer} mt-16 md:mt-32`, children: /* @__PURE__ */ jsxs38("div", { className: "rounded-3xl border border-border p-6 md:p-10", children: [
     eyebrow ? /* @__PURE__ */ jsxs38("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1527,7 +1530,7 @@ function PositioningSpectrumSection({
   options,
   currentLabel = "You are here"
 }) {
-  return /* @__PURE__ */ jsxs39("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs39("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ jsxs39("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1566,7 +1569,7 @@ function RequirementsChecklistSection({
   caption,
   footnote
 }) {
-  return /* @__PURE__ */ jsxs40("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs40("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ jsxs40("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1592,7 +1595,7 @@ function RequirementsChecklistSection({
 import * as React14 from "react";
 import { jsx as jsx51, jsxs as jsxs41 } from "react/jsx-runtime";
 function CostBreakdownSection({ eyebrow, heading, description, components }) {
-  return /* @__PURE__ */ jsxs41("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs41("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ jsxs41("p", { className: "text-sm font-semibold uppercase tracking-[0.1em] text-primary", children: [
       "\u2014 ",
       eyebrow
@@ -1614,7 +1617,7 @@ function CostBreakdownSection({ eyebrow, heading, description, components }) {
 import { Check as Check3, X as X2 } from "lucide-react";
 import { jsx as jsx52, jsxs as jsxs42 } from "react/jsx-runtime";
 function ComparisonCardsSection({ eyebrow, heading, cards }) {
-  return /* @__PURE__ */ jsxs42("section", { className: "mx-auto mt-16 max-w-[1280px] px-6 md:mt-32", children: [
+  return /* @__PURE__ */ jsxs42("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
     eyebrow ? /* @__PURE__ */ jsx52("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
     /* @__PURE__ */ jsx52("h2", { className: "mt-4 font-display text-h2", children: heading }),
     /* @__PURE__ */ jsx52("div", { className: "mt-8 grid gap-6 md:grid-cols-2", children: cards.map((card) => /* @__PURE__ */ jsxs42(

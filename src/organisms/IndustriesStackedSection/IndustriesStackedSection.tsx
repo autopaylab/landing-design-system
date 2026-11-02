@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Badge } from "@/atoms/Badge";
 import { IndustryCard } from "@/molecules/IndustryCard";
+import { pageContainer } from "@/lib/page-container";
 
 export interface IndustryEntry {
   name: string;
@@ -27,7 +28,7 @@ export interface IndustriesStackedSectionProps {
 export function IndustriesStackedSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }: IndustriesStackedSectionProps) {
   return (
     <section className="mt-16 w-full bg-surface md:mt-32">
-      <div className="mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20">
+      <div className={`${pageContainer} py-16 md:py-20`}>
         <div className="text-center">
           <Badge variant="eyebrow">{eyebrow}</Badge>
           <h2 className="mt-6 font-display text-h2">{heading}</h2>

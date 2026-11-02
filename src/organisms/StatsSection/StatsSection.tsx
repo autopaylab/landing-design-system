@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { StatBlock, type StatBlockProps } from "@/molecules/StatBlock";
+import { pageContainer } from "@/lib/page-container";
 
 /** HomeContent.tsx Stats panel (lines 369-387). */
 export interface StatsSectionProps {
@@ -11,7 +12,7 @@ export interface StatsSectionProps {
 
 export function StatsSection({ heading, description, stats }: StatsSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[oklch(0.93_0.05_240)] via-[oklch(0.88_0.09_240)] to-[oklch(0.82_0.13_240)] p-10 md:p-16">
         <div className="max-w-2xl">
           <h2 className="font-display text-h2">{heading}</h2>

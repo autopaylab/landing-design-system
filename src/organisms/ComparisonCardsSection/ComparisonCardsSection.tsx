@@ -2,6 +2,7 @@ import * as React from "react";
 import { Check, X } from "lucide-react";
 
 import { cn } from "@/lib/cn";
+import { pageContainer } from "@/lib/page-container";
 
 export interface ComparisonCriterion {
   label: string;
@@ -35,7 +36,7 @@ export interface ComparisonCardsSectionProps {
 
 export function ComparisonCardsSection({ eyebrow, heading, cards }: ComparisonCardsSectionProps) {
   return (
-    <section className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section className={`${pageContainer} mt-16 md:mt-32`}>
       {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">{eyebrow}</p> : null}
       <h2 className="mt-4 font-display text-h2">{heading}</h2>
 

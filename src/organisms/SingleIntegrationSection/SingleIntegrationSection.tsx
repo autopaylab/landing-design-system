@@ -3,6 +3,7 @@ import * as React from "react";
 import { Badge } from "@/atoms/Badge";
 import { IconFeatureItem, type IconFeatureItemProps } from "@/molecules/IconFeatureItem";
 import { SectionMedia, type SectionMediaImage } from "@/molecules/SectionMedia";
+import { pageContainer } from "@/lib/page-container";
 
 /**
  * HomeContent.tsx "Single Integration" section (lines 179-227).
@@ -43,7 +44,7 @@ export function SingleIntegrationSection({
 }: SingleIntegrationSectionProps) {
   return (
     <section id="platform" className="mt-16 w-full overflow-hidden bg-white pb-0 pt-24 md:mt-32">
-      <div className="mx-auto max-w-[1280px] px-6">
+      <div className={pageContainer}>
         <div className="text-center">
           <Badge variant="eyebrow">{eyebrow}</Badge>
           <h2 className="mt-6 font-display text-h2">{heading}</h2>

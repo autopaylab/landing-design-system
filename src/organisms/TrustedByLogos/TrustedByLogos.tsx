@@ -1,4 +1,5 @@
 import * as React from "react";
+import { pageContainer } from "@/lib/page-container";
 
 export interface TrustedByLogo {
   src: string;
@@ -33,7 +34,7 @@ const MUTED_FILTER = "grayscale(100%) opacity(0.65)";
 
 export function TrustedByLogos({ heading, description, logos, logoTone = "muted" }: TrustedByLogosProps) {
   return (
-    <section id="trusted-by" className="mx-auto mt-16 max-w-[1280px] px-6 md:mt-32">
+    <section id="trusted-by" className={`${pageContainer} mt-16 md:mt-32`}>
       <h2 className="text-center font-display text-h3">{heading}</h2>
       {description ? <p className="mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:text-[17px]">{description}</p> : null}
       <div className="mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10">

@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Accordion } from "@/atoms/Accordion";
 import { FaqItem } from "@/molecules/FaqItem";
+import { pageContainer } from "@/lib/page-container";
 
 export interface FaqEntry {
   question: string;
@@ -16,8 +17,8 @@ export interface FaqAccordionSectionProps {
 
 export function FaqAccordionSection({ heading, entries }: FaqAccordionSectionProps) {
   return (
-    <section id="faq" aria-labelledby="faq-title" className="bg-surface px-5 py-14 md:py-20">
-      <div className="mx-auto max-w-[1280px]">
+    <section id="faq" aria-labelledby="faq-title" className="bg-surface py-14 md:py-20">
+      <div className={pageContainer}>
         <h2 id="faq-title" className="font-display text-h2">
           {heading}
         </h2>

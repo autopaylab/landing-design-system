@@ -3,6 +3,7 @@ import * as React from "react";
 import { Badge } from "@/atoms/Badge";
 import { IndustryCard } from "@/molecules/IndustryCard";
 import type { IndustryEntry } from "@/organisms/IndustriesStackedSection";
+import { pageContainer } from "@/lib/page-container";
 
 /**
  * IndustriesGridA.tsx: 3-up grid of industry cards over the same shape of
@@ -21,7 +22,7 @@ export interface IndustriesGridSectionProps {
 export function IndustriesGridSection({ eyebrow, heading, industries, ctaLabel, onCtaClick }: IndustriesGridSectionProps) {
   return (
     <section className="mt-16 w-full bg-surface md:mt-32">
-      <div className="mx-auto max-w-[1600px] px-6 py-16 md:px-10 md:py-20">
+      <div className={`${pageContainer} py-16 md:py-20`}>
         <div className="text-center">
           <Badge variant="eyebrow">{eyebrow}</Badge>
           <h2 className="mt-6 font-display text-h2">{heading}</h2>
