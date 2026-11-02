@@ -17,10 +17,15 @@ const sources = readdirSync(organismsDir, { withFileTypes: true })
 const OWN_WIDTH = new Set(["HeroImageOverlay", "PromoCtaSection", "Footer", "PlatformFeatureShowcase", "CookieConsentScript"]);
 
 describe("pageContainer", () => {
-  it("matches autopay.pl's container widths and keeps a margin on every screen", () => {
-    expect(pageContainer).toContain("min-[1200px]:max-w-[1140px]");
-    expect(pageContainer).toContain("min-[1400px]:max-w-[1320px]");
+  it("gives autopay.pl's text column (1116 / 1296 px) inside a fixed 40 px padding", () => {
+    expect(pageContainer).toContain("md:px-10");
+    expect(pageContainer).toContain("min-[1200px]:max-w-[1196px]"); // 1116 + 2 x 40
+    expect(pageContainer).toContain("min-[1400px]:max-w-[1376px]"); // 1296 + 2 x 40
     expect(pageContainer).toMatch(/(^| )px-6( |$)/);
+  });
+
+  it("does not change the padding at a min-[…] breakpoint, which Tailwind would order before md:", () => {
+    expect(pageContainer).not.toMatch(/min-\[\d+px\]:px-/);
   });
 
   it("is the only content width in the organisms", () => {

@@ -126,7 +126,7 @@ function Logo({ className, size, src, alt, ...props }) {
 }
 
 // src/lib/page-container.ts
-var pageContainer = "mx-auto w-full px-6 sm:px-8 md:px-10 min-[1200px]:max-w-[1140px] min-[1200px]:px-3 min-[1400px]:max-w-[1320px]";
+var pageContainer = "mx-auto w-full px-6 sm:px-8 md:px-10 min-[1200px]:max-w-[1196px] min-[1400px]:max-w-[1376px]";
 
 // src/organisms/Navbar/Navbar.tsx
 import { Fragment, jsx as jsx4, jsxs } from "react/jsx-runtime";
