@@ -468,7 +468,7 @@ function HeroImageOverlay({
   const Heading = headingLevel;
   const ctas = /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex flex-col gap-3 sm:flex-row", children: [
     /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { href: primaryCta.href, children: primaryCta.label }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { href: secondaryCta.href, children: secondaryCta.label }) })
+    secondaryCta && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { href: secondaryCta.href, children: secondaryCta.label }) })
   ] });
   return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "px-4 md:px-8", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("section", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground", children: [
     /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: image, alt: "", "aria-hidden": "true", loading: imageLoading, className: "absolute inset-0 size-full object-cover" }),

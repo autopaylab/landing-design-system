@@ -31,6 +31,13 @@ describe("HeroImageOverlay", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Title" })).toBeInTheDocument();
   });
 
+  it("renders both buttons, and only the primary one without a secondaryCta", () => {
+    const { rerender } = render(<HeroImageOverlay layout="stacked" {...props} />);
+    expect(screen.getAllByRole("link").map((link) => link.textContent)).toEqual(["Primary", "Secondary"]);
+    rerender(<HeroImageOverlay layout="stacked" {...props} secondaryCta={undefined} />);
+    expect(screen.getAllByRole("link").map((link) => link.textContent)).toEqual(["Primary"]);
+  });
+
   it("loads the background eagerly when asked to", () => {
     const { container } = render(<HeroImageOverlay layout="stacked" imageLoading="eager" {...props} />);
     expect(background(container)).toHaveAttribute("loading", "eager");

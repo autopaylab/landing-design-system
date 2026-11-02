@@ -855,7 +855,7 @@ function HeroImageOverlay({
   const Heading = headingLevel;
   const ctas = /* @__PURE__ */ jsxs21("div", { className: "flex flex-col gap-3 sm:flex-row", children: [
     /* @__PURE__ */ jsx30(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx30("a", { href: primaryCta.href, children: primaryCta.label }) }),
-    /* @__PURE__ */ jsx30(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ jsx30("a", { href: secondaryCta.href, children: secondaryCta.label }) })
+    secondaryCta && /* @__PURE__ */ jsx30(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ jsx30("a", { href: secondaryCta.href, children: secondaryCta.label }) })
   ] });
   return /* @__PURE__ */ jsx30("div", { className: "px-4 md:px-8", children: /* @__PURE__ */ jsxs21("section", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground", children: [
     /* @__PURE__ */ jsx30("img", { src: image, alt: "", "aria-hidden": "true", loading: imageLoading, className: "absolute inset-0 size-full object-cover" }),
