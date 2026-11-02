@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Link } from "@/atoms/Link";
 import { Logo } from "@/atoms/Logo";
+import { externalLinkProps } from "@/lib/external-link";
 
 /**
  * A footer link, or -- with `onClick` and no `href` -- a button styled as a
@@ -90,7 +91,7 @@ export function Footer({
           </div>
           <div className="flex gap-4">
             {socialLinks.map(({ label, href, icon: Icon }) => (
-              <a key={label} href={href} aria-label={label} className="hover:opacity-70">
+              <a key={label} href={href} aria-label={label} className="hover:opacity-70" {...externalLinkProps(href)}>
                 <Icon className="h-5 w-5" />
               </a>
             ))}

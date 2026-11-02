@@ -74,6 +74,10 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>, Varia
     /** Render the styling onto a single child element (e.g. a router `Link`) instead of a plain `<a>`. */
     asChild?: boolean;
 }
+/**
+ * An absolute `http(s)` `href` opens in a new tab with `rel="noopener noreferrer"`. An explicit `target` wins
+ * (`target="_self"` keeps an external link in the same tab).
+ */
 declare const Link: React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>;
 
 /**

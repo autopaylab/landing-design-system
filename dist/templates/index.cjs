@@ -99,6 +99,18 @@ Button.displayName = "Button";
 var React2 = __toESM(require("react"), 1);
 var import_react_slot2 = require("@radix-ui/react-slot");
 var import_class_variance_authority2 = require("class-variance-authority");
+
+// src/lib/external-link.ts
+var ABSOLUTE_HTTP = /^https?:\/\//i;
+function isExternalHref(href) {
+  return href !== void 0 && ABSOLUTE_HTTP.test(href.trim());
+}
+function externalLinkProps(href, external) {
+  const opensNewTab = external ?? isExternalHref(href);
+  return opensNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
+// src/atoms/Link/Link.tsx
 var import_jsx_runtime2 = require("react/jsx-runtime");
 var linkVariants = (0, import_class_variance_authority2.cva)("transition-colors", {
   variants: {
@@ -113,9 +125,19 @@ var linkVariants = (0, import_class_variance_authority2.cva)("transition-colors"
   }
 });
 var Link = React2.forwardRef(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ className, variant, asChild = false, target, rel, ...props }, ref) => {
     const Comp = asChild ? import_react_slot2.Slot : "a";
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+    const auto = target === void 0 ? externalLinkProps(props.href) : {};
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      Comp,
+      {
+        className: cn(linkVariants({ variant }), className),
+        ref,
+        target: target ?? auto.target,
+        rel: rel ?? auto.rel,
+        ...props
+      }
+    );
   }
 );
 Link.displayName = "Link";
@@ -184,7 +206,7 @@ function Navbar({
   const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: homeHref, className: "flex shrink-0 items-center", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: homeHref, className: "flex shrink-0 items-center", ...externalLinkProps(homeHref), children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex items-center gap-2", children: [
         showAuthButtons && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
@@ -202,7 +224,7 @@ function Navbar({
         ] }),
         cta && // Hidden below sm: next to a full-width wordmark it would not fit on a phone, and
         // single-goal pages repeat the same CTA in the hero right below.
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button, { asChild: true, variant: "lime", className: "hidden px-4 py-2.5 text-sm sm:inline-flex md:px-6 md:text-[17px]", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: cta.href, children: cta.label }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button, { asChild: true, variant: "lime", className: "hidden px-4 py-2.5 text-sm sm:inline-flex md:px-6 md:text-[17px]", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { href: cta.href, ...externalLinkProps(cta.href), children: cta.label }) }),
         languageLink && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(LanguageLink, { link: languageLink }),
         showLanguageButton && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
           "button",
@@ -312,7 +334,7 @@ function Footer({
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Logo, { src: logoSrc, alt: logoAlt, size: "sm" }),
               secondaryLogoSrc && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Logo, { src: secondaryLogoSrc, alt: secondaryLogoAlt ?? "", size: "sm" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("a", { href, "aria-label": label, className: "hover:opacity-70", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { className: "h-5 w-5" }) }, label)) })
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("a", { href, "aria-label": label, className: "hover:opacity-70", ...externalLinkProps(href), children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { className: "h-5 w-5" }) }, label)) })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),

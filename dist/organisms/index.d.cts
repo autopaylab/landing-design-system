@@ -332,6 +332,7 @@ interface PromoCtaSectionProps {
         label: string;
         href: string;
     };
+    /** `external` overrides the detection: by default an absolute http(s) `href` opens in a new tab, `false` keeps it in this one. */
     secondaryCta: {
         label: string;
         href: string;

@@ -6,6 +6,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/atoms/Button";
 import { Link } from "@/atoms/Link";
 import { Logo } from "@/atoms/Logo";
+import { externalLinkProps } from "@/lib/external-link";
 
 export interface NavItem {
   label: string;
@@ -115,7 +116,7 @@ export function Navbar({
     <header className="sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6">
       <div className="rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]">
         <div className="flex items-center justify-between gap-6 px-6 py-3">
-          <a href={homeHref} className="flex shrink-0 items-center">
+          <a href={homeHref} className="flex shrink-0 items-center" {...externalLinkProps(homeHref)}>
             <Logo src={logoSrc} alt={logoAlt} size="md" />
           </a>
           <nav aria-label={navAriaLabel} className="hidden flex-1 items-center justify-center gap-2 md:flex">
@@ -145,7 +146,7 @@ export function Navbar({
               // Hidden below sm: next to a full-width wordmark it would not fit on a phone, and
               // single-goal pages repeat the same CTA in the hero right below.
               <Button asChild variant="lime" className="hidden px-4 py-2.5 text-sm sm:inline-flex md:px-6 md:text-[17px]">
-                <a href={cta.href}>{cta.label}</a>
+                <a href={cta.href} {...externalLinkProps(cta.href)}>{cta.label}</a>
               </Button>
             )}
             {languageLink && <LanguageLink link={languageLink} />}
