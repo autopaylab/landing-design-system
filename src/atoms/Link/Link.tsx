@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/cn";
+import { externalLinkProps } from "@/lib/external-link";
 
 /**
  * Covers the plain-text anchor patterns observed across the source:
@@ -29,10 +30,23 @@ export interface LinkProps
   asChild?: boolean;
 }
 
+/**
+ * An absolute `http(s)` `href` opens in a new tab with `rel="noopener noreferrer"`. An explicit `target` wins
+ * (`target="_self"` keeps an external link in the same tab).
+ */
 export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ className, variant, asChild = false, target, rel, ...props }, ref) => {
     const Comp = asChild ? Slot : "a";
-    return <Comp className={cn(linkVariants({ variant }), className)} ref={ref} {...props} />;
+    const auto = target === undefined ? externalLinkProps(props.href) : {};
+    return (
+      <Comp
+        className={cn(linkVariants({ variant }), className)}
+        ref={ref}
+        target={target ?? auto.target}
+        rel={rel ?? auto.rel}
+        {...props}
+      />
+    );
   },
 );
 Link.displayName = "Link";

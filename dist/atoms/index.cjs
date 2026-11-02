@@ -253,6 +253,18 @@ Checkbox.displayName = "Checkbox";
 var React7 = __toESM(require("react"), 1);
 var import_react_slot2 = require("@radix-ui/react-slot");
 var import_class_variance_authority3 = require("class-variance-authority");
+
+// src/lib/external-link.ts
+var ABSOLUTE_HTTP = /^https?:\/\//i;
+function isExternalHref(href) {
+  return href !== void 0 && ABSOLUTE_HTTP.test(href.trim());
+}
+function externalLinkProps(href, external) {
+  const opensNewTab = external ?? isExternalHref(href);
+  return opensNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
+// src/atoms/Link/Link.tsx
 var import_jsx_runtime9 = require("react/jsx-runtime");
 var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors", {
   variants: {
@@ -267,9 +279,19 @@ var linkVariants = (0, import_class_variance_authority3.cva)("transition-colors"
   }
 });
 var Link = React7.forwardRef(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ className, variant, asChild = false, target, rel, ...props }, ref) => {
     const Comp = asChild ? import_react_slot2.Slot : "a";
-    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+    const auto = target === void 0 ? externalLinkProps(props.href) : {};
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+      Comp,
+      {
+        className: cn(linkVariants({ variant }), className),
+        ref,
+        target: target ?? auto.target,
+        rel: rel ?? auto.rel,
+        ...props
+      }
+    );
   }
 );
 Link.displayName = "Link";

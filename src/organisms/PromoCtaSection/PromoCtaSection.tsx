@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Button } from "@/atoms/Button";
 import { Logo } from "@/atoms/Logo";
+import { externalLinkProps } from "@/lib/external-link";
 
 /**
  * Originally a promotional footer CTA from a second, unrelated product line
@@ -13,6 +14,7 @@ export interface PromoCtaSectionProps {
   backgroundImage: string;
   heading: React.ReactNode;
   primaryCta: { label: string; href: string };
+  /** `external` overrides the detection: by default an absolute http(s) `href` opens in a new tab, `false` keeps it in this one. */
   secondaryCta: { label: string; href: string; external?: boolean };
   logoSrc: string;
   logoAlt: string;
@@ -45,14 +47,14 @@ export function PromoCtaSection({
             <h2 className="max-w-xl font-display text-h2 text-background">{heading}</h2>
             <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
               <Button asChild variant="lime" className="h-12 px-7 text-base hover:scale-100 hover:bg-lime/90">
-                <a href={primaryCta.href}>{primaryCta.label}</a>
+                <a href={primaryCta.href} {...externalLinkProps(primaryCta.href)}>{primaryCta.label}</a>
               </Button>
               <Button
                 asChild
                 variant="outline-inverse"
                 className="h-12 border-background/30 px-7 text-base"
               >
-                <a href={secondaryCta.href} target={secondaryCta.external ? "_blank" : undefined} rel={secondaryCta.external ? "noopener noreferrer" : undefined}>
+                <a href={secondaryCta.href} {...externalLinkProps(secondaryCta.href, secondaryCta.external)}>
                   {secondaryCta.label}
                 </a>
               </Button>

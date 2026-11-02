@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Button } from "@/atoms/Button";
 import { cn } from "@/lib/cn";
+import { externalLinkProps } from "@/lib/external-link";
 
 /**
  * Merges the source's two hero-overlay variants ("stacked": gradient
@@ -51,11 +52,11 @@ export function HeroImageOverlay({
   const ctas = (
     <div className="flex flex-col gap-3 sm:flex-row">
       <Button asChild variant="lime" size="lg">
-        <a href={primaryCta.href}>{primaryCta.label}</a>
+        <a href={primaryCta.href} {...externalLinkProps(primaryCta.href)}>{primaryCta.label}</a>
       </Button>
       {secondaryCta && (
         <Button asChild variant="outline-inverse" size="lg">
-          <a href={secondaryCta.href}>{secondaryCta.label}</a>
+          <a href={secondaryCta.href} {...externalLinkProps(secondaryCta.href)}>{secondaryCta.label}</a>
         </Button>
       )}
     </div>

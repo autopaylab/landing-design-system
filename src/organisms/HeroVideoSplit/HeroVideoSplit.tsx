@@ -3,6 +3,7 @@ import * as React from "react";
 import { Badge } from "@/atoms/Badge";
 import { Button } from "@/atoms/Button";
 import { SectionMedia, type SectionMediaImage } from "@/molecules/SectionMedia";
+import { externalLinkProps } from "@/lib/external-link";
 
 /**
  * The primary two-column video hero from HomeContent.tsx (lines 142-165).
@@ -68,7 +69,7 @@ export function HeroVideoSplit({
           </p>
           <div className="mt-10">
             <Button asChild variant="lime" size="lg">
-              <a href={ctaHref}>{ctaLabel}</a>
+              <a href={ctaHref} {...externalLinkProps(ctaHref)}>{ctaLabel}</a>
             </Button>
           </div>
         </div>

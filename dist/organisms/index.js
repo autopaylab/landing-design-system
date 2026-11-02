@@ -63,6 +63,18 @@ Button.displayName = "Button";
 import * as React2 from "react";
 import { Slot as Slot2 } from "@radix-ui/react-slot";
 import { cva as cva2 } from "class-variance-authority";
+
+// src/lib/external-link.ts
+var ABSOLUTE_HTTP = /^https?:\/\//i;
+function isExternalHref(href) {
+  return href !== void 0 && ABSOLUTE_HTTP.test(href.trim());
+}
+function externalLinkProps(href, external) {
+  const opensNewTab = external ?? isExternalHref(href);
+  return opensNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
+// src/atoms/Link/Link.tsx
 import { jsx as jsx2 } from "react/jsx-runtime";
 var linkVariants = cva2("transition-colors", {
   variants: {
@@ -77,9 +89,19 @@ var linkVariants = cva2("transition-colors", {
   }
 });
 var Link = React2.forwardRef(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ className, variant, asChild = false, target, rel, ...props }, ref) => {
     const Comp = asChild ? Slot2 : "a";
-    return /* @__PURE__ */ jsx2(Comp, { className: cn(linkVariants({ variant }), className), ref, ...props });
+    const auto = target === void 0 ? externalLinkProps(props.href) : {};
+    return /* @__PURE__ */ jsx2(
+      Comp,
+      {
+        className: cn(linkVariants({ variant }), className),
+        ref,
+        target: target ?? auto.target,
+        rel: rel ?? auto.rel,
+        ...props
+      }
+    );
   }
 );
 Link.displayName = "Link";
@@ -148,7 +170,7 @@ function Navbar({
   const hasMobileMenu = navItems.length > 0 || showAuthButtons || showLanguageButton;
   return /* @__PURE__ */ jsx4("header", { className: "sticky top-5 z-40 mx-auto w-full max-w-[1280px] px-6", children: /* @__PURE__ */ jsxs("div", { className: "rounded-xl bg-background shadow-[0_10px_40px_-12px_rgba(0,0,0,0.12)]", children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between gap-6 px-6 py-3", children: [
-      /* @__PURE__ */ jsx4("a", { href: homeHref, className: "flex shrink-0 items-center", children: /* @__PURE__ */ jsx4(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
+      /* @__PURE__ */ jsx4("a", { href: homeHref, className: "flex shrink-0 items-center", ...externalLinkProps(homeHref), children: /* @__PURE__ */ jsx4(Logo, { src: logoSrc, alt: logoAlt, size: "md" }) }),
       /* @__PURE__ */ jsx4("nav", { "aria-label": navAriaLabel, className: "hidden flex-1 items-center justify-center gap-2 md:flex", children: navItems.map((item) => /* @__PURE__ */ jsx4(Link, { variant: "nav", href: item.href, children: item.label }, item.label)) }),
       /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
         showAuthButtons && /* @__PURE__ */ jsxs(Fragment, { children: [
@@ -166,7 +188,7 @@ function Navbar({
         ] }),
         cta && // Hidden below sm: next to a full-width wordmark it would not fit on a phone, and
         // single-goal pages repeat the same CTA in the hero right below.
-        /* @__PURE__ */ jsx4(Button, { asChild: true, variant: "lime", className: "hidden px-4 py-2.5 text-sm sm:inline-flex md:px-6 md:text-[17px]", children: /* @__PURE__ */ jsx4("a", { href: cta.href, children: cta.label }) }),
+        /* @__PURE__ */ jsx4(Button, { asChild: true, variant: "lime", className: "hidden px-4 py-2.5 text-sm sm:inline-flex md:px-6 md:text-[17px]", children: /* @__PURE__ */ jsx4("a", { href: cta.href, ...externalLinkProps(cta.href), children: cta.label }) }),
         languageLink && /* @__PURE__ */ jsx4(LanguageLink, { link: languageLink }),
         showLanguageButton && /* @__PURE__ */ jsxs(
           "button",
@@ -276,7 +298,7 @@ function Footer({
               /* @__PURE__ */ jsx5(Logo, { src: logoSrc, alt: logoAlt, size: "sm" }),
               secondaryLogoSrc && /* @__PURE__ */ jsx5(Logo, { src: secondaryLogoSrc, alt: secondaryLogoAlt ?? "", size: "sm" })
             ] }),
-            /* @__PURE__ */ jsx5("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ jsx5("a", { href, "aria-label": label, className: "hover:opacity-70", children: /* @__PURE__ */ jsx5(Icon, { className: "h-5 w-5" }) }, label)) })
+            /* @__PURE__ */ jsx5("div", { className: "flex gap-4", children: socialLinks.map(({ label, href, icon: Icon }) => /* @__PURE__ */ jsx5("a", { href, "aria-label": label, className: "hover:opacity-70", ...externalLinkProps(href), children: /* @__PURE__ */ jsx5(Icon, { className: "h-5 w-5" }) }, label)) })
           ] }),
           /* @__PURE__ */ jsxs2("div", { className: "mt-10 grid items-end gap-8 md:grid-cols-[1.4fr_2fr_1fr]", children: [
             /* @__PURE__ */ jsx5("p", { className: "font-display text-3xl leading-[1.1] md:text-[38px]", children: tagline }),
@@ -384,7 +406,7 @@ function HeroVideoSplit({
       eyebrow && /* @__PURE__ */ jsx8("div", { className: "mb-6", children: /* @__PURE__ */ jsx8(Badge, { variant: "eyebrow", children: eyebrow }) }),
       /* @__PURE__ */ jsx8(Heading, { className: "font-display text-h1", children: title }),
       /* @__PURE__ */ jsx8("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
-      /* @__PURE__ */ jsx8("div", { className: "mt-10", children: /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx8("a", { href: ctaHref, children: ctaLabel }) }) })
+      /* @__PURE__ */ jsx8("div", { className: "mt-10", children: /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx8("a", { href: ctaHref, ...externalLinkProps(ctaHref), children: ctaLabel }) }) })
     ] }),
     /* @__PURE__ */ jsx8(SectionMedia, { videoSrc, videoPoster, videoLabel, image, caption: mediaCaption, showVideoControls })
   ] }) });
@@ -404,8 +426,8 @@ function HeroImageOverlay({
 }) {
   const Heading = headingLevel;
   const ctas = /* @__PURE__ */ jsxs5("div", { className: "flex flex-col gap-3 sm:flex-row", children: [
-    /* @__PURE__ */ jsx9(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx9("a", { href: primaryCta.href, children: primaryCta.label }) }),
-    secondaryCta && /* @__PURE__ */ jsx9(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ jsx9("a", { href: secondaryCta.href, children: secondaryCta.label }) })
+    /* @__PURE__ */ jsx9(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx9("a", { href: primaryCta.href, ...externalLinkProps(primaryCta.href), children: primaryCta.label }) }),
+    secondaryCta && /* @__PURE__ */ jsx9(Button, { asChild: true, variant: "outline-inverse", size: "lg", children: /* @__PURE__ */ jsx9("a", { href: secondaryCta.href, ...externalLinkProps(secondaryCta.href), children: secondaryCta.label }) })
   ] });
   return /* @__PURE__ */ jsx9("div", { className: "px-4 md:px-8", children: /* @__PURE__ */ jsxs5("section", { className: "relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-3xl bg-foreground", children: [
     /* @__PURE__ */ jsx9("img", { src: image, alt: "", "aria-hidden": "true", loading: imageLoading, className: "absolute inset-0 size-full object-cover" }),
@@ -1179,14 +1201,14 @@ function PromoCtaSection({
       /* @__PURE__ */ jsxs30("div", { className: "grid gap-10 md:grid-cols-2 md:items-start", children: [
         /* @__PURE__ */ jsx38("h2", { className: "max-w-xl font-display text-h2 text-background", children: heading }),
         /* @__PURE__ */ jsxs30("div", { className: "flex flex-col gap-3 sm:flex-row md:justify-end", children: [
-          /* @__PURE__ */ jsx38(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ jsx38("a", { href: primaryCta.href, children: primaryCta.label }) }),
+          /* @__PURE__ */ jsx38(Button, { asChild: true, variant: "lime", className: "h-12 px-7 text-base hover:scale-100 hover:bg-lime/90", children: /* @__PURE__ */ jsx38("a", { href: primaryCta.href, ...externalLinkProps(primaryCta.href), children: primaryCta.label }) }),
           /* @__PURE__ */ jsx38(
             Button,
             {
               asChild: true,
               variant: "outline-inverse",
               className: "h-12 border-background/30 px-7 text-base",
-              children: /* @__PURE__ */ jsx38("a", { href: secondaryCta.href, target: secondaryCta.external ? "_blank" : void 0, rel: secondaryCta.external ? "noopener noreferrer" : void 0, children: secondaryCta.label })
+              children: /* @__PURE__ */ jsx38("a", { href: secondaryCta.href, ...externalLinkProps(secondaryCta.href, secondaryCta.external), children: secondaryCta.label })
             }
           )
         ] })
