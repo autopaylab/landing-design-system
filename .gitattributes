@@ -1,0 +1,4 @@
+# LF everywhere, whatever the contributor's OS: dist/ source maps embed the sources, and CI checks
+# that dist/ matches a fresh build on Linux. A CRLF checkout on Windows broke that check (PR #38),
+# and changesets wrote package.json as CRLF (release 0.14.0).
+* text=auto eol=lf
