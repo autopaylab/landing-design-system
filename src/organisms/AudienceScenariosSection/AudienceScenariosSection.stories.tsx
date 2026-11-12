@@ -31,3 +31,19 @@ export const Default: Story = {
     ],
   },
 };
+
+/** Light blue rounded surface (PlatformFeatureShowcase's tint), e.g. to break up a run of white sections. */
+export const Tinted: Story = {
+  args: {
+    ...Default.args,
+    tone: "tinted",
+  },
+};
+
+/** Dark rounded surface (RequirementsChecklistSection's), with translucent cards and light text. */
+export const Dark: Story = {
+  args: {
+    ...Default.args,
+    tone: "dark",
+  },
+};

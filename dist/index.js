@@ -1431,19 +1431,33 @@ function PricingSection({ eyebrow, heading, tiers, footnotes }) {
 }
 
 // src/organisms/AudienceScenariosSection/AudienceScenariosSection.tsx
-import { jsx as jsx47, jsxs as jsxs37 } from "react/jsx-runtime";
-function AudienceScenariosSection({ eyebrow, heading, description, scenarios }) {
-  return /* @__PURE__ */ jsxs37("section", { className: `${pageContainer} mt-16 md:mt-32`, children: [
+import { Fragment as Fragment4, jsx as jsx47, jsxs as jsxs37 } from "react/jsx-runtime";
+var SURFACE = {
+  tinted: "rounded-3xl bg-[oklch(0.97_0.02_240)] px-6 py-10 md:px-14 md:py-14",
+  dark: "rounded-3xl bg-foreground px-6 py-10 text-background md:px-14 md:py-14"
+};
+function AudienceScenariosSection({ eyebrow, heading, description, scenarios, tone = "default" }) {
+  const isDark = tone === "dark";
+  const mutedText = isDark ? "text-background/70" : "text-muted-foreground";
+  const content = /* @__PURE__ */ jsxs37(Fragment4, { children: [
     /* @__PURE__ */ jsxs37("div", { className: "text-center", children: [
-      eyebrow ? /* @__PURE__ */ jsx47("p", { className: "text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground", children: eyebrow }) : null,
+      eyebrow ? /* @__PURE__ */ jsx47("p", { className: `text-sm font-semibold uppercase tracking-[0.14em] ${mutedText}`, children: eyebrow }) : null,
       /* @__PURE__ */ jsx47("h2", { className: "mt-4 font-display text-h2", children: heading }),
-      description ? /* @__PURE__ */ jsx47("p", { className: "mx-auto mt-6 max-w-2xl text-muted-foreground md:text-[17px]", children: description }) : null
+      description ? /* @__PURE__ */ jsx47("p", { className: `mx-auto mt-6 max-w-2xl ${mutedText} md:text-[17px]`, children: description }) : null
     ] }),
-    /* @__PURE__ */ jsx47("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: scenarios.map((scenario) => /* @__PURE__ */ jsxs37("div", { className: "rounded-3xl border border-border bg-card p-8 shadow-sm", children: [
-      /* @__PURE__ */ jsx47("h3", { className: "font-display text-sm font-semibold uppercase tracking-[0.08em] text-primary", children: scenario.title }),
-      /* @__PURE__ */ jsx47("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground", children: scenario.description })
-    ] }, scenario.title)) })
+    /* @__PURE__ */ jsx47("div", { className: "mt-12 grid gap-6 md:grid-cols-3", children: scenarios.map((scenario) => /* @__PURE__ */ jsxs37(
+      "div",
+      {
+        className: isDark ? "rounded-3xl border border-background/10 bg-background/10 p-8" : "rounded-3xl border border-border bg-card p-8 shadow-sm",
+        children: [
+          /* @__PURE__ */ jsx47("h3", { className: `font-display text-sm font-semibold uppercase tracking-[0.08em] ${isDark ? "text-lime" : "text-primary"}`, children: scenario.title }),
+          /* @__PURE__ */ jsx47("p", { className: `mt-4 text-sm leading-relaxed ${mutedText}`, children: scenario.description })
+        ]
+      },
+      scenario.title
+    )) })
   ] });
+  return /* @__PURE__ */ jsx47("section", { className: `${pageContainer} mt-16 md:mt-32`, children: tone === "default" ? content : /* @__PURE__ */ jsx47("div", { className: SURFACE[tone], children: content }) });
 }
 
 // src/organisms/LeadFormSection/LeadFormSection.tsx

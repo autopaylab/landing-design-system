@@ -506,14 +506,26 @@ interface AudienceScenario {
  * /lp/platnosci-online-1 ("Dla kogo jest Autopay" — masz już sklep /
  * startujesz z nowym sklepem / skalujesz biznes) has this exact shape with
  * no prior equivalent in this package.
+ *
+ * `tone` is new (not extracted): a consuming landing page (paytalkpl) needs a
+ * non-white section mid-page, so it does not show more than two white
+ * sections in a row, and uses these cards for its programme benefits.
+ * "tinted" reuses PlatformFeatureShowcase's light blue and FourStepsSection's
+ * rounded container and padding; "dark" reuses RequirementsChecklistSection's
+ * dark surface and translucent rows. All text meets WCAG AA on its surface.
  */
 interface AudienceScenariosSectionProps {
     eyebrow?: string;
     heading: React.ReactNode;
     description?: string;
     scenarios: AudienceScenario[];
+    /**
+     * "default" (as built): no surface, white cards. "tinted": light blue rounded surface, white cards.
+     * "dark": dark rounded surface, translucent light cards, light text.
+     */
+    tone?: "default" | "tinted" | "dark";
 }
-declare function AudienceScenariosSection({ eyebrow, heading, description, scenarios }: AudienceScenariosSectionProps): React.JSX.Element;
+declare function AudienceScenariosSection({ eyebrow, heading, description, scenarios, tone }: AudienceScenariosSectionProps): React.JSX.Element;
 
 type LeadFormField = {
     kind: "text";
