@@ -30,19 +30,13 @@ import * as React from "react";
  * rendering on the client") — expected, not a sign of misconfiguration,
  * just a reminder this only does its job server-rendered.
  *
- * `cmp_cdid` is tied to a specific ConsentManager account and domain
- * registration — it identifies which ConsentManager "website" config (its
- * consent scope, banner design, vendor list) actually loads. It defaults to
- * Autopay's own autopaylab.com value ("136af463a10ba"), which is correct
- * for any page living under that same registered domain/consent scope (see
- * ConsentManager's own dashboard for what `consentscope` covers). It is
- * almost certainly WRONG for a page on an unrelated domain, which needs its
- * own cdid from its own ConsentManager account — passing the wrong one
- * either shows the wrong banner/policy or, worse, silently gates consent
- * against a config that was never meant to cover that domain. That's why
- * `buildCookieConsentScript`/`CookieConsentScript` log a one-time
- * console warning whenever `cmpCdid` is left at its default — treat that
- * warning as a prompt to actually verify, not as noise to suppress.
+ * `cmp_cdid` identifies which ConsentManager "website" config (consent
+ * scope, banner design, vendor list) loads. It defaults to autopaylab.com's
+ * production config ("136af463a10ba"), which the process owner made the
+ * standard banner for every Autopay landing page on 2026-11-12, whatever its
+ * domain; lp-core passes it explicitly. Override it only when the process
+ * owner decides a page needs a banner of its own. The default is not a
+ * warning sign, so nothing is logged for it.
  *
  * Two fixes were applied, once, to the vendor snippet as originally pasted
  * into chat (carried forward unchanged from the original port in
@@ -82,13 +76,9 @@ export interface CookieConsentScriptProps {
   localeStorageKey?: string;
   /**
    * ConsentManager `cmp_cdid` — which ConsentManager account/website config
-   * this banner loads. Defaults to Autopay's own autopaylab.com value,
-   * correct for any page sharing that domain's consent scope. Override it
-   * ONLY after confirming the right id with whoever administers
-   * ConsentManager for the domain this page actually lives on — see the
-   * file-level doc comment above. Leaving it at the default logs a
-   * one-time console warning as a reminder to make that check, not because
-   * anything is actually broken.
+   * this banner loads. Defaults to autopaylab.com's config, the standard
+   * banner for every Autopay landing page. Override it only when the process
+   * owner decides a page needs a banner of its own.
    */
   cmpCdid?: string;
   /**
@@ -102,8 +92,6 @@ export interface CookieConsentScriptProps {
 }
 
 const AUTOPAYLAB_CMP_CDID = "136af463a10ba";
-
-let warnedAboutDefaultCdid = false;
 
 function buildSetLangSnippet(localeStorageKey: string, locale: CookieConsentScriptProps["locale"]) {
   if (locale) {
@@ -121,16 +109,6 @@ export function buildCookieConsentScript({
   cmpCdid = AUTOPAYLAB_CMP_CDID,
   locale,
 }: CookieConsentScriptProps = {}) {
-  if (cmpCdid === AUTOPAYLAB_CMP_CDID && !warnedAboutDefaultCdid) {
-    warnedAboutDefaultCdid = true;
-    console.warn(
-      "[landing-design-system] CookieConsentScript is using autopaylab.com's default ConsentManager cmp_cdid " +
-        `(${AUTOPAYLAB_CMP_CDID}). If this page lives on a different domain or consent scope, it needs its ` +
-        "own cdid from its own ConsentManager account -- pass cmpCdid explicitly once you've confirmed the " +
-        "right value. If this really is an autopaylab.com page, this warning is expected and safe to ignore."
-    );
-  }
-
   return `
 (function () {
   ${buildSetLangSnippet(localeStorageKey, locale)}
