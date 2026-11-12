@@ -16,7 +16,7 @@ Contributing? See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the extraction disc
 **Not published to npm or any registry** — deliberately, so only people with GitHub access to this repo can pull it in (see `CONTRIBUTING.md` "Releases"). Install as a git dependency, always pinned to a released tag — never `#main`, which moves under you on every merge:
 
 ```bash
-npm install github:autopaylab/landing-design-system#v0.15.0
+npm install github:autopaylab/landing-design-system#v0.15.1
 ```
 
 Peer dependencies: `react` ≥18, `react-dom` ≥18, `tailwindcss` ≥4. Tailwind v3 is not supported. Fully typed (TypeScript `.d.ts` shipped for every export). No runtime dependency on shadcn/ui or Lovable tooling — see [`AUDIT.md`](./AUDIT.md) #3. Built and tested against Next.js App Router — see `AUDIT.md` §8 for Server/Client Component notes.
