@@ -122,7 +122,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-It only does its job server-rendered (a Next.js Server Component, no `"use client"` needed) — see the component's own doc comment for why it's inert, and expected, when mounted client-side (as its own Storybook story is). Its `cmp_cdid` (ConsentManager account/website config) defaults to Autopay's own, correct for pages sharing that domain/consent scope; pass a different `cmpCdid` prop only after confirming the right value for a page on an unrelated domain — leaving it at the default there logs a one-time console warning as a reminder. See `AUDIT.md` sections 12 and 26 for the full port rationale.
+It only does its job server-rendered (a Next.js Server Component, no `"use client"` needed) — see the component's own doc comment for why it's inert, and expected, when mounted client-side (as its own Storybook story is). Its `cmp_cdid` (ConsentManager account/website config) defaults to autopaylab.com's config, the standard banner for every Autopay landing page on any domain (process owner, 2026-11-12); pass a different `cmpCdid` only when the process owner decides a page needs a banner of its own. See `AUDIT.md` sections 12, 26 and 34 for the full port rationale.
 
 ## Development
 

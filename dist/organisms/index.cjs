@@ -1316,7 +1316,6 @@ function PromoCtaSection({
 // src/organisms/CookieConsentScript/CookieConsentScript.tsx
 var import_jsx_runtime39 = require("react/jsx-runtime");
 var AUTOPAYLAB_CMP_CDID = "136af463a10ba";
-var warnedAboutDefaultCdid = false;
 function buildSetLangSnippet(localeStorageKey, locale) {
   if (locale) {
     return `window.cmp_setlang = ${JSON.stringify(locale === "pl" ? "PL" : "EN")};`;
@@ -1332,12 +1331,6 @@ function buildCookieConsentScript({
   cmpCdid = AUTOPAYLAB_CMP_CDID,
   locale
 } = {}) {
-  if (cmpCdid === AUTOPAYLAB_CMP_CDID && !warnedAboutDefaultCdid) {
-    warnedAboutDefaultCdid = true;
-    console.warn(
-      `[landing-design-system] CookieConsentScript is using autopaylab.com's default ConsentManager cmp_cdid (${AUTOPAYLAB_CMP_CDID}). If this page lives on a different domain or consent scope, it needs its own cdid from its own ConsentManager account -- pass cmpCdid explicitly once you've confirmed the right value. If this really is an autopaylab.com page, this warning is expected and safe to ignore.`
-    );
-  }
   return `
 (function () {
   ${buildSetLangSnippet(localeStorageKey, locale)}
