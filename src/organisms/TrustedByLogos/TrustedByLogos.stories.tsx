@@ -37,3 +37,11 @@ export const PartnersWithDescription: Story = {
     ],
   },
 };
+
+/** Heading and description beside the logos from md up; stacked below md. */
+export const Split: Story = {
+  args: {
+    ...PartnersWithDescription.args,
+    layout: "split",
+  },
+};
