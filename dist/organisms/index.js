@@ -404,12 +404,12 @@ function HeroVideoSplit({
 }) {
   const hasMedia = !!videoSrc || !!image;
   const Heading = headingLevel;
-  return /* @__PURE__ */ jsx8("section", { className: `${pageContainer} pt-16 md:pt-24`, children: /* @__PURE__ */ jsxs4("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
+  return /* @__PURE__ */ jsx8("section", { className: `${pageContainer} pt-16 md:pt-24`, children: /* @__PURE__ */ jsxs4("div", { className: `grid grid-cols-1 items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
     /* @__PURE__ */ jsxs4("div", { className: hasMedia ? void 0 : "max-w-3xl", children: [
       eyebrow && /* @__PURE__ */ jsx8("div", { className: "mb-6", children: /* @__PURE__ */ jsx8(Badge, { variant: "eyebrow", children: eyebrow }) }),
       /* @__PURE__ */ jsx8(Heading, { className: "font-display text-h1", children: title }),
       /* @__PURE__ */ jsx8("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
-      /* @__PURE__ */ jsx8("div", { className: "mt-10", children: /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx8("a", { href: ctaHref, ...externalLinkProps(ctaHref), children: ctaLabel }) }) })
+      /* @__PURE__ */ jsx8("div", { className: "mt-10", children: /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", className: "whitespace-normal text-center", children: /* @__PURE__ */ jsx8("a", { href: ctaHref, ...externalLinkProps(ctaHref), children: ctaLabel }) }) })
     ] }),
     /* @__PURE__ */ jsx8(SectionMedia, { videoSrc, videoPoster, videoLabel, image, caption: mediaCaption, showVideoControls })
   ] }) });
