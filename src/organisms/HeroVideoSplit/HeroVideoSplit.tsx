@@ -57,7 +57,8 @@ export function HeroVideoSplit({
   const Heading = headingLevel;
   return (
     <section className={`${pageContainer} pt-16 md:pt-24`}>
-      <div className={`grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`}>
+      {/* grid-cols-1 (minmax(0, 1fr)) keeps a long CTA label from widening the single mobile track past the container. */}
+      <div className={`grid grid-cols-1 items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`}>
         <div className={hasMedia ? undefined : "max-w-3xl"}>
           {eyebrow && (
             <div className="mb-6">
@@ -69,7 +70,8 @@ export function HeroVideoSplit({
             {subtitle}
           </p>
           <div className="mt-10">
-            <Button asChild variant="lime" size="lg">
+            {/* Wraps instead of overflowing when the label is longer than the column; a label that fits renders as before. */}
+            <Button asChild variant="lime" size="lg" className="whitespace-normal text-center">
               <a href={ctaHref} {...externalLinkProps(ctaHref)}>{ctaLabel}</a>
             </Button>
           </div>

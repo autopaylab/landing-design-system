@@ -404,12 +404,12 @@ function HeroVideoSplit({
 }) {
   const hasMedia = !!videoSrc || !!image;
   const Heading = headingLevel;
-  return /* @__PURE__ */ jsx8("section", { className: `${pageContainer} pt-16 md:pt-24`, children: /* @__PURE__ */ jsxs4("div", { className: `grid items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
+  return /* @__PURE__ */ jsx8("section", { className: `${pageContainer} pt-16 md:pt-24`, children: /* @__PURE__ */ jsxs4("div", { className: `grid grid-cols-1 items-center gap-10 ${hasMedia ? "md:grid-cols-2" : ""}`, children: [
     /* @__PURE__ */ jsxs4("div", { className: hasMedia ? void 0 : "max-w-3xl", children: [
       eyebrow && /* @__PURE__ */ jsx8("div", { className: "mb-6", children: /* @__PURE__ */ jsx8(Badge, { variant: "eyebrow", children: eyebrow }) }),
       /* @__PURE__ */ jsx8(Heading, { className: "font-display text-h1", children: title }),
       /* @__PURE__ */ jsx8("p", { className: `mt-8 text-base leading-relaxed text-muted-foreground md:text-[17px] ${hasMedia ? "max-w-md" : "max-w-2xl"}`, children: subtitle }),
-      /* @__PURE__ */ jsx8("div", { className: "mt-10", children: /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", children: /* @__PURE__ */ jsx8("a", { href: ctaHref, ...externalLinkProps(ctaHref), children: ctaLabel }) }) })
+      /* @__PURE__ */ jsx8("div", { className: "mt-10", children: /* @__PURE__ */ jsx8(Button, { asChild: true, variant: "lime", size: "lg", className: "whitespace-normal text-center", children: /* @__PURE__ */ jsx8("a", { href: ctaHref, ...externalLinkProps(ctaHref), children: ctaLabel }) }) })
     ] }),
     /* @__PURE__ */ jsx8(SectionMedia, { videoSrc, videoPoster, videoLabel, image, caption: mediaCaption, showVideoControls })
   ] }) });
@@ -455,24 +455,34 @@ function HeroImageOverlay({
 // src/organisms/TrustedByLogos/TrustedByLogos.tsx
 import { jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
 var MUTED_FILTER = "grayscale(100%) opacity(0.65)";
-function TrustedByLogos({ heading, description, logos, logoTone = "muted" }) {
+function TrustedByLogos({ heading, description, logos, logoTone = "muted", layout = "stacked" }) {
+  const logoImages = logos.map((l) => /* @__PURE__ */ jsx10(
+    "img",
+    {
+      src: l.src,
+      alt: l.alt,
+      className: l.height ? "w-auto object-contain" : "h-8 w-auto object-contain md:h-10",
+      style: {
+        filter: logoTone === "muted" ? MUTED_FILTER : void 0,
+        maxWidth: l.width,
+        height: l.height
+      }
+    },
+    l.alt
+  ));
+  if (layout === "split") {
+    return /* @__PURE__ */ jsxs6("section", { id: "trusted-by", className: `${pageContainer} mt-16 md:mt-32 md:grid md:grid-cols-2 md:items-center md:gap-10`, children: [
+      /* @__PURE__ */ jsxs6("div", { children: [
+        /* @__PURE__ */ jsx10("h2", { className: "text-center font-display text-h3 md:text-left", children: heading }),
+        description ? /* @__PURE__ */ jsx10("p", { className: "mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:mx-0 md:text-left md:text-[17px]", children: description }) : null
+      ] }),
+      /* @__PURE__ */ jsx10("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10 md:mt-0 md:justify-end", children: logoImages })
+    ] });
+  }
   return /* @__PURE__ */ jsxs6("section", { id: "trusted-by", className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ jsx10("h2", { className: "text-center font-display text-h3", children: heading }),
     description ? /* @__PURE__ */ jsx10("p", { className: "mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:text-[17px]", children: description }) : null,
-    /* @__PURE__ */ jsx10("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ jsx10(
-      "img",
-      {
-        src: l.src,
-        alt: l.alt,
-        className: l.height ? "w-auto object-contain" : "h-8 w-auto object-contain md:h-10",
-        style: {
-          filter: logoTone === "muted" ? MUTED_FILTER : void 0,
-          maxWidth: l.width,
-          height: l.height
-        }
-      },
-      l.alt
-    )) })
+    /* @__PURE__ */ jsx10("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logoImages })
   ] });
 }
 
