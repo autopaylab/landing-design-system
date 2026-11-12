@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.15.0
+
+### Minor Changes
+
+- c343358: `AudienceScenariosSection` gets an optional `tone` prop: `"default"` (unchanged output), `"tinted"` or `"dark"`. `"tinted"` puts the heading and cards on a light blue rounded surface: the light blue from `PlatformFeatureShowcase`, with the rounded corners and padding of `FourStepsSection`. `"dark"` uses `RequirementsChecklistSection`'s dark surface, with translucent cards, light text and lime card titles. All text meets WCAG AA on its surface (at least 7.8:1). New, not extracted: paytalkpl needs a non-white section in the middle of the page for its three programme benefits.
+- eafc3b1: `TrustedByLogos` gets an optional `layout` prop: `"stacked"` (default, unchanged output) or `"split"`, which from `md` up puts the heading and description left-aligned in a left column and the logos at the end of a right column, vertically centred against the text. Below `md`, `"split"` renders like `"stacked"`. Per-logo `height` and `width` (max width) apply as before. New, not extracted: a page with only a couple of partner logos (paytalkpl) looked tall and empty with the stacked strip on desktop.
+
+### Patch Changes
+
+- 7d2958a: `HeroVideoSplit` no longer overflows on narrow screens when the CTA label is longer than the column. The grid's single mobile track can now shrink to the container (`grid-cols-1`), and the CTA label wraps instead of staying on one line. Before, a 374 px label at a 375 px viewport widened the grid by 23 px, and the page clipped the text column and the image. Labels that fit render as before, and the two desktop columns are unchanged.
+
 ## 0.14.0
 
 ### Minor Changes
