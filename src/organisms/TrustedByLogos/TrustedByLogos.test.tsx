@@ -31,4 +31,32 @@ describe("TrustedByLogos", () => {
     render(<TrustedByLogos heading="Partners" description="Intro text" logos={logos} />);
     expect(screen.getByText("Intro text")).toBeInTheDocument();
   });
+
+  it("keeps the stacked markup by default", () => {
+    const { container } = render(<TrustedByLogos heading="Partners" description="Intro text" logos={logos} />);
+    const section = container.querySelector("section")!;
+    expect(section.className).not.toContain("md:grid");
+    expect(section.firstElementChild?.tagName).toBe("H2");
+    expect(screen.getByRole("heading", { name: "Partners" }).className).toBe("text-center font-display text-h3");
+  });
+
+  it("puts heading and description beside the logos with layout split", () => {
+    const { container } = render(
+      <TrustedByLogos heading="Partners" description="Intro text" logos={logos} layout="split" />,
+    );
+    const section = container.querySelector("section")!;
+    expect(section.className).toContain("md:grid-cols-2");
+    const [textColumn, logoColumn] = Array.from(section.children);
+    expect(textColumn).toContainElement(screen.getByRole("heading", { name: "Partners" }));
+    expect(textColumn).toContainElement(screen.getByText("Intro text"));
+    expect(logoColumn).toContainElement(screen.getByRole("img", { name: "Wide" }));
+    expect(logoColumn.className).toContain("md:justify-end");
+  });
+
+  it("keeps per-logo height and maxWidth with layout split", () => {
+    render(<TrustedByLogos heading="Partners" logos={logos} layout="split" />);
+    const stacked = screen.getByRole("img", { name: "Stacked" });
+    expect(stacked.style.height).toBe("96px");
+    expect(stacked.style.maxWidth).toBe("160px");
+  });
 });
