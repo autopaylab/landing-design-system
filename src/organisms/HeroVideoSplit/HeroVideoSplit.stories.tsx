@@ -53,3 +53,15 @@ export const WithImage: Story = {
     mediaCaption: "Demo",
   },
 };
+
+/**
+ * A CTA label longer than a phone-width column (the paytalkpl English label). Opens at a mobile
+ * viewport: the label wraps inside the column instead of widening the grid past the container.
+ */
+export const LongCtaLabel: Story = {
+  args: {
+    ...WithImage.args,
+    ctaLabel: "Join the PayTalk co-creation programme",
+  },
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+};
