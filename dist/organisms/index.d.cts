@@ -98,6 +98,11 @@ interface TrustedByLogo {
  * page (paytalkpl) introduces a small set of named partners with a short
  * paragraph, and shows their marks in full colour, as their owners supplied
  * them, rather than as a muted wall of client logos.
+ *
+ * `layout` is new (not extracted): with only two partner logos, the stacked
+ * strip leaves paytalkpl's desktop section tall and mostly empty, so "split"
+ * puts the heading and description beside the logos from md up, two columns
+ * like SingleIntegrationSection. Below md it renders as "stacked".
  */
 interface TrustedByLogosProps {
     heading: string;
@@ -106,8 +111,15 @@ interface TrustedByLogosProps {
     logos: TrustedByLogo[];
     /** "muted" (default, as extracted): grayscale at 65% opacity. "original": logos as supplied. */
     logoTone?: "muted" | "original";
+    /**
+     * "stacked" (default, as extracted): heading, description and logo row centred, one under another.
+     * "split": from md up, heading and description left-aligned in the left column, logos in a row
+     * at the end of the right column, vertically centred against the text. The row still wraps when
+     * the column is too narrow for every logo (at md with many or very wide logos) instead of overflowing.
+     */
+    layout?: "stacked" | "split";
 }
-declare function TrustedByLogos({ heading, description, logos, logoTone }: TrustedByLogosProps): React.JSX.Element;
+declare function TrustedByLogos({ heading, description, logos, logoTone, layout }: TrustedByLogosProps): React.JSX.Element;
 
 interface Step {
     title: string;

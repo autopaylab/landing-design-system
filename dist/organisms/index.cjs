@@ -518,24 +518,34 @@ function HeroImageOverlay({
 // src/organisms/TrustedByLogos/TrustedByLogos.tsx
 var import_jsx_runtime10 = require("react/jsx-runtime");
 var MUTED_FILTER = "grayscale(100%) opacity(0.65)";
-function TrustedByLogos({ heading, description, logos, logoTone = "muted" }) {
+function TrustedByLogos({ heading, description, logos, logoTone = "muted", layout = "stacked" }) {
+  const logoImages = logos.map((l) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "img",
+    {
+      src: l.src,
+      alt: l.alt,
+      className: l.height ? "w-auto object-contain" : "h-8 w-auto object-contain md:h-10",
+      style: {
+        filter: logoTone === "muted" ? MUTED_FILTER : void 0,
+        maxWidth: l.width,
+        height: l.height
+      }
+    },
+    l.alt
+  ));
+  if (layout === "split") {
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("section", { id: "trusted-by", className: `${pageContainer} mt-16 md:mt-32 md:grid md:grid-cols-2 md:items-center md:gap-10`, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h2", { className: "text-center font-display text-h3 md:text-left", children: heading }),
+        description ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:mx-0 md:text-left md:text-[17px]", children: description }) : null
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10 md:mt-0 md:justify-end", children: logoImages })
+    ] });
+  }
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("section", { id: "trusted-by", className: `${pageContainer} mt-16 md:mt-32`, children: [
     /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h2", { className: "text-center font-display text-h3", children: heading }),
     description ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "mx-auto mt-6 max-w-2xl text-center text-muted-foreground md:text-[17px]", children: description }) : null,
-    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logos.map((l) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
-      "img",
-      {
-        src: l.src,
-        alt: l.alt,
-        className: l.height ? "w-auto object-contain" : "h-8 w-auto object-contain md:h-10",
-        style: {
-          filter: logoTone === "muted" ? MUTED_FILTER : void 0,
-          maxWidth: l.width,
-          height: l.height
-        }
-      },
-      l.alt
-    )) })
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "mt-12 flex flex-wrap items-center justify-center gap-x-16 gap-y-10", children: logoImages })
   ] });
 }
 
