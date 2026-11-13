@@ -182,6 +182,13 @@ Storybook (10.6, `@storybook/react-vite`) runs directly on the same `src/**/*.st
 
 Every push/PR to `main` also publishes the built Storybook to [Chromatic](https://www.chromatic.com/builds?appId=6aa104b411b5b49179275bdc) (the `chromatic` CI job, gated on the `CHROMATIC_PROJECT_TOKEN` repo secret) — a visual, browsable catalog of every story, and the foundation for visual regression testing if that's added later.
 
+**Visual changes reviewed with an agent (Chromatic for Agents, beta, since 2026-11-13).** `chromatic.config.json` links this repo to the Chromatic project (a project id, not the token). An agent with the Chromatic plugin (Claude Code: `claude plugin install chromatic@chromatic`, sign-in through `/mcp` as the maintainer) reads each build's visual diffs, accessibility and interaction results. The rules:
+
+- After every change that affects stories, the agent reads the Chromatic build for the branch and explains each changed snapshot against the code change: intended or a regression.
+- It accepts or denies a change only after the maintainer approves that specific change in the conversation. No auto-accept, no blanket approval.
+- It never quarantines a story or changes project settings without the maintainer asking.
+- Builds still run in CI (the `chromatic` job); the agent does not start them.
+
 ## API docs
 
 `npm run docs` generates a static API reference with [TypeDoc](https://typedoc.org) (output: `docs/`, gitignored) — every exported component, prop interface, and its real JSDoc comments, grouped by Atomic Design layer (`atoms`/`molecules`/`organisms`/`templates`/`tokens`, matching `typedoc.json`'s entry points). This is generated straight from the same TypeScript source and doc comments Storybook and the props tables already rely on, so it can't drift from the actual code the way a hand-maintained docs site could. CI builds it on every push/PR (`npm run docs` must succeed) to catch broken doc comments or entry points before they ship, even though the output isn't currently published anywhere.
